@@ -63,4 +63,8 @@
         <property name="mapperInterface" value="com.dao.AdministratorDao"></property>
     </bean>
 
+    <bean id="SpaceDao" class="org.mybatis.spring.mapper.MapperFactoryBean">
+        <property name="sqlSessionFactory" ref="sqlSessionFactory"></property>
+        <property name="mapperInterface" value="com.dao.SpaceDao"></property>
+    </bean>
 </beans>

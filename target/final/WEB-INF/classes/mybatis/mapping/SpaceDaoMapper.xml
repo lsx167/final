@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!--命名空间是对应接口的包名+类名,指定要映射的接口 -->
+<mapper namespace="com.dao.SpaceDao">
+    <!--id是接口中的方法名，结果类型如没有在mybatis.xml文件中配置别名，则必须使用全名称（包名+类名） -->
+    <select id="getAllSpaces" resultType="SpacePO">
+        select id,`name`,originatorID,`type`,readID,writeID,childPageID,expired from space
+    </select>
+</mapper>

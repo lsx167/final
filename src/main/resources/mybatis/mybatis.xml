@@ -6,6 +6,13 @@
 
 <!--没有集成spring时可以用，集成spring后这个文件主要内容都做spring配置文件中完成-->
 <configuration>
+    <!--配置全局属性-->
+    <settings>
+        <!-- 开启驼峰命名转换 ：{name_id}  -> {nameId}    -->
+        <setting name="useGeneratedKeys" value="false"/>
+        <setting name="mapUnderscoreToCamelCase" value="true"/>
+    </settings>
+
     <!-- 指定数据库连接信息的位置 -->
     <!--<properties resource="mybatis/mysql.properties"></properties>-->
 
@@ -13,6 +20,8 @@
     <typeAliases>
         <package name="com.entities"/>
     </typeAliases>
+
+
 
     <!--配置mysql的链接信息，数据从配置文件里面读取，注意名称要对应-->
     <!--<environments default="development">

@@ -1,3 +1,4 @@
+/*
 import com.dao.UserDao;
 import com.entities.UserPO;
 import org.apache.ibatis.session.SqlSession;
@@ -53,4 +54,4 @@ public class UserDaoTest {
             session.close();
         }
     }
-}
+}*/

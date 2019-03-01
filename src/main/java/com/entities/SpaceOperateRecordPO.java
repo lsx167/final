@@ -1,5 +1,6 @@
 package com.entities;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 //空间操作记录
@@ -11,11 +12,12 @@ public class SpaceOperateRecordPO {
     //操作人id
     private long operatorId;
     //操作时间
-    private Date operaterTime;
+    private Date operatorTime;
     //操作类型（1、创建空间，2、更改权限，3、新建页面，4、修改页面，5、删除页面）
     private Integer type;
     //操作内容
-    private String operaterContent;
+    private String operatorContent;
+
     private boolean expired;
 
     public long getId() {
@@ -42,12 +44,14 @@ public class SpaceOperateRecordPO {
         this.operatorId = operatorId;
     }
 
-    public Date getOperaterTime() {
-        return operaterTime;
+    public String getOperatorTime() {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+        String time = dateFormat.format(operatorTime);
+        return time;
     }
 
-    public void setOperaterTime(Date operaterTime) {
-        this.operaterTime = operaterTime;
+    public void setOperatorTime(Date operatorTime) {
+        this.operatorTime = operatorTime;
     }
 
     public Integer getType() {
@@ -58,12 +62,12 @@ public class SpaceOperateRecordPO {
         this.type = type;
     }
 
-    public String getOperaterContent() {
-        return operaterContent;
+    public String getOperatorContent() {
+        return operatorContent;
     }
 
-    public void setOperaterContent(String operaterContent) {
-        this.operaterContent = operaterContent;
+    public void setOperatorContent(String operatorContent) {
+        this.operatorContent = operatorContent;
     }
 
     public boolean isExpired() {

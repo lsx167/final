@@ -3,6 +3,7 @@ package com.service.impl;
 import com.dao.UserDao;
 import com.entities.UserPO;
 import com.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 
@@ -13,7 +14,7 @@ import java.util.List;
 @Scope("prototype")
 public class UserServiceImpl implements UserService {
 
-    @Resource
+    @Autowired
     private UserDao userDao;
 
     @Override
@@ -29,11 +30,11 @@ public class UserServiceImpl implements UserService {
     @Override
     public Boolean loginById(long id, String password) {
         UserPO userPO = userDao.getUserById(id);
-        if(password == userPO.getPassword()){
-            return true;
+        if(userPO == null || !userPO.getPassword().equals(password)){
+            return false;
         }
         else {
-            return false;
+            return true;
         }
     }
 }

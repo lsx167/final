@@ -5,5 +5,6 @@
 </head>
 <body>
 <h1>登录，首页</h1>
+<a href="/user/page1" target="_blank">前往test1.jsp</a>
 </body>
 </html>

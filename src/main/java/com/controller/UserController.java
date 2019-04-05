@@ -3,9 +3,13 @@ package com.controller;
 import com.entities.UserPO;
 import com.service.UserService;
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.ui.Model;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
@@ -19,7 +23,7 @@ import java.util.List;
 public class UserController {
     private static final Logger logger = Logger.getLogger(UserController.class);
 
-    @Resource
+    @Autowired
     private UserService service;
 
     /**
@@ -58,16 +62,29 @@ public class UserController {
      */
     @RequestMapping(value = "/login", produces = "text/html;charset=UTF-8")
     @ResponseBody
-    public String login(HttpServletRequest request, HttpServletResponse response) {
-        long id = Long.parseLong(request.getParameter("id"));
-        String password = request.getParameter("password");
-        Boolean success = service.loginById(id,password);
-        if(success == true){
-            return "登陆成功";
+    public ModelAndView login(HttpServletRequest request, HttpServletResponse response) {
+        ModelAndView mav = new ModelAndView();
+        if(request.getParameter("username").equals(null) || request.getParameter("password").equals(null)){
+            mav.setViewName("forward://jsp/index1.jsp");
+            mav.addObject("loginMsg", "登录失败");
+            return mav;
         }
         else {
-            return "登陆失败";
+            long id = Long.parseLong(request.getParameter("username"));
+            String password = request.getParameter("password");
+            Boolean success = service.loginById(id,password);
+            if(success == true){
+                mav.setViewName("main");
+                mav.addObject("loginMsg", "登录成功");
+                return mav;
+            }
+            else {
+                mav.setViewName("forward://jsp/index1.jsp");
+                mav.addObject("loginMsg", "登录失败");
+                return mav;
+            }
         }
+
     }
 
     /**
@@ -86,5 +103,10 @@ public class UserController {
         return name+"-{name:context:hi,你好}"+users.get(0);
     }
 
-
+    @RequestMapping(value = "/test1",method = RequestMethod.POST)
+    @ResponseBody
+    public String testController(HttpServletRequest request, HttpServletResponse response) {
+        System.out.println("1");
+        return "main";
+    }
 }

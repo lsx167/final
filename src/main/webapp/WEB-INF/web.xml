@@ -65,23 +65,44 @@
     <url-pattern>/</url-pattern>
   </servlet-mapping>
 
+  <servlet-mapping>
+    <servlet-name>default</servlet-name>
+    <url-pattern>*.css</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>default</servlet-name>
+    <url-pattern>*.js</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>default</servlet-name>
+    <url-pattern>*.gif</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>default</servlet-name>
+    <url-pattern>*.jpeg</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>default</servlet-name>
+    <url-pattern>*.jpg</url-pattern>
+  </servlet-mapping>
 
-  <!-- 错误跳转页面 -->
+<!--
+  &lt;!&ndash; 错误跳转页面 &ndash;&gt;
   <error-page>
-    <!-- 404客户端路径不正确 -->
+    &lt;!&ndash; 404客户端路径不正确 &ndash;&gt;
     <error-code>404</error-code>
     <location>/WEB-INF/views/errorpage/404.jsp</location>
   </error-page>
   <error-page>
-    <!-- 客户端没有访问权限，访问被禁止 -->
+    &lt;!&ndash; 客户端没有访问权限，访问被禁止 &ndash;&gt;
     <error-code>405</error-code>
     <location>/WEB-INF/views/errorpage/405.jsp</location>
   </error-page>
   <error-page>
-    <!-- 服务器内部错误 -->
+    &lt;!&ndash; 服务器内部错误 &ndash;&gt;
     <error-code>500</error-code>
     <location>/WEB-INF/views/errorpage/500.jsp</location>
-  </error-page>
+  </error-page>-->
 
 
 </web-app>

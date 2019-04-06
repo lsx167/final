@@ -64,9 +64,14 @@ public class UserController {
     @ResponseBody
     public ModelAndView login(HttpServletRequest request, HttpServletResponse response) {
         ModelAndView mav = new ModelAndView();
-        if(request.getParameter("username").equals(null) || request.getParameter("password").equals(null)){
-            mav.setViewName("forward://jsp/index1.jsp");
-            mav.addObject("loginMsg", "登录失败");
+        if(request.getParameter("username").equals(null) || request.getParameter("username").equals("")){
+            mav.setViewName("forward://jsp/login.jsp");
+            mav.addObject("loginMsg", "登录失败,请输入账号");
+            return mav;
+        }
+        else if(request.getParameter("password").equals(null) || request.getParameter("password").equals("")){
+            mav.setViewName("forward://jsp/login.jsp");
+            mav.addObject("loginMsg", "登录失败,请输入密码");
             return mav;
         }
         else {
@@ -79,7 +84,7 @@ public class UserController {
                 return mav;
             }
             else {
-                mav.setViewName("forward://jsp/index1.jsp");
+                mav.setViewName("forward://jsp/login.jsp");
                 mav.addObject("loginMsg", "登录失败");
                 return mav;
             }

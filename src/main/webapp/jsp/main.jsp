@@ -10,7 +10,10 @@
 <body class="body">
 <header class="header">
     <img src="../img/logo.jpeg" style="max-height: 30px;float: left;margin-left: 10%;margin-top: 5px;border:none;"/>
-    <div class="dropdown">
+    <div style="float: left;width: 200px;height: 30px;text-align: center;color: white;">
+		多人协作文档编辑系统
+	</div>
+	<div class="dropdown">
         <button class="dropbtn">空间</button>
         <div class="dropdown-content">
             <span style="font-size: small;color: #2b669a">最近访问的空间</span>
@@ -30,8 +33,63 @@
 
 </header>
 <div class="main">
-    登录成功
-    123
+	<div class="main_left">
+		<div class="left_name">
+			<div class="left_name_img">
+				
+			</div>
+			<div class="left_name_item">
+				空间名称	
+			</div>
+		</div>
+		
+		<div class="left_page_tree">
+			<div style="color: gray;font-size: 20px;text-align: left;margin-left: 20px;margin-top: 20px;">
+				页面树
+			</div>
+			<div class="left_page">
+				
+			</div>
+		</div>
+		
+		<div class="left_setting">
+			<div class="left_setting_img">
+				
+			</div>
+			<div class="left_setting_item">
+				空间配置	
+			</div>
+		</div>
+	</div>
+	<div class="main_right">
+		<div class="right_1">
+			<div class="right_1_left">
+				空间名称
+			</div>
+			<div class="right_1_right">
+				删除
+			</div>
+			<div class="right_1_right">
+				页面历史
+			</div>
+			<div class="right_1_right">
+				编辑
+			</div>
+		</div>
+		<div class="right_2">
+			<div class="right_2_creator">
+				创建者：xyh
+			</div>
+			<div class="right_2_time">
+				最后一次修改时间：2019-04-24
+			</div>
+		</div>
+		<div class="right_3">
+			<div class="right_3_item">
+				Welcome to your new space!
+			</div>
+		</div>
+	</div>
 </div>
 <footer class="footer">
     <p class="footer_p" style="margin-left: 20%;float: left;">

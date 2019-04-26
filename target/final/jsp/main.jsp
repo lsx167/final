@@ -23,20 +23,22 @@
         </div>
     </div>
     <button class="create_btn">创建</button>
-
-    <div class="bar1">
+	<button class="create_btn">退出</button>
+    <div class="header_user">
+    	<img src="../img/yonghu1.png" style="max-height: 30px;margin-top: 5px;border:none;"/>
+    </div>
+	<div class="bar1">
         <form>
             <input type="text" placeholder="请输入您要搜索的内容...">
             <button type="submit"></button>
         </form>
     </div>
-
 </header>
 <div class="main">
 	<div class="main_left">
 		<div class="left_name">
 			<div class="left_name_img">
-				
+				<img src="../img/wujiaoxing.png" style="max-height: 30px;margin-top: 5px;border:none;"/>
 			</div>
 			<div class="left_name_item">
 				空间名称	
@@ -54,7 +56,7 @@
 		
 		<div class="left_setting">
 			<div class="left_setting_img">
-				
+				<img src="../img/shezhi.png" style="max-height: 25px;margin-top:5px;border:none;"/>
 			</div>
 			<div class="left_setting_item">
 				空间配置	

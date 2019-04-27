@@ -3,18 +3,39 @@
 
 <!--命名空间是对应接口的包名+类名,指定要映射的接口 -->
 <mapper namespace="com.dao.UserDao">
+    <resultMap id="BaseResultMap" type="com.entities.UserPO">
+        <!--
+          WARNING - @mbg.generated
+        -->
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="userName" jdbcType="VARCHAR" property="userName"/>
+        <result column="password" jdbcType="VARCHAR" property="password"/>
+        <result column="name" jdbcType="VARCHAR" property="name"/>
+        <result column="expired" jdbcType="TINYINT" property="expired"/>
+    </resultMap>
+
+    <sql id="BASE_COLUMN_LIST">
+        id,userName,password,name,expired
+    </sql>
+
     <!--id是接口中的方法名，结果类型如没有在mybatis.xml文件中配置别名，则必须使用全名称（包名+类名） -->
-    <select id="getAllUsers" resultType="UserPO">
-        select id,`name`,username,password from user
+    <select id="getAllUsers" resultMap="BaseResultMap">
+        select
+        <include refid="BASE_COLUMN_LIST"/>
+        from user
     </select>
 
-    <select id="getUserById" resultType="UserPO">
-        select id,`name`,username,password from user
+    <select id="getUserById" parameterType="Long" resultMap="BaseResultMap">
+        select
+        <include refid="BASE_COLUMN_LIST"/>
+        from user
         WHERE id =#{id}
     </select>
 
-    <select id="getUserByUsername" resultType="UserPO">
-        select id,`name`,username,password from user
+    <select id="getUserByUsername" parameterType="String" resultMap="BaseResultMap">
+        select
+        <include refid="BASE_COLUMN_LIST"/>
+        from user
         WHERE username =#{username}
     </select>
 </mapper>

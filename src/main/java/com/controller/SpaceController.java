@@ -30,7 +30,20 @@ public class SpaceController {
     @ResponseBody
     public String getAllspace(HttpServletRequest request, HttpServletResponse response) {
         List<SpacePO> spacePOS = service.getAllSpace();
-        return (spacePOS.get(0).getId()+spacePOS.get(0).getName()+spacePOS.get(0).getOriginatorID()+spacePOS.get(0).getChildPageID());
+        return (spacePOS.get(1).getId()+spacePOS.get(1).getName()+spacePOS.get(1).getOriginatorID()+spacePOS.get(1).getChildPageID());
+    }
+
+    /**
+     * 根据id返回主空间信息
+     * @param request
+     * @param response
+     * @return
+     */
+    @RequestMapping(value = "/getMainSpaceById", produces = "text/html;charset=UTF-8")
+    @ResponseBody
+    public String getMainSpaceById(HttpServletRequest request, HttpServletResponse response) {
+        SpacePO spacePO = service.getMainSpaceById(10001);
+        return spacePO.getName()+spacePO.getId()+spacePO.getIsMain();
     }
 
 }

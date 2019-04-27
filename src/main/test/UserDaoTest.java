@@ -1,4 +1,6 @@
 /*
+
+import com.dao.SpaceDao;
 import com.dao.UserDao;
 import com.entities.UserPO;
 import org.apache.ibatis.session.SqlSession;
@@ -29,14 +31,15 @@ public class UserDaoTest {
             UserDao userDao = session.getMapper(UserDao.class);
             List<UserPO> userPOS = userDao.getAllUsers();
             logger.info(userPOS);
-            userPOS.forEach(userPO-> logger.info(userPO.getId()+","+userPO.getName()));
+            System.out.println(userPOS.get(0).getName());
         } finally {
             session.close();
         }
 
     }
 
-    private static void testMybatis(){
+    */
+/*private static void testMybatis(){
         System.out.println("hi");
         // 获得Mybatis配置文件流
         InputStream config = UserDaoTest.class.getClassLoader().getResourceAsStream("mybatis/mybatis.xml");
@@ -53,5 +56,7 @@ public class UserDaoTest {
         } finally {
             session.close();
         }
-    }
-}*/
+    }*//*
+
+}
+*/

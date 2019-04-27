@@ -8,4 +8,6 @@ public interface SpaceDao {
     //查询所有空间信息
     List<SpacePO> getAllSpaces();
 
+    //根据id返回主空间信息
+    SpacePO getMainSpaceById(long id);
 }

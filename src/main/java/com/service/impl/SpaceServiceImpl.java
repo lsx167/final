@@ -19,4 +19,9 @@ public class SpaceServiceImpl implements SpaceService{
     public List<SpacePO> getAllSpace() {
         return spaceDao.getAllSpaces();
     }
+
+    @Override
+    public SpacePO getMainSpaceById(long id) {
+        return spaceDao.getMainSpaceById(id);
+    }
 }

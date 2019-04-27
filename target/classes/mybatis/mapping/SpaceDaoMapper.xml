@@ -3,8 +3,37 @@
 
 <!--命名空间是对应接口的包名+类名,指定要映射的接口 -->
 <mapper namespace="com.dao.SpaceDao">
+    <resultMap id="BaseResultMap" type="com.entities.SpacePO">
+        <!--
+          WARNING - @mbg.generated
+        -->
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="name" jdbcType="VARCHAR" property="name"/>
+        <result column="originatorID" jdbcType="BIGINT" property="originatorID"/>
+        <result column="isMain" jdbcType="TINYINT" property="isMain"/>
+        <result column="type" jdbcType="TINYINT" property="type"/>
+        <result column="readID" jdbcType="VARCHAR" property="readID"/>
+        <result column="writeID" jdbcType="VARCHAR" property="writeID"/>
+        <result column="childPageID" jdbcType="VARCHAR" property="childPageID"/>
+        <result column="expired" jdbcType="TINYINT" property="expired"/>
+
+    </resultMap>
+
+    <sql id="BASE_COLUMN_LIST">
+        id,`name`,originatorID,isMain,`type`,readID,writeID,childPageID,expired
+    </sql>
+
     <!--id是接口中的方法名，结果类型如没有在mybatis.xml文件中配置别名，则必须使用全名称（包名+类名） -->
-    <select id="getAllSpaces" resultType="SpacePO">
-        select id,`name`,originatorID,isMain,`type`,readID,writeID,childPageID,expired from space
+    <select id="getAllSpaces" resultMap="BaseResultMap">
+        select
+        <include refid="BASE_COLUMN_LIST"/>
+        from space
+    </select>
+
+    <select id="getMainSpaceById" resultMap="BaseResultMap">
+        select
+        <include refid="BASE_COLUMN_LIST"/>
+        from space
+        WHERE originatorID =#{id} and isMain = 1
     </select>
 </mapper>

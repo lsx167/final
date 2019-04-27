@@ -13,5 +13,8 @@ public interface UserService {
     UserPO getUserById(long id);
 
     //判断登陆
-    Boolean loginById(long id, String password);
+    Integer loginById(String username, String password);
+
+    //根据用户名查用户
+    UserPO getUserByUsername(String username);
 }

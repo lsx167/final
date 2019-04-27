@@ -13,4 +13,6 @@ public interface UserDao {
     //根据id查用户
     UserPO getUserById(@Param("id") long id);
 
+    //根据用户名查用户
+    UserPO getUserByUsername(@Param("username") String username);
 }

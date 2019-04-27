@@ -12,4 +12,9 @@
         select id,`name`,username,password from user
         WHERE id =#{id}
     </select>
+
+    <select id="getUserByUsername" resultType="UserPO">
+        select id,`name`,username,password from user
+        WHERE username =#{username}
+    </select>
 </mapper>

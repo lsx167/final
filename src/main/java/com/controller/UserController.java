@@ -75,17 +75,26 @@ public class UserController {
             return mav;
         }
         else {
-            long id = Long.parseLong(request.getParameter("username"));
+            //long id = Long.parseLong(request.getParameter("username"));
+            String username = request.getParameter("username");
             String password = request.getParameter("password");
-            Boolean success = service.loginById(id,password);
-            if(success == true){
-                mav.setViewName("main");
-                mav.addObject("loginMsg", "登录成功");
+
+
+
+            Integer success = service.loginById(username,password);
+            if (success == 0){
+                mav.setViewName("forward://jsp/login.jsp");
+                mav.addObject("loginMsg", "账号不存在");
+                return mav;
+            }
+            else if(success == 1){
+                mav.setViewName("forward://jsp/login.jsp");
+                mav.addObject("loginMsg", "密码错误");
                 return mav;
             }
             else {
-                mav.setViewName("forward://jsp/login.jsp");
-                mav.addObject("loginMsg", "登录失败");
+                mav.setViewName("main");
+                mav.addObject("loginMsg", "登录成功");
                 return mav;
             }
         }

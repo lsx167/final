@@ -28,13 +28,23 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Boolean loginById(long id, String password) {
-        UserPO userPO = userDao.getUserById(id);
-        if(userPO == null || !userPO.getPassword().equals(password)){
-            return false;
+    public Integer loginById(String username, String password) {
+        UserPO userPO = userDao.getUserByUsername(username);
+        if(userPO == null){
+            return 0;
+        }
+        if(!userPO.getPassword().equals(password)){
+            //return false;
+            return 1;
         }
         else {
-            return true;
+            //return true;
+            return 2;
         }
+    }
+
+    @Override
+    public UserPO getUserByUsername(String username) {
+        return userDao.getUserByUsername(username);
     }
 }

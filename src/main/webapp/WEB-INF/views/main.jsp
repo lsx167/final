@@ -6,6 +6,7 @@
     <link href="http://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <script type="text/javascript" src="/js/jquery-3.3.1.min.js"></script>
     <script type="text/javascript" src="/js/ajaxfileupload.js"></script>
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 </head>
 <body class="body">
 <header class="header">
@@ -41,7 +42,7 @@
                 <img src="../img/wujiaoxing.png" style="max-height: 30px;margin-top: 5px;border:none;"/>
             </div>
             <div class="left_name_item">
-                空间名称
+                ${requestScope.spacePO.name}
             </div>
         </div>
 
@@ -50,7 +51,17 @@
                 页面树
             </div>
             <div class="left_page">
+<%--todo
+                这里需要修改成页面树
+--%>
+                <table>
+                    <c:forEach items="${requestScope.spacePOS}" var="bean">
+                        <tr>
+                            <td>${bean.name}</td>
+                        </tr>
+                    </c:forEach>
 
+                </table>
             </div>
         </div>
 
@@ -66,7 +77,7 @@
     <div class="main_right">
         <div class="right_1">
             <div class="right_1_left">
-                空间名称
+                ${requestScope.spacePO.name}
             </div>
             <div class="right_1_right">
                 删除
@@ -80,7 +91,7 @@
         </div>
         <div class="right_2">
             <div class="right_2_creator">
-                创建者：xyh
+                创建者：${requestScope.userPO.name}
             </div>
             <div class="right_2_time">
                 最后一次修改时间：2019-04-24

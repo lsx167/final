@@ -132,9 +132,9 @@
 .right_2_creator{
 	float: left;
 	text-align: center;
-	width: 120px;
+	width: 150px;
 	height: 30px;
-	font-size: 20px;
+	font-size: 16px;
 	margin-left: 50px;
 }
 .right_2_time{
@@ -142,7 +142,7 @@
 	text-align: center;
 	width: 350px;
 	height: 30px;
-	font-size: 20px;
+	font-size: 16px;
 }
 .right_3{
 	width: 800px;

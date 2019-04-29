@@ -36,4 +36,11 @@
         from space
         WHERE originatorID =#{id} and isMain = 1
     </select>
+
+    <select id="getSpacesById" resultMap="BaseResultMap">
+        select
+        <include refid="BASE_COLUMN_LIST"/>
+        from space
+        WHERE originatorID =#{id}
+    </select>
 </mapper>

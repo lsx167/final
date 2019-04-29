@@ -1,6 +1,8 @@
 package com.controller;
 
+import com.entities.SpacePO;
 import com.entities.UserPO;
+import com.service.SpaceService;
 import com.service.UserService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +26,10 @@ public class UserController {
     private static final Logger logger = Logger.getLogger(UserController.class);
 
     @Autowired
-    private UserService service;
+    private UserService userService;
+
+    @Resource
+    private SpaceService spaceService;
 
     /**
      *返回user对象信息给page1.jsp处理，然后在前端页面展示
@@ -33,7 +38,7 @@ public class UserController {
     public ModelAndView getUser() {
         System.out.println("访问page1的后台。。。");
         ModelAndView mav = new ModelAndView("page1");
-        List<UserPO> users = service.getAllUser();
+        List<UserPO> users = userService.getAllUser();
         System.out.println(users);
         mav.addObject("user", users.get(0));
         return mav;
@@ -50,7 +55,7 @@ public class UserController {
     @ResponseBody
     public String getUserById(HttpServletRequest request, HttpServletResponse response) {
         long id = Long.parseLong(request.getParameter("v"));
-        UserPO users = service.getUserById(id);
+        UserPO users = userService.getUserById(id);
         return (users.getId()+users.getUserName()+users.getPassword()+users.getName());
     }
 
@@ -81,7 +86,7 @@ public class UserController {
 
 
 
-            Integer success = service.loginById(username,password);
+            Integer success = userService.loginById(username,password);
             if (success == 0){
                 mav.setViewName("forward://jsp/login.jsp");
                 mav.addObject("loginMsg", "账号不存在");
@@ -93,8 +98,18 @@ public class UserController {
                 return mav;
             }
             else {
+                //登录成功
+                //获取用户信息
+                UserPO userPO = userService.getUserByUsername(username);
+                //获取主空间信息
+                SpacePO spacePO = spaceService.getMainSpaceById(userPO.getId());
+                //获取空间信息
+                List<SpacePO> spacePOS = spaceService.getSpacesById(userPO.getId());
                 mav.setViewName("main");
                 mav.addObject("loginMsg", "登录成功");
+                mav.addObject("userPO",userPO);
+                mav.addObject("spacePO",spacePO);
+                mav.addObject("spacePOS",spacePOS);
                 return mav;
             }
         }
@@ -111,7 +126,7 @@ public class UserController {
     @ResponseBody
     public String sayHi(HttpServletRequest request, HttpServletResponse response) {
         String name = request.getParameter("v");
-        List<UserPO> users = service.getAllUser();
+        List<UserPO> users = userService.getAllUser();
         //!!!!!!!看一下注释
         logger.info("{name:context:hi,你好}");
         return name+"-{name:context:hi,你好}"+users.get(0);

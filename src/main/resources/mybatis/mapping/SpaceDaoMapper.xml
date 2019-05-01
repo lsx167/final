@@ -41,6 +41,6 @@
         select
         <include refid="BASE_COLUMN_LIST"/>
         from space
-        WHERE originatorID =#{id}
+        WHERE originatorID =#{id} and expired = 0
     </select>
 </mapper>

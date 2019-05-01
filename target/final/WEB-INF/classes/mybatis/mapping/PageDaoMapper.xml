@@ -2,45 +2,35 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <!--命名空间是对应接口的包名+类名,指定要映射的接口 -->
-<mapper namespace="com.dao.SpaceDao">
-    <resultMap id="BaseResultMap" type="com.entities.SpacePO">
+<mapper namespace="com.dao.PageDao">
+    <resultMap id="BaseResultMap" type="com.entities.PagePO">
         <!--
           WARNING - @mbg.generated
         -->
         <id column="id" jdbcType="BIGINT" property="id"/>
         <result column="name" jdbcType="VARCHAR" property="name"/>
         <result column="originatorID" jdbcType="BIGINT" property="originatorID"/>
-        <result column="isMain" jdbcType="TINYINT" property="isMain"/>
         <result column="type" jdbcType="TINYINT" property="type"/>
         <result column="readID" jdbcType="VARCHAR" property="readID"/>
         <result column="writeID" jdbcType="VARCHAR" property="writeID"/>
+        <result column="spaceID" jdbcType="BIGINT" property="spaceID"/>
+        <result column="isRootPage" jdbcType="TINYINT" property="isRootPage"/>
+        <result column="fatherPageID" jdbcType="BIGINT" property="fatherPageID"/>
         <result column="childPageID" jdbcType="VARCHAR" property="childPageID"/>
+        <result column="versionID" jdbcType="VARCHAR" property="versionID"/>
         <result column="expired" jdbcType="TINYINT" property="expired"/>
 
     </resultMap>
 
     <sql id="BASE_COLUMN_LIST">
-        id,`name`,originatorID,isMain,`type`,readID,writeID,childPageID,expired
+        id,`name`,originatorID,`type`,readID,writeID,spaceID,isRootPage,fatherPageID,childPageID,versionID,expired
     </sql>
 
-    <!--id是接口中的方法名，结果类型如没有在mybatis.xml文件中配置别名，则必须使用全名称（包名+类名） -->
-    <select id="getAllSpaces" resultMap="BaseResultMap">
+    <select id="getPagesBySpaceId" resultMap="BaseResultMap">
         select
         <include refid="BASE_COLUMN_LIST"/>
-        from space
+        from page
+        WHERE spaceID =#{id} and expired = 0
     </select>
 
-    <select id="getMainSpaceById" resultMap="BaseResultMap">
-        select
-        <include refid="BASE_COLUMN_LIST"/>
-        from space
-        WHERE originatorID =#{id} and isMain = 1
-    </select>
-
-    <select id="getSpacesById" resultMap="BaseResultMap">
-        select
-        <include refid="BASE_COLUMN_LIST"/>
-        from space
-        WHERE originatorID =#{id} and expired = 0
-    </select>
 </mapper>

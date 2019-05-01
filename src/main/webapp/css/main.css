@@ -61,16 +61,15 @@
 	margin-left: 10px;
 }
 .left_page_tree{
-	height: 617px;
+	height: 308px;
 	width: 300px;
 	padding: 1px;
 }
 .left_page{
-	height: 500px;
+	height: 250px;
 	width: 240px;
 	margin-left: 30px;
 	margin-top: 10px;
-	background-color: yellow;
 }
 .left_setting{
 	height: 40px;

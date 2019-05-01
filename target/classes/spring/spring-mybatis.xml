@@ -72,4 +72,9 @@
         <property name="sqlSessionFactory" ref="sqlSessionFactory"></property>
         <property name="mapperInterface" value="com.dao.SpaceOperateRecordDao"></property>
     </bean>
+
+    <bean id="PageDao" class="org.mybatis.spring.mapper.MapperFactoryBean">
+        <property name="sqlSessionFactory" ref="sqlSessionFactory"></property>
+        <property name="mapperInterface" value="com.dao.PageDao"></property>
+    </bean>
 </beans>

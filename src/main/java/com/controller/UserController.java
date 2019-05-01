@@ -1,7 +1,9 @@
 package com.controller;
 
+import com.entities.PagePO;
 import com.entities.SpacePO;
 import com.entities.UserPO;
+import com.service.PageService;
 import com.service.SpaceService;
 import com.service.UserService;
 import org.apache.log4j.Logger;
@@ -27,9 +29,10 @@ public class UserController {
 
     @Autowired
     private UserService userService;
-
-    @Resource
+    @Autowired
     private SpaceService spaceService;
+    @Autowired
+    private PageService pageService;
 
     /**
      *返回user对象信息给page1.jsp处理，然后在前端页面展示
@@ -105,11 +108,15 @@ public class UserController {
                 SpacePO spacePO = spaceService.getMainSpaceById(userPO.getId());
                 //获取空间信息
                 List<SpacePO> spacePOS = spaceService.getSpacesById(userPO.getId());
+                //获取该空间页面信息
+                List<PagePO> pagePOS = pageService.getPagesBySpaceId(spacePO.getId());
+
                 mav.setViewName("main");
                 mav.addObject("loginMsg", "登录成功");
                 mav.addObject("userPO",userPO);
                 mav.addObject("spacePO",spacePO);
                 mav.addObject("spacePOS",spacePOS);
+                mav.addObject("pagePOS",pagePOS);
                 return mav;
             }
         }

@@ -45,17 +45,27 @@
                 ${requestScope.spacePO.name}
             </div>
         </div>
-
+		<div class="left_page_tree">
+		    <div style="color: gray;font-size: 20px;text-align: left;margin-left: 20px;margin-top: 20px;">
+		        我创建的空间
+		    </div>
+		    <div class="left_page">
+				<table>
+				    <c:forEach items="${requestScope.spacePOS}" var="bean">
+				        <tr>
+				            <td>${bean.name}</td>
+				        </tr>
+				    </c:forEach>
+				</table>
+		    </div>
+		</div>
         <div class="left_page_tree">
             <div style="color: gray;font-size: 20px;text-align: left;margin-left: 20px;margin-top: 20px;">
                 页面树
             </div>
             <div class="left_page">
-<%--todo
-                这里需要修改成页面树
---%>
                 <table>
-                    <c:forEach items="${requestScope.spacePOS}" var="bean">
+                    <c:forEach items="${requestScope.pagePOS}" var="bean">
                         <tr>
                             <td>${bean.name}</td>
                         </tr>

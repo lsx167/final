@@ -29,4 +29,9 @@ public class SpaceServiceImpl implements SpaceService{
     public List<SpacePO> getSpacesById(long id) {
         return spaceDao.getSpacesById(id);
     }
+
+    @Override
+    public SpacePO getSpaceBySpaceId(long id) {
+        return spaceDao.getSpaceBySpaceId(id);
+    }
 }

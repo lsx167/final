@@ -18,6 +18,8 @@ public class SpacePO {
     private String writeID;
     //子页面id集
     private String childPageID;
+    //空间描述
+    private String describe;
     private boolean expired;
 
     public long getId() {
@@ -82,6 +84,14 @@ public class SpacePO {
 
     public void setChildPageID(String childPageID) {
         this.childPageID = childPageID;
+    }
+
+    public String getDescribe() {
+        return describe;
+    }
+
+    public void setDescribe(String describe) {
+        this.describe = describe;
     }
 
     public boolean isExpired() {

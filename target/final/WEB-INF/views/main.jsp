@@ -23,19 +23,33 @@
             <a href="#">菜鸟教程 3</a>
         </div>
     </div>
-    <button class="create_btn">创建</button>
+    <button class="create_btn" onclick="showWindow()">创建</button>	
     <button class="create_btn">退出</button>
     <div class="header_user">
         <img src="../img/yonghu1.png" style="max-height: 30px;margin-top: 5px;border:none;"/>
     </div>
     <div class="bar1">
-        <form>
-            <input type="text" placeholder="请输入您要搜索的内容...">
+        <form action="/space/getSpaceBySpaceId" method="post">
+            <input type="text" name="id" placeholder="请输入您要搜索的内容...">
             <button type="submit"></button>
         </form>
     </div>
 </header>
 <div class="main">
+	<!-- 遮罩层 -->
+	<div id="cover" style="background: #000; position: absolute; left: 0px; top: 0px; width: 100%; filter: alpha(opacity=30); opacity: 0.3; display: none; z-index: 2 " onclick="closeWindow()">
+	</div>
+	<div id="showdiv" style="width: 80%; margin: 0 auto; height: 9.5rem; border: 1px solid #999; display: none; position: absolute; top: 40%; left: 10%; z-index: 3; background: #fff">
+		<div style="background: #F8F7F7; width: 100%; height: 2rem; font-size: 0.65rem; line-height: 2rem; border: 1px solid #999; text-align: center;" >
+			提示
+		</div>
+		<div style="text-indent: 50px; height: 4rem; font-size: 0.5rem; padding: 0.5rem; line-height: 1rem; ">
+			js弹窗 js弹出DIV,并使整个页面背景变暗</div>
+		<div style="background: #418BCA; width: 80%; margin: 0 auto; height: 1.5rem; line-height: 1.5rem; text-align: center;color: #fff;margin-top: 1rem; -moz-border-radius: .128rem; -webkit-border-radius: .128rem; border-radius: .128rem;font-size: .59733rem;" onclick="closeWindow()">
+			确 定
+		</div>
+	</div>
+	
     <div class="main_left">
         <div class="left_name">
             <div class="left_name_img">
@@ -109,7 +123,7 @@
         </div>
         <div class="right_3">
             <div class="right_3_item">
-                Welcome to your new space!
+                ${requestScope.spacePO.describe}
             </div>
         </div>
     </div>
@@ -122,5 +136,18 @@
         联系方式:暂无联系方式
     </p>
 </footer>
+<script type="text/javascript">
+  // 弹窗
+  function showWindow() {
+    $('#showdiv').show();  //显示弹窗
+    $('#cover').css('display','block'); //显示遮罩层
+    $('#cover').css('height',document.body.clientHeight+'px'); //设置遮罩层的高度为当前页面高度
+  }
+  // 关闭弹窗
+  function closeWindow() {
+    $('#showdiv').hide();  //隐藏弹窗
+    $('#cover').css('display','none');   //显示遮罩层
+  }
+</script>
 </body>
 </html>

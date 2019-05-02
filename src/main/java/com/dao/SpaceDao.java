@@ -13,4 +13,7 @@ public interface SpaceDao {
 
     //根据id返回空间信息
     List<SpacePO> getSpacesById(long id);
+
+    //根据空间id返回空间信息
+    SpacePO getSpaceBySpaceId(long id);
 }

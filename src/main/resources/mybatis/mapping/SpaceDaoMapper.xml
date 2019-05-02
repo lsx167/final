@@ -15,12 +15,13 @@
         <result column="readID" jdbcType="VARCHAR" property="readID"/>
         <result column="writeID" jdbcType="VARCHAR" property="writeID"/>
         <result column="childPageID" jdbcType="VARCHAR" property="childPageID"/>
+        <result column="describe" jdbcType="VARCHAR" property="describe"/>
         <result column="expired" jdbcType="TINYINT" property="expired"/>
 
     </resultMap>
 
     <sql id="BASE_COLUMN_LIST">
-        id,`name`,originatorID,isMain,`type`,readID,writeID,childPageID,expired
+        id,`name`,originatorID,isMain,`type`,readID,writeID,childPageID,`describe`,expired
     </sql>
 
     <!--id是接口中的方法名，结果类型如没有在mybatis.xml文件中配置别名，则必须使用全名称（包名+类名） -->
@@ -42,5 +43,12 @@
         <include refid="BASE_COLUMN_LIST"/>
         from space
         WHERE originatorID =#{id} and expired = 0
+    </select>
+
+    <select id="getSpaceBySpaceId" resultMap="BaseResultMap">
+        select
+        <include refid="BASE_COLUMN_LIST"/>
+        from space
+        WHERE id =#{id} and expired = 0
     </select>
 </mapper>

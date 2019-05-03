@@ -27,7 +27,7 @@
             <value>${driver}</value>
         </property>
         <property name="url">
-            <value>${url}</value>
+            <value>${url}?useUnicode=true&amp;characterEncoding=utf-8</value>
         </property>
         <property name="username">
             <value>${username}</value>

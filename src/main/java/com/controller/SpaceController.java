@@ -1,8 +1,6 @@
 package com.controller;
 
-import com.entities.PagePO;
-import com.entities.SpacePO;
-import com.entities.UserPO;
+import com.entities.*;
 import com.service.PageService;
 import com.service.SpaceService;
 import com.service.UserService;
@@ -10,13 +8,17 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
+import javax.enterprise.inject.Model;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -65,16 +67,56 @@ public class SpaceController {
         return null;
     }
 
+    //根据搜索内容返回空间列表
+    @RequestMapping(value = "/getSpaceBySearchContent", produces = "text/html;charset=UTF-8")
+    @ResponseBody
+    public ModelAndView getSpaceBySearchContent(HttpServletRequest request, HttpServletResponse response) {
+        ModelAndView mav = new ModelAndView();
+        String content = request.getParameter("spaceContent");
+
+        Integer pagenow = 1;
+        Page page = new Page(0,1);
+        List<SpacePO> spacePOList = new ArrayList<SpacePO>();
+
+        if(null == content || content == ""){
+            mav.setViewName("search");
+            mav.addObject("spacePOList",spacePOList);
+            mav.addObject("pageNow",pagenow);
+            mav.addObject("page",page);
+            return mav;
+        }
+
+        LimitPageList limitPageList = spaceService.selectPageBySearch(pagenow,content);
+        page = limitPageList.getPage();
+        page.setTotalPageCount(page.getTotalPageCount());
+        //强制类型转换
+        spacePOList = (List<SpacePO>) limitPageList.getList();
+        mav.setViewName("search");
+        mav.addObject("spacePOList",spacePOList);
+        mav.addObject("pageNow",pagenow);
+        mav.addObject("page",page);
+        return mav;
+    }
+
     //根据空间id返回空间信息
     @RequestMapping(value = "/getSpaceBySpaceId", produces = "text/html;charset=UTF-8")
     @ResponseBody
     public ModelAndView getSpaceBySpaceId(HttpServletRequest request, HttpServletResponse response) {
         ModelAndView mav = new ModelAndView();
 
-        System.out.println(request.getParameter("id"));
-        long id = Long.parseLong(request.getParameter("id"));
+        //理论上不存在找不到id的情况
+        /*if(request.getParameter("spaceId").equals(null)||request.getParameter("spaceId") == ""){
+            mav.setViewName("searchNull");
+            return mav;
+        }*/
+        long spaceId = Long.parseLong(request.getParameter("spaceId"));
 
-        SpacePO spacePO = spaceService.getSpaceBySpaceId(id);
+        SpacePO spacePO = spaceService.getSpaceBySearchContent(spaceId);
+        /*if(null==spacePO){
+            mav.setViewName("searchNull");
+            return mav;
+        }*/
+
         //获取用户信息
         UserPO userPO = userService.getUserById(spacePO.getOriginatorID());
         //获取空间信息

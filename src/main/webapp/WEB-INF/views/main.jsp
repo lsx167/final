@@ -29,8 +29,8 @@
         <img src="../img/yonghu1.png" style="max-height: 30px;margin-top: 5px;border:none;"/>
     </div>
     <div class="bar1">
-        <form action="/space/getSpaceBySpaceId" method="post">
-            <input type="text" name="id" placeholder="请输入您要搜索的内容...">
+        <form action="/space/getSpaceBySearchContent" method="post">
+            <input type="text" name="spaceContent" placeholder="请输入您要搜索的内容...">
             <button type="submit"></button>
         </form>
     </div>
@@ -67,7 +67,11 @@
 				<table>
 				    <c:forEach items="${requestScope.spacePOS}" var="bean">
 				        <tr>
-				            <td>${bean.name}</td>
+				            <td>
+                                <a href="/space/getSpaceBySpaceId?spaceId=${bean.id}">
+                                        ${bean.name}
+                                </a>
+                            </td>
 				        </tr>
 				    </c:forEach>
 				</table>

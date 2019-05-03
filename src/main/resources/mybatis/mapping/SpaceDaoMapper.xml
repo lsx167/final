@@ -45,10 +45,27 @@
         WHERE originatorID =#{id} and expired = 0
     </select>
 
-    <select id="getSpaceBySpaceId" resultMap="BaseResultMap">
+    <select id="getSpaceBySearchContent" resultMap="BaseResultMap">
         select
         <include refid="BASE_COLUMN_LIST"/>
         from space
         WHERE id =#{id} and expired = 0
+    </select>
+
+    <select id="selectPageBySearch" resultMap="BaseResultMap">
+        select
+        <include refid="BASE_COLUMN_LIST"/>
+        from space
+        WHERE expired = 0
+        and name like #{content}
+        limit #{startPos},#{pageSize}
+    </select>
+
+    <!-- 取得记录的总数 -->
+    <select id="getCountBySearch" resultType="integer">
+        SELECT COUNT(*)
+        FROM space
+        WHERE expired = 0
+        and name like #{content}
     </select>
 </mapper>

@@ -18,6 +18,9 @@ public interface SpaceDao {
     //根据空间id返回空间信息
     SpacePO getSpaceBySearchContent(long id);
 
+    //根据空间名返回空间信息
+    SpacePO getSpaceBySpaceName(@Param("name") String name);
+
     /**
      3      * 根据搜索内容获取分页记录
      4      * @param startPos:从数据库中第几行开始获取
@@ -30,4 +33,8 @@ public interface SpaceDao {
        * @return 返回数据库表的总条数
        */
     Integer getCountBySearch(@Param("content") String content);
+
+    //创建空间
+    Long insertSpace(SpacePO spacePO);
+
 }

@@ -112,11 +112,12 @@ public class UserController {
                 List<PagePO> pagePOS = pageService.getPagesBySpaceId(spacePO.getId());
 
                 mav.setViewName("main");
-                mav.addObject("loginMsg", "登录成功");
                 mav.addObject("userPO",userPO);
                 mav.addObject("spacePO",spacePO);
                 mav.addObject("spacePOS",spacePOS);
                 mav.addObject("pagePOS",pagePOS);
+
+                request.getSession().setAttribute("userPO",userPO);
                 return mav;
             }
         }

@@ -39,6 +39,11 @@ public class SpaceServiceImpl implements SpaceService{
     }
 
     @Override
+    public SpacePO getSpaceBySpaceName(String name) {
+        return spaceDao.getSpaceBySpaceName(name);
+    }
+
+    @Override
     public LimitPageList selectPageBySearch(Integer pageNow, String content) {
 
         content = "%"+content+"%";
@@ -66,5 +71,12 @@ public class SpaceServiceImpl implements SpaceService{
     public int getCountBySearch(String content) {
         content = "\'%"+content+"%\'";
         return spaceDao.getCountBySearch(content);
+    }
+
+    @Override
+    public Long createSpace(SpacePO spacePO) {
+        spaceDao.insertSpace(spacePO);
+
+        return spacePO.getId();
     }
 }

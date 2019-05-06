@@ -132,4 +132,47 @@ public class SpaceController {
         mav.addObject("pagePOS",pagePOS);
         return mav;
     }
+
+    //创建空间
+    @RequestMapping(value = "/createSpace", produces = "text/html;charset=UTF-8")
+    @ResponseBody
+    public ModelAndView createSpace(HttpServletRequest request, HttpServletResponse response,HttpSession httpSession) {
+        ModelAndView mav = new ModelAndView();
+        String spaceName = request.getParameter("spaceName");
+        String spaceDescribe = request.getParameter("spaceDescribe");
+        UserPO userPO = (UserPO) httpSession.getAttribute("userPO");
+
+        //根据空间名称去查询是否存在同名空间，若存在则创建失败，校验之后移到前端
+        // todo
+        SpacePO spacePO = spaceService.getSpaceBySpaceName(spaceName);
+        if(spacePO == null){
+            System.out.println("该空间已存在");
+            mav.setViewName("main");
+            return mav;
+        }
+        else{
+            spacePO.setName(spaceName);
+            spacePO.setOriginatorID(userPO.getId());
+            spacePO.setIsMain(0);
+            spacePO.setType(1);
+            spacePO.setReadID("-1");
+            spacePO.setWriteID("-1");
+            spacePO.setChildPageID("-1");
+            spacePO.setDescribe(spaceDescribe);
+            spacePO.setExpired(false);
+            spaceService.createSpace(spacePO);
+
+            //获取空间信息
+            List<SpacePO> spacePOS = spaceService.getSpacesById(userPO.getId());
+            //获取该空间页面信息
+            List<PagePO> pagePOS = pageService.getPagesBySpaceId(spacePO.getId());
+
+            mav.setViewName("main");
+            mav.addObject("userPO",userPO);
+            mav.addObject("spacePO",spacePO);
+            mav.addObject("spacePOS",spacePOS);
+            mav.addObject("pagePOS",pagePOS);
+            return mav;
+        }
+    }
 }

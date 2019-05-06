@@ -258,3 +258,10 @@
 	width: 40px;
 	display: inline-block;
 }
+.create_form{
+	width: 80%;
+	margin-left: 10%;
+	height: 150px;
+	margin-top: 20px;
+	background-color: red;
+}

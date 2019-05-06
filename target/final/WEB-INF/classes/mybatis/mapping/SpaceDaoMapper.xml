@@ -52,6 +52,13 @@
         WHERE id =#{id} and expired = 0
     </select>
 
+    <select id="getSpaceBySpaceName" resultMap="BaseResultMap">
+        select
+        <include refid="BASE_COLUMN_LIST"/>
+        from space
+        WHERE name =#{name} and expired = 0
+    </select>
+
     <select id="selectPageBySearch" resultMap="BaseResultMap">
         select
         <include refid="BASE_COLUMN_LIST"/>
@@ -68,4 +75,20 @@
         WHERE expired = 0
         and name like #{content}
     </select>
+
+    <insert id="insertSpace" parameterType="SpacePO" useGeneratedKeys="true" keyProperty="id">
+        insert into space (id,`name`,originatorID,isMain,`type`,readID,writeID,childPageID,`describe`,expired)
+        values (
+        #{id,jdbcType=BIGINT},
+        #{name,jdbcType=VARCHAR},
+        #{originatorID,jdbcType=BIGINT},
+        #{isMain,jdbcType=TINYINT},
+        #{type,jdbcType=TINYINT},
+        #{readID,jdbcType=VARCHAR},
+        #{writeID,jdbcType=VARCHAR},
+        #{childPageID,jdbcType=VARCHAR},
+        #{describe,jdbcType=VARCHAR},
+        #{expired,jdbcType=TINYINT}
+        )
+    </insert>
 </mapper>

@@ -7,7 +7,7 @@ public class SpacePO {
     private String name;
     //空间创始人id
     private long originatorID;
-    //是否是主页（1、主页；2、非主页）
+    //是否是主页（1、主页；0、非主页）
     private Integer isMain;
     //空间权限类型：1、所有人可读可写，2、所有人可读部分人可写，
     // 3、部分人可读部分人可写，4、私密

@@ -126,13 +126,18 @@ public class SpaceController {
         List<SpacePO> spacePOS = spaceService.getSpacesById(userPO.getId());
         //获取该空间页面信息
         List<PagePO> pagePOS = pageService.getPagesBySpaceId(spacePO.getId());
+        //获取该空间最近5条操作记录
+        List<SpaceOperateRecordPO> spaceOperateRecordPOS = spaceOperateRecordService.getLastFiveSpaceOperateRecord(spacePO.getId());
 
-        mav.setViewName("main");
-        mav.addObject("loginMsg", "登录成功");
+
+        /*mav.setViewName("main");
         mav.addObject("userPO",userPO);
         mav.addObject("spacePO",spacePO);
         mav.addObject("spacePOS",spacePOS);
         mav.addObject("pagePOS",pagePOS);
+        mav.addObject("spaceOperateRecordPOS",spaceOperateRecordPOS);*/
+        mav = spaceService.packagePage(userPO,spacePO,spacePOS,pagePOS,spaceOperateRecordPOS);
+
         return mav;
     }
 
@@ -175,12 +180,16 @@ public class SpaceController {
             //添加空间操作记录
             spaceOperateRecordService.createSpaceOperate(spacePO.getId(),userPO.getId(),spacePO.getName());
 
+            //获取该空间最近5条操作记录
+            List<SpaceOperateRecordPO> spaceOperateRecordPOS = spaceOperateRecordService.getLastFiveSpaceOperateRecord(spacePO.getId());
 
-            mav.setViewName("main");
+            /*mav.setViewName("main");
             mav.addObject("userPO",userPO);
             mav.addObject("spacePO",spacePO);
             mav.addObject("spacePOS",spacePOS);
-            mav.addObject("pagePOS",pagePOS);
+            mav.addObject("pagePOS",pagePOS);*/
+            mav = spaceService.packagePage(userPO,spacePO,spacePOS,pagePOS,spaceOperateRecordPOS);
+
             return mav;
         }
     }

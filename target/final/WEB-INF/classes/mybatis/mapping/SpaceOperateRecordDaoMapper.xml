@@ -26,9 +26,8 @@
         select
         <include refid="BASE_COLUMN_LIST"/>
         from spaceOperateRecord
+        where expired = 0
     </select>
-
-
 
     <insert id="insertSpaceOperate" parameterType="SpaceOperateRecordPO" useGeneratedKeys="true" keyProperty="id">
         insert into spaceOperateRecord(id,spaceId,operatorId,operatorTime,`type`,operatorContent,expired)
@@ -42,4 +41,13 @@
         #{expired,jdbcType=TINYINT}
         )
     </insert>
+
+    <select id="getLastFiveSpaceOperateRecord" resultMap="BaseResultMap">
+        select
+        <include refid="BASE_COLUMN_LIST"/>
+        from spaceOperateRecord
+        WHERE expired = 0 and spaceId =#{id}
+        order by id desc
+        limit 5
+    </select>
 </mapper>

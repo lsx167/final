@@ -29,13 +29,14 @@
         select
         <include refid="BASE_COLUMN_LIST"/>
         from space
+        where expired = 0
     </select>
 
     <select id="getMainSpaceById" resultMap="BaseResultMap">
         select
         <include refid="BASE_COLUMN_LIST"/>
         from space
-        WHERE originatorID =#{id} and isMain = 1
+        WHERE originatorID =#{id} and isMain = 1 and expired = 0
     </select>
 
     <select id="getSpacesById" resultMap="BaseResultMap">

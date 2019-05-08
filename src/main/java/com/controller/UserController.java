@@ -1,9 +1,12 @@
 package com.controller;
 
+import com.dao.SpaceOperateRecordDao;
 import com.entities.PagePO;
+import com.entities.SpaceOperateRecordPO;
 import com.entities.SpacePO;
 import com.entities.UserPO;
 import com.service.PageService;
+import com.service.SpaceOperateRecordService;
 import com.service.SpaceService;
 import com.service.UserService;
 import org.apache.log4j.Logger;
@@ -33,6 +36,8 @@ public class UserController {
     private SpaceService spaceService;
     @Autowired
     private PageService pageService;
+    @Autowired
+    private SpaceOperateRecordService spaceOperateRecordService;
 
     /**
      *返回user对象信息给page1.jsp处理，然后在前端页面展示
@@ -110,12 +115,16 @@ public class UserController {
                 List<SpacePO> spacePOS = spaceService.getSpacesById(userPO.getId());
                 //获取该空间页面信息
                 List<PagePO> pagePOS = pageService.getPagesBySpaceId(spacePO.getId());
+                //获取该空间最近5条操作记录
+                List<SpaceOperateRecordPO> spaceOperateRecordPOS = spaceOperateRecordService.getLastFiveSpaceOperateRecord(spacePO.getId());
 
-                mav.setViewName("main");
+                /*mav.setViewName("main");
                 mav.addObject("userPO",userPO);
                 mav.addObject("spacePO",spacePO);
                 mav.addObject("spacePOS",spacePOS);
                 mav.addObject("pagePOS",pagePOS);
+                mav.addObject("spaceOperateRecordPOS",spaceOperateRecordPOS);*/
+                mav = spaceService.packagePage(userPO,spacePO,spacePOS,pagePOS,spaceOperateRecordPOS);
 
                 request.getSession().setAttribute("userPO",userPO);
                 return mav;

@@ -147,6 +147,24 @@
                 ${requestScope.spacePO.describe}
             </div>
         </div>
+		<div class="space_operate_record">
+			<table>
+				<tr>
+					<td class="space_operate_record_content">空间操作记录</td>
+					<td class="space_operate_record_time">操作时间</td>
+				</tr>
+			    <c:forEach items="${requestScope.spaceOperateRecordPOS}" var="bean">
+			        <tr>
+			            <td class="space_operate_record_content">
+			                ${bean.operatorContent}
+			            </td>
+						<td class="space_operate_record_time">
+						    ${bean.operatorTime}
+						</td>
+			        </tr>
+			    </c:forEach>
+			</table>
+		</div>
     </div>
 </div>
 <footer class="footer">

@@ -1,12 +1,11 @@
 package com.service.impl;
 
 import com.dao.SpaceDao;
-import com.entities.LimitPageList;
-import com.entities.Page;
-import com.entities.SpacePO;
+import com.entities.*;
 import com.service.SpaceService;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
 import java.util.ArrayList;
@@ -78,5 +77,17 @@ public class SpaceServiceImpl implements SpaceService{
         spaceDao.insertSpace(spacePO);
 
         return spacePO.getId();
+    }
+
+    @Override
+    public ModelAndView packagePage(UserPO userPO, SpacePO spacePO, List<SpacePO> spacePOS, List<PagePO> pagePOS, List<SpaceOperateRecordPO> spaceOperateRecordPOS) {
+        ModelAndView mav = new ModelAndView();
+        mav.setViewName("main");
+        mav.addObject("userPO",userPO);
+        mav.addObject("spacePO",spacePO);
+        mav.addObject("spacePOS",spacePOS);
+        mav.addObject("pagePOS",pagePOS);
+        mav.addObject("spaceOperateRecordPOS",spaceOperateRecordPOS);
+        return mav;
     }
 }

@@ -11,4 +11,7 @@ public interface SpaceOperateRecordDao {
 
     //添加空间操作记录
     Long insertSpaceOperate(SpaceOperateRecordPO spaceOperateRecordPO);
+
+    //根据空间id查询最近5条操作记录
+    List<SpaceOperateRecordPO> getLastFiveSpaceOperateRecord(Long id);
 }

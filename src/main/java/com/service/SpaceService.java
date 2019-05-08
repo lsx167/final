@@ -1,7 +1,7 @@
 package com.service;
 
-import com.entities.LimitPageList;
-import com.entities.SpacePO;
+import com.entities.*;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
 
@@ -32,4 +32,7 @@ public interface SpaceService {
 
     //创建空间
     Long createSpace(SpacePO spacePO);
+
+    //包装空间页面方法
+    ModelAndView packagePage(UserPO userPO, SpacePO spacePO, List<SpacePO> spacePOS, List<PagePO>pagePOS, List<SpaceOperateRecordPO> spaceOperateRecordPOS);
 }

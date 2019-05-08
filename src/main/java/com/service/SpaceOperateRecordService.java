@@ -15,4 +15,7 @@ public interface SpaceOperateRecordService {
 
     //添加空间操作记录
     Long createSpaceOperate(Long spaceId, Long operatorId,String spaceName);
+
+    //根据空间id查询最近5条操作记录
+    List<SpaceOperateRecordPO> getLastFiveSpaceOperateRecord(Long id);
 }

@@ -47,4 +47,9 @@ public class SpaceOperateRecordServiceImpl implements SpaceOperateRecordService 
             System.out.println(spaceOperateRecordPO.getId()+spaceOperateRecordPO.getSpaceId()+spaceOperateRecordPO.getOperatorContent());
         return spaceOperateRecordPO.getId();
     }
+
+    @Override
+    public List<SpaceOperateRecordPO> getLastFiveSpaceOperateRecord(Long id) {
+        return spaceOperateRecordDao.getLastFiveSpaceOperateRecord(id);
+    }
 }

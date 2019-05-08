@@ -2,6 +2,7 @@ package com.controller;
 
 import com.entities.*;
 import com.service.PageService;
+import com.service.SpaceOperateRecordService;
 import com.service.SpaceService;
 import com.service.UserService;
 import org.apache.log4j.Logger;
@@ -32,6 +33,8 @@ public class SpaceController {
     private SpaceService spaceService;
     @Autowired
     private PageService pageService;
+    @Autowired
+    private SpaceOperateRecordService spaceOperateRecordService;
 
     /**
      * 查询所有空间
@@ -145,12 +148,13 @@ public class SpaceController {
         //根据空间名称去查询是否存在同名空间，若存在则创建失败，校验之后移到前端
         // todo
         SpacePO spacePO = spaceService.getSpaceBySpaceName(spaceName);
-        if(spacePO == null){
+        if(spacePO != null){
             System.out.println("该空间已存在");
             mav.setViewName("main");
             return mav;
         }
         else{
+            spacePO = new SpacePO();
             spacePO.setName(spaceName);
             spacePO.setOriginatorID(userPO.getId());
             spacePO.setIsMain(0);
@@ -166,6 +170,11 @@ public class SpaceController {
             List<SpacePO> spacePOS = spaceService.getSpacesById(userPO.getId());
             //获取该空间页面信息
             List<PagePO> pagePOS = pageService.getPagesBySpaceId(spacePO.getId());
+
+
+            //添加空间操作记录
+            spaceOperateRecordService.createSpaceOperate(spacePO.getId(),userPO.getId(),spacePO.getName());
+
 
             mav.setViewName("main");
             mav.addObject("userPO",userPO);

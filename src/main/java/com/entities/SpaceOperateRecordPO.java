@@ -12,7 +12,7 @@ public class SpaceOperateRecordPO {
     //操作人id
     private long operatorId;
     //操作时间
-    private Date operatorTime;
+    private String operatorTime;
     //操作类型（1、创建空间，2、更改权限，3、新建页面，4、修改页面，5、删除页面）
     private Integer type;
     //操作内容
@@ -45,12 +45,10 @@ public class SpaceOperateRecordPO {
     }
 
     public String getOperatorTime() {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
-        String time = dateFormat.format(operatorTime);
-        return time;
+        return operatorTime;
     }
 
-    public void setOperatorTime(Date operatorTime) {
+    public void setOperatorTime(String operatorTime) {
         this.operatorTime = operatorTime;
     }
 

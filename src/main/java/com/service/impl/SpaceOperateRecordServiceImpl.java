@@ -7,6 +7,9 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.text.ParsePosition;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 @Service("SpaceOperateRecordServiceImpl")
@@ -18,5 +21,30 @@ public class SpaceOperateRecordServiceImpl implements SpaceOperateRecordService 
     @Override
     public List<SpaceOperateRecordPO> getAllSpaceOperateRecord() {
         return spaceOperateRecordDao.getAllSpaceOperateRecord();
+    }
+
+    @Override
+    public Long insertSpaceOperate(SpaceOperateRecordPO spaceOperateRecordPO) {
+        spaceOperateRecordDao.insertSpaceOperate(spaceOperateRecordPO);
+        return spaceOperateRecordPO.getId();
+    }
+
+    @Override
+    public Long createSpaceOperate(Long spaceId, Long operatorId, String spaceName){
+        Date currentTime = new Date();
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String dateString = formatter.format(currentTime);
+
+        SpaceOperateRecordPO spaceOperateRecordPO = new SpaceOperateRecordPO();
+        spaceOperateRecordPO.setSpaceId(spaceId);
+        spaceOperateRecordPO.setOperatorId(operatorId);
+        spaceOperateRecordPO.setOperatorTime(dateString);
+        spaceOperateRecordPO.setType(1);
+        spaceOperateRecordPO.setOperatorContent("创建空间"+spaceName);
+        spaceOperateRecordPO.setExpired(false);
+
+        spaceOperateRecordDao.insertSpaceOperate(spaceOperateRecordPO);
+            System.out.println(spaceOperateRecordPO.getId()+spaceOperateRecordPO.getSpaceId()+spaceOperateRecordPO.getOperatorContent());
+        return spaceOperateRecordPO.getId();
     }
 }

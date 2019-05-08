@@ -3,8 +3,43 @@
 
 <!--命名空间是对应接口的包名+类名,指定要映射的接口 -->
 <mapper namespace="com.dao.SpaceOperateRecordDao">
+    <resultMap id="BaseResultMap" type="com.entities.SpaceOperateRecordPO">
+        <!--
+          WARNING - @mbg.generated
+        -->
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="spaceId" jdbcType="BIGINT" property="spaceId"/>
+        <result column="operatorId" jdbcType="BIGINT" property="operatorId"/>
+        <result column="operatorTime" jdbcType="VARCHAR" property="operatorTime"/>
+        <result column="type" jdbcType="TINYINT" property="type"/>
+        <result column="operatorContent" jdbcType="VARCHAR" property="operatorContent"/>
+        <result column="expired" jdbcType="TINYINT" property="expired"/>
+
+    </resultMap>
+
+    <sql id="BASE_COLUMN_LIST">
+        id,spaceId,operatorId,operatorTime,`type`,operatorContent,expired
+    </sql>
+
     <!--id是接口中的方法名，结果类型如没有在mybatis.xml文件中配置别名，则必须使用全名称（包名+类名） -->
-    <select id="getAllSpaceOperateRecord" resultType="SpaceOperateRecordPO">
-        select id,spaceID,operatorID,operator_time,`type`,operator_content,expired from space_operate_record
+    <select id="getAllSpaceOperateRecord" resultMap="BaseResultMap">
+        select
+        <include refid="BASE_COLUMN_LIST"/>
+        from spaceOperateRecord
     </select>
+
+
+
+    <insert id="insertSpaceOperate" parameterType="SpaceOperateRecordPO" useGeneratedKeys="true" keyProperty="id">
+        insert into spaceOperateRecord(id,spaceId,operatorId,operatorTime,`type`,operatorContent,expired)
+        values (
+        #{id,jdbcType=BIGINT},
+        #{spaceId,jdbcType=BIGINT},
+        #{operatorId,jdbcType=BIGINT},
+        #{operatorTime,jdbcType=VARCHAR},
+        #{type,jdbcType=TINYINT},
+        #{operatorContent,jdbcType=VARCHAR},
+        #{expired,jdbcType=TINYINT}
+        )
+    </insert>
 </mapper>

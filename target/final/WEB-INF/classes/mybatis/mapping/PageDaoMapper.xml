@@ -33,4 +33,11 @@
         WHERE spaceID =#{id} and expired = 0
     </select>
 
+    <select id="getPageByPageId" resultMap="BaseResultMap">
+        select
+        <include refid="BASE_COLUMN_LIST"/>
+        from page
+        WHERE id =#{id} and expired = 0
+    </select>
+
 </mapper>

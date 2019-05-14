@@ -2,7 +2,7 @@
 <html>
 <head>
     <title>TEST</title>
-    <link rel="stylesheet" href="../css/main.css" type="text/css">
+    <link rel="stylesheet" href="../../css/pageItem.css" type="text/css">
     <link href="http://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <script type="text/javascript" src="/js/jquery-3.3.1.min.js"></script>
     <script type="text/javascript" src="/js/ajaxfileupload.js"></script>
@@ -102,11 +102,7 @@
                 <table>
                     <c:forEach items="${requestScope.pagePOS}" var="bean">
                         <tr>
-                            <td>
-                                <a href="/page/getPageByPageId?pageId=${bean.id}">
-                                        ${bean.name}
-                                </a>
-                            </td>
+                            <td>${bean.name}</td>
                         </tr>
                     </c:forEach>
 
@@ -123,6 +119,7 @@
             </div>
         </div>
     </div>
+	
     <div class="main_right">
         <div class="right_1">
             <div class="right_1_left">
@@ -146,28 +143,9 @@
                 最后一次修改时间：${requestScope.spaceOperateRecordPOS.get(0).operatorTime}
             </div>
         </div>
-        <div class="right_3">
-            <div class="right_3_item">
-                ${requestScope.spacePO.describe}
-            </div>
-        </div>
-		<div class="space_operate_record">
-			<table>
-				<tr>
-					<td class="space_operate_record_content">空间操作记录</td>
-					<td class="space_operate_record_time">操作时间</td>
-				</tr>
-			    <c:forEach items="${requestScope.spaceOperateRecordPOS}" var="bean">
-			        <tr>
-			            <td class="space_operate_record_content">
-			                ${bean.operatorContent}
-			            </td>
-						<td class="space_operate_record_time">
-						    ${bean.operatorTime}
-						</td>
-			        </tr>
-			    </c:forEach>
-			</table>
+        
+		<div class="right_3">
+			页面内容
 		</div>
     </div>
 </div>

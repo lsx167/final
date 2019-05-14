@@ -2,7 +2,7 @@
 <html>
 <head>
     <title>TEST</title>
-    <link rel="stylesheet" href="../css/main.css" type="text/css">
+    <link rel="stylesheet" href="../../css/pageItem.css" type="text/css">
     <link href="http://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <script type="text/javascript" src="/js/jquery-3.3.1.min.js"></script>
     <script type="text/javascript" src="/js/ajaxfileupload.js"></script>
@@ -73,7 +73,7 @@
                 <img src="../img/wujiaoxing.png" style="max-height: 30px;margin-top: 5px;border:none;"/>
             </div>
             <div class="left_name_item">
-                ${requestScope.spacePO.name}
+                ${requestScope.pagePO.name}
             </div>
         </div>
 		<div class="left_page_tree">
@@ -123,10 +123,11 @@
             </div>
         </div>
     </div>
+	
     <div class="main_right">
         <div class="right_1">
             <div class="right_1_left">
-                ${requestScope.spacePO.name}
+                ${requestScope.pagePO.name}
             </div>
             <div class="right_1_right">
                 删除
@@ -140,34 +141,18 @@
         </div>
         <div class="right_2">
             <div class="right_2_creator">
-                创建者：${requestScope.userPO.name}
+                创建者：${requestScope.originUserPO.name}
+            </div>
+            <div class="right_2_creator">
+                版本号：${requestScope.pagePO.versionID}
             </div>
             <div class="right_2_time">
                 最后一次修改时间：${requestScope.spaceOperateRecordPOS.get(0).operatorTime}
             </div>
         </div>
-        <div class="right_3">
-            <div class="right_3_item">
-                ${requestScope.spacePO.describe}
-            </div>
-        </div>
-		<div class="space_operate_record">
-			<table>
-				<tr>
-					<td class="space_operate_record_content">空间操作记录</td>
-					<td class="space_operate_record_time">操作时间</td>
-				</tr>
-			    <c:forEach items="${requestScope.spaceOperateRecordPOS}" var="bean">
-			        <tr>
-			            <td class="space_operate_record_content">
-			                ${bean.operatorContent}
-			            </td>
-						<td class="space_operate_record_time">
-						    ${bean.operatorTime}
-						</td>
-			        </tr>
-			    </c:forEach>
-			</table>
+        
+		<div class="right_3">
+            ${requestScope.pageDetailPO.pageContent}
 		</div>
     </div>
 </div>

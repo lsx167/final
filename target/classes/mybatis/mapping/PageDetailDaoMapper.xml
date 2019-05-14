@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!--命名空间是对应接口的包名+类名,指定要映射的接口 -->
+<mapper namespace="com.dao.PageDetailDao">
+    <resultMap id="BaseResultMap" type="com.entities.PageDetailPO">
+        <!--
+          WARNING - @mbg.generated
+        -->
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="versionID" jdbcType="VARCHAR" property="versionID"/>
+        <result column="pageContent" jdbcType="VARCHAR" property="pageContent"/>
+        <result column="expired" jdbcType="TINYINT" property="expired"/>
+
+    </resultMap>
+
+    <sql id="BASE_COLUMN_LIST">
+        id,versionID,pageContent,expired
+    </sql>
+
+    <select id="getCurPageById" resultMap="BaseResultMap">
+        select
+        <include refid="BASE_COLUMN_LIST"/>
+        from pageDetail
+        WHERE id =#{id} and expired = 0
+        order by id desc
+        limit 1
+    </select>
+
+</mapper>

@@ -102,7 +102,11 @@
                 <table>
                     <c:forEach items="${requestScope.pagePOS}" var="bean">
                         <tr>
-                            <td>${bean.name}</td>
+                            <td>
+                                <a href="/page/getPageByPageId?pageId=${bean.id}">
+                                        ${bean.name}
+                                </a>
+                            </td>
                         </tr>
                     </c:forEach>
 
@@ -139,7 +143,7 @@
                 创建者：${requestScope.userPO.name}
             </div>
             <div class="right_2_time">
-                最后一次修改时间：2019-04-24
+                最后一次修改时间：${requestScope.spaceOperateRecordPOS.get(0).operatorTime}
             </div>
         </div>
         <div class="right_3">

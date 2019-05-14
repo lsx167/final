@@ -77,4 +77,9 @@
         <property name="sqlSessionFactory" ref="sqlSessionFactory"></property>
         <property name="mapperInterface" value="com.dao.PageDao"></property>
     </bean>
+
+    <bean id="PageDetailDao" class="org.mybatis.spring.mapper.MapperFactoryBean">
+        <property name="sqlSessionFactory" ref="sqlSessionFactory"></property>
+        <property name="mapperInterface" value="com.dao.PageDetailDao"></property>
+    </bean>
 </beans>

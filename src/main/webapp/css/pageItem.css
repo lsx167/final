@@ -1,0 +1,262 @@
+.header {
+    background-color: #205081;
+    height: 40px;
+    width: 100%;
+    min-width: 1050px;
+    float: left;
+}
+.body{
+     margin: 0px;
+    padding: 0px;
+     font-family: 'Avenir', Helvetica, Arial, sans-serif;
+     -webkit-font-smoothing: antialiased;
+     -moz-osx-font-smoothing: grayscale;
+     text-align: center;
+     color: #2c3e50;
+ }
+.footer{
+    background: aliceblue;
+    height: 80px;
+    width: 100%;
+    min-width: 1050px;
+}
+.footer_p{
+    font-size: 24px;
+    color: black;
+}
+.main{
+    height: 800px;
+    width: 100%;
+    min-width: 1050px;
+    padding-top: 1px;
+    background-color: white;
+}
+.main_left{
+	height: 760px;
+	width: 300px;
+	min-width: 300px;
+	float: left;
+	display: inline-block;
+	background-color: rgb(235,233,234);
+}
+.left_name{
+	width: 300px;
+	height: 100px;
+	padding: 1px;
+}
+.left_name_img{
+	height: 40px;
+	width: 40px;
+	margin-top: 29px;
+	margin-left: 30px;
+	float: left;
+	display: inline-block;
+}
+.left_name_item{
+	font-size: 24px;
+	color: black;
+	float: left;
+	display: inline-block;
+	margin-top: 35px;
+	margin-left: 10px;
+}
+.left_page_tree{
+	height: 308px;
+	width: 300px;
+	padding: 1px;
+}
+.left_page{
+	height: 250px;
+	width: 240px;
+	margin-left: 30px;
+	margin-top: 10px;
+}
+.left_setting{
+	height: 40px;
+	width: 300px;
+	background-color: rgb(237,237,237);
+	padding-top: 1px;
+}
+.left_setting_img{
+	height: 30px;
+	width: 30px;
+	margin-top: 4px;
+	margin-left: 20px;
+	float: left;
+	display: inline-block;
+}
+.left_setting_item{
+	font-size: 16px;
+	color: black;
+	float: left;
+	display: inline-block;
+	margin-top: 10px;
+	margin-left: 10px;
+}
+.main_right{
+	height: 760px;
+	width: 77%;
+	min-width: 750px;
+	float: left;
+	display: inline-block;
+	background-color: white;
+}
+.right_1{
+	width: 80%;
+	height: 60px;
+	margin-top: 20px;
+	margin-left: 20px;
+}
+.right_1_left{
+	float: left;
+	text-align: center;
+	width: 200px;
+	height: 30px;
+	font-size: 30px;
+	font-weight: 500;
+}
+.right_1_right{
+	float: right;
+	text-align: center;
+	width: 80px;
+	height: 20px;
+	font-size: 20px;
+	margin-top: 6px;
+	margin-right: 10px;
+}
+.right_2{
+	width: 80%;
+	height: 30px;
+}
+.right_2_creator{
+	float: left;
+	text-align: center;
+	width: 150px;
+	height: 30px;
+	font-size: 16px;
+	margin-left: 50px;
+}
+.right_2_time{
+	float: left;
+	text-align: center;
+	width: 350px;
+	height: 30px;
+	font-size: 16px;
+}
+.right_3{
+	width: 700px;
+	height: 600px;
+	margin-left: 50px;
+	border: 2px solid rgb(219,246,214);
+	background-color: white;
+}
+
+/* 下拉按钮样式 */
+.dropbtn {
+    background-color: #205081;
+    height: 40px;
+    color: white;
+    padding: 8px;
+    float: left;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+}
+
+/* 容器 <div> - 需要定位下拉内容 */
+.dropdown {
+    float: left;
+    position: relative;
+    display: inline-block;
+    margin-left: 100px;
+}
+
+/* 下拉内容 (默认隐藏) */
+.dropdown-content {
+    display: none;
+    position: absolute;
+    margin-top: 40px;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+}
+
+/* 下拉菜单的链接 */
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+/* 鼠标移上去后修改下拉菜单链接颜色 */
+.dropdown-content a:hover {background-color: #f1f1f1}
+
+/* 在鼠标移上去后显示下拉菜单 */
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+/* 当下拉内容显示后修改下拉按钮的背景颜色 */
+.dropdown:hover .dropbtn {
+    background-color: darkblue;
+}
+.create_btn{
+    background-color: #205081;
+    height: 40px;
+    color: white;
+    padding: 8px;
+    float: left;
+    font-size: 16px;
+    border: 0px;
+}
+.create_btn:hover{
+    background-color: darkblue;
+}
+
+/*搜索框1*/
+.bar1 {
+    background: #205081;
+    height: 40px;
+    width: 300px;
+    float: right;
+    margin-right: 150px;
+}
+.bar1 input {
+    border: 0px;
+    border-radius: 5px;
+    background: rgb(20,49,88);
+    color: #9E9C9C;
+    height: 30px;
+    margin-top: 5px;
+    float: left;
+}
+.bar1 button {
+    top: 0;
+    right: 0;
+    height: 30px;
+    background: rgb(20,49,88);
+    margin-top: 5px;
+    border-radius: 0 5px 5px 0;
+    float: left;
+}
+.bar1 button:before {
+    content: "\f002";
+    font-family: FontAwesome;
+    font-size: 16px;
+    color: #F9F0DA;
+}
+.header_user{
+	height: 40px;
+	float: right;
+	margin-right: 10px;
+	width: 40px;
+	display: inline-block;
+}
+.create_form{
+	width: 80%;
+	margin-left: 10%;
+	height: 150px;
+	margin-top: 20px;
+	background-color: red;
+}

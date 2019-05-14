@@ -40,7 +40,7 @@ public class SpaceOperateRecordServiceImpl implements SpaceOperateRecordService 
         spaceOperateRecordPO.setOperatorId(operatorId);
         spaceOperateRecordPO.setOperatorTime(dateString);
         spaceOperateRecordPO.setType(1);
-        spaceOperateRecordPO.setOperatorContent("创建空间"+spaceName);
+        spaceOperateRecordPO.setOperatorContent("创建空间-"+spaceName);
         spaceOperateRecordPO.setExpired(false);
 
         spaceOperateRecordDao.insertSpaceOperate(spaceOperateRecordPO);

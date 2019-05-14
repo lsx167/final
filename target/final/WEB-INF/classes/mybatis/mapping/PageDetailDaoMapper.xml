@@ -8,6 +8,7 @@
           WARNING - @mbg.generated
         -->
         <id column="id" jdbcType="BIGINT" property="id"/>
+        <id column="pageId" jdbcType="BIGINT" property="pageId"/>
         <result column="versionID" jdbcType="VARCHAR" property="versionID"/>
         <result column="pageContent" jdbcType="VARCHAR" property="pageContent"/>
         <result column="expired" jdbcType="TINYINT" property="expired"/>
@@ -15,14 +16,14 @@
     </resultMap>
 
     <sql id="BASE_COLUMN_LIST">
-        id,versionID,pageContent,expired
+        id,pageId,versionID,pageContent,expired
     </sql>
 
     <select id="getCurPageById" resultMap="BaseResultMap">
         select
         <include refid="BASE_COLUMN_LIST"/>
         from pageDetail
-        WHERE id =#{id} and expired = 0
+        WHERE pageId =#{id} and expired = 0
         order by id desc
         limit 1
     </select>

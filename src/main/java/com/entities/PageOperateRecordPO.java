@@ -11,9 +11,11 @@ public class PageOperateRecordPO {
     //操作人id
     private long operatorId;
     //操作时间
-    private String operaterTime;
-    //操作类型（1、创建页面，2、修改页面，3、修改权限）
+    private String operatorTime;
+    //操作类型（1、创建页面，2、修改页面，3、修改权限，4、删除页面）
     private Integer type;
+    //操作备注
+    private String operatorContent;
     //操作前版本号
     private String beforeVersionId;
     //操作后版本号
@@ -44,12 +46,12 @@ public class PageOperateRecordPO {
         this.operatorId = operatorId;
     }
 
-    public String getOperaterTime() {
-        return operaterTime;
+    public String getOperatorTime() {
+        return operatorTime;
     }
 
-    public void setOperaterTime(String operaterTime) {
-        this.operaterTime = operaterTime;
+    public void setOperatorTime(String operatorTime) {
+        this.operatorTime = operatorTime;
     }
 
     public Integer getType() {
@@ -58,6 +60,14 @@ public class PageOperateRecordPO {
 
     public void setType(Integer type) {
         this.type = type;
+    }
+
+    public String getOperatorContent() {
+        return operatorContent;
+    }
+
+    public void setOperatorContent(String operatorContent) {
+        this.operatorContent = operatorContent;
     }
 
     public String getBeforeVersionId() {

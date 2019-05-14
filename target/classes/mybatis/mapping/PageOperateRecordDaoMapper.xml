@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!--命名空间是对应接口的包名+类名,指定要映射的接口 -->
+<mapper namespace="com.dao.PageOperateRecordDao">
+    <resultMap id="BaseResultMap" type="com.entities.PageOperateRecordPO">
+        <!--
+          WARNING - @mbg.generated
+        -->
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="pageId" jdbcType="BIGINT" property="pageId"/>
+        <result column="operatorId" jdbcType="BIGINT" property="operatorId"/>
+        <result column="operatorTime" jdbcType="VARCHAR" property="operatorTime"/>
+        <result column="type" jdbcType="TINYINT" property="type"/>
+        <result column="operatorContent" jdbcType="VARCHAR" property="operatorContent"/>
+        <result column="beforeVersionId" jdbcType="VARCHAR" property="beforeVersionId"/>
+        <result column="afterVersionId" jdbcType="VARCHAR" property="afterVersionId"/>
+        <result column="expired" jdbcType="TINYINT" property="expired"/>
+
+    </resultMap>
+
+    <sql id="BASE_COLUMN_LIST">
+        id,pageId,operatorId,operatorTime,`type`,operatorContent,beforeVersionId,afterVersionId,expired
+    </sql>
+
+    <select id="getLastPageOperateRecord" resultMap="BaseResultMap">
+        select
+        <include refid="BASE_COLUMN_LIST"/>
+        from pageOperateRecord
+        WHERE expired = 0 and pageId =#{id}
+        order by id desc
+        limit 1
+    </select>
+</mapper>

@@ -17,6 +17,8 @@ public class PagePO {
     private long spaceID;
     //是否为根页面(1、是，2、否)
     private boolean isRootPage;
+    //页面深度
+    private Integer depth;
     //父页面id（不是根页面才有父页面）
     private long fatherPageID;
     //子页面id集
@@ -87,6 +89,14 @@ public class PagePO {
 
     public void setRootPage(boolean rootPage) {
         isRootPage = rootPage;
+    }
+
+    public Integer getDepth() {
+        return depth;
+    }
+
+    public void setDepth(Integer depth) {
+        this.depth = depth;
     }
 
     public long getFatherPageID() {

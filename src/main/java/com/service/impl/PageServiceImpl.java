@@ -2,10 +2,8 @@ package com.service.impl;
 
 import com.dao.PageDao;
 import com.dao.PageDetailDao;
-import com.entities.PageDetailPO;
-import com.entities.PagePO;
-import com.entities.SpacePO;
-import com.entities.UserPO;
+import com.dao.PageOperateRecordDao;
+import com.entities.*;
 import com.service.PageService;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
@@ -23,6 +21,9 @@ public class PageServiceImpl implements PageService {
     @Resource
     private PageDetailDao pageDetailDao;
 
+    @Resource
+    private PageOperateRecordDao pageOperateRecordDao;
+
     @Override
     public List<PagePO> getPagesBySpaceId(long id) {
         return pageDao.getPagesBySpaceId(id);
@@ -39,7 +40,13 @@ public class PageServiceImpl implements PageService {
     }
 
     @Override
-    public ModelAndView packagePage(UserPO userPO, UserPO originUserPO, SpacePO spacePO, List<SpacePO> spacePOS, List<PagePO> pagePOS, PagePO pagePO, PageDetailPO pageDetailPO) {
+    public PageOperateRecordPO getLastPageRecordById(Long id) {
+        return pageOperateRecordDao.getLastPageOperateRecord(id);
+    }
+
+    @Override
+    public ModelAndView packagePage(UserPO userPO, UserPO originUserPO, SpacePO spacePO, List<SpacePO> spacePOS, List<PagePO> pagePOS,
+                                    PagePO pagePO, PageDetailPO pageDetailPO ,PageOperateRecordPO pageOperateRecordPO) {
         ModelAndView mav = new ModelAndView();
         mav.setViewName("pageItem");
         mav.addObject("userPO",userPO);
@@ -49,6 +56,7 @@ public class PageServiceImpl implements PageService {
         mav.addObject("pagePOS",pagePOS);
         mav.addObject("pagePO",pagePO);
         mav.addObject("pageDetailPO",pageDetailPO);
+        mav.addObject("pageOperateRecordPO",pageOperateRecordPO);
         return mav;
     }
 }

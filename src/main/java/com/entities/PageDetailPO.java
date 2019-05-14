@@ -2,6 +2,8 @@ package com.entities;
 
 public class PageDetailPO {
     private long id;
+    //页面编号
+    private long pageId;
     //版本号
     private String versionID;
     //页面内容
@@ -14,6 +16,14 @@ public class PageDetailPO {
 
     public void setId(long id) {
         this.id = id;
+    }
+
+    public long getPageId() {
+        return pageId;
+    }
+
+    public void setPageId(long pageId) {
+        this.pageId = pageId;
     }
 
     public String getVersionID() {

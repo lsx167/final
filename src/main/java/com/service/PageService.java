@@ -15,7 +15,10 @@ public interface PageService {
     //根据页面id返回最近的存在空间
     PageDetailPO getCurPageById(Long id);
 
+    //根据页面id返回最近的操作记录
+    PageOperateRecordPO getLastPageRecordById(Long id);
+
     //包装页面方法
-    ModelAndView packagePage(UserPO userPO, UserPO originUserPO, SpacePO spacePO, List<SpacePO> spacePOS,
-                             List<PagePO>pagePOS, PagePO pagePO, PageDetailPO pageDetailPO);
+    ModelAndView packagePage(UserPO userPO, UserPO originUserPO, SpacePO spacePO, List<SpacePO> spacePOS, List<PagePO>pagePOS,
+                             PagePO pagePO, PageDetailPO pageDetailPO, PageOperateRecordPO pageOperateRecordPO);
 }

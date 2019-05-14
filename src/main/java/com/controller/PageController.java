@@ -1,9 +1,6 @@
 package com.controller;
 
-import com.entities.PageDetailPO;
-import com.entities.PagePO;
-import com.entities.SpacePO;
-import com.entities.UserPO;
+import com.entities.*;
 import com.service.PageService;
 import com.service.SpaceOperateRecordService;
 import com.service.SpaceService;
@@ -60,7 +57,9 @@ public class PageController {
 
         UserPO originUserPO = userService.getUserById(pagePO.getOriginatorID());
 
-        mav = pageService.packagePage(userPO,originUserPO,spacePO,spacePOS,pagePOS,pagePO,pageDetailPO);
+        PageOperateRecordPO pageOperateRecordPO = pageService.getLastPageRecordById(pageId);
+
+        mav = pageService.packagePage(userPO,originUserPO,spacePO,spacePOS,pagePOS,pagePO,pageDetailPO,pageOperateRecordPO);
 
         return mav;
     }

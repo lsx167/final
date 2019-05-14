@@ -5,6 +5,6 @@ import com.entities.PageOperateRecordPO;
 import java.util.List;
 
 public interface PageOperateRecordDao {
-    //根据空间id查询最近5条操作记录
-    List<PageOperateRecordPO> getLastFivePageOperateRecord(Long id);
+    //根据页面id查询最近1条操作记录
+    PageOperateRecordPO getLastPageOperateRecord(Long id);
 }

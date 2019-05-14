@@ -147,7 +147,7 @@
                 版本号：${requestScope.pagePO.versionID}
             </div>
             <div class="right_2_time">
-                最后一次修改时间：${requestScope.spaceOperateRecordPOS.get(0).operatorTime}
+                最后一次修改时间：${requestScope.pageOperateRecordPO.operatorTime}
             </div>
         </div>
         

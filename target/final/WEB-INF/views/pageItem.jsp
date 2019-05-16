@@ -6,6 +6,8 @@
     <link href="http://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <script type="text/javascript" src="/js/jquery-3.3.1.min.js"></script>
     <script type="text/javascript" src="/js/ajaxfileupload.js"></script>
+	<script type="text/javascript" charset="utf-8" src="/utf8-jsp/ueditor.all.min.js"></script>
+    <script type="text/javascript" charset="utf-8" src="/utf8-jsp/lang/zh-cn/zh-cn.js"></script>
     <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 </head>
 <body class="body">
@@ -135,8 +137,11 @@
             <div class="right_1_right">
                 页面历史
             </div>
-            <div class="right_1_right">
+            <div class="right_1_right" id="bianji" style="display: block" onclick="show_bianji()">
                 编辑
+            </div>
+            <div class="right_1_right" id="cancel_bianji" style="display: none" onclick="show_cancel_bianji()">
+                取消编辑
             </div>
         </div>
         <div class="right_2">
@@ -150,10 +155,33 @@
                 最后一次修改时间：${requestScope.pageOperateRecordPO.operatorTime}
             </div>
         </div>
-        
-		<div class="right_3">
-            ${requestScope.pageDetailPO.pageContent}
+
+        <!--页面内容-->
+		<div class="right_3" id="page_content_show" style="display: block">
+			${requestScope.pageDetailPO.pageContent}
 		</div>
+
+        <div class="right_3" id="page_content_update" style="display: none">
+            <form action="/page/updatePageContent?pageId=${requestScope.pagePO.id}" method="post">
+                <!-- 加载编辑器的容器 -->
+                <script id="container" name="pageContent" type="text/plain">
+                    ${requestScope.pageDetailPO.pageContent}
+                </script>
+				<div>
+				    <input type="submit" value="保存" />
+				</div>
+            </form>
+            
+            <!-- 配置文件 -->
+            <script type="text/javascript" src="../../utf8-jsp/ueditor.config.js"></script>
+            <!-- 编辑器源码文件 -->
+            <script type="text/javascript" src="../../utf8-jsp/ueditor.all.js"></script>
+            <!-- 实例化编辑器 -->
+            <script type="text/javascript">
+                var ue = UE.getEditor('container');
+            </script>
+        </div>
+
     </div>
 </div>
 <footer class="footer">
@@ -171,10 +199,27 @@
     $('#cover').css('display','block'); //显示遮罩层
     $('#cover').css('height',document.body.clientHeight+'px'); //设置遮罩层的高度为当前页面高度
   }
+
   // 关闭弹窗
   function closeWindow() {
     $('#showdiv').hide();  //隐藏弹窗
     $('#cover').css('display','none');   //显示遮罩层
+  }
+
+  // 编辑页面
+  function show_bianji() {
+      $('#cancel_bianji').css('display','block');
+      $('#bianji').css('display','none');
+      $('#page_content_update').css('display','block');
+      $('#page_content_show').css('display','none');
+  }
+
+  // 取消页面编辑
+  function show_cancel_bianji() {
+      $('#cancel_bianji').css('display','none');
+      $('#bianji').css('display','block');
+      $('#page_content_update').css('display','none');
+      $('#page_content_show').css('display','block');
   }
 </script>
 </body>

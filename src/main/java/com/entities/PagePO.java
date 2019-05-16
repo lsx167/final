@@ -24,7 +24,7 @@ public class PagePO {
     //子页面id集
     private String childPageID;
     //版本号
-    private String versionID;
+    private double versionID;
     private boolean expired;
 
     public long getId() {
@@ -115,11 +115,11 @@ public class PagePO {
         this.childPageID = childPageID;
     }
 
-    public String getVersionID() {
+    public double getVersionID() {
         return versionID;
     }
 
-    public void setVersionID(String versionID) {
+    public void setVersionID(double versionID) {
         this.versionID = versionID;
     }
 

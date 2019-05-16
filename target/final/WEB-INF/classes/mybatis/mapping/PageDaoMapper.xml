@@ -18,7 +18,7 @@
         <result column="depth" jdbcType="TINYINT" property="depth"/>
         <result column="fatherPageID" jdbcType="BIGINT" property="fatherPageID"/>
         <result column="childPageID" jdbcType="VARCHAR" property="childPageID"/>
-        <result column="versionID" jdbcType="VARCHAR" property="versionID"/>
+        <result column="versionID" jdbcType="DOUBLE" property="versionID"/>
         <result column="expired" jdbcType="TINYINT" property="expired"/>
 
     </resultMap>
@@ -40,5 +40,12 @@
         from page
         WHERE id =#{id} and expired = 0
     </select>
+
+    <!-- 修改页面内容 -->
+    <update id="updatePageVersion">
+        UPDATE page
+        SET versionID = #{versionId}
+        WHERE id = #{id} and expired = 0
+    </update>
 
 </mapper>

@@ -5,7 +5,7 @@ public class PageDetailPO {
     //页面编号
     private long pageId;
     //版本号
-    private String versionID;
+    private double versionID;
     //页面内容
     private String pageContent;
     private boolean expired;
@@ -26,11 +26,11 @@ public class PageDetailPO {
         this.pageId = pageId;
     }
 
-    public String getVersionID() {
+    public double getVersionID() {
         return versionID;
     }
 
-    public void setVersionID(String versionID) {
+    public void setVersionID(double versionID) {
         this.versionID = versionID;
     }
 

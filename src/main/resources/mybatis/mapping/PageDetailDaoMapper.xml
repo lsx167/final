@@ -9,7 +9,7 @@
         -->
         <id column="id" jdbcType="BIGINT" property="id"/>
         <id column="pageId" jdbcType="BIGINT" property="pageId"/>
-        <result column="versionID" jdbcType="VARCHAR" property="versionID"/>
+        <result column="versionID" jdbcType="DOUBLE" property="versionID"/>
         <result column="pageContent" jdbcType="VARCHAR" property="pageContent"/>
         <result column="expired" jdbcType="TINYINT" property="expired"/>
 
@@ -28,4 +28,21 @@
         limit 1
     </select>
 
+    <!-- 修改页面版本号 -->
+    <update id="deletePageRecord">
+        UPDATE pageDetail
+        SET expired = 1
+        WHERE pageId = #{id} and expired = 0
+    </update>
+
+    <insert id="insertPageVersion" parameterType="PageDetailPO" useGeneratedKeys="true" keyProperty="id">
+        insert into pageDetail (id,pageId,versionID,pageContent,expired)
+        values (
+        #{id,jdbcType=BIGINT},
+        #{pageId,jdbcType=BIGINT},
+        #{versionID,jdbcType=DOUBLE},
+        #{pageContent,jdbcType=VARCHAR},
+        #{expired,jdbcType=TINYINT}
+        )
+    </insert>
 </mapper>

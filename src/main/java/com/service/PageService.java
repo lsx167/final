@@ -21,4 +21,7 @@ public interface PageService {
     //包装页面方法
     ModelAndView packagePage(UserPO userPO, UserPO originUserPO, SpacePO spacePO, List<SpacePO> spacePOS, List<PagePO>pagePOS,
                              PagePO pagePO, PageDetailPO pageDetailPO, PageOperateRecordPO pageOperateRecordPO);
+
+    //更新页面信息
+    void updatePageContent(long pageId,String pageContent,long operatorId);
 }

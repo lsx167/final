@@ -17,9 +17,9 @@ public class PageOperateRecordPO {
     //操作备注
     private String operatorContent;
     //操作前版本号
-    private String beforeVersionId;
+    private double beforeVersionId;
     //操作后版本号
-    private String afterVersionId;
+    private double afterVersionId;
     private boolean expired;
 
     public long getId() {
@@ -70,19 +70,19 @@ public class PageOperateRecordPO {
         this.operatorContent = operatorContent;
     }
 
-    public String getBeforeVersionId() {
+    public double getBeforeVersionId() {
         return beforeVersionId;
     }
 
-    public void setBeforeVersionId(String beforeVersionId) {
+    public void setBeforeVersionId(double beforeVersionId) {
         this.beforeVersionId = beforeVersionId;
     }
 
-    public String getAfterVersionId() {
+    public double getAfterVersionId() {
         return afterVersionId;
     }
 
-    public void setAfterVersionId(String afterVersionId) {
+    public void setAfterVersionId(double afterVersionId) {
         this.afterVersionId = afterVersionId;
     }
 

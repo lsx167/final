@@ -10,6 +10,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 @Service("PageServiceImpl")
@@ -58,5 +60,39 @@ public class PageServiceImpl implements PageService {
         mav.addObject("pageDetailPO",pageDetailPO);
         mav.addObject("pageOperateRecordPO",pageOperateRecordPO);
         return mav;
+    }
+
+    @Override
+    public void updatePageContent(long pageId, String pageContent,long operatorId) {
+        //获取页面
+        PagePO pagePO = pageDao.getPageByPageId(pageId);
+        PageDetailPO pageDetailPO = pageDetailDao.getCurPageById(pageId);
+
+        double version = pageDetailPO.getVersionID()+0.1;
+        Date currentTime = new Date();
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String dateString = formatter.format(currentTime);
+
+        pageDetailPO.setPageContent(pageContent);
+        pageDetailPO.setVersionID(version);
+        pageDetailPO.setId(0);
+
+        PageOperateRecordPO pageOperateRecordPO = new PageOperateRecordPO();
+        pageOperateRecordPO.setPageId(pageId);
+        pageOperateRecordPO.setOperatorId(operatorId);
+        pageOperateRecordPO.setOperatorTime(dateString);
+        pageOperateRecordPO.setType(2);
+        pageOperateRecordPO.setOperatorContent("修改页面");
+        pageOperateRecordPO.setBeforeVersionId(version-0.1);
+        pageOperateRecordPO.setAfterVersionId(version);
+        pageOperateRecordPO.setExpired(false);
+
+        //页面表更新版本
+        pageDao.updatePageVersion(pageId,version);
+        //页面详情表假删、添加新纪录
+        pageDetailDao.deletePageRecord(pageId);
+        pageDetailDao.insertPageVersion(pageDetailPO);
+        //添加页面操作记录
+        pageOperateRecordDao.updatePageContent(pageOperateRecordPO);
     }
 }

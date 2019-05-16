@@ -13,8 +13,8 @@
         <result column="operatorTime" jdbcType="VARCHAR" property="operatorTime"/>
         <result column="type" jdbcType="TINYINT" property="type"/>
         <result column="operatorContent" jdbcType="VARCHAR" property="operatorContent"/>
-        <result column="beforeVersionId" jdbcType="VARCHAR" property="beforeVersionId"/>
-        <result column="afterVersionId" jdbcType="VARCHAR" property="afterVersionId"/>
+        <result column="beforeVersionId" jdbcType="DOUBLE" property="beforeVersionId"/>
+        <result column="afterVersionId" jdbcType="DOUBLE" property="afterVersionId"/>
         <result column="expired" jdbcType="TINYINT" property="expired"/>
 
     </resultMap>
@@ -31,4 +31,19 @@
         order by id desc
         limit 1
     </select>
+
+    <insert id="updatePageContent" parameterType="PageOperateRecordPO" useGeneratedKeys="true" keyProperty="id">
+        insert into pageOperateRecord (id,pageId,operatorId,operatorTime,`type`,operatorContent,beforeVersionId,afterVersionId,expired)
+        values (
+        #{id,jdbcType=BIGINT},
+        #{pageId,jdbcType=BIGINT},
+        #{operatorId,jdbcType=BIGINT},
+        #{operatorTime,jdbcType=VARCHAR},
+        #{type,jdbcType=TINYINT},
+        #{operatorContent,jdbcType=VARCHAR},
+        #{beforeVersionId,jdbcType=DOUBLE},
+        #{afterVersionId,jdbcType=DOUBLE},
+        #{expired,jdbcType=TINYINT}
+        )
+    </insert>
 </mapper>

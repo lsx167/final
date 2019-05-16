@@ -14,6 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @Controller
@@ -62,5 +63,19 @@ public class PageController {
         mav = pageService.packagePage(userPO,originUserPO,spacePO,spacePOS,pagePOS,pagePO,pageDetailPO,pageOperateRecordPO);
 
         return mav;
+    }
+
+    //修改页面内容
+    @RequestMapping(value = "/updatePageContent", produces = "text/html;charset=UTF-8")
+    @ResponseBody
+    public ModelAndView updatePageContent(HttpServletRequest request, HttpServletResponse response, HttpSession httpSession) {
+        long pageId = Long.parseLong(request.getParameter("pageId"));
+        String pageContent = request.getParameter("pageContent");
+
+        UserPO userPO = (UserPO) httpSession.getAttribute("userPO");
+
+        pageService.updatePageContent(pageId,pageContent,userPO.getId());
+
+        return getSpaceBySpaceId(request,response);
     }
 }

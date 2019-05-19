@@ -47,7 +47,7 @@ public class PageController {
         PagePO pagePO = pageService.getPageByPageId(pageId);
         PageDetailPO pageDetailPO = pageService.getCurPageById(pageId);
 
-        SpacePO spacePO = spaceService.getSpaceBySearchContent(pagePO.getSpaceID());
+        SpacePO spacePO = spaceService.getSpaceById(pagePO.getSpaceID());
 
         //获取用户信息
         UserPO userPO = userService.getUserById(spacePO.getOriginatorID());
@@ -102,6 +102,47 @@ public class PageController {
         //更新pageOperateRecord表
         pageService.insertNewRootPageOperateRecord(pagePO);
         PageOperateRecordPO pageOperateRecordPO = pageService.getLastPageRecordById(pageId);
+
+        //更新空间操作记录
+        spaceOperateRecordService.createPageOperate(spacePO.getId(),userPO.getId(),pageName);
+
+        //获取空间信息
+        List<SpacePO> spacePOS = spaceService.getSpacesById(userPO.getId());
+        //获取该空间页面信息
+        List<PagePO> pagePOS = pageService.getPagesBySpaceId(spacePO.getId());
+
+        mav = pageService.packagePage(userPO,userPO,spacePO,spacePOS,pagePOS,pagePO,pageDetailPO,pageOperateRecordPO);
+
+        return mav;
+    }
+
+    //创建子页面
+    @RequestMapping(value = "/createNewChildPage", produces = "text/html;charset=UTF-8")
+    @ResponseBody
+    public ModelAndView createNewChildPage(HttpServletRequest request, HttpServletResponse response, HttpSession httpSession){
+        ModelAndView mav = new ModelAndView();
+        Long fatherPageId = Long.parseLong(request.getParameter("fatherPageId"));
+        String pageName = request.getParameter("pageName");
+        String pageContent = request.getParameter("pageContent");
+
+        UserPO userPO = (UserPO) httpSession.getAttribute("userPO");
+        PagePO fatherPage = pageService.getPageByPageId(fatherPageId);
+        SpacePO spacePO = spaceService.getSpaceById(fatherPage.getSpaceID());
+
+        //更新page表
+        Long pageId = pageService.insertNewChildPage(fatherPage,pageName,userPO.getId());
+        PagePO pagePO = pageService.getPageByPageId(pageId);
+
+        //更新pageDetail表
+        pageService.insertNewRootPageDetail(pageId,pageContent);
+        PageDetailPO pageDetailPO = pageService.getCurPageById(pageId);
+
+        //更新pageOperateRecord表
+        pageService.insertNewRootPageOperateRecord(pagePO);
+        PageOperateRecordPO pageOperateRecordPO = pageService.getLastPageRecordById(pageId);
+
+        //更新空间操作记录
+        spaceOperateRecordService.createPageOperate(spacePO.getId(),userPO.getId(),pageName);
 
         //获取空间信息
         List<SpacePO> spacePOS = spaceService.getSpacesById(userPO.getId());

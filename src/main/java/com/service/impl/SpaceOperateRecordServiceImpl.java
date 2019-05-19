@@ -45,7 +45,6 @@ public class SpaceOperateRecordServiceImpl implements SpaceOperateRecordService 
         spaceOperateRecordPO.setExpired(false);
 
         spaceOperateRecordDao.insertSpaceOperate(spaceOperateRecordPO);
-            System.out.println(spaceOperateRecordPO.getId()+spaceOperateRecordPO.getSpaceId()+spaceOperateRecordPO.getOperatorContent());
         return spaceOperateRecordPO.getId();
     }
 
@@ -53,4 +52,18 @@ public class SpaceOperateRecordServiceImpl implements SpaceOperateRecordService 
     public List<SpaceOperateRecordPO> getLastFiveSpaceOperateRecord(Long id) {
         return spaceOperateRecordDao.getLastFiveSpaceOperateRecord(id);
     }
+
+    @Override
+    public Long createPageOperate(long spaceId, long operatorID, String pageName) {
+
+        SpaceOperateRecordPO spaceOperateRecordPO = new SpaceOperateRecordPO();
+        spaceOperateRecordPO.setSpaceId(spaceId);
+        spaceOperateRecordPO.setOperatorId(operatorID);
+        spaceOperateRecordPO.setOperatorTime(new base().getCurrTime());
+        spaceOperateRecordPO.setType(3);
+        spaceOperateRecordPO.setOperatorContent("创建页面-"+pageName);
+        spaceOperateRecordPO.setExpired(false);
+
+        spaceOperateRecordDao.insertSpaceOperate(spaceOperateRecordPO);
+        return spaceOperateRecordPO.getId();    }
 }

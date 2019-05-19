@@ -137,18 +137,18 @@ public class PageServiceImpl implements PageService {
         pagePO1.setExpired(false);
 
         //添加新页面
-        long pageId = pageDao.insertNewPage(pagePO1);
+        pageDao.insertNewPage(pagePO1);
 
         //更新原页面
         if(pagePO.getChildPageID() == "-1"){
-            pagePO.setChildPageID(pageId+"");
+            pagePO.setChildPageID(pagePO.getId()+"");
         }else {
-            pagePO.setChildPageID(pagePO.getChildPageID()+"+"+pageId);
+            pagePO.setChildPageID(pagePO.getChildPageID()+"+"+pagePO1.getId());
         }
 
         pageDao.updatePageInfo(pagePO);
 
-        return pageId;
+        return pagePO1.getId();
     }
 
     @Override

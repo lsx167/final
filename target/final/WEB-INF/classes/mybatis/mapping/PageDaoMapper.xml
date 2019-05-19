@@ -72,7 +72,7 @@
         UPDATE page
         SET name = #{name},originatorID = #{originatorID},type = #{type},readID = #{readID},writeID = #{writeID},
         spaceID = #{spaceID},isRootPage = #{isRootPage},depth = #{depth},fatherPageID = #{fatherPageID},
-        childPageID = #{childPageID},versionID = #{versionID},expired = #{expired},
+        childPageID = #{childPageID},versionID = #{versionID},expired = #{expired}
         WHERE id = #{id}
     </update>
 </mapper>

@@ -43,7 +43,7 @@
                 <input type="text" name="pageName" id="pageName" class="login_text" placeholder="请输入页面名称" />
 			</div>
 			<div>
-                创建为根页面
+                页面类型：根页面
             </div>
             <div>
                 所属空间为:<input type="text" name="spaceName" value="${param.spaceName}" readonly>

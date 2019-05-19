@@ -33,8 +33,8 @@ public class SpaceServiceImpl implements SpaceService{
     }
 
     @Override
-    public SpacePO getSpaceBySearchContent(long id) {
-        return spaceDao.getSpaceBySearchContent(id);
+    public SpacePO getSpaceById(long id) {
+        return spaceDao.getSpaceById(id);
     }
 
     @Override

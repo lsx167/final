@@ -37,12 +37,21 @@
 </header>
 <div class="main">
    	<div class="">
-   	    <form action=" " method="post">
-            <div>
+   	    <form action="/page/createNewChildPage" method="post">
+			<div>
                 <label class="username-label">页面名称：</label>
-                <input type="text" name="pageName" id="pageName" class="login_text" placeholder="请输入空间名称" />
+                <input type="text" name="pageName" id="pageName" class="login_text" placeholder="请输入页面名称" />
+			</div>
+			<div>
+				页面类型：子页面
+			</div>
+			<div>
+                父页面：<input type="text" name="pageName" value="${param.pageName}" readonly>
             </div>
-			
+            <div>
+                所属空间为:<input type="text" name="spaceName" value="${param.spaceName}" readonly>
+            </div>
+			<input type='hidden' name="fatherPageId" value ='${param.pageId}'/>
    	        <!-- 加载编辑器的容器 -->
    	        <script id="container" name="pageContent" type="text/plain">
    	            

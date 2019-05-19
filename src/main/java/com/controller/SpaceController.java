@@ -114,7 +114,7 @@ public class SpaceController {
         }*/
         long spaceId = Long.parseLong(request.getParameter("spaceId"));
 
-        SpacePO spacePO = spaceService.getSpaceBySearchContent(spaceId);
+        SpacePO spacePO = spaceService.getSpaceById(spaceId);
         /*if(null==spacePO){
             mav.setViewName("searchNull");
             return mav;

@@ -16,7 +16,7 @@ public interface SpaceDao {
     List<SpacePO> getSpacesById(long id);
 
     //根据空间id返回空间信息
-    SpacePO getSpaceBySearchContent(long id);
+    SpacePO getSpaceById(long id);
 
     //根据空间名返回空间信息
     SpacePO getSpaceBySpaceName(@Param("name") String name);

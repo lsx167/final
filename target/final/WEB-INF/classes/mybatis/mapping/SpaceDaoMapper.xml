@@ -46,7 +46,7 @@
         WHERE originatorID =#{id} and expired = 0
     </select>
 
-    <select id="getSpaceBySearchContent" resultMap="BaseResultMap">
+    <select id="getSpaceById" resultMap="BaseResultMap">
         select
         <include refid="BASE_COLUMN_LIST"/>
         from space

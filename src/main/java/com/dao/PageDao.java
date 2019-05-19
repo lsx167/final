@@ -14,4 +14,10 @@ public interface PageDao {
 
     //修改页面版本号
     void updatePageVersion(@Param("id")long id, @Param("versionId") double versionId);
+
+    //添加页面
+    long insertNewPage(PagePO pagePO);
+
+    //更新页面记录
+    void updatePageInfo(PagePO pagePO);
 }

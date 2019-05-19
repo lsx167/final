@@ -8,6 +8,7 @@ import com.service.PageService;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.ModelAndView;
+import com.service.base;
 
 import javax.annotation.Resource;
 import java.text.SimpleDateFormat;
@@ -93,6 +94,91 @@ public class PageServiceImpl implements PageService {
         pageDetailDao.deletePageRecord(pageId);
         pageDetailDao.insertPageVersion(pageDetailPO);
         //添加页面操作记录
-        pageOperateRecordDao.updatePageContent(pageOperateRecordPO);
+        pageOperateRecordDao.insertPageOperateRecord(pageOperateRecordPO);
     }
+
+    @Override
+    public Long insertNewRootPage(SpacePO spacePO,String pagename,long originatorID) {
+        PagePO pagePO = new PagePO();
+        pagePO.setId(0);
+        pagePO.setName(pagename);
+        pagePO.setOriginatorID(originatorID);
+        pagePO.setType(1);
+        pagePO.setReadID("-1");
+        pagePO.setWriteID("-1");
+        pagePO.setSpaceID(spacePO.getId());
+        pagePO.setRootPage(true);
+        pagePO.setDepth(1);
+        pagePO.setFatherPageID(-1);
+        pagePO.setChildPageID("-1");
+        pagePO.setVersionID(1.0);
+        pagePO.setExpired(false);
+
+        pageDao.insertNewPage(pagePO);
+        return pagePO.getId();
+    }
+
+    @Override
+    public Long insertNewChildPage(PagePO pagePO, String pagename, long originatorID) {
+
+        PagePO pagePO1 = new PagePO();
+        pagePO1.setId(0);
+        pagePO1.setName(pagename);
+        pagePO1.setOriginatorID(originatorID);
+        pagePO1.setType(1);
+        pagePO1.setReadID("-1");
+        pagePO1.setWriteID("-1");
+        pagePO1.setSpaceID(pagePO.getSpaceID());
+        pagePO1.setRootPage(false);
+        pagePO1.setDepth(pagePO.getDepth()+1);
+        pagePO1.setFatherPageID(pagePO.getId());
+        pagePO1.setChildPageID("-1");
+        pagePO1.setVersionID(1.0);
+        pagePO1.setExpired(false);
+
+        //添加新页面
+        long pageId = pageDao.insertNewPage(pagePO1);
+
+        //更新原页面
+        if(pagePO.getChildPageID() == "-1"){
+            pagePO.setChildPageID(pageId+"");
+        }else {
+            pagePO.setChildPageID(pagePO.getChildPageID()+"+"+pageId);
+        }
+
+        pageDao.updatePageInfo(pagePO);
+
+        return pageId;
+    }
+
+    @Override
+    public long insertNewRootPageDetail(long pageId, String pageContent) {
+        PageDetailPO pageDetailPO = new PageDetailPO();
+        pageDetailPO.setId(0);
+        pageDetailPO.setPageId(pageId);
+        pageDetailPO.setVersionID(1.0);
+        pageDetailPO.setPageContent(pageContent);
+        pageDetailPO.setExpired(false);
+
+        return pageDetailDao.insertPageVersion(pageDetailPO);
+    }
+
+    @Override
+    public long insertNewRootPageOperateRecord(PagePO pagePO) {
+
+        PageOperateRecordPO pageOperateRecordPO = new PageOperateRecordPO();
+        pageOperateRecordPO.setId(0);
+        pageOperateRecordPO.setPageId(pagePO.getId());
+        pageOperateRecordPO.setOperatorId(pagePO.getOriginatorID());
+        pageOperateRecordPO.setOperatorTime(new base().getCurrTime());
+        pageOperateRecordPO.setType(1);
+        pageOperateRecordPO.setOperatorContent("新建页面\""+pagePO.getName()+"\"");
+        pageOperateRecordPO.setBeforeVersionId(-1);
+        pageOperateRecordPO.setAfterVersionId(1.0);
+        pageOperateRecordPO.setExpired(false);
+
+        return pageOperateRecordDao.insertPageOperateRecord(pageOperateRecordPO);
+    }
+
+
 }

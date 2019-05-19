@@ -24,4 +24,16 @@ public interface PageService {
 
     //更新页面信息
     void updatePageContent(long pageId,String pageContent,long operatorId);
+
+    //新增根页面
+    Long insertNewRootPage(SpacePO spacePO,String pagename,long originatorID);
+
+    //新增子页面
+    Long insertNewChildPage(PagePO pagePO,String pagename,long originatorID);
+
+    //新增根页面详细信息
+    long insertNewRootPageDetail(long pageId, String pageContent);
+
+    //新增根页面操作记录
+    long insertNewRootPageOperateRecord(PagePO pagePO);
 }

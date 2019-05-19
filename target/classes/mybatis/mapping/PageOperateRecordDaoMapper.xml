@@ -32,7 +32,7 @@
         limit 1
     </select>
 
-    <insert id="updatePageContent" parameterType="PageOperateRecordPO" useGeneratedKeys="true" keyProperty="id">
+    <insert id="insertPageOperateRecord" parameterType="PageOperateRecordPO" useGeneratedKeys="true" keyProperty="id">
         insert into pageOperateRecord (id,pageId,operatorId,operatorTime,`type`,operatorContent,beforeVersionId,afterVersionId,expired)
         values (
         #{id,jdbcType=BIGINT},

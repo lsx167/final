@@ -3,8 +3,8 @@
   <component name="Encoding" defaultCharsetForPropertiesFiles="UTF-8">
     <file url="file://$PROJECT_DIR$" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/main/webapp/img/search.jpg" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/main/webapp/img/team.png" charset="GBK" />
     <file url="file://$PROJECT_DIR$/src/main/webapp/js/ajaxfileupload.js" charset="GBK" />
-    <file url="file://$PROJECT_DIR$/src/main/webapp/utf8-jsp" charset="GBK" />
     <file url="file://$PROJECT_DIR$/src/main/webapp/utf8-jsp" charset="GBK" />
   </component>
 </project>

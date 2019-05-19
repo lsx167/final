@@ -78,4 +78,39 @@ public class PageController {
 
         return getSpaceBySpaceId(request,response);
     }
+
+    //创建根页面
+    @RequestMapping(value = "/createNewRootPage", produces = "text/html;charset=UTF-8")
+    @ResponseBody
+    public ModelAndView createNewRootPage(HttpServletRequest request, HttpServletResponse response, HttpSession httpSession){
+        ModelAndView mav = new ModelAndView();
+        String spaceName = request.getParameter("spaceName");
+        String pageName = request.getParameter("pageName");
+        String pageContent = request.getParameter("pageContent");
+
+        UserPO userPO = (UserPO) httpSession.getAttribute("userPO");
+        SpacePO spacePO = spaceService.getSpaceBySpaceName(spaceName);
+
+        //更新page表
+        Long pageId = pageService.insertNewRootPage(spacePO,pageName,userPO.getId());
+        PagePO pagePO = pageService.getPageByPageId(pageId);
+
+        //更新pageDetail表
+        pageService.insertNewRootPageDetail(pageId,pageContent);
+        PageDetailPO pageDetailPO = pageService.getCurPageById(pageId);
+
+        //更新pageOperateRecord表
+        pageService.insertNewRootPageOperateRecord(pagePO);
+        PageOperateRecordPO pageOperateRecordPO = pageService.getLastPageRecordById(pageId);
+
+        //获取空间信息
+        List<SpacePO> spacePOS = spaceService.getSpacesById(userPO.getId());
+        //获取该空间页面信息
+        List<PagePO> pagePOS = pageService.getPagesBySpaceId(spacePO.getId());
+
+        mav = pageService.packagePage(userPO,userPO,spacePO,spacePOS,pagePOS,pagePO,pageDetailPO,pageOperateRecordPO);
+
+        return mav;
+    }
+
 }

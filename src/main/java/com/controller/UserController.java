@@ -22,6 +22,7 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 
@@ -41,7 +42,7 @@ public class UserController {
 
     /**
      *返回user对象信息给page1.jsp处理，然后在前端页面展示
-     */
+     *//*
     @RequestMapping("/page1")
     public ModelAndView getUser() {
         System.out.println("访问page1的后台。。。");
@@ -51,21 +52,21 @@ public class UserController {
         mav.addObject("user", users.get(0));
         return mav;
 //        return "page1"; //跳转到.jsp结尾的对应文件（page1.jsp）,此时返回值是String
-    }
+    }*/
 
     /**
      * 根据id查询账号
      * @param request
      * @param response
      * @return
-     */
+     *//*
     @RequestMapping(value = "/id", produces = "text/html;charset=UTF-8")
     @ResponseBody
     public String getUserById(HttpServletRequest request, HttpServletResponse response) {
         long id = Long.parseLong(request.getParameter("v"));
         UserPO users = userService.getUserById(id);
         return (users.getId()+users.getUserName()+users.getPassword()+users.getName());
-    }
+    }*/
 
     /**
      * 账号登陆
@@ -138,7 +139,7 @@ public class UserController {
      * @param request
      * @param response
      * @return
-     */
+     *//*
     @RequestMapping(value = "/say", produces = "text/html;charset=UTF-8")
     @ResponseBody
     public String sayHi(HttpServletRequest request, HttpServletResponse response) {
@@ -154,5 +155,16 @@ public class UserController {
     public String testController(HttpServletRequest request, HttpServletResponse response) {
         System.out.println("1");
         return "main";
+    }*/
+
+    @RequestMapping(value = "/logout", produces = "text/html;charset=UTF-8")
+    @ResponseBody
+    public ModelAndView logout(HttpServletRequest request, HttpServletResponse response) {
+        ModelAndView mav = new ModelAndView();
+        mav.setViewName("forward://jsp/login.jsp");
+        HttpSession session = request.getSession();
+        session.invalidate();
+
+        return mav;
     }
 }

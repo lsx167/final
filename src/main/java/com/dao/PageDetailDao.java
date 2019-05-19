@@ -12,5 +12,7 @@ public interface PageDetailDao {
     //根据页面id假删记录
     void deletePageRecord(@Param("id")long id);
 
+    //添加页面详细信息、页面版本更新
     Long insertPageVersion(PageDetailPO pageDetailPO);
+
 }

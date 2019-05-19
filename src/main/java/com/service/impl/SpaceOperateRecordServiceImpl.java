@@ -5,6 +5,7 @@ import com.entities.SpaceOperateRecordPO;
 import com.service.SpaceOperateRecordService;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
+import com.service.base;
 
 import javax.annotation.Resource;
 import java.text.ParsePosition;
@@ -31,14 +32,14 @@ public class SpaceOperateRecordServiceImpl implements SpaceOperateRecordService 
 
     @Override
     public Long createSpaceOperate(Long spaceId, Long operatorId, String spaceName){
-        Date currentTime = new Date();
+        /*Date currentTime = new Date();
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        String dateString = formatter.format(currentTime);
+        String dateString = formatter.format(currentTime);*/
 
         SpaceOperateRecordPO spaceOperateRecordPO = new SpaceOperateRecordPO();
         spaceOperateRecordPO.setSpaceId(spaceId);
         spaceOperateRecordPO.setOperatorId(operatorId);
-        spaceOperateRecordPO.setOperatorTime(dateString);
+        spaceOperateRecordPO.setOperatorTime(new base().getCurrTime());
         spaceOperateRecordPO.setType(1);
         spaceOperateRecordPO.setOperatorContent("创建空间-"+spaceName);
         spaceOperateRecordPO.setExpired(false);

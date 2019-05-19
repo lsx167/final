@@ -23,8 +23,18 @@
             <a href="#">菜鸟教程 3</a>
         </div>
     </div>
-    <button class="create_btn" onclick="showWindow()">创建</button>	
-    <button class="create_btn">退出</button>
+    <div class="dropdown">
+        <button class="dropbtn">创建</button>
+        <div class="dropdown-content">
+            <a href="/jsp/createSpace.jsp">创建空间</a>
+            <a href="/jsp/createRootPage.jsp">创建页面</a>
+        </div>
+    </div>
+    <button class="create_btn">
+        <a href="/user/logout" style="color: white;text-decoration: none">
+            退出
+        </a>
+    </button>
     <div class="header_user">
         <img src="../img/yonghu1.png" style="max-height: 30px;margin-top: 5px;border:none;"/>
     </div>
@@ -72,7 +82,10 @@
 
         <c:forEach begin="0" end="${page.totalCount % page.pageSize}" items="${requestScope.spacePOList}" var="spaceItem">
 			<div class="spaceItem_name">
-                空间名称：<a href="/space/getSpaceBySpaceId?spaceId=${spaceItem.id}">${spaceItem.name}</a>
+                空间名称：
+                <a href="/space/getSpaceBySpaceId?spaceId=${spaceItem.id}" style="color: white;text-decoration: none">
+                    ${spaceItem.name}
+                </a>
 			</div>
             <div class="spaceItem_describe">
                 空间描述：${spaceItem.describe}

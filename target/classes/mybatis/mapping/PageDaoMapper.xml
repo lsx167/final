@@ -48,4 +48,31 @@
         WHERE id = #{id} and expired = 0
     </update>
 
+    <insert id="insertNewPage" parameterType="PagePO" useGeneratedKeys="true" keyProperty="id">
+        insert into page (id,`name`,originatorID,`type`,readID,writeID,spaceID,isRootPage,depth,fatherPageID,childPageID,versionID,expired)
+        values (
+        #{id,jdbcType=BIGINT},
+        #{name,jdbcType=VARCHAR},
+        #{originatorID,jdbcType=BIGINT},
+        #{type,jdbcType=TINYINT},
+        #{readID,jdbcType=VARCHAR},
+        #{writeID,jdbcType=VARCHAR},
+        #{spaceID,jdbcType=BIGINT},
+        #{isRootPage,jdbcType=TINYINT},
+        #{depth,jdbcType=TINYINT},
+        #{fatherPageID,jdbcType=BIGINT},
+        #{childPageID,jdbcType=VARCHAR},
+        #{versionID,jdbcType=DOUBLE},
+        #{expired,jdbcType=TINYINT}
+        )
+    </insert>
+
+    <!-- 修改页面内容 -->
+    <update id="updatePageInfo" parameterType="PagePO">
+        UPDATE page
+        SET name = #{name},originatorID = #{originatorID},type = #{type},readID = #{readID},writeID = #{writeID},
+        spaceID = #{spaceID},isRootPage = #{isRootPage},depth = #{depth},fatherPageID = #{fatherPageID},
+        childPageID = #{childPageID},versionID = #{versionID},expired = #{expired},
+        WHERE id = #{id}
+    </update>
 </mapper>

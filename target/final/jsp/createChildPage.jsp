@@ -36,28 +36,31 @@
     </div>
 </header>
 <div class="main">
-   	<div class="left_input">
-		<form action="/space/createSpace" method="post">
-		    <div class="field-group">
-		        <label class="username-label">空间名称：</label>
-		        <input type="text" name="spaceName" id="spaceName" class="login_text" placeholder="请输入空间名称" />
-		    </div>
-		    <div class="field-group">
-		        <label class="username-label">空间描述：</label>
-		        <input type="text" name="spaceDescribe" id="spaceDescribe" class="login_text" placeholder="请输入空间描述" />
-		    </div>
-		    <div class="field-group" style="margin-top: 10px;margin-left: 20px">
-		        <input type="submit" class="input_btn" value="创建" />
-		    </div>
-		</form>
-	</div>
-	<div class="right_img">
-		<h2>关于空间< /h2>
-		<p style="text-align: left;font-size: 20px;">
-			&nbsp;&nbsp;&nbsp;&nbsp;与您的团队分享知识并与项目，流程和程序进行协作。他们将收到有关此空间和所有更新的通知。团队成员将被授予权限并添加为该空间的观察者。
-		</p>
-        <img src="../img/team.png" style="max-height: 150px;margin-top: 30px;border:none;"/>
-	</div>
+   	<div class="">
+   	    <form action=" " method="post">
+            <div>
+                <label class="username-label">页面名称：</label>
+                <input type="text" name="pageName" id="pageName" class="login_text" placeholder="请输入空间名称" />
+            </div>
+			
+   	        <!-- 加载编辑器的容器 -->
+   	        <script id="container" name="pageContent" type="text/plain">
+   	            
+   	        </script>
+   			<div>
+   			    <input type="submit" value="保存" />
+   			</div>
+   	    </form>
+   	    
+   	    <!-- 配置文件 -->
+   	    <script type="text/javascript" src="../../utf8-jsp/ueditor.config.js"></script>
+   	    <!-- 编辑器源码文件 -->
+   	    <script type="text/javascript" src="../../utf8-jsp/ueditor.all.js"></script>
+   	    <!-- 实例化编辑器 -->
+   	    <script type="text/javascript">
+   	        var ue = UE.getEditor('container');
+   	    </script>
+   	</div>
 </div>
 <footer class="footer">
     <p class="footer_p" style="margin-left: 20%;float: left;">

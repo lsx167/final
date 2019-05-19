@@ -23,8 +23,18 @@
             <a href="#">菜鸟教程 3</a>
         </div>
     </div>
-    <button class="create_btn" onclick="showWindow()">创建</button>	
-    <button class="create_btn">退出</button>
+    <div class="dropdown">
+        <button class="dropbtn">创建</button>
+        <div class="dropdown-content">
+            <a href="/jsp/createSpace.jsp">创建空间</a>
+            <a href="/jsp/createRootPage.jsp?spaceName=${requestScope.spacePO.name}">创建页面</a>
+        </div>
+    </div>
+    <button class="create_btn">
+        <a href="/user/logout" style="color: white;text-decoration: none">
+            退出
+        </a>
+    </button>
     <div class="header_user">
         <img src="../img/yonghu1.png" style="max-height: 30px;margin-top: 5px;border:none;"/>
     </div>
@@ -36,7 +46,7 @@
     </div>
 </header>
 <div class="main">
-	<!-- 遮罩层 -->
+	<%--<!-- 遮罩层 -->
 	<div id="cover" style="background: #000; position: absolute; left: 0px; top: 0px; width: 100%; filter: alpha(opacity=30); opacity: 0.3; display: none; z-index: 2 " onclick="closeWindow()">
 	</div>
 	<div id="showdiv" style="width: 50%; margin: 0 auto; height: 300px; border: 1px solid #999; display: none; position: absolute; top: 30%; left: 25%; z-index: 3; background: #fff">
@@ -65,7 +75,7 @@
 			确 定
 		</div>
 		-->
-	</div>
+	</div>--%>
 	
     <div class="main_left">
         <div class="left_name">
@@ -85,7 +95,7 @@
 				    <c:forEach items="${requestScope.spacePOS}" var="bean">
 				        <tr>
 				            <td>
-                                <a href="/space/getSpaceBySpaceId?spaceId=${bean.id}">
+                                <a href="/space/getSpaceBySpaceId?spaceId=${bean.id}" style="color: blue;text-decoration: none">
                                         ${bean.name}
                                 </a>
                             </td>
@@ -103,7 +113,7 @@
                     <c:forEach items="${requestScope.pagePOS}" var="bean">
                         <tr>
                             <td>
-                                <a href="/page/getPageByPageId?pageId=${bean.id}">
+                                <a href="/page/getPageByPageId?pageId=${bean.id}" style="color: blue;text-decoration: none">
                                         ${bean.name}
                                 </a>
                             </td>
@@ -180,7 +190,7 @@
     </p>
 </footer>
 <script type="text/javascript">
-  // 弹窗
+  /*// 弹窗
   function showWindow() {
     $('#showdiv').show();  //显示弹窗
     $('#cover').css('display','block'); //显示遮罩层
@@ -190,7 +200,7 @@
   function closeWindow() {
     $('#showdiv').hide();  //隐藏弹窗
     $('#cover').css('display','none');   //显示遮罩层
-  }
+  }*/
 </script>
 </body>
 </html>

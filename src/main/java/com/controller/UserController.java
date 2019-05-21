@@ -119,7 +119,7 @@ public class UserController {
                 //获取该空间最近5条操作记录
                 List<SpaceOperateRecordPO> spaceOperateRecordPOS = spaceOperateRecordService.getLastFiveSpaceOperateRecord(spacePO.getId());
 
-                mav = spaceService.packagePage(userPO,spacePO,spacePOS,pagePOS,spaceOperateRecordPOS);
+                mav = spaceService.packagePage(userPO,userPO,spacePO,spacePOS,pagePOS,spaceOperateRecordPOS);
 
                 request.getSession().setAttribute("userPO",userPO);
                 return mav;
@@ -151,6 +151,7 @@ public class UserController {
         return "main";
     }*/
 
+    //退出
     @RequestMapping(value = "/logout", produces = "text/html;charset=UTF-8")
     @ResponseBody
     public ModelAndView logout(HttpServletRequest request, HttpServletResponse response) {

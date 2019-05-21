@@ -34,7 +34,7 @@ public interface SpaceService {
     Long createSpace(SpacePO spacePO);
 
     //包装空间页面方法
-    ModelAndView packagePage(UserPO userPO, SpacePO spacePO, List<SpacePO> spacePOS,
+    ModelAndView packagePage(UserPO userPO, UserPO originUserPO, SpacePO spacePO, List<SpacePO> spacePOS,
                              List<PagePO>pagePOS, List<SpaceOperateRecordPO> spaceOperateRecordPOS);
 
     //添加页面时，更新空间信息

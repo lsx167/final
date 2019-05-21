@@ -80,10 +80,11 @@ public class SpaceServiceImpl implements SpaceService{
     }
 
     @Override
-    public ModelAndView packagePage(UserPO userPO, SpacePO spacePO, List<SpacePO> spacePOS, List<PagePO> pagePOS, List<SpaceOperateRecordPO> spaceOperateRecordPOS) {
+    public ModelAndView packagePage(UserPO userPO, UserPO originUserPO,SpacePO spacePO, List<SpacePO> spacePOS, List<PagePO> pagePOS, List<SpaceOperateRecordPO> spaceOperateRecordPOS) {
         ModelAndView mav = new ModelAndView();
         mav.setViewName("main");
         mav.addObject("userPO",userPO);
+        mav.addObject("originUserPO",originUserPO);
         mav.addObject("spacePO",spacePO);
         mav.addObject("spacePOS",spacePOS);
         mav.addObject("pagePOS",pagePOS);

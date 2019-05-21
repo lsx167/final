@@ -105,7 +105,7 @@
     <div class="main_right">
         <div class="right_3" style="margin-top: 150px">
             <div class="right_3_item">
-                对不起，您没有该空间的权限
+                对不起，您没有访问该空间/页面的权限
             </div>
         </div>
 		<div class="space_operate_record">

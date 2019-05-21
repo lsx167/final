@@ -36,6 +36,7 @@
         </a>
     </button>
     <div class="header_user">
+        欢迎您，${requestScope.userPO.name}
         <img src="../img/yonghu1.png" style="max-height: 30px;margin-top: 5px;border:none;"/>
     </div>
     <div class="bar1">
@@ -76,7 +77,7 @@
 		</div>
 		-->
 	</div>--%>
-	
+
     <div class="main_left">
         <div class="left_name">
             <div class="left_name_img">
@@ -150,7 +151,7 @@
         </div>
         <div class="right_2">
             <div class="right_2_creator">
-                创建者：${requestScope.userPO.name}
+                创建者：${requestScope.originUserPO.name}
             </div>
             <div class="right_2_time">
                 最后一次修改时间：${requestScope.spaceOperateRecordPOS.get(0).operatorTime}

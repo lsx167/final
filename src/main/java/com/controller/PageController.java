@@ -1,10 +1,7 @@
 package com.controller;
 
 import com.entities.*;
-import com.service.PageService;
-import com.service.SpaceOperateRecordService;
-import com.service.SpaceService;
-import com.service.UserService;
+import com.service.*;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -34,33 +31,47 @@ public class PageController {
     //根据页面id返回空间信息
     @RequestMapping(value = "/getPageByPageId", produces = "text/html;charset=UTF-8")
     @ResponseBody
-    public ModelAndView getSpaceBySpaceId(HttpServletRequest request, HttpServletResponse response) {
+    public ModelAndView getSpaceBySpaceId(HttpServletRequest request, HttpServletResponse response,HttpSession httpSession) {
         ModelAndView mav = new ModelAndView();
+        base general = new base();
 
-        //理论上不存在找不到id的情况
-        /*if(request.getParameter("spaceId").equals(null)||request.getParameter("spaceId") == ""){
-            mav.setViewName("searchNull");
-            return mav;
-        }*/
         long pageId = Long.parseLong(request.getParameter("pageId"));
-
+        //获取操作用户信息
+        UserPO userPO = (UserPO) httpSession.getAttribute("userPO");
+        //获取页面信息
         PagePO pagePO = pageService.getPageByPageId(pageId);
-        PageDetailPO pageDetailPO = pageService.getCurPageById(pageId);
 
+        //获取当前空间信息
         SpacePO spacePO = spaceService.getSpaceById(pagePO.getSpaceID());
 
-        //获取用户信息
-        UserPO userPO = userService.getUserById(spacePO.getOriginatorID());
-        //获取空间信息
+        //获取空间列表信息
         List<SpacePO> spacePOS = spaceService.getSpacesById(userPO.getId());
+
         //获取该空间页面信息
         List<PagePO> pagePOS = pageService.getPagesBySpaceId(spacePO.getId());
 
-        UserPO originUserPO = userService.getUserById(pagePO.getOriginatorID());
+        //判断当前用户是否有目标页面的权限
+        if(!(pagePO.getReadID().equals("-1") ||
+                general.isLongBelongToList(userPO.getId(),general.stringToLongList(pagePO.getReadID())))){
+            mav.setViewName("noPermission");
+            mav.addObject("userPO",userPO);
+            mav.addObject("spacePO",spacePO);
+            mav.addObject("spacePOS",spacePOS);
+            mav.addObject("pagePOS",pagePOS);
+            return mav;
+        }
+
+        PageDetailPO pageDetailPO = pageService.getCurPageById(pageId);
+
+        //获得空间创建者信息
+        UserPO spaceOriginUserPO = userService.getUserById(spacePO.getOriginatorID());
+
+        //获得页面创建者信息
+        UserPO pageOriginUserPO1 = userService.getUserById(pagePO.getOriginatorID());
 
         PageOperateRecordPO pageOperateRecordPO = pageService.getLastPageRecordById(pageId);
 
-        mav = pageService.packagePage(userPO,originUserPO,spacePO,spacePOS,pagePOS,pagePO,pageDetailPO,pageOperateRecordPO);
+        mav = pageService.packagePage(userPO,pageOriginUserPO1,spacePO,spacePOS,pagePOS,pagePO,pageDetailPO,pageOperateRecordPO);
 
         return mav;
     }
@@ -76,7 +87,7 @@ public class PageController {
 
         pageService.updatePageContent(pageId,pageContent,userPO.getId());
 
-        return getSpaceBySpaceId(request,response);
+        return getSpaceBySpaceId(request,response,httpSession);
     }
 
     //创建根页面

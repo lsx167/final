@@ -255,8 +255,9 @@
 	height: 40px;
 	float: right;
 	margin-right: 10px;
-	width: 40px;
+	width: 200px;
 	display: inline-block;
+	color: white;
 }
 .create_form{
 	width: 80%;

@@ -121,6 +121,9 @@ public class SpaceController {
         //获取用户信息
         UserPO userPO = (UserPO) httpSession.getAttribute("userPO");
 
+        //获取空间创始人信息
+        UserPO originUserPO = userService.getUserById(spacePO.getOriginatorID());
+
         //获取空间信息
         List<SpacePO> spacePOS = spaceService.getSpacesById(userPO.getId());
 
@@ -139,7 +142,7 @@ public class SpaceController {
         //获取该空间最近5条操作记录
         List<SpaceOperateRecordPO> spaceOperateRecordPOS = spaceOperateRecordService.getLastFiveSpaceOperateRecord(spacePO.getId());
 
-        mav = spaceService.packagePage(userPO,spacePO,spacePOS,pagePOS,spaceOperateRecordPOS);
+        mav = spaceService.packagePage(userPO,originUserPO,spacePO,spacePOS,pagePOS,spaceOperateRecordPOS);
 
         return mav;
     }
@@ -186,7 +189,7 @@ public class SpaceController {
             //获取该空间最近5条操作记录
             List<SpaceOperateRecordPO> spaceOperateRecordPOS = spaceOperateRecordService.getLastFiveSpaceOperateRecord(spacePO.getId());
 
-            mav = spaceService.packagePage(userPO,spacePO,spacePOS,pagePOS,spaceOperateRecordPOS);
+            mav = spaceService.packagePage(userPO,userPO,spacePO,spacePOS,pagePOS,spaceOperateRecordPOS);
 
             return mav;
         }
@@ -210,7 +213,7 @@ public class SpaceController {
         //获取该空间最近5条操作记录
         List<SpaceOperateRecordPO> spaceOperateRecordPOS = spaceOperateRecordService.getLastFiveSpaceOperateRecord(spacePO.getId());
 
-        mav = spaceService.packagePage(userPO,spacePO,spacePOS,pagePOS,spaceOperateRecordPOS);
+        mav = spaceService.packagePage(userPO,userPO,spacePO,spacePOS,pagePOS,spaceOperateRecordPOS);
 
         return mav;
     }

@@ -104,7 +104,7 @@ public class SpaceController {
     //根据空间id返回空间信息
     @RequestMapping(value = "/getSpaceBySpaceId", produces = "text/html;charset=UTF-8")
     @ResponseBody
-    public ModelAndView getSpaceBySpaceId(HttpServletRequest request, HttpServletResponse response) {
+    public ModelAndView getSpaceBySpaceId(HttpServletRequest request, HttpServletResponse response,HttpSession httpSession) {
         ModelAndView mav = new ModelAndView();
 
         //理论上不存在找不到id的情况
@@ -121,7 +121,8 @@ public class SpaceController {
         }*/
 
         //获取用户信息
-        UserPO userPO = userService.getUserById(spacePO.getOriginatorID());
+        UserPO userPO = (UserPO) httpSession.getAttribute("userPO");
+        //UserPO userPO = userService.getUserById(spacePO.getOriginatorID());
         //获取空间信息
         List<SpacePO> spacePOS = spaceService.getSpacesById(userPO.getId());
         //获取该空间页面信息

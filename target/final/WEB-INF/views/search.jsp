@@ -80,10 +80,10 @@
             </c:otherwise>
         </c:choose>
 
-        <c:forEach begin="0" end="${page.totalCount % page.pageSize}" items="${requestScope.spacePOList}" var="spaceItem">
+        <c:forEach begin="0" end="${(page.totalCount>=page.pageSize)?page.pageSize:(page.totalCount % page.pageSize)}" items="${requestScope.spacePOList}" var="spaceItem">
 			<div class="spaceItem_name">
                 空间名称：
-                <a href="/space/getSpaceBySpaceId?spaceId=${spaceItem.id}" style="color: white;text-decoration: none">
+                <a href="/space/getSpaceBySpaceId?spaceId=${spaceItem.id}" style="color: black;text-decoration: none">
                     ${spaceItem.name}
                 </a>
 			</div>

@@ -76,8 +76,12 @@ public class SpaceController {
     public ModelAndView getSpaceBySearchContent(HttpServletRequest request, HttpServletResponse response) {
         ModelAndView mav = new ModelAndView();
         String content = request.getParameter("spaceContent");
-
+        String currPage = request.getParameter("pageNow");
         Integer pagenow = 1;
+        if(!(currPage == "" || currPage == null)){
+            pagenow = Integer.valueOf(currPage);
+        }
+
         Page page = new Page(0,1);
         List<SpacePO> spacePOList = new ArrayList<SpacePO>();
 
@@ -98,6 +102,7 @@ public class SpaceController {
         mav.addObject("spacePOList",spacePOList);
         mav.addObject("pageNow",pagenow);
         mav.addObject("page",page);
+        mav.addObject("content",content);
         return mav;
     }
 

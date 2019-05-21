@@ -94,8 +94,8 @@
 
         <c:choose>
             <c:when test="${page.pageNow != 1}"><!-- 如果当前页为1，则不显示首页和上一页 -->
-                <a href="?pageNow=1">首页</a> 
-                <a href="?pageNow=${page.pageNow-1}">上一页</a>
+                <a href="/space/getSpaceBySearchContent?pageNow=1&spaceContent=${content}">首页</a>
+                <a href="/space/getSpaceBySearchContent?pageNow=${page.pageNow-1}&spaceContent=${content}">上一页</a>
             </c:when>
         </c:choose>
         <!-- 遍历页码 -->
@@ -105,14 +105,15 @@
                     <a style="height:24px; margin:0 3px; border:none; background:#C00;">${index}</a>
                 </c:when>
                 <c:otherwise><!-- 否则，普通显示 -->
-                    <a href="?pageNow=${index}">${index}</a>
+                    <%--<a href="?pageNow=${index}">${index}</a>--%>
+                    <a href="/space/getSpaceBySearchContent?pageNow=${index}&spaceContent=${content}">${index}</a>
                 </c:otherwise>
             </c:choose>
         </c:forEach>
         <c:choose>
             <c:when test="${page.pageNow != page.totalPageCount }"><!-- 如果当前页为总的记录数，则不显示末页和下一页 -->
-                <a href="?pageNow=${page.pageNow+1 }">下一页</a> 
-                <a href="?pageNow=${page.totalPageCount }">末页</a>
+                <a href="/space/getSpaceBySearchContent?pageNow=${page.pageNow+1}&spaceContent=${content}">下一页</a>
+                <a href="/space/getSpaceBySearchContent?pageNow=${page.totalPageCount}&spaceContent=${content}">末页</a>
             </c:when>
         </c:choose>
         共${page.totalPageCount }页，${page.totalCount }条记录 到第<input
@@ -135,7 +136,7 @@
                 //获取到要跳转的页码
                 var pageNow = $("#pn_input").val();
                 //通过修改window.location属性跳转到另一个页面
-                window.location = "?pageNow=" + pageNow;
+                window.location = "?pageNow=" + pageNow + "&spaceContent=${content}";
             });
         </script>
 </body>

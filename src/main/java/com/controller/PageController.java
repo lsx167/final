@@ -103,6 +103,8 @@ public class PageController {
         pageService.insertNewRootPageOperateRecord(pagePO);
         PageOperateRecordPO pageOperateRecordPO = pageService.getLastPageRecordById(pageId);
 
+        //更新空间表
+        spaceService.updateSpaceCreatePage(spacePO.getId(),pageId);
         //更新空间操作记录
         spaceOperateRecordService.createPageOperate(spacePO.getId(),userPO.getId(),pageName);
 
@@ -140,6 +142,9 @@ public class PageController {
         //更新pageOperateRecord表
         pageService.insertNewRootPageOperateRecord(pagePO);
         PageOperateRecordPO pageOperateRecordPO = pageService.getLastPageRecordById(pageId);
+
+        //更新空间表
+        spaceService.updateSpaceCreatePage(spacePO.getId(),pageId);
 
         //更新空间操作记录
         spaceOperateRecordService.createPageOperate(spacePO.getId(),userPO.getId(),pageName);

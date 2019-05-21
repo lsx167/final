@@ -92,4 +92,12 @@
         #{expired,jdbcType=TINYINT}
         )
     </insert>
+
+    <!-- 修改页面内容 -->
+    <update id="updateSpaceInfo" parameterType="SpacePO">
+        UPDATE space
+        SET `name` = #{name},originatorID = #{originatorID},isMain = #{isMain},`type` = #{type},readID = #{readID},
+        writeID = #{writeID},childPageID = #{childPageID},`describe` = #{describe},expired = #{expired}
+        WHERE id = #{id}
+    </update>
 </mapper>

@@ -37,4 +37,6 @@ public interface SpaceDao {
     //创建空间
     Long insertSpace(SpacePO spacePO);
 
+    //更新页面记录
+    void updateSpaceInfo(SpacePO spacePO);
 }

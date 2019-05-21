@@ -90,4 +90,17 @@ public class SpaceServiceImpl implements SpaceService{
         mav.addObject("spaceOperateRecordPOS",spaceOperateRecordPOS);
         return mav;
     }
+
+    @Override
+    public void updateSpaceCreatePage(long spaceId, long pageId) {
+        SpacePO spacePO = getSpaceById(spaceId);
+
+        if(spacePO.getChildPageID().equals("-1")){
+            spacePO.setChildPageID(pageId+"");
+        }else {
+            spacePO.setChildPageID(spacePO.getChildPageID()+"+"+pageId);
+        }
+
+        spaceDao.updateSpaceInfo(spacePO);
+    }
 }

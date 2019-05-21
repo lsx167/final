@@ -10,41 +10,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="259add4a-78ab-4c03-ac8b-2f25a280c5b6" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/com/controller/PageController.class" afterPath="$PROJECT_DIR$/target/classes/com/controller/PageController.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/com/controller/SpaceController.class" afterPath="$PROJECT_DIR$/target/classes/com/controller/SpaceController.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/com/dao/SpaceDao.class" afterPath="$PROJECT_DIR$/target/classes/com/dao/SpaceDao.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/com/service/SpaceOperateRecordService.class" afterPath="$PROJECT_DIR$/target/classes/com/service/SpaceOperateRecordService.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/com/service/SpaceService.class" afterPath="$PROJECT_DIR$/target/classes/com/service/SpaceService.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/com/service/impl/PageServiceImpl.class" afterPath="$PROJECT_DIR$/target/classes/com/service/impl/PageServiceImpl.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/com/service/impl/SpaceOperateRecordServiceImpl.class" afterPath="$PROJECT_DIR$/target/classes/com/service/impl/SpaceOperateRecordServiceImpl.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/com/service/impl/SpaceServiceImpl.class" afterPath="$PROJECT_DIR$/target/classes/com/service/impl/SpaceServiceImpl.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/final/WEB-INF/classes/com/controller/PageController.class" afterPath="$PROJECT_DIR$/target/final/WEB-INF/classes/com/controller/PageController.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/final/WEB-INF/classes/com/controller/SpaceController.class" afterPath="$PROJECT_DIR$/target/final/WEB-INF/classes/com/controller/SpaceController.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/final/WEB-INF/classes/com/dao/SpaceDao.class" afterPath="$PROJECT_DIR$/target/final/WEB-INF/classes/com/dao/SpaceDao.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/final/WEB-INF/classes/com/service/SpaceOperateRecordService.class" afterPath="$PROJECT_DIR$/target/final/WEB-INF/classes/com/service/SpaceOperateRecordService.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/final/WEB-INF/classes/com/service/SpaceService.class" afterPath="$PROJECT_DIR$/target/final/WEB-INF/classes/com/service/SpaceService.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/final/WEB-INF/classes/com/service/impl/PageServiceImpl.class" afterPath="$PROJECT_DIR$/target/final/WEB-INF/classes/com/service/impl/PageServiceImpl.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/final/WEB-INF/classes/com/service/impl/SpaceOperateRecordServiceImpl.class" afterPath="$PROJECT_DIR$/target/final/WEB-INF/classes/com/service/impl/SpaceOperateRecordServiceImpl.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/final/WEB-INF/classes/com/service/impl/SpaceServiceImpl.class" afterPath="$PROJECT_DIR$/target/final/WEB-INF/classes/com/service/impl/SpaceServiceImpl.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/controller/PageController.java" afterPath="$PROJECT_DIR$/src/main/java/com/controller/PageController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/controller/SpaceController.java" afterPath="$PROJECT_DIR$/src/main/java/com/controller/SpaceController.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/dao/SpaceDao.java" afterPath="$PROJECT_DIR$/src/main/java/com/dao/SpaceDao.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/service/SpaceOperateRecordService.java" afterPath="$PROJECT_DIR$/src/main/java/com/service/SpaceOperateRecordService.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/service/SpaceService.java" afterPath="$PROJECT_DIR$/src/main/java/com/service/SpaceService.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/service/impl/PageServiceImpl.java" afterPath="$PROJECT_DIR$/src/main/java/com/service/impl/PageServiceImpl.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/service/impl/SpaceOperateRecordServiceImpl.java" afterPath="$PROJECT_DIR$/src/main/java/com/service/impl/SpaceOperateRecordServiceImpl.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/service/impl/SpaceServiceImpl.java" afterPath="$PROJECT_DIR$/src/main/java/com/service/impl/SpaceServiceImpl.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/mybatis/mapping/PageDaoMapper.xml" afterPath="$PROJECT_DIR$/src/main/resources/mybatis/mapping/PageDaoMapper.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/mybatis/mapping/SpaceDaoMapper.xml" afterPath="$PROJECT_DIR$/src/main/resources/mybatis/mapping/SpaceDaoMapper.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/pageItem.jsp" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/pageItem.jsp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/jsp/createChildPage.jsp" afterPath="$PROJECT_DIR$/src/main/webapp/jsp/createChildPage.jsp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/jsp/createRootPage.jsp" afterPath="$PROJECT_DIR$/src/main/webapp/jsp/createRootPage.jsp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/mybatis/mapping/SpaceDaoMapper.xml" afterPath="$PROJECT_DIR$/target/classes/mybatis/mapping/SpaceDaoMapper.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/final/WEB-INF/classes/mybatis/mapping/SpaceDaoMapper.xml" afterPath="$PROJECT_DIR$/target/final/WEB-INF/classes/mybatis/mapping/SpaceDaoMapper.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/final/WEB-INF/views/pageItem.jsp" afterPath="$PROJECT_DIR$/target/final/WEB-INF/views/pageItem.jsp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/final/jsp/createChildPage.jsp" afterPath="$PROJECT_DIR$/target/final/jsp/createChildPage.jsp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/final/jsp/createRootPage.jsp" afterPath="$PROJECT_DIR$/target/final/jsp/createRootPage.jsp" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -68,35 +40,42 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="PageController.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="PageController.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/controller/PageController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="288">
-              <caret line="151" column="0" lean-forward="false" selection-start-line="151" selection-start-column="0" selection-end-line="151" selection-end-column="0" />
+            <state relative-caret-position="233">
+              <caret line="158" column="0" lean-forward="false" selection-start-line="158" selection-start-column="0" selection-end-line="158" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="SpaceServiceImpl.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="SpaceServiceImpl.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/service/impl/SpaceServiceImpl.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="300">
-              <caret line="35" column="31" lean-forward="false" selection-start-line="35" selection-start-column="31" selection-end-line="35" selection-end-column="31" />
-              <folding>
-                <element signature="e#883#884#0" expanded="true" />
-                <element signature="e#931#932#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="203">
+              <caret line="100" column="72" lean-forward="true" selection-start-line="100" selection-start-column="72" selection-end-line="100" selection-end-column="72" />
+              <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="PageService.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/service/PageService.java">
+      <file leaf-file-name="SpaceDaoMapper.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/resources/mybatis/mapping/SpaceDaoMapper.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="420">
-              <caret line="31" column="22" lean-forward="true" selection-start-line="31" selection-start-column="22" selection-end-line="31" selection-end-column="22" />
-              <folding />
+            <state relative-caret-position="382">
+              <caret line="102" column="9" lean-forward="true" selection-start-line="102" selection-start-column="9" selection-end-line="102" selection-end-column="9" />
+              <folding>
+                <marker date="1558421893595" expanded="true" signature="1345:1440" ph="select from space" />
+                <marker date="1558421893595" expanded="true" signature="1525:1659" ph="select from space" />
+                <marker date="1558421893595" expanded="true" signature="1741:1860" ph="select from space" />
+                <marker date="1558421893595" expanded="true" signature="1941:2050" ph="select from space" />
+                <marker date="1558421893595" expanded="true" signature="2138:2251" ph="select from space" />
+                <marker date="1558421893595" expanded="true" signature="2338:2504" ph="select from space" />
+                <marker date="1558421893595" expanded="true" signature="2605:2698" ph="SELECT COUNT... space" />
+                <marker date="1558421893595" expanded="true" signature="2817:3310" ph="insert into space... " />
+                <marker date="1558421893595" expanded="true" signature="3412:3669" ph="UPDATE space... " />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -104,26 +83,10 @@
       <file leaf-file-name="PageServiceImpl.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/service/impl/PageServiceImpl.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="341">
+            <state relative-caret-position="299">
               <caret line="150" column="0" lean-forward="false" selection-start-line="150" selection-start-column="0" selection-end-line="150" selection-end-column="0" />
               <folding>
                 <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="PageDaoMapper.xml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/resources/mybatis/mapping/PageDaoMapper.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="248">
-              <caret line="74" column="82" lean-forward="true" selection-start-line="74" selection-start-column="82" selection-end-line="74" selection-end-column="82" />
-              <folding>
-                <marker date="1558272374415" expanded="true" signature="1544:1657" ph="select from page" />
-                <marker date="1558272374415" expanded="true" signature="1741:1849" ph="select from page" />
-                <marker date="1558272374415" expanded="true" signature="1929:2018" ph="UPDATE page " />
-                <marker date="1558272374415" expanded="true" signature="2138:2776" ph="insert into page... " />
-                <marker date="1558272374415" expanded="true" signature="2876:3214" ph="UPDATE page " />
               </folding>
             </state>
           </provider>
@@ -143,7 +106,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>index</find>
       <find>mysql.pro</find>
       <find>com.en</find>
       <find>SpaceController</find>
@@ -173,6 +135,7 @@
       <find>insertSpace</find>
       <find>getSpaceBySearchContent</find>
       <find>updatePageInfo</find>
+      <find>updateSpaceInfo</find>
     </findStrings>
     <dirStrings>
       <dir>$PROJECT_DIR$</dir>
@@ -230,17 +193,17 @@
         <option value="$PROJECT_DIR$/src/main/java/com/dao/PageOperateRecordDao.java" />
         <option value="$PROJECT_DIR$/src/main/resources/mybatis/mapping/PageOperateRecordDaoMapper.xml" />
         <option value="$PROJECT_DIR$/src/main/java/com/service/base.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/service/PageService.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/service/SpaceOperateRecordService.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/service/impl/SpaceOperateRecordServiceImpl.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/dao/SpaceDao.java" />
-        <option value="$PROJECT_DIR$/src/main/resources/mybatis/mapping/SpaceDaoMapper.xml" />
-        <option value="$PROJECT_DIR$/src/main/java/com/service/impl/SpaceServiceImpl.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/service/SpaceService.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/controller/SpaceController.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/controller/PageController.java" />
         <option value="$PROJECT_DIR$/src/main/resources/mybatis/mapping/PageDaoMapper.xml" />
+        <option value="$PROJECT_DIR$/src/main/java/com/service/PageService.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/dao/SpaceDao.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/service/SpaceService.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/controller/PageController.java" />
+        <option value="$PROJECT_DIR$/src/main/resources/mybatis/mapping/SpaceDaoMapper.xml" />
         <option value="$PROJECT_DIR$/src/main/java/com/service/impl/PageServiceImpl.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/service/impl/SpaceServiceImpl.java" />
       </list>
     </option>
   </component>
@@ -297,9 +260,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
-      <pane id="Scope" />
-      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -350,15 +310,6 @@
               <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="com" type="462c0819:PsiDirectoryNode" />
               <item name="dao" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="final" type="b2602c69:ProjectViewProjectNode" />
-              <item name="final" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="com" type="462c0819:PsiDirectoryNode" />
-              <item name="entities" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="final" type="b2602c69:ProjectViewProjectNode" />
@@ -439,7 +390,10 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scratches" />
       <pane id="AndroidView" />
+      <pane id="Scope" />
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -719,12 +673,14 @@
       <workItem from="1557935472189" duration="56000" />
       <workItem from="1558000182484" duration="11031000" />
       <workItem from="1558089351233" duration="10078000" />
-      <workItem from="1558247901850" duration="9665000" />
+      <workItem from="1558247901850" duration="9828000" />
+      <workItem from="1558277246951" duration="163000" />
+      <workItem from="1558420403977" duration="1922000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="205522000" />
+    <option name="totallyTimeSpent" value="207770000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -737,6 +693,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="109" y="23" width="1331" height="877" extended-state="0" />
+    <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="true" content_ui="tabs" />
@@ -750,7 +707,7 @@
       <window_info id="JSF" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.45012787" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.45012787" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32992327" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.28772378" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -761,7 +718,7 @@
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32992327" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Spring" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32992327" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.41432226" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.22265323" sideWeight="0.5" order="6" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.22885959" sideWeight="0.5" order="6" side_tool="false" content_ui="combo" />
       <window_info id="Bean Validation" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Web" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32992327" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
@@ -820,12 +777,6 @@
           <option name="timeStamp" value="48" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/controller/PageController.java</url>
-          <line>94</line>
-          <properties />
-          <option name="timeStamp" value="61" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/com/controller/SpaceController.java</url>
           <line>164</line>
           <properties />
@@ -833,24 +784,24 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/com/controller/PageController.java</url>
-          <line>132</line>
+          <line>134</line>
           <properties />
           <option name="timeStamp" value="66" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/service/impl/PageServiceImpl.java</url>
-          <line>139</line>
+          <url>file://$PROJECT_DIR$/src/main/java/com/service/impl/SpaceServiceImpl.java</url>
+          <line>95</line>
           <properties />
-          <option name="timeStamp" value="68" />
+          <option name="timeStamp" value="70" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/service/impl/PageServiceImpl.java</url>
-          <line>148</line>
+          <url>file://$PROJECT_DIR$/src/main/java/com/controller/PageController.java</url>
+          <line>94</line>
           <properties />
-          <option name="timeStamp" value="69" />
+          <option name="timeStamp" value="71" />
         </line-breakpoint>
       </breakpoints>
-      <option name="time" value="70" />
+      <option name="time" value="72" />
     </breakpoint-manager>
     <watches-manager>
       <configuration name="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory">
@@ -859,13 +810,6 @@
     </watches-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/resources/mybatis/mapping/UserDaoMapper.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="289">
-          <caret line="32" column="13" lean-forward="true" selection-start-line="32" selection-start-column="13" selection-end-line="32" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/pom.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2805">
@@ -1067,7 +1011,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="165">
           <caret line="14" column="17" lean-forward="false" selection-start-line="14" selection-start-column="17" selection-end-line="14" selection-end-column="17" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1094,7 +1037,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="135">
           <caret line="11" column="26" lean-forward="false" selection-start-line="11" selection-start-column="26" selection-end-line="11" selection-end-column="26" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1148,14 +1090,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/service/SpaceOperateRecordService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="21" column="20" lean-forward="false" selection-start-line="21" selection-start-column="20" selection-end-line="21" selection-end-column="20" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/service/impl/SpaceOperateRecordServiceImpl.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="510">
@@ -1166,86 +1100,50 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/service/PageService.java">
+    <entry file="file://$PROJECT_DIR$/src/main/resources/mybatis/mysql.properties">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="420">
-          <caret line="31" column="22" lean-forward="true" selection-start-line="31" selection-start-column="22" selection-end-line="31" selection-end-column="22" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/mybatis/mapping/SpaceDaoMapper.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="433">
-          <caret line="48" column="28" lean-forward="false" selection-start-line="48" selection-start-column="28" selection-end-line="48" selection-end-column="28" />
-          <folding>
-            <marker date="1558262584899" expanded="true" signature="1345:1440" ph="select from space" />
-            <marker date="1558262584899" expanded="true" signature="1525:1659" ph="select from space" />
-            <marker date="1558262584899" expanded="true" signature="1741:1860" ph="select from space" />
-            <marker date="1558262584899" expanded="true" signature="1941:2050" ph="select from space" />
-            <marker date="1558262584899" expanded="true" signature="2138:2251" ph="select from space" />
-            <marker date="1558262584899" expanded="true" signature="2338:2504" ph="select from space" />
-            <marker date="1558262584899" expanded="true" signature="2605:2698" ph="SELECT COUNT... space" />
-            <marker date="1558262584899" expanded="true" signature="2817:3310" ph="insert into space... " />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/dao/SpaceDao.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="225">
-          <caret line="18" column="24" lean-forward="false" selection-start-line="18" selection-start-column="12" selection-end-line="18" selection-end-column="24" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/service/SpaceService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="225">
-          <caret line="18" column="24" lean-forward="false" selection-start-line="18" selection-start-column="24" selection-end-line="18" selection-end-column="24" />
+        <state relative-caret-position="45">
+          <caret line="3" column="13" lean-forward="false" selection-start-line="3" selection-start-column="13" selection-end-line="3" selection-end-column="13" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/controller/SpaceController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="252">
-          <caret line="116" column="61" lean-forward="true" selection-start-line="116" selection-start-column="61" selection-end-line="116" selection-end-column="61" />
+        <state relative-caret-position="1122">
+          <caret line="122" column="16" lean-forward="true" selection-start-line="122" selection-start-column="16" selection-end-line="122" selection-end-column="16" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/service/impl/SpaceServiceImpl.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/service/SpaceOperateRecordService.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="300">
-          <caret line="35" column="31" lean-forward="false" selection-start-line="35" selection-start-column="31" selection-end-line="35" selection-end-column="31" />
-          <folding>
-            <element signature="e#883#884#0" expanded="true" />
-            <element signature="e#931#932#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="255">
+          <caret line="21" column="20" lean-forward="false" selection-start-line="21" selection-start-column="20" selection-end-line="21" selection-end-column="20" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/service/PageService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="360">
+          <caret line="27" column="11" lean-forward="true" selection-start-line="27" selection-start-column="11" selection-end-line="27" selection-end-column="11" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/dao/PageDao.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="21" column="9" lean-forward="false" selection-start-line="21" selection-start-column="9" selection-end-line="21" selection-end-column="9" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/spring-web/4.0.5.RELEASE/spring-web-4.0.5.RELEASE.jar!/org/springframework/web/method/support/InvocableHandlerMethod.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="163">
-          <caret line="137" column="0" lean-forward="false" selection-start-line="137" selection-start-column="0" selection-end-line="137" selection-end-column="0" />
+        <state relative-caret-position="255">
+          <caret line="20" column="4" lean-forward="false" selection-start-line="20" selection-start-column="4" selection-end-line="21" selection-end-column="39" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/resources/mybatis/mapping/PageDaoMapper.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="248">
-          <caret line="74" column="82" lean-forward="true" selection-start-line="74" selection-start-column="82" selection-end-line="74" selection-end-column="82" />
+        <state relative-caret-position="630">
+          <caret line="76" column="13" lean-forward="true" selection-start-line="69" selection-start-column="4" selection-end-line="76" selection-end-column="13" />
           <folding>
             <marker date="1558272374415" expanded="true" signature="1544:1657" ph="select from page" />
             <marker date="1558272374415" expanded="true" signature="1741:1849" ph="select from page" />
@@ -1256,9 +1154,43 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/dao/SpaceDao.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="555">
+          <caret line="40" column="42" lean-forward="true" selection-start-line="40" selection-start-column="42" selection-end-line="40" selection-end-column="42" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/service/SpaceService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="270">
+          <caret line="40" column="9" lean-forward="false" selection-start-line="40" selection-start-column="9" selection-end-line="40" selection-end-column="9" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/mybatis/mapping/SpaceDaoMapper.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="382">
+          <caret line="102" column="9" lean-forward="true" selection-start-line="102" selection-start-column="9" selection-end-line="102" selection-end-column="9" />
+          <folding>
+            <marker date="1558421893595" expanded="true" signature="1345:1440" ph="select from space" />
+            <marker date="1558421893595" expanded="true" signature="1525:1659" ph="select from space" />
+            <marker date="1558421893595" expanded="true" signature="1741:1860" ph="select from space" />
+            <marker date="1558421893595" expanded="true" signature="1941:2050" ph="select from space" />
+            <marker date="1558421893595" expanded="true" signature="2138:2251" ph="select from space" />
+            <marker date="1558421893595" expanded="true" signature="2338:2504" ph="select from space" />
+            <marker date="1558421893595" expanded="true" signature="2605:2698" ph="SELECT COUNT... space" />
+            <marker date="1558421893595" expanded="true" signature="2817:3310" ph="insert into space... " />
+            <marker date="1558421893595" expanded="true" signature="3412:3669" ph="UPDATE space... " />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/service/impl/PageServiceImpl.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="341">
+        <state relative-caret-position="299">
           <caret line="150" column="0" lean-forward="false" selection-start-line="150" selection-start-column="0" selection-end-line="150" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
@@ -1266,10 +1198,26 @@
         </state>
       </provider>
     </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/spring-web/4.0.5.RELEASE/spring-web-4.0.5.RELEASE.jar!/org/springframework/web/method/support/InvocableHandlerMethod.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="88">
+          <caret line="132" column="0" lean-forward="false" selection-start-line="132" selection-start-column="0" selection-end-line="132" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/controller/PageController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="288">
-          <caret line="151" column="0" lean-forward="false" selection-start-line="151" selection-start-column="0" selection-end-line="151" selection-end-column="0" />
+        <state relative-caret-position="233">
+          <caret line="158" column="0" lean-forward="false" selection-start-line="158" selection-start-column="0" selection-end-line="158" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/service/impl/SpaceServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="203">
+          <caret line="100" column="72" lean-forward="true" selection-start-line="100" selection-start-column="72" selection-end-line="100" selection-end-column="72" />
           <folding />
         </state>
       </provider>

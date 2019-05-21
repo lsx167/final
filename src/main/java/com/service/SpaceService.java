@@ -36,4 +36,8 @@ public interface SpaceService {
     //包装空间页面方法
     ModelAndView packagePage(UserPO userPO, SpacePO spacePO, List<SpacePO> spacePOS,
                              List<PagePO>pagePOS, List<SpaceOperateRecordPO> spaceOperateRecordPOS);
+
+    //添加页面时，更新空间信息
+    void updateSpaceCreatePage(long spaceId,long pageId);
+
 }

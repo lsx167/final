@@ -140,7 +140,7 @@ public class PageServiceImpl implements PageService {
         pageDao.insertNewPage(pagePO1);
 
         //更新原页面
-        if(pagePO.getChildPageID() == "-1"){
+        if(pagePO.getChildPageID().equals("-1")){
             pagePO.setChildPageID(pagePO.getId()+"");
         }else {
             pagePO.setChildPageID(pagePO.getChildPageID()+"+"+pagePO1.getId());

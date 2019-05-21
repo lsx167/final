@@ -9,10 +9,9 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+import com.service.base;
 
 import javax.annotation.Resource;
 import javax.enterprise.inject.Model;
@@ -48,19 +47,20 @@ public class SpaceController {
         List<SpacePO> spacePOS = spaceService.getAllSpace();
         return (spacePOS.get(1).getId()+spacePOS.get(1).getName()+spacePOS.get(1).getOriginatorID()+spacePOS.get(1).getChildPageID());
     }
-
-    /**
+/*
+    *//**
      * 根据用户id返回主空间信息
      * @param request
      * @param response
      * @return
-     */
+     *//*
     @RequestMapping(value = "/getMainSpaceById", produces = "text/html;charset=UTF-8")
     @ResponseBody
     public String getMainSpaceById(HttpServletRequest request, HttpServletResponse response) {
         SpacePO spacePO = spaceService.getMainSpaceById(10001);
         return spacePO.getName()+spacePO.getId()+spacePO.getIsMain();
-    }
+    }*/
+/*
 
     //模糊搜索空间列表
     @RequestMapping(value = "/getSpacesBySearch", produces = "text/html;charset=UTF-8")
@@ -69,6 +69,7 @@ public class SpaceController {
         // TODO: 2019/5/2
         return null;
     }
+*/
 
     //根据搜索内容返回空间列表
     @RequestMapping(value = "/getSpaceBySearchContent", produces = "text/html;charset=UTF-8")
@@ -111,25 +112,28 @@ public class SpaceController {
     @ResponseBody
     public ModelAndView getSpaceBySpaceId(HttpServletRequest request, HttpServletResponse response,HttpSession httpSession) {
         ModelAndView mav = new ModelAndView();
+        base general = new base();
 
-        //理论上不存在找不到id的情况
-        /*if(request.getParameter("spaceId").equals(null)||request.getParameter("spaceId") == ""){
-            mav.setViewName("searchNull");
-            return mav;
-        }*/
         long spaceId = Long.parseLong(request.getParameter("spaceId"));
 
         SpacePO spacePO = spaceService.getSpaceById(spaceId);
-        /*if(null==spacePO){
-            mav.setViewName("searchNull");
-            return mav;
-        }*/
 
         //获取用户信息
         UserPO userPO = (UserPO) httpSession.getAttribute("userPO");
-        //UserPO userPO = userService.getUserById(spacePO.getOriginatorID());
+
         //获取空间信息
         List<SpacePO> spacePOS = spaceService.getSpacesById(userPO.getId());
+
+        //判断当前用户是否有目标空间的权限
+        if(!(spacePO.getReadID().equals("-1") ||
+                general.isLongBelongToList(userPO.getId(),general.stringToLongList(spacePO.getReadID())))){
+            mav.setViewName("noPermission");
+            mav.addObject("userPO",userPO);
+            mav.addObject("spacePO",spacePO);
+            mav.addObject("spacePOS",spacePOS);
+            return mav;
+        }
+
         //获取该空间页面信息
         List<PagePO> pagePOS = pageService.getPagesBySpaceId(spacePO.getId());
         //获取该空间最近5条操作记录
@@ -186,5 +190,28 @@ public class SpaceController {
 
             return mav;
         }
+    }
+
+    //返回登录账号的主空间
+    @RequestMapping(value = "/getMainSpace", produces = "text/html;charset=UTF-8")
+    @ResponseBody
+    public ModelAndView getMainSpace(HttpServletRequest request, HttpServletResponse response,HttpSession httpSession) {
+        ModelAndView mav = new ModelAndView();
+
+        //获取用户信息
+        UserPO userPO = (UserPO) httpSession.getAttribute("userPO");
+
+        //获取主空间信息
+        SpacePO spacePO = spaceService.getMainSpaceById(userPO.getId());
+        //获取空间信息
+        List<SpacePO> spacePOS = spaceService.getSpacesById(userPO.getId());
+        //获取该空间页面信息
+        List<PagePO> pagePOS = pageService.getPagesBySpaceId(spacePO.getId());
+        //获取该空间最近5条操作记录
+        List<SpaceOperateRecordPO> spaceOperateRecordPOS = spaceOperateRecordService.getLastFiveSpaceOperateRecord(spacePO.getId());
+
+        mav = spaceService.packagePage(userPO,spacePO,spacePOS,pagePOS,spaceOperateRecordPOS);
+
+        return mav;
     }
 }

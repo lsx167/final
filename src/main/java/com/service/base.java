@@ -27,7 +27,7 @@ public class base {
         return list;
     }
 
-
+    //long list转字符串
     public String longListToString(List<Long> list){
         StringBuffer str = new StringBuffer();
         str.append(list.get(0));
@@ -36,5 +36,17 @@ public class base {
             str.append("+"+list.get(i));
         }
         return str.toString();
+    }
+
+    //检查某个id是否位于一个list中
+    public boolean isLongBelongToList(Long id,List<Long> list){
+        boolean b = false;
+        for(int i=0;i<list.size();i++){
+           if(id.equals(list.get(i))){
+               b = true;
+               break;
+           }
+        }
+        return b;
     }
 }

@@ -13,8 +13,10 @@ public class UserDaoTest {
             System.out.println(list.get(i));
         }
 
-        String s1 = test.longListToString(list);
-        System.out.println(s1);
+        System.out.println(test.isLongBelongToList((long)10001,list));
+
+        /*String s1 = test.longListToString(list);
+        System.out.println(s1);*/
     }
 }
 /*

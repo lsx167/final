@@ -119,12 +119,6 @@ public class UserController {
                 //获取该空间最近5条操作记录
                 List<SpaceOperateRecordPO> spaceOperateRecordPOS = spaceOperateRecordService.getLastFiveSpaceOperateRecord(spacePO.getId());
 
-                /*mav.setViewName("main");
-                mav.addObject("userPO",userPO);
-                mav.addObject("spacePO",spacePO);
-                mav.addObject("spacePOS",spacePOS);
-                mav.addObject("pagePOS",pagePOS);
-                mav.addObject("spaceOperateRecordPOS",spaceOperateRecordPOS);*/
                 mav = spaceService.packagePage(userPO,spacePO,spacePOS,pagePOS,spaceOperateRecordPOS);
 
                 request.getSession().setAttribute("userPO",userPO);

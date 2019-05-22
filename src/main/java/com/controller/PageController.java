@@ -71,6 +71,11 @@ public class PageController {
 
         mav = pageService.packagePage(userPO,pageOriginUserPO1,spacePO,spacePOS,pagePOS,pagePO,pageDetailPO,pageOperateRecordPO);
 
+        if(pageService.haswritePermission(spacePO,pagePO,userPO.getId())){
+            mav.addObject("writePermission",1);
+        }else {
+            mav.addObject("writePermission",0);
+        }
         return mav;
     }
 
@@ -94,14 +99,14 @@ public class PageController {
         List<PagePO> pagePOS = pageService.getPagesBySpaceId(spacePO.getId());
 
         //todo 写权限需要改到前端
-        if(!pageService.haswritePermission(spacePO,pagePO,userPO.getId())){
+        /*if(!pageService.haswritePermission(spacePO,pagePO,userPO.getId())){
             mav.setViewName("noPermission");
             mav.addObject("userPO",userPO);
             mav.addObject("spacePO",spacePO);
             mav.addObject("spacePOS",spacePOS);
             mav.addObject("pagePOS",pagePOS);
             return mav;
-        }
+        }*/
 
         pageService.updatePageContent(pageId,pageContent,userPO.getId());
 
@@ -144,6 +149,7 @@ public class PageController {
 
         mav = pageService.packagePage(userPO,userPO,spacePO,spacePOS,pagePOS,pagePO,pageDetailPO,pageOperateRecordPO);
 
+        mav.addObject("writePermission",1);
         return mav;
     }
 
@@ -185,6 +191,7 @@ public class PageController {
 
         mav = pageService.packagePage(userPO,userPO,spacePO,spacePOS,pagePOS,pagePO,pageDetailPO,pageOperateRecordPO);
 
+        mav.addObject("writePermission",1);
         return mav;
     }
 

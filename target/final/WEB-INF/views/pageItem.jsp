@@ -147,12 +147,16 @@
             <div class="right_1_right">
                 页面历史
             </div>
-            <div class="right_1_right" id="bianji" style="display: block" onclick="show_bianji()">
-                编辑
-            </div>
-            <div class="right_1_right" id="cancel_bianji" style="display: none" onclick="show_cancel_bianji()">
-                取消编辑
-            </div>
+            <c:choose>
+                <c:when test="${writePermission == 1}"><!-- 如果用户没有写权限-->
+                    <div class="right_1_right" id="bianji" style="display: block" onclick="show_bianji()">
+                        编辑
+                    </div>
+                    <div class="right_1_right" id="cancel_bianji" style="display: none" onclick="show_cancel_bianji()">
+                        取消编辑
+                    </div>
+                </c:when>
+            </c:choose>
         </div>
         <div class="right_2">
             <div class="right_2_creator">
@@ -165,6 +169,13 @@
                 最后一次修改时间：${requestScope.pageOperateRecordPO.operatorTime}
             </div>
         </div>
+        <c:choose>
+            <c:when test="${writePermission == 0}"><!-- 如果用户没有写权限-->
+                <div>
+                    对不起，您没有该页面的写权限，请联系该页面的负责人
+                </div>
+            </c:when>
+        </c:choose>
 
         <!--页面内容-->
 		<div class="right_3" id="page_content_show" style="display: block">

@@ -36,4 +36,10 @@ public interface PageService {
 
     //新增根页面操作记录
     long insertNewRootPageOperateRecord(PagePO pagePO);
+
+    //检查用户是否有该页面的读权限
+    boolean hasReadPermission(SpacePO spacePO,PagePO pagePO,long userId);
+
+    //检查用户是否有该页面的写权限
+    boolean haswritePermission(SpacePO spacePO,PagePO pagePO,long userId);
 }

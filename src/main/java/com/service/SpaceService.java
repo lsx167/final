@@ -40,4 +40,10 @@ public interface SpaceService {
     //添加页面时，更新空间信息
     void updateSpaceCreatePage(long spaceId,long pageId);
 
+    //检查用户是否有该页面的读权限
+    boolean hasReadPermission(SpacePO spacePO,long userId);
+
+    //检查用户是否有该页面的写权限
+    boolean haswritePermission(SpacePO spacePO,long userId);
+
 }

@@ -3,6 +3,7 @@ package com.service.impl;
 import com.dao.SpaceDao;
 import com.entities.*;
 import com.service.SpaceService;
+import com.service.base;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.ModelAndView;
@@ -103,5 +104,31 @@ public class SpaceServiceImpl implements SpaceService{
         }
 
         spaceDao.updateSpaceInfo(spacePO);
+    }
+
+    @Override
+    public boolean hasReadPermission(SpacePO spacePO, long userId) {
+        base general = new base();
+        boolean b = true;
+
+        //判断当前用户是否有目标空间的权限
+        if(!(spacePO.getReadID().equals("-1") ||
+                general.isLongBelongToList(userId,general.stringToLongList(spacePO.getReadID())))){
+            b = false;
+        }
+        return b;
+    }
+
+    @Override
+    public boolean haswritePermission(SpacePO spacePO, long userId) {
+        base general = new base();
+        boolean b = true;
+
+        //判断当前用户是否有目标空间的权限
+        if(!(spacePO.getWriteID().equals("-1") ||
+                general.isLongBelongToList(userId,general.stringToLongList(spacePO.getWriteID())))){
+            b = false;
+        }
+        return b;
     }
 }

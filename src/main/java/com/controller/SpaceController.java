@@ -66,7 +66,6 @@ public class SpaceController {
     @RequestMapping(value = "/getSpacesBySearch", produces = "text/html;charset=UTF-8")
     @ResponseBody
     public String getSpacesBySearch(HttpServletRequest request, HttpServletResponse response, HttpSession session) {
-        // TODO: 2019/5/2
         return null;
     }
 */
@@ -128,8 +127,7 @@ public class SpaceController {
         List<SpacePO> spacePOS = spaceService.getSpacesById(userPO.getId());
 
         //判断当前用户是否有目标空间的权限
-        if(!(spacePO.getReadID().equals("-1") ||
-                general.isLongBelongToList(userPO.getId(),general.stringToLongList(spacePO.getReadID())))){
+        if(!spaceService.hasReadPermission(spacePO,userPO.getId())){
             mav.setViewName("noPermission");
             mav.addObject("userPO",userPO);
             mav.addObject("spacePO",spacePO);

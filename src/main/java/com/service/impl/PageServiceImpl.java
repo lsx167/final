@@ -180,5 +180,59 @@ public class PageServiceImpl implements PageService {
         return pageOperateRecordDao.insertPageOperateRecord(pageOperateRecordPO);
     }
 
+    @Override
+    public boolean hasReadPermission(SpacePO spacePO, PagePO pagePO, long userId) {
+        base general = new base();
+        boolean b = true;
+
+        //判断当前用户是否有目标空间的权限
+        if(!(spacePO.getReadID().equals("-1") ||
+                general.isLongBelongToList(userId,general.stringToLongList(spacePO.getReadID())))){
+            b = false;
+        }
+        //判断当前用户是否有目标页面的权限
+        if(!(pagePO.getReadID().equals("-1") ||
+                general.isLongBelongToList(userId,general.stringToLongList(pagePO.getReadID())))){
+            b = false;
+        }
+        //判断当前用户是否有目标页面其父页面的权限
+        while (pagePO.isRootPage()==false){
+            pagePO = getPageByPageId(pagePO.getFatherPageID());
+            if(!(pagePO.getReadID().equals("-1") ||
+                    general.isLongBelongToList(userId,general.stringToLongList(pagePO.getReadID())))){
+                b = false;
+                break;
+            }
+        }
+        return b;
+    }
+
+    @Override
+    public boolean haswritePermission(SpacePO spacePO, PagePO pagePO, long userId) {
+        base general = new base();
+        boolean b = true;
+
+        //判断当前用户是否有目标空间的权限
+        if(!(spacePO.getWriteID().equals("-1") ||
+                general.isLongBelongToList(userId,general.stringToLongList(spacePO.getWriteID())))){
+            b = false;
+        }
+        //判断当前用户是否有目标页面的权限
+        if(!(pagePO.getWriteID().equals("-1") ||
+                general.isLongBelongToList(userId,general.stringToLongList(pagePO.getWriteID())))){
+            b = false;
+        }
+        //判断当前用户是否有目标页面其父页面的权限
+        while (pagePO.isRootPage()==false){
+            pagePO = getPageByPageId(pagePO.getFatherPageID());
+            if(!(pagePO.getWriteID().equals("-1") ||
+                    general.isLongBelongToList(userId,general.stringToLongList(pagePO.getWriteID())))){
+                b = false;
+                break;
+            }
+        }
+        return b;
+    }
+
 
 }

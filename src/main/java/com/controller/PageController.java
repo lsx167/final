@@ -50,9 +50,7 @@ public class PageController {
         //获取该空间页面信息
         List<PagePO> pagePOS = pageService.getPagesBySpaceId(spacePO.getId());
 
-        //判断当前用户是否有目标页面的权限
-        if(!(pagePO.getReadID().equals("-1") ||
-                general.isLongBelongToList(userPO.getId(),general.stringToLongList(pagePO.getReadID())))){
+        if(!pageService.hasReadPermission(spacePO,pagePO,userPO.getId())){
             mav.setViewName("noPermission");
             mav.addObject("userPO",userPO);
             mav.addObject("spacePO",spacePO);
@@ -64,7 +62,7 @@ public class PageController {
         PageDetailPO pageDetailPO = pageService.getCurPageById(pageId);
 
         //获得空间创建者信息
-        UserPO spaceOriginUserPO = userService.getUserById(spacePO.getOriginatorID());
+        //UserPO spaceOriginUserPO = userService.getUserById(spacePO.getOriginatorID());
 
         //获得页面创建者信息
         UserPO pageOriginUserPO1 = userService.getUserById(pagePO.getOriginatorID());
@@ -80,10 +78,30 @@ public class PageController {
     @RequestMapping(value = "/updatePageContent", produces = "text/html;charset=UTF-8")
     @ResponseBody
     public ModelAndView updatePageContent(HttpServletRequest request, HttpServletResponse response, HttpSession httpSession) {
+        ModelAndView mav = new ModelAndView();
         long pageId = Long.parseLong(request.getParameter("pageId"));
+        //获取页面信息
+        PagePO pagePO = pageService.getPageByPageId(pageId);
+        //获取所属空间信息
+        SpacePO spacePO = spaceService.getSpaceById(pagePO.getSpaceID());
+        //获取页面修改内容
         String pageContent = request.getParameter("pageContent");
-
+        //获取用户信息
         UserPO userPO = (UserPO) httpSession.getAttribute("userPO");
+        //获取空间列表信息
+        List<SpacePO> spacePOS = spaceService.getSpacesById(userPO.getId());
+        //获取该空间页面信息
+        List<PagePO> pagePOS = pageService.getPagesBySpaceId(spacePO.getId());
+
+        //todo 写权限需要改到前端
+        if(!pageService.haswritePermission(spacePO,pagePO,userPO.getId())){
+            mav.setViewName("noPermission");
+            mav.addObject("userPO",userPO);
+            mav.addObject("spacePO",spacePO);
+            mav.addObject("spacePOS",spacePOS);
+            mav.addObject("pagePOS",pagePOS);
+            return mav;
+        }
 
         pageService.updatePageContent(pageId,pageContent,userPO.getId());
 

@@ -47,7 +47,7 @@
     float: left;
     position: relative;
     display: inline-block;
-    margin-left: 100px;
+    margin-left: 50px;
 }
 
 /* 下拉内容 (默认隐藏) */
@@ -99,7 +99,7 @@
     height: 40px;
     width: 300px;
     float: right;
-    margin-right: 150px;
+    margin-right: 120px;
 }
 .bar1 input {
     border: 0px;
@@ -126,11 +126,12 @@
     color: #F9F0DA;
 }
 .header_user{
-	height: 40px;
-	float: right;
-	margin-right: 10px;
-	width: 40px;
-	display: inline-block;
+    height: 40px;
+    float: right;
+    margin-right: 10px;
+    width: 160px;
+    display: inline-block;
+    color: white;
 }
 .left_input{
 	height: 300px;

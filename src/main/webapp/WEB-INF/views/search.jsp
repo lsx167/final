@@ -11,7 +11,7 @@
 <body class="body">
 <header class="header">
     <img src="../img/logo.jpeg" style="max-height: 30px;float: left;margin-left: 10%;margin-top: 5px;border:none;"/>
-    <div style="float: left;width: 200px;height: 30px;text-align: center;color: white;">
+    <div style="float: left;width: 200px;height: 30px;text-align: center;color: white;margin-top: 10px">
         多人协作文档编辑系统
     </div>
     <div class="dropdown">
@@ -27,16 +27,19 @@
         <button class="dropbtn">创建</button>
         <div class="dropdown-content">
             <a href="/jsp/createSpace.jsp">创建空间</a>
-            <a href="/jsp/createRootPage.jsp">创建页面</a>
+            <a href="/jsp/createRootPage.jsp?spaceName=${requestScope.spacePO.name}">创建页面</a>
         </div>
     </div>
     <button class="create_btn">
-        <a href="/user/logout" style="color: white;text-decoration: none">
+        <a href="/user/logout" style="color: white;text-decoration: none;margin-left: 50px">
             退出
         </a>
     </button>
     <div class="header_user">
-        <img src="../img/yonghu1.png" style="max-height: 30px;margin-top: 5px;border:none;"/>
+        <div style="float: left;text-align: center;color: white;margin-top: 10px">
+            欢迎您，${requestScope.userPO.name}
+        </div>
+        <img src="../img/yonghu1.png" style="max-height: 30px;margin-top: 10px;border:none;float: right"/>
     </div>
     <div class="bar1">
         <form action="/space/getSpaceBySearchContent" method="post">

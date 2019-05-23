@@ -11,7 +11,7 @@
 <body class="body">
 <header class="header">
     <img src="../img/logo.jpeg" style="max-height: 30px;float: left;margin-left: 10%;margin-top: 5px;border:none;"/>
-    <div style="float: left;width: 200px;height: 30px;text-align: center;color: white;">
+    <div style="float: left;width: 200px;height: 30px;text-align: center;color: white;margin-top: 10px">
         多人协作文档编辑系统
     </div>
     <div class="dropdown">
@@ -31,13 +31,15 @@
         </div>
     </div>
     <button class="create_btn">
-        <a href="/user/logout" style="color: white;text-decoration: none">
+        <a href="/user/logout" style="color: white;text-decoration: none;margin-left: 50px">
             退出
         </a>
     </button>
     <div class="header_user">
-        欢迎您，${requestScope.userPO.name}
-        <img src="../img/yonghu1.png" style="max-height: 30px;margin-top: 5px;border:none;"/>
+        <div style="float: left;text-align: center;color: white;margin-top: 10px">
+            欢迎您，${requestScope.userPO.name}
+        </div>
+        <img src="../img/yonghu1.png" style="max-height: 30px;margin-top: 10px;border:none;float: right"/>
     </div>
     <div class="bar1">
         <form action="/space/getSpaceBySearchContent" method="post">
@@ -125,30 +127,34 @@
             </div>
         </div>
 
-        <div class="left_setting">
+        <%--<div class="left_setting">
             <div class="left_setting_img">
                 <img src="../img/shezhi.png" style="max-height: 25px;margin-top:5px;border:none;"/>
             </div>
             <div class="left_setting_item">
                 空间配置
             </div>
-        </div>
+        </div>--%>
     </div>
     <div class="main_right">
         <div class="right_1">
             <div class="right_1_left">
                 ${requestScope.spacePO.name}
             </div>
-            <div class="right_1_right">
-                删除
-            </div>
-            <div class="right_1_right">
-                页面历史
-            </div>
-            <div class="right_1_right">
-                编辑
-            </div>
+            <c:choose>
+                <c:when test="${writePermission == 1}"><!-- 如果用户没有写权限-->
+                    <div class="right_1_right">
+                        <div class="left_setting_img">
+                            <img src="../img/shezhi.png" style="max-height: 25px;margin-top:5px;border:none;"/>
+                        </div>
+                        <div class="left_setting_item">
+                            空间配置
+                        </div>
+                    </div>
+                </c:when>
+            </c:choose>
         </div>
+
         <div class="right_2">
             <div class="right_2_creator">
                 创建者：${requestScope.originUserPO.name}

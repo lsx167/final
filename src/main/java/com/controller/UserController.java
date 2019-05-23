@@ -121,6 +121,7 @@ public class UserController {
 
                 mav = spaceService.packagePage(userPO,userPO,spacePO,spacePOS,pagePOS,spaceOperateRecordPOS);
 
+                mav.addObject("writePermission",1);
                 request.getSession().setAttribute("userPO",userPO);
                 return mav;
             }

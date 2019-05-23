@@ -141,7 +141,11 @@ public class SpaceController {
         List<SpaceOperateRecordPO> spaceOperateRecordPOS = spaceOperateRecordService.getLastFiveSpaceOperateRecord(spacePO.getId());
 
         mav = spaceService.packagePage(userPO,originUserPO,spacePO,spacePOS,pagePOS,spaceOperateRecordPOS);
-
+        if(userPO.getId() == originUserPO.getId()){
+            mav.addObject("writePermission",1);
+        }else {
+            mav.addObject("writePermission",0);
+        }
         return mav;
     }
 
@@ -188,7 +192,7 @@ public class SpaceController {
             List<SpaceOperateRecordPO> spaceOperateRecordPOS = spaceOperateRecordService.getLastFiveSpaceOperateRecord(spacePO.getId());
 
             mav = spaceService.packagePage(userPO,userPO,spacePO,spacePOS,pagePOS,spaceOperateRecordPOS);
-
+            mav.addObject("writePermission",1);
             return mav;
         }
     }
@@ -212,7 +216,7 @@ public class SpaceController {
         List<SpaceOperateRecordPO> spaceOperateRecordPOS = spaceOperateRecordService.getLastFiveSpaceOperateRecord(spacePO.getId());
 
         mav = spaceService.packagePage(userPO,userPO,spacePO,spacePOS,pagePOS,spaceOperateRecordPOS);
-
+        mav.addObject("writePermission",1);
         return mav;
     }
 }

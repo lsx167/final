@@ -29,7 +29,7 @@
         <button class="dropbtn">创建</button>
         <div class="dropdown-content">
             <a href="/jsp/createSpace.jsp">创建空间</a>
-            <a href="/jsp/createRootPage.jsp?spaceName=${requestScope.spacePO.name}">创建页面</a>
+            <a href="/jsp/createChildPage.jsp?spaceName=${requestScope.spacePO.name}&pageName=${requestScope.pagePO.name}&pageId=${requestScope.pagePO.id}">创建页面</a>
         </div>
     </div>
     <button class="create_btn">
@@ -183,12 +183,12 @@
         <div class="right_3" id="page_content_update" style="display: none">
             <form action="/page/updatePageContent?pageId=${requestScope.pagePO.id}" method="post">
                 <!-- 加载编辑器的容器 -->
-                <script id="container" name="pageContent" type="text/plain">
+                <script id="container" name="pageContent" type="text/plain" class="right_3_container" >
                     ${requestScope.pageDetailPO.pageContent}
                 </script>
-				<div>
-				    <input type="submit" value="保存" />
-				</div>
+                <div>
+                    <input type="submit" value="保存" />
+                </div>
             </form>
             
             <!-- 配置文件 -->

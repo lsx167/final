@@ -49,30 +49,34 @@
     </div>
 </header>
 <div class="main">
-   	<div class="">
-   	    <form action="/page/createNewChildPage" method="post">
-			<div>
-                <label class="username-label">页面名称：</label>
-                <input type="text" name="pageName" id="pageName" class="login_text" placeholder="请输入页面名称" />
-			</div>
-			<div>
-				页面类型：子页面
-			</div>
-			<div>
-                父页面：<input type="text" name="pageName" value="${param.pageName}" readonly>
+   	<div>
+        <form action="/page/createNewChildPage" method="post">
+            <div class="form_info">
+                <div class="info" style="margin-left: 0">
+                    <label class="username-label">页面名称：</label>
+                    <input type="text" name="pageName" id="pageName" class="login_text" placeholder="请输入页面名称" />
+                </div>
+                <div class="info" style="width: 180px;>
+                    页面类型：子页面
+                </div>
+                <div class="info" style="margin-left: 10px;width: 200px">
+                    父页面：<input type="text" name="pageName" value="${param.pageName}" readonly>
+                </div>
+                <div class="info" style="margin-left: 10px;width: 240px">
+                    所属空间为:<input type="text" name="spaceName" value="${param.spaceName}" readonly>
+                </div>
             </div>
-            <div>
-                所属空间为:<input type="text" name="spaceName" value="${param.spaceName}" readonly>
+            <input type='hidden' name="fatherPageId" value ='${param.pageId}'/>
+            <div class="page_content">
+                <!-- 加载编辑器的容器 -->
+                <script id="container" name="pageContent" type="text/plain" class="page_container">
+
+                </script>
+                <div>
+                    <input type="submit" value="保存" />
+                </div>
             </div>
-			<input type='hidden' name="fatherPageId" value ='${param.pageId}'/>
-   	        <!-- 加载编辑器的容器 -->
-   	        <script id="container" name="pageContent" type="text/plain">
-   	            
-   	        </script>
-   			<div>
-   			    <input type="submit" value="保存" />
-   			</div>
-   	    </form>
+        </form>
    	    
    	    <!-- 配置文件 -->
    	    <script type="text/javascript" src="../../utf8-jsp/ueditor.config.js"></script>

@@ -261,3 +261,10 @@
 	margin-top: 20px;
 	background-color: red;
 }
+.right_3_container{
+	width: 700px;
+	height: 580px;
+	overflow: scroll;
+	border: 2px solid rgb(219,246,214);
+	background-color: white;
+}

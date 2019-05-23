@@ -49,25 +49,30 @@
     </div>
 </header>
 <div class="main">
-   	<div class="">
+   	<div>
    	    <form action="/page/createNewRootPage" method="post">
-			<div>
-                <label class="username-label">页面名称：</label>
-                <input type="text" name="pageName" id="pageName" class="login_text" placeholder="请输入页面名称" />
-			</div>
-			<div>
-                页面类型：根页面
+            <div class="form_info">
+                <div class="info">
+                    <label class="username-label">页面名称：</label>
+                    <input type="text" name="pageName" id="pageName" class="login_text" placeholder="请输入页面名称" />
+                </div>
+                <div class="info">
+                    页面类型：根页面
+                </div>
+                <div class="info">
+                    所属空间为:<input type="text" name="spaceName" value="${param.spaceName}" readonly>
+                </div>
             </div>
-            <div>
-                所属空间为:<input type="text" name="spaceName" value="${param.spaceName}" readonly>
+
+            <div class="page_content">
+                <!-- 加载编辑器的容器 -->
+                <script id="container" name="pageContent" type="text/plain" class="page_container">
+
+                </script>
+                <div>
+                    <input type="submit" value="保存" />
+                </div>
             </div>
-   	        <!-- 加载编辑器的容器 -->
-   	        <script id="container" name="pageContent" type="text/plain">
-   	            
-   	        </script>
-   			<div>
-   			    <input type="submit" value="保存" />
-   			</div>
    	    </form>
    	    
    	    <!-- 配置文件 -->

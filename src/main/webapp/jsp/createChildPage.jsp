@@ -56,7 +56,7 @@
                     <label class="username-label">页面名称：</label>
                     <input type="text" name="pageName" id="pageName" class="login_text" placeholder="请输入页面名称" />
                 </div>
-                <div class="info" style="width: 180px;>
+                <div class="info" style="width: 180px;、】>
                     页面类型：子页面
                 </div>
                 <div class="info" style="margin-left: 10px;width: 200px">

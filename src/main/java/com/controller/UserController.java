@@ -122,6 +122,7 @@ public class UserController {
                 mav = spaceService.packagePage(userPO,userPO,spacePO,spacePOS,pagePOS,spaceOperateRecordPOS);
 
                 mav.addObject("writePermission",1);
+                //保存操作者信息至session
                 request.getSession().setAttribute("userPO",userPO);
                 return mav;
             }

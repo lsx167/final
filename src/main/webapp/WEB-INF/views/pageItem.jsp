@@ -11,6 +11,80 @@
     <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 </head>
 <body class="body">
+<script type="text/javascript" src="http://cdn.bootcss.com/jquery/3.1.0/jquery.min.js"></script>
+<script type="text/javascript" src="http://cdn.bootcss.com/sockjs-client/1.1.1/sockjs.js"></script>
+<script type="text/javascript">
+    var websocket = null;
+    if ('WebSocket' in window) {
+        //Websocket的连接
+        websocket = new WebSocket("ws://localhost:8080/websocket/socketServer");//WebSocket对应的地址
+    }
+    else if ('MozWebSocket' in window) {
+        //Websocket的连接
+        websocket = new MozWebSocket("ws://localhost:8080/websocket/socketServer");//SockJS对应的地址
+    }
+    else {
+        //SockJS的连接
+        websocket = new SockJS("http://localhost:8080/sockjs/socketServer");    //SockJS对应的地址
+    }
+    websocket.onopen = onOpen;
+    websocket.onmessage = onMessage;
+    websocket.onerror = onError;
+    websocket.onclose = onClose;
+
+    function onOpen(openEvt) {
+        //alert(openEvt.Data);
+    }
+
+    function onMessage(evt) {
+        $("#content").append(evt.data+"<br>"); // 接收后台发送的数据
+    }
+    function onError() {
+    }
+    function onClose() {
+    }
+
+    /*function doEdit() {
+        if (websocket.readyState == websocket.OPEN) {
+            websocket.send($("#targetName").val()+"@"+$("#inputMsg").val());//调用后台handleTextMessage方法
+            alert("发送成功!");
+        } else {
+
+            alert("连接失败!"+websocket.readyState);
+        }
+    }*/
+
+    // 编辑页面
+    function show_bianji() {
+        $('#cancel_bianji').css('display','block');
+        $('#bianji').css('display','none');
+        $('#page_content_update').css('display','block');
+        $('#page_content_show').css('display','none');
+        $('#now_bianji').css('display','block');
+
+        //向后端发送消息
+        if (websocket.readyState == websocket.OPEN) {
+            websocket.send(${requestScope.userPO.name}+"@"+"正在编辑");//调用后台handleTextMessage方法
+            alert("发送成功!");
+        } else {
+            alert("连接失败!"+websocket.readyState);
+        }
+    }
+
+    // 取消页面编辑
+    function show_cancel_bianji() {
+        $('#cancel_bianji').css('display','none');
+        $('#bianji').css('display','block');
+        $('#page_content_update').css('display','none');
+        $('#page_content_show').css('display','block');
+        $('#now_bianji').css('display','none');
+    }
+
+
+    window.close = function () {
+        websocket.onclose();
+    }
+</script>
 <header class="header">
     <img src="../img/logo.jpeg" style="max-height: 30px;float: left;margin-left: 10%;margin-top: 5px;border:none;"/>
     <div style="float: left;width: 200px;height: 30px;text-align: center;color: white;margin-top: 10px">
@@ -33,7 +107,7 @@
         </div>
     </div>
     <button class="create_btn">
-        <a href="/user/logout" style="color: white;text-decoration: none;margin-left: 50px">
+        <a href="/user/logout?userName=${requestScope.userPO.name}" style="color: white;text-decoration: none;margin-left: 50px">
             退出
         </a>
     </button>
@@ -177,7 +251,11 @@
                 var ue = UE.getEditor('container');
             </script>
         </div>
-
+        <div class="now_bianji" id="now_bianji">
+            当前有  1  人在编辑中
+            <div id="content"></div>
+            编辑者：徐钰菡
+        </div>
     </div>
 </div>
 <footer class="footer">
@@ -188,35 +266,5 @@
         联系方式:暂无联系方式
     </p>
 </footer>
-<script type="text/javascript">
-  // 弹窗
-  function showWindow() {
-    $('#showdiv').show();  //显示弹窗
-    $('#cover').css('display','block'); //显示遮罩层
-    $('#cover').css('height',document.body.clientHeight+'px'); //设置遮罩层的高度为当前页面高度
-  }
-
-  // 关闭弹窗
-  function closeWindow() {
-    $('#showdiv').hide();  //隐藏弹窗
-    $('#cover').css('display','none');   //显示遮罩层
-  }
-
-  // 编辑页面
-  function show_bianji() {
-      $('#cancel_bianji').css('display','block');
-      $('#bianji').css('display','none');
-      $('#page_content_update').css('display','block');
-      $('#page_content_show').css('display','none');
-  }
-
-  // 取消页面编辑
-  function show_cancel_bianji() {
-      $('#cancel_bianji').css('display','none');
-      $('#bianji').css('display','block');
-      $('#page_content_update').css('display','none');
-      $('#page_content_show').css('display','block');
-  }
-</script>
 </body>
 </html>

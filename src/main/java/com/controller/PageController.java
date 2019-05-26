@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequestMapping(value = "/page")
@@ -37,7 +38,7 @@ public class PageController {
 
         //获取登录账号
         String userName = request.getParameter("userName");
-        UserPO userPO = (UserPO) request.getSession().getAttribute(userName);
+        UserPO userPO = (UserPO)((Map)request.getSession().getAttribute("SESSION_USERNAME")).get(userName);
 
         long pageId = Long.parseLong(request.getParameter("pageId"));
         /*//获取操作用户信息
@@ -100,7 +101,7 @@ public class PageController {
         UserPO userPO = (UserPO) httpSession.getAttribute("userPO");*/
         //获取登录账号
         String userName = request.getParameter("userName");
-        UserPO userPO = (UserPO) request.getSession().getAttribute(userName);
+        UserPO userPO = (UserPO)((Map)request.getSession().getAttribute("SESSION_USERNAME")).get(userName);
 
         //获取空间列表信息
         List<SpacePO> spacePOS = spaceService.getSpacesById(userPO.getId());
@@ -134,7 +135,7 @@ public class PageController {
         /*UserPO userPO = (UserPO) httpSession.getAttribute("userPO");*/
         //获取登录账号
         String userName = request.getParameter("userName");
-        UserPO userPO = (UserPO) request.getSession().getAttribute(userName);
+        UserPO userPO = (UserPO)((Map)request.getSession().getAttribute("SESSION_USERNAME")).get(userName);
 
         SpacePO spacePO = spaceService.getSpaceBySpaceName(spaceName);
 
@@ -180,7 +181,8 @@ public class PageController {
 */
         //获取登录账号
         String userName = request.getParameter("userName");
-        UserPO userPO = (UserPO) request.getSession().getAttribute(userName);
+        UserPO userPO = (UserPO)((Map)request.getSession().getAttribute("SESSION_USERNAME")).get(userName);
+
         PagePO fatherPage = pageService.getPageByPageId(fatherPageId);
         SpacePO spacePO = spaceService.getSpaceById(fatherPage.getSpaceID());
 

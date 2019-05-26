@@ -21,6 +21,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequestMapping(value = "/space")
@@ -77,7 +78,7 @@ public class SpaceController {
     public ModelAndView getSpaceBySearchContent(HttpServletRequest request, HttpServletResponse response) {
         //获取登录账号
         String userName = request.getParameter("userName");
-        UserPO userPO = (UserPO) request.getSession().getAttribute(userName);
+        UserPO userPO = (UserPO)((Map)request.getSession().getAttribute("SESSION_USERNAME")).get(userName);
 
         ModelAndView mav = new ModelAndView();
         String content = request.getParameter("spaceContent");
@@ -122,7 +123,7 @@ public class SpaceController {
 
         //获取登录账号
         String userName = request.getParameter("userName");
-        UserPO userPO = (UserPO) request.getSession().getAttribute(userName);
+        UserPO userPO = (UserPO)((Map)request.getSession().getAttribute("SESSION_USERNAME")).get(userName);
 
         long spaceId = Long.parseLong(request.getParameter("spaceId"));
 
@@ -169,7 +170,7 @@ public class SpaceController {
         String spaceDescribe = request.getParameter("spaceDescribe");
         //获取登录账号
         String userName = request.getParameter("userName");
-        UserPO userPO = (UserPO) request.getSession().getAttribute(userName);
+        UserPO userPO = (UserPO)((Map)request.getSession().getAttribute("SESSION_USERNAME")).get(userName);
 /*
         UserPO userPO = (UserPO) httpSession.getAttribute("userPO");
 */
@@ -223,7 +224,7 @@ public class SpaceController {
         UserPO userPO = (UserPO) httpSession.getAttribute("userPO");*/
         //获取登录账号
         String userName = request.getParameter("userName");
-        UserPO userPO = (UserPO) request.getSession().getAttribute(userName);
+        UserPO userPO = (UserPO)((Map)request.getSession().getAttribute("SESSION_USERNAME")).get(userName);
 
         //获取主空间信息
         SpacePO spacePO = spaceService.getMainSpaceById(userPO.getId());

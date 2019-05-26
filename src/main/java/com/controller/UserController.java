@@ -23,7 +23,9 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 
 @Controller
@@ -39,6 +41,9 @@ public class UserController {
     private PageService pageService;
     @Autowired
     private SpaceOperateRecordService spaceOperateRecordService;
+
+    //当前登录用户列表
+    private static Map sessionMap = new HashMap();
 
     /**
      *返回user对象信息给page1.jsp处理，然后在前端页面展示
@@ -125,8 +130,10 @@ public class UserController {
 
                 /*HttpSession session = request.getSession();
                 session.setAttribute("SESSION_USERNAME", username);*/
+
                 //保存操作者信息至session
-                request.getSession().setAttribute(userPO.getName(),userPO);
+                sessionMap.put(userPO.getName(),userPO);
+                request.getSession().setAttribute("SESSION_USERNAME",sessionMap);
                 return mav;
             }
         }
@@ -162,9 +169,13 @@ public class UserController {
     public ModelAndView logout(HttpServletRequest request, HttpServletResponse response) {
         ModelAndView mav = new ModelAndView();
         mav.setViewName("forward://jsp/login.jsp");
-        HttpSession session = request.getSession();
-        session.invalidate();
 
+        //获取登录账号
+        String userName = request.getParameter("userName");
+        UserPO userPO = (UserPO)((Map)request.getSession().getAttribute("SESSION_USERNAME")).get(userName);
+        //删除对应账号
+        sessionMap.remove(userPO.getName());
+        request.getSession().setAttribute("SESSION_USERNAME",sessionMap);
         return mav;
     }
 }

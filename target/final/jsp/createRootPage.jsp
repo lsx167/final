@@ -31,7 +31,7 @@
         </div>
     </div>
     <button class="create_btn">
-        <a href="/user/logout" style="color: white;text-decoration: none;margin-left: 50px">
+        <a href="/user/logout?userName=${param.userName}" style="color: white;text-decoration: none;margin-left: 50px">
             退出
         </a>
     </button>

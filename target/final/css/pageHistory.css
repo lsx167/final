@@ -1,0 +1,51 @@
+.page_operate_record_version{
+	width: 200px;
+	height: 50px;
+	font-size: 16px;
+}
+.page_operate_record_content{
+	width: 300px;
+	height: 50px;
+	margin-left: 20px;
+	font-size: 16px;
+}
+.page_operate_record_time{
+	width: 200px;
+	height: 50px;
+	margin-left: 40px;
+	font-size: 16px;
+}
+.page_operate_record_username{
+	width: 200px;
+	height: 50px;
+	margin-left: 60px;
+	font-size: 16px;
+}
+.page_operate_record_back{
+	width: 200px;
+	height: 50px;
+	margin-left: 80px;
+	font-size: 16px;
+}
+.page_name{
+	float: left;
+	text-align: center;
+	width: 200px;
+	height: 40px;
+	font-size: 30px;
+	font-weight: 500;
+	margin-top: 20px
+}
+.page_return{
+	float: left;
+	text-align: center;
+	width: 80px;
+	height: 40px;
+	font-size: 20px;
+	margin-top: 30px;
+	margin-left: 300px;
+}
+.right_title{
+	width: 600px;
+	height: 60px;
+}

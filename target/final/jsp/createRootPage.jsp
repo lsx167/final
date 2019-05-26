@@ -26,8 +26,8 @@
     <div class="dropdown">
         <button class="dropbtn">创建</button>
         <div class="dropdown-content">
-            <a href="/jsp/createSpace.jsp">创建空间</a>
-            <a href="/jsp/createRootPage.jsp?spaceName=${requestScope.spacePO.name}">创建页面</a>
+            <a href="/jsp/createSpace.jsp?userName=${param.userName}">创建空间</a>
+            <a href="/jsp/createRootPage.jsp?spaceName=${requestScope.spacePO.name}&userName=${param.userName}">创建页面</a>
         </div>
     </div>
     <button class="create_btn">
@@ -44,6 +44,7 @@
     <div class="bar1">
         <form action="/space/getSpaceBySearchContent" method="post">
             <input type="text" name="spaceContent" placeholder="请输入您要搜索的内容...">
+            <input type='hidden' name="userName" value ='${param.userName}'/>
             <button type="submit"></button>
         </form>
     </div>
@@ -63,7 +64,7 @@
                     所属空间为:<input type="text" name="spaceName" value="${param.spaceName}" readonly>
                 </div>
             </div>
-
+            <input type='hidden' name="userName" value ='${param.userName}'/>
             <div class="page_content">
                 <!-- 加载编辑器的容器 -->
                 <script id="container" name="pageContent" type="text/plain" class="page_container">

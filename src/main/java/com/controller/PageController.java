@@ -35,9 +35,13 @@ public class PageController {
         ModelAndView mav = new ModelAndView();
         base general = new base();
 
+        //获取登录账号
+        String userName = request.getParameter("userName");
+        UserPO userPO = (UserPO) request.getSession().getAttribute(userName);
+
         long pageId = Long.parseLong(request.getParameter("pageId"));
-        //获取操作用户信息
-        UserPO userPO = (UserPO) httpSession.getAttribute("userPO");
+        /*//获取操作用户信息
+        UserPO userPO = (UserPO) httpSession.getAttribute("userPO");*/
         //获取页面信息
         PagePO pagePO = pageService.getPageByPageId(pageId);
 
@@ -91,8 +95,13 @@ public class PageController {
         SpacePO spacePO = spaceService.getSpaceById(pagePO.getSpaceID());
         //获取页面修改内容
         String pageContent = request.getParameter("pageContent");
-        //获取用户信息
-        UserPO userPO = (UserPO) httpSession.getAttribute("userPO");
+
+        /*//获取用户信息
+        UserPO userPO = (UserPO) httpSession.getAttribute("userPO");*/
+        //获取登录账号
+        String userName = request.getParameter("userName");
+        UserPO userPO = (UserPO) request.getSession().getAttribute(userName);
+
         //获取空间列表信息
         List<SpacePO> spacePOS = spaceService.getSpacesById(userPO.getId());
         //获取该空间页面信息
@@ -122,7 +131,11 @@ public class PageController {
         String pageName = request.getParameter("pageName");
         String pageContent = request.getParameter("pageContent");
 
-        UserPO userPO = (UserPO) httpSession.getAttribute("userPO");
+        /*UserPO userPO = (UserPO) httpSession.getAttribute("userPO");*/
+        //获取登录账号
+        String userName = request.getParameter("userName");
+        UserPO userPO = (UserPO) request.getSession().getAttribute(userName);
+
         SpacePO spacePO = spaceService.getSpaceBySpaceName(spaceName);
 
         //更新page表
@@ -162,7 +175,12 @@ public class PageController {
         String pageName = request.getParameter("pageName");
         String pageContent = request.getParameter("pageContent");
 
+/*
         UserPO userPO = (UserPO) httpSession.getAttribute("userPO");
+*/
+        //获取登录账号
+        String userName = request.getParameter("userName");
+        UserPO userPO = (UserPO) request.getSession().getAttribute(userName);
         PagePO fatherPage = pageService.getPageByPageId(fatherPageId);
         SpacePO spacePO = spaceService.getSpaceById(fatherPage.getSpaceID());
 

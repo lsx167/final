@@ -33,6 +33,11 @@
           <element id="library" level="project" name="Maven: org.webjars.bower:ueditor:1.4.3" />
           <element id="library" level="project" name="Maven: commons-io:commons-io:2.2" />
           <element id="library" level="project" name="Maven: commons-codec:commons-codec:1.9" />
+          <element id="library" level="project" name="Maven: com.fasterxml.jackson.core:jackson-core:2.4.0" />
+          <element id="library" level="project" name="Maven: com.fasterxml.jackson.core:jackson-databind:2.4.0" />
+          <element id="library" level="project" name="Maven: com.fasterxml.jackson.core:jackson-annotations:2.4.0" />
+          <element id="library" level="project" name="Maven: org.springframework:spring-websocket:4.0.5.RELEASE" />
+          <element id="library" level="project" name="Maven: org.springframework:spring-messaging:4.0.5.RELEASE" />
         </element>
       </element>
       <element id="directory" name="META-INF">

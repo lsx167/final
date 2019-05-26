@@ -28,8 +28,8 @@
     <div class="dropdown">
         <button class="dropbtn">创建</button>
         <div class="dropdown-content">
-            <a href="/jsp/createSpace.jsp">创建空间</a>
-            <a href="/jsp/createChildPage.jsp?spaceName=${requestScope.spacePO.name}&pageName=${requestScope.pagePO.name}&pageId=${requestScope.pagePO.id}">创建页面</a>
+            <a href="/jsp/createSpace.jsp?userName=${requestScope.userPO.name}">创建空间</a>
+            <a href="/jsp/createChildPage.jsp?spaceName=${requestScope.spacePO.name}&pageName=${requestScope.pagePO.name}&pageId=${requestScope.pagePO.id}&userName=${requestScope.userPO.name}">创建页面</a>
         </div>
     </div>
     <button class="create_btn">
@@ -46,42 +46,19 @@
     <div class="bar1">
         <form action="/space/getSpaceBySearchContent" method="post">
             <input type="text" name="spaceContent" placeholder="请输入您要搜索的内容...">
+            <input type='hidden' name="userName" value ='${requestScope.userPO.name}'/>
             <button type="submit"></button>
         </form>
     </div>
 </header>
 <div class="main">
-	<!-- 遮罩层 -->
-	<div id="cover" style="background: #000; position: absolute; left: 0px; top: 0px; width: 100%; filter: alpha(opacity=30); opacity: 0.3; display: none; z-index: 2 " onclick="closeWindow()">
-	</div>
-	<div id="showdiv" style="width: 50%; margin: 0 auto; height: 300px; border: 1px solid #999; display: none; position: absolute; top: 30%; left: 25%; z-index: 3; background: #fff">
-		<div style="background: #F8F7F7; width: 100%; height: 2rem; font-size: 0.65rem; line-height: 2rem; border: 1px solid #999; text-align: center;" >
-			创建空间
-		</div>
-		<div class="create_form">
-			<form action="/space/createSpace" method="post">
-			    <div class="field-group">
-			        <label class="username-label">空间名称：</label>
-			        <input type="text" name="spaceName" id="spaceName" class="login_text" placeholder="请输入空间名称" />
-			    </div>
-			    <div class="field-group">
-			        <label class="username-label">空间描述：</label>
-			        <input type="text" name="spaceDescribe" id="spaceDescribe" class="login_text" placeholder="请输入空间描述" />
-			    </div>
-			    <div class="field-group" style="margin-top: 10px;margin-left: 20px">
-			        <input type="submit" class="input_btn" value="创建" />
-			    </div>
-			</form>
-		</div>
-	</div>
-	
     <div class="main_left">
         <div class="left_name">
             <div class="left_name_img">
                 <img src="../img/wujiaoxing.png" style="max-height: 30px;margin-top: 5px;border:none;"/>
             </div>
             <div class="left_name_item">
-                ${requestScope.pagePO.name}
+                ${requestScope.spacePO.name}
             </div>
         </div>
 		<div class="left_page_tree">
@@ -93,7 +70,7 @@
 				    <c:forEach items="${requestScope.spacePOS}" var="bean">
 				        <tr>
 				            <td>
-                                <a href="/space/getSpaceBySpaceId?spaceId=${bean.id}" style="color: blue;text-decoration: none">
+                                <a href="/space/getSpaceBySpaceId?spaceId=${bean.id}&userName=${requestScope.userPO.name}" style="color: blue;text-decoration: none">
                                         ${bean.name}
                                 </a>
                             </td>
@@ -111,7 +88,7 @@
                     <c:forEach items="${requestScope.pagePOS}" var="bean">
                         <tr>
                             <td>
-                                <a href="/page/getPageByPageId?pageId=${bean.id}" style="color: blue;text-decoration: none">
+                                <a href="/page/getPageByPageId?pageId=${bean.id}&userName=${requestScope.userPO.name}" style="color: blue;text-decoration: none">
                                         ${bean.name}
                                 </a>
                             </td>
@@ -181,7 +158,7 @@
 		</div>
 
         <div class="right_3" id="page_content_update" style="display: none">
-            <form action="/page/updatePageContent?pageId=${requestScope.pagePO.id}" method="post">
+            <form action="/page/updatePageContent?pageId=${requestScope.pagePO.id}&userName=${requestScope.userPO.name}" method="post">
                 <!-- 加载编辑器的容器 -->
                 <script id="container" name="pageContent" type="text/plain" class="right_3_container" >
                     ${requestScope.pageDetailPO.pageContent}

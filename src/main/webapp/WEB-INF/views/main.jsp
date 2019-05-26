@@ -26,12 +26,12 @@
     <div class="dropdown">
         <button class="dropbtn">创建</button>
         <div class="dropdown-content">
-            <a href="/jsp/createSpace.jsp">创建空间</a>
-            <a href="/jsp/createRootPage.jsp?spaceName=${requestScope.spacePO.name}">创建页面</a>
+            <a href="/jsp/createSpace.jsp?userName=${requestScope.userPO.name}">创建空间</a>
+            <a href="/jsp/createRootPage.jsp?spaceName=${requestScope.spacePO.name}&userName=${requestScope.userPO.name}">创建页面</a>
         </div>
     </div>
     <button class="create_btn">
-        <a href="/user/logout" style="color: white;text-decoration: none;margin-left: 50px">
+        <a href="/user/logout?userName=${requestScope.userPO.name}" style="color: white;text-decoration: none;margin-left: 50px">
             退出
         </a>
     </button>
@@ -44,6 +44,7 @@
     <div class="bar1">
         <form action="/space/getSpaceBySearchContent" method="post">
             <input type="text" name="spaceContent" placeholder="请输入您要搜索的内容...">
+            <input type='hidden' name="userName" value ='${requestScope.userPO.name}'/>
             <button type="submit"></button>
         </form>
     </div>
@@ -98,7 +99,7 @@
 				    <c:forEach items="${requestScope.spacePOS}" var="bean">
 				        <tr>
 				            <td>
-                                <a href="/space/getSpaceBySpaceId?spaceId=${bean.id}" style="color: blue;text-decoration: none">
+                                <a href="/space/getSpaceBySpaceId?spaceId=${bean.id}&userName=${requestScope.userPO.name}" style="color: blue;text-decoration: none">
                                         ${bean.name}
                                 </a>
                             </td>
@@ -116,7 +117,7 @@
                     <c:forEach items="${requestScope.pagePOS}" var="bean">
                         <tr>
                             <td>
-                                <a href="/page/getPageByPageId?pageId=${bean.id}" style="color: blue;text-decoration: none">
+                                <a href="/page/getPageByPageId?pageId=${bean.id}&userName=${requestScope.userPO.name}" style="color: blue;text-decoration: none">
                                         ${bean.name}
                                 </a>
                             </td>

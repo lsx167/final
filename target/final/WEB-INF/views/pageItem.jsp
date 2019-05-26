@@ -11,6 +11,96 @@
     <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 </head>
 <body class="body">
+<script type="text/javascript" src="http://cdn.bootcss.com/jquery/3.1.0/jquery.min.js"></script>
+<script type="text/javascript" src="http://cdn.bootcss.com/sockjs-client/1.1.1/sockjs.js"></script>
+<script type="text/javascript">
+    var websocket = null;
+    if ('WebSocket' in window) {
+        //Websocket的连接
+        websocket = new WebSocket("ws://localhost:8080/websocket/socketServer?&userName=${requestScope.userPO.name}&pageId=${requestScope.pagePO.id}");//WebSocket对应的地址
+    }
+    else if ('MozWebSocket' in window) {
+        //Websocket的连接
+        websocket = new MozWebSocket("ws://localhost:8080/websocket/socketServer");//SockJS对应的地址
+    }
+    else {
+        //SockJS的连接
+        websocket = new SockJS("http://localhost:8080/sockjs/socketServer");    //SockJS对应的地址
+    }
+    websocket.onopen = onOpen;
+    websocket.onmessage = onMessage;
+    websocket.onerror = onError;
+    websocket.onclose = onClose;
+
+    function onOpen(openEvt) {
+        //alert(openEvt.Data);
+    }
+
+    function onMessage(evt) {
+        $("#content").append(evt.data+"<br>"); // 接收后台发送的数据
+    }
+    function onError() {
+    }
+    function onClose() {
+    }
+
+    /*function doEdit() {
+        if (websocket.readyState == websocket.OPEN) {
+            websocket.send($("#targetName").val()+"@"+$("#inputMsg").val());//调用后台handleTextMessage方法
+            alert("发送成功!");
+        } else {
+
+            alert("连接失败!"+websocket.readyState);
+        }
+    }*/
+
+    // 编辑页面
+    function show_bianji() {
+        $('#cancel_bianji').css('display','block');
+        $('#bianji').css('display','none');
+        $('#page_content_update').css('display','block');
+        $('#page_content_show').css('display','none');
+        $('#now_bianji').css('display','block');
+
+        /*$.ajax(*/
+        /*    {*/
+        /*        url: '/page/editMessage',     // 请求地址, 就是你的控制器, 如 test.com/home/index/index*/
+        /*        data: { userName: "${requestScope.userPO.name}" },   // 需要传送的参数*/
+        /*        type: 'POST',   // 请求方式*/
+        /*        dataType: 'json', // 返回数据的格式, 通常为JSON*/
+        /*        contentType: 'application/json',*/
+        /*        success: function (result) {*/
+        /*            console.log('Send Request success..'); // 请求失败时的回调函数*/
+        /*        },*/
+        /*        error: function () {*/
+        /*            console.log('Send Request Fail..'); // 请求失败时的回调函数*/
+        /*        }*/
+        /*    }*/
+        /*);*/
+
+        //向后端发送消息
+        if (websocket.readyState == websocket.OPEN) {
+            websocket.send(${requestScope.userPO.name}+"@"+"正在编辑");//调用后台handleTextMessage方法
+            alert("发送成功!");
+        } else {
+            alert("连接失败!"+websocket.readyState);
+        }
+    }
+
+    // 取消页面编辑
+    function show_cancel_bianji() {
+        $('#cancel_bianji').css('display','none');
+        $('#bianji').css('display','block');
+        $('#page_content_update').css('display','none');
+        $('#page_content_show').css('display','block');
+        $('#now_bianji').css('display','none');
+    }
+
+
+    window.close = function () {
+        websocket.onclose();
+    }
+</script>
 <header class="header">
     <img src="../img/logo.jpeg" style="max-height: 30px;float: left;margin-left: 10%;margin-top: 5px;border:none;"/>
     <div style="float: left;width: 200px;height: 30px;text-align: center;color: white;margin-top: 10px">
@@ -28,12 +118,12 @@
     <div class="dropdown">
         <button class="dropbtn">创建</button>
         <div class="dropdown-content">
-            <a href="/jsp/createSpace.jsp">创建空间</a>
-            <a href="/jsp/createChildPage.jsp?spaceName=${requestScope.spacePO.name}&pageName=${requestScope.pagePO.name}&pageId=${requestScope.pagePO.id}">创建页面</a>
+            <a href="/jsp/createSpace.jsp?userName=${requestScope.userPO.name}">创建空间</a>
+            <a href="/jsp/createChildPage.jsp?spaceName=${requestScope.spacePO.name}&pageName=${requestScope.pagePO.name}&pageId=${requestScope.pagePO.id}&userName=${requestScope.userPO.name}">创建页面</a>
         </div>
     </div>
     <button class="create_btn">
-        <a href="/user/logout" style="color: white;text-decoration: none;margin-left: 50px">
+        <a href="/user/logout?userName=${requestScope.userPO.name}" style="color: white;text-decoration: none;margin-left: 50px">
             退出
         </a>
     </button>
@@ -46,42 +136,19 @@
     <div class="bar1">
         <form action="/space/getSpaceBySearchContent" method="post">
             <input type="text" name="spaceContent" placeholder="请输入您要搜索的内容...">
+            <input type='hidden' name="userName" value ='${requestScope.userPO.name}'/>
             <button type="submit"></button>
         </form>
     </div>
 </header>
 <div class="main">
-	<!-- 遮罩层 -->
-	<div id="cover" style="background: #000; position: absolute; left: 0px; top: 0px; width: 100%; filter: alpha(opacity=30); opacity: 0.3; display: none; z-index: 2 " onclick="closeWindow()">
-	</div>
-	<div id="showdiv" style="width: 50%; margin: 0 auto; height: 300px; border: 1px solid #999; display: none; position: absolute; top: 30%; left: 25%; z-index: 3; background: #fff">
-		<div style="background: #F8F7F7; width: 100%; height: 2rem; font-size: 0.65rem; line-height: 2rem; border: 1px solid #999; text-align: center;" >
-			创建空间
-		</div>
-		<div class="create_form">
-			<form action="/space/createSpace" method="post">
-			    <div class="field-group">
-			        <label class="username-label">空间名称：</label>
-			        <input type="text" name="spaceName" id="spaceName" class="login_text" placeholder="请输入空间名称" />
-			    </div>
-			    <div class="field-group">
-			        <label class="username-label">空间描述：</label>
-			        <input type="text" name="spaceDescribe" id="spaceDescribe" class="login_text" placeholder="请输入空间描述" />
-			    </div>
-			    <div class="field-group" style="margin-top: 10px;margin-left: 20px">
-			        <input type="submit" class="input_btn" value="创建" />
-			    </div>
-			</form>
-		</div>
-	</div>
-	
     <div class="main_left">
         <div class="left_name">
             <div class="left_name_img">
                 <img src="../img/wujiaoxing.png" style="max-height: 30px;margin-top: 5px;border:none;"/>
             </div>
             <div class="left_name_item">
-                ${requestScope.pagePO.name}
+                ${requestScope.spacePO.name}
             </div>
         </div>
 		<div class="left_page_tree">
@@ -93,7 +160,7 @@
 				    <c:forEach items="${requestScope.spacePOS}" var="bean">
 				        <tr>
 				            <td>
-                                <a href="/space/getSpaceBySpaceId?spaceId=${bean.id}" style="color: blue;text-decoration: none">
+                                <a href="/space/getSpaceBySpaceId?spaceId=${bean.id}&userName=${requestScope.userPO.name}" style="color: blue;text-decoration: none">
                                         ${bean.name}
                                 </a>
                             </td>
@@ -111,7 +178,7 @@
                     <c:forEach items="${requestScope.pagePOS}" var="bean">
                         <tr>
                             <td>
-                                <a href="/page/getPageByPageId?pageId=${bean.id}" style="color: blue;text-decoration: none">
+                                <a href="/page/getPageByPageId?pageId=${bean.id}&userName=${requestScope.userPO.name}" style="color: blue;text-decoration: none">
                                         ${bean.name}
                                 </a>
                             </td>
@@ -181,7 +248,7 @@
 		</div>
 
         <div class="right_3" id="page_content_update" style="display: none">
-            <form action="/page/updatePageContent?pageId=${requestScope.pagePO.id}" method="post">
+            <form action="/page/updatePageContent?pageId=${requestScope.pagePO.id}&userName=${requestScope.userPO.name}" method="post">
                 <!-- 加载编辑器的容器 -->
                 <script id="container" name="pageContent" type="text/plain" class="right_3_container" >
                     ${requestScope.pageDetailPO.pageContent}
@@ -200,7 +267,11 @@
                 var ue = UE.getEditor('container');
             </script>
         </div>
-
+        <div class="now_bianji" id="now_bianji">
+            当前有  1  人在编辑中
+            <div id="content"></div>
+            编辑者：徐钰菡
+        </div>
     </div>
 </div>
 <footer class="footer">
@@ -211,35 +282,5 @@
         联系方式:暂无联系方式
     </p>
 </footer>
-<script type="text/javascript">
-  // 弹窗
-  function showWindow() {
-    $('#showdiv').show();  //显示弹窗
-    $('#cover').css('display','block'); //显示遮罩层
-    $('#cover').css('height',document.body.clientHeight+'px'); //设置遮罩层的高度为当前页面高度
-  }
-
-  // 关闭弹窗
-  function closeWindow() {
-    $('#showdiv').hide();  //隐藏弹窗
-    $('#cover').css('display','none');   //显示遮罩层
-  }
-
-  // 编辑页面
-  function show_bianji() {
-      $('#cancel_bianji').css('display','block');
-      $('#bianji').css('display','none');
-      $('#page_content_update').css('display','block');
-      $('#page_content_show').css('display','none');
-  }
-
-  // 取消页面编辑
-  function show_cancel_bianji() {
-      $('#cancel_bianji').css('display','none');
-      $('#bianji').css('display','block');
-      $('#page_content_update').css('display','none');
-      $('#page_content_show').css('display','block');
-  }
-</script>
 </body>
 </html>

@@ -9,6 +9,43 @@
     <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 </head>
 <body class="body">
+<%--<script type="text/javascript" src="http://cdn.bootcss.com/jquery/3.1.0/jquery.min.js"></script>
+<script type="text/javascript" src="http://cdn.bootcss.com/sockjs-client/1.1.1/sockjs.js"></script>
+<script type="text/javascript">
+    var websocket = null;
+    if ('WebSocket' in window) {
+        //Websocket的连接
+        websocket = new WebSocket("ws://localhost:8080/websocket/socketServer");//WebSocket对应的地址
+    }
+    else if ('MozWebSocket' in window) {
+        //Websocket的连接
+        websocket = new MozWebSocket("ws://localhost:8080/websocket/socketServer");//SockJS对应的地址
+    }
+    else {
+        //SockJS的连接
+        websocket = new SockJS("http://localhost:8080/sockjs/socketServer");    //SockJS对应的地址
+    }
+    websocket.onopen = onOpen;
+    websocket.onmessage = onMessage;
+    websocket.onerror = onError;
+    websocket.onclose = onClose;
+
+    function onOpen(openEvt) {
+    }
+
+    function onMessage(evt) {
+    }
+    function onError() {
+    }
+    function onClose() {
+    }
+
+    function doSend() {}
+
+    window.close = function () {
+        websocket.onclose();
+    }
+</script>--%>
 <header class="header">
     <img src="../img/logo.jpeg" style="max-height: 30px;float: left;margin-left: 10%;margin-top: 5px;border:none;"/>
     <div style="float: left;width: 200px;height: 30px;text-align: center;color: white;margin-top: 10px">
@@ -26,12 +63,12 @@
     <div class="dropdown">
         <button class="dropbtn">创建</button>
         <div class="dropdown-content">
-            <a href="/jsp/createSpace.jsp">创建空间</a>
-            <a href="/jsp/createRootPage.jsp?spaceName=${requestScope.spacePO.name}">创建页面</a>
+            <a href="/jsp/createSpace.jsp?userName=${requestScope.userPO.name}">创建空间</a>
+            <a href="/jsp/createRootPage.jsp?spaceName=${requestScope.spacePO.name}&userName=${requestScope.userPO.name}">创建页面</a>
         </div>
     </div>
     <button class="create_btn">
-        <a href="/user/logout" style="color: white;text-decoration: none;margin-left: 50px">
+        <a href="/user/logout?userName=${requestScope.userPO.name}" style="color: white;text-decoration: none;margin-left: 50px">
             退出
         </a>
     </button>
@@ -44,6 +81,7 @@
     <div class="bar1">
         <form action="/space/getSpaceBySearchContent" method="post">
             <input type="text" name="spaceContent" placeholder="请输入您要搜索的内容...">
+            <input type='hidden' name="userName" value ='${requestScope.userPO.name}'/>
             <button type="submit"></button>
         </form>
     </div>
@@ -56,7 +94,8 @@
 		<div class="search_form">
 			<form action="/space/getSpaceBySearchContent" method="post">
 			    <input type="text" name="spaceContent" placeholder="请输入您要搜索的内容...">
-			    <button type="submit">
+                <input type='hidden' name="userName" value ='${requestScope.userPO.name}'/>
+                <button type="submit">
 					<img src="../img/sousuo.png" style="max-height: 30px;margin-top: 5px;border: none;" />
 				</button>
 			</form>
@@ -86,7 +125,7 @@
         <c:forEach begin="0" end="${(page.totalCount>=page.pageSize)?page.pageSize:(page.totalCount % page.pageSize)}" items="${requestScope.spacePOList}" var="spaceItem">
 			<div class="spaceItem_name">
                 空间名称：
-                <a href="/space/getSpaceBySpaceId?spaceId=${spaceItem.id}" style="color: black;text-decoration: none">
+                <a href="/space/getSpaceBySpaceId?spaceId=${spaceItem.id}&userName=${requestScope.userPO.name}" style="color: black;text-decoration: none">
                     ${spaceItem.name}
                 </a>
 			</div>
@@ -97,8 +136,8 @@
 
         <c:choose>
             <c:when test="${page.pageNow != 1}"><!-- 如果当前页为1，则不显示首页和上一页 -->
-                <a href="/space/getSpaceBySearchContent?pageNow=1&spaceContent=${content}">首页</a>
-                <a href="/space/getSpaceBySearchContent?pageNow=${page.pageNow-1}&spaceContent=${content}">上一页</a>
+                <a href="/space/getSpaceBySearchContent?pageNow=1&spaceContent=${content}&userName=${requestScope.userPO.name}">首页</a>
+                <a href="/space/getSpaceBySearchContent?pageNow=${page.pageNow-1}&spaceContent=${content}&userName=${requestScope.userPO.name}">上一页</a>
             </c:when>
         </c:choose>
         <!-- 遍历页码 -->
@@ -109,14 +148,14 @@
                 </c:when>
                 <c:otherwise><!-- 否则，普通显示 -->
                     <%--<a href="?pageNow=${index}">${index}</a>--%>
-                    <a href="/space/getSpaceBySearchContent?pageNow=${index}&spaceContent=${content}">${index}</a>
+                    <a href="/space/getSpaceBySearchContent?pageNow=${index}&spaceContent=${content}&userName=${requestScope.userPO.name}">${index}</a>
                 </c:otherwise>
             </c:choose>
         </c:forEach>
         <c:choose>
             <c:when test="${page.pageNow != page.totalPageCount }"><!-- 如果当前页为总的记录数，则不显示末页和下一页 -->
-                <a href="/space/getSpaceBySearchContent?pageNow=${page.pageNow+1}&spaceContent=${content}">下一页</a>
-                <a href="/space/getSpaceBySearchContent?pageNow=${page.totalPageCount}&spaceContent=${content}">末页</a>
+                <a href="/space/getSpaceBySearchContent?pageNow=${page.pageNow+1}&spaceContent=${content}&userName=${requestScope.userPO.name}">下一页</a>
+                <a href="/space/getSpaceBySearchContent?pageNow=${page.totalPageCount}&spaceContent=${content}&userName=${requestScope.userPO.name}">末页</a>
             </c:when>
         </c:choose>
         共${page.totalPageCount }页，${page.totalCount }条记录 到第<input
@@ -139,7 +178,7 @@
                 //获取到要跳转的页码
                 var pageNow = $("#pn_input").val();
                 //通过修改window.location属性跳转到另一个页面
-                window.location = "?pageNow=" + pageNow + "&spaceContent=${content}";
+                window.location = "?pageNow=" + pageNow + "&spaceContent=${content}&userName=${requestScope.userPO.name}";
             });
         </script>
 </body>

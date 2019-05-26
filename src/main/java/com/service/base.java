@@ -49,4 +49,16 @@ public class base {
         }
         return b;
     }
+
+    //把string用户列表转换成list
+    public List<String> userList(String str){
+        List<String> list = new ArrayList<String>();
+
+        String[] split=str.split("\\+");
+        for(int i=0,len=split.length;i<len;i++){
+            list.add(i,split[i].toString());
+        }
+
+        return list;
+    }
 }

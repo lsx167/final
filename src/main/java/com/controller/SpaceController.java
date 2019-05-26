@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import com.service.base;
+import org.springframework.web.socket.WebSocketSession;
 
 import javax.annotation.Resource;
 import javax.enterprise.inject.Model;
@@ -20,6 +21,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequestMapping(value = "/space")
@@ -40,13 +42,13 @@ public class SpaceController {
      * @param request
      * @param response
      * @return
-     */
+     *//*
     @RequestMapping(value = "/allspace", produces = "text/html;charset=UTF-8")
     @ResponseBody
     public String getAllspace(HttpServletRequest request, HttpServletResponse response) {
         List<SpacePO> spacePOS = spaceService.getAllSpace();
         return (spacePOS.get(1).getId()+spacePOS.get(1).getName()+spacePOS.get(1).getOriginatorID()+spacePOS.get(1).getChildPageID());
-    }
+    }*/
 /*
     *//**
      * 根据用户id返回主空间信息
@@ -74,6 +76,10 @@ public class SpaceController {
     @RequestMapping(value = "/getSpaceBySearchContent", produces = "text/html;charset=UTF-8")
     @ResponseBody
     public ModelAndView getSpaceBySearchContent(HttpServletRequest request, HttpServletResponse response) {
+        //获取登录账号
+        String userName = request.getParameter("userName");
+        UserPO userPO = (UserPO)((Map)request.getSession().getAttribute("SESSION_USERNAME")).get(userName);
+
         ModelAndView mav = new ModelAndView();
         String content = request.getParameter("spaceContent");
         String currPage = request.getParameter("pageNow");
@@ -90,6 +96,7 @@ public class SpaceController {
             mav.addObject("spacePOList",spacePOList);
             mav.addObject("pageNow",pagenow);
             mav.addObject("page",page);
+            mav.addObject("userPO",userPO);
             return mav;
         }
 
@@ -103,6 +110,7 @@ public class SpaceController {
         mav.addObject("pageNow",pagenow);
         mav.addObject("page",page);
         mav.addObject("content",content);
+        mav.addObject("userPO",userPO);
         return mav;
     }
 
@@ -113,12 +121,16 @@ public class SpaceController {
         ModelAndView mav = new ModelAndView();
         base general = new base();
 
+        //获取登录账号
+        String userName = request.getParameter("userName");
+        UserPO userPO = (UserPO)((Map)request.getSession().getAttribute("SESSION_USERNAME")).get(userName);
+
         long spaceId = Long.parseLong(request.getParameter("spaceId"));
 
         SpacePO spacePO = spaceService.getSpaceById(spaceId);
 
-        //获取用户信息
-        UserPO userPO = (UserPO) httpSession.getAttribute("userPO");
+        /*//获取用户信息
+        UserPO userPO = (UserPO) httpSession.getAttribute("userPO");*/
 
         //获取空间创始人信息
         UserPO originUserPO = userService.getUserById(spacePO.getOriginatorID());
@@ -156,7 +168,12 @@ public class SpaceController {
         ModelAndView mav = new ModelAndView();
         String spaceName = request.getParameter("spaceName");
         String spaceDescribe = request.getParameter("spaceDescribe");
+        //获取登录账号
+        String userName = request.getParameter("userName");
+        UserPO userPO = (UserPO)((Map)request.getSession().getAttribute("SESSION_USERNAME")).get(userName);
+/*
         UserPO userPO = (UserPO) httpSession.getAttribute("userPO");
+*/
 
         //根据空间名称去查询是否存在同名空间，若存在则创建失败，校验之后移到前端
         // todo
@@ -203,8 +220,11 @@ public class SpaceController {
     public ModelAndView getMainSpace(HttpServletRequest request, HttpServletResponse response,HttpSession httpSession) {
         ModelAndView mav = new ModelAndView();
 
-        //获取用户信息
-        UserPO userPO = (UserPO) httpSession.getAttribute("userPO");
+        /*//获取用户信息
+        UserPO userPO = (UserPO) httpSession.getAttribute("userPO");*/
+        //获取登录账号
+        String userName = request.getParameter("userName");
+        UserPO userPO = (UserPO)((Map)request.getSession().getAttribute("SESSION_USERNAME")).get(userName);
 
         //获取主空间信息
         SpacePO spacePO = spaceService.getMainSpaceById(userPO.getId());

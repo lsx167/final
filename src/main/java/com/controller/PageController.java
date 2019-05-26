@@ -12,7 +12,9 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequestMapping(value = "/page")
@@ -28,6 +30,9 @@ public class PageController {
     @Autowired
     private SpaceOperateRecordService spaceOperateRecordService;
 
+    //当前登录用户列表
+    private static Map editingUserPage = new HashMap();
+
     //根据页面id返回空间信息
     @RequestMapping(value = "/getPageByPageId", produces = "text/html;charset=UTF-8")
     @ResponseBody
@@ -35,9 +40,13 @@ public class PageController {
         ModelAndView mav = new ModelAndView();
         base general = new base();
 
+        //获取登录账号
+        String userName = request.getParameter("userName");
+        UserPO userPO = (UserPO)((Map)request.getSession().getAttribute("SESSION_USERNAME")).get(userName);
+
         long pageId = Long.parseLong(request.getParameter("pageId"));
-        //获取操作用户信息
-        UserPO userPO = (UserPO) httpSession.getAttribute("userPO");
+        /*//获取操作用户信息
+        UserPO userPO = (UserPO) httpSession.getAttribute("userPO");*/
         //获取页面信息
         PagePO pagePO = pageService.getPageByPageId(pageId);
 
@@ -71,8 +80,22 @@ public class PageController {
 
         mav = pageService.packagePage(userPO,pageOriginUserPO1,spacePO,spacePOS,pagePOS,pagePO,pageDetailPO,pageOperateRecordPO);
 
+        //判断当前操作者是否有编辑权限
         if(pageService.haswritePermission(spacePO,pagePO,userPO.getId())){
             mav.addObject("writePermission",1);
+
+            //添加正在编辑列表
+            editingUserPage = (Map) request.getSession().getAttribute("editingUserPage");
+            if(editingUserPage==null){
+                editingUserPage = new HashMap();
+                editingUserPage.put(pagePO.getId(),userPO.getName());
+            }else if(editingUserPage.get(pagePO.getId())==null){
+                editingUserPage.put(pagePO.getId(),userPO.getName());
+            } else {
+                String editingPageNowUsers = (String) editingUserPage.get(pagePO.getId());
+                editingUserPage.put(pagePO.getId(),userPO.getName()+"+"+editingPageNowUsers);
+            }
+            request.getSession().setAttribute("editingUserPage",editingUserPage);
         }else {
             mav.addObject("writePermission",0);
         }
@@ -91,8 +114,13 @@ public class PageController {
         SpacePO spacePO = spaceService.getSpaceById(pagePO.getSpaceID());
         //获取页面修改内容
         String pageContent = request.getParameter("pageContent");
-        //获取用户信息
-        UserPO userPO = (UserPO) httpSession.getAttribute("userPO");
+
+        /*//获取用户信息
+        UserPO userPO = (UserPO) httpSession.getAttribute("userPO");*/
+        //获取登录账号
+        String userName = request.getParameter("userName");
+        UserPO userPO = (UserPO)((Map)request.getSession().getAttribute("SESSION_USERNAME")).get(userName);
+
         //获取空间列表信息
         List<SpacePO> spacePOS = spaceService.getSpacesById(userPO.getId());
         //获取该空间页面信息
@@ -122,7 +150,11 @@ public class PageController {
         String pageName = request.getParameter("pageName");
         String pageContent = request.getParameter("pageContent");
 
-        UserPO userPO = (UserPO) httpSession.getAttribute("userPO");
+        /*UserPO userPO = (UserPO) httpSession.getAttribute("userPO");*/
+        //获取登录账号
+        String userName = request.getParameter("userName");
+        UserPO userPO = (UserPO)((Map)request.getSession().getAttribute("SESSION_USERNAME")).get(userName);
+
         SpacePO spacePO = spaceService.getSpaceBySpaceName(spaceName);
 
         //更新page表
@@ -162,7 +194,13 @@ public class PageController {
         String pageName = request.getParameter("pageName");
         String pageContent = request.getParameter("pageContent");
 
+/*
         UserPO userPO = (UserPO) httpSession.getAttribute("userPO");
+*/
+        //获取登录账号
+        String userName = request.getParameter("userName");
+        UserPO userPO = (UserPO)((Map)request.getSession().getAttribute("SESSION_USERNAME")).get(userName);
+
         PagePO fatherPage = pageService.getPageByPageId(fatherPageId);
         SpacePO spacePO = spaceService.getSpaceById(fatherPage.getSpaceID());
 
@@ -195,4 +233,19 @@ public class PageController {
         return mav;
     }
 
+    /*//编辑时给后端发送消息
+    @RequestMapping(value = "/editMessage", produces = "text/html;charset=UTF-8")
+    @ResponseBody
+    public void editMessage(String userName){
+
+        Long pageId;
+
+        if(editUsers.equals(null)){
+            editUsers.append(userName);
+        } else {
+            editUsers.append("+"+userName);
+        }
+        editingUserPage.put(pageId,editUsers);
+        request.getSession().setAttribute("editUsers",editUsers);
+    }*/
 }

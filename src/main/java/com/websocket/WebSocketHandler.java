@@ -7,6 +7,7 @@ import org.springframework.web.socket.handler.TextWebSocketHandler;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Websocket处理器
@@ -26,7 +27,8 @@ public class WebSocketHandler extends TextWebSocketHandler {
      */
     @Override
     protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
-        String username = (String) session.getAttributes().get("WEBSOCKET_USERNAME");
+        String username = (String) session.getAttributes().get("editingUserPage");
+        //String username = (String) session.getAttributes().get("editingUserPage");
 
         // 获取提交过来的消息详情
         System.out.println("收到用户 " + username + " 的消息:" + message.toString());
@@ -63,9 +65,19 @@ public class WebSocketHandler extends TextWebSocketHandler {
     @Override
     public void afterConnectionEstablished(WebSocketSession session) throws Exception {
         users.add(session);
-        String username = (String) session.getAttributes().get("WEBSOCKET_USERNAME");
-        System.out.println("用户 " + username + " Connection Established");
-        session.sendMessage(new TextMessage(username + " connect"));
+        List<String> editUsers = (List<String>) session.getAttributes().get("editUsers");
+        int count = (Integer) session.getAttributes().get("count");
+        String pageId = (String) session.getAttributes().get("pageId");
+        String userName = (String) session.getAttributes().get("userName");
+        System.out.println("用户 " + userName + "正在编辑页面"+pageId);
+        System.out.println("当前正有"+count+"人正在编辑");
+        StringBuffer stringBuffer = new StringBuffer();
+        stringBuffer.append(editUsers.get(0));
+        for(int i=1;i<editUsers.size();i++){
+            stringBuffer.append(editUsers.get(i));
+        }
+        System.out.println("他们分别有:"+stringBuffer);
+        session.sendMessage(new TextMessage(userName + " connect"));
     }
 
     /**

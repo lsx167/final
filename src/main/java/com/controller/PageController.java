@@ -12,6 +12,7 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -28,6 +29,9 @@ public class PageController {
     private PageService pageService;
     @Autowired
     private SpaceOperateRecordService spaceOperateRecordService;
+
+    //当前登录用户列表
+    private static Map editingUserPage = new HashMap();
 
     //根据页面id返回空间信息
     @RequestMapping(value = "/getPageByPageId", produces = "text/html;charset=UTF-8")
@@ -76,8 +80,22 @@ public class PageController {
 
         mav = pageService.packagePage(userPO,pageOriginUserPO1,spacePO,spacePOS,pagePOS,pagePO,pageDetailPO,pageOperateRecordPO);
 
+        //判断当前操作者是否有编辑权限
         if(pageService.haswritePermission(spacePO,pagePO,userPO.getId())){
             mav.addObject("writePermission",1);
+
+            //添加正在编辑列表
+            editingUserPage = (Map) request.getSession().getAttribute("editingUserPage");
+            if(editingUserPage==null){
+                editingUserPage = new HashMap();
+                editingUserPage.put(pagePO.getId(),userPO.getName());
+            }else if(editingUserPage.get(pagePO.getId())==null){
+                editingUserPage.put(pagePO.getId(),userPO.getName());
+            } else {
+                String editingPageNowUsers = (String) editingUserPage.get(pagePO.getId());
+                editingUserPage.put(pagePO.getId(),userPO.getName()+"+"+editingPageNowUsers);
+            }
+            request.getSession().setAttribute("editingUserPage",editingUserPage);
         }else {
             mav.addObject("writePermission",0);
         }
@@ -215,4 +233,19 @@ public class PageController {
         return mav;
     }
 
+    /*//编辑时给后端发送消息
+    @RequestMapping(value = "/editMessage", produces = "text/html;charset=UTF-8")
+    @ResponseBody
+    public void editMessage(String userName){
+
+        Long pageId;
+
+        if(editUsers.equals(null)){
+            editUsers.append(userName);
+        } else {
+            editUsers.append("+"+userName);
+        }
+        editingUserPage.put(pageId,editUsers);
+        request.getSession().setAttribute("editUsers",editUsers);
+    }*/
 }

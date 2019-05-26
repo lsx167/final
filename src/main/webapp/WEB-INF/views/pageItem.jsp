@@ -17,7 +17,7 @@
     var websocket = null;
     if ('WebSocket' in window) {
         //Websocket的连接
-        websocket = new WebSocket("ws://localhost:8080/websocket/socketServer");//WebSocket对应的地址
+        websocket = new WebSocket("ws://localhost:8080/websocket/socketServer?&userName=${requestScope.userPO.name}&pageId=${requestScope.pagePO.id}");//WebSocket对应的地址
     }
     else if ('MozWebSocket' in window) {
         //Websocket的连接
@@ -61,6 +61,22 @@
         $('#page_content_update').css('display','block');
         $('#page_content_show').css('display','none');
         $('#now_bianji').css('display','block');
+
+        /*$.ajax(*/
+        /*    {*/
+        /*        url: '/page/editMessage',     // 请求地址, 就是你的控制器, 如 test.com/home/index/index*/
+        /*        data: { userName: "${requestScope.userPO.name}" },   // 需要传送的参数*/
+        /*        type: 'POST',   // 请求方式*/
+        /*        dataType: 'json', // 返回数据的格式, 通常为JSON*/
+        /*        contentType: 'application/json',*/
+        /*        success: function (result) {*/
+        /*            console.log('Send Request success..'); // 请求失败时的回调函数*/
+        /*        },*/
+        /*        error: function () {*/
+        /*            console.log('Send Request Fail..'); // 请求失败时的回调函数*/
+        /*        }*/
+        /*    }*/
+        /*);*/
 
         //向后端发送消息
         if (websocket.readyState == websocket.OPEN) {

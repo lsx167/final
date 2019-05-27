@@ -24,22 +24,12 @@ public class WebSocketHandshakeInterceptor implements HandshakeInterceptor {
             HttpSession session = servletRequest.getServletRequest().getSession(false);
 
             //获取用户名和页面id
-            String userName = servletRequest.getServletRequest().getParameter("userName");
-            String pageId = servletRequest.getServletRequest().getParameter("pageId");
             if (session != null) {
-                Map editingUserPage = (Map) session.getAttribute("editingUserPage");  //这边获得登录时设置的唯一用户标识
-
-                String editPageUsers = (String) editingUserPage.get(Long.parseLong(pageId));//获取当前页面编辑用户列表
-                /*if (editingUserPage == null) {
-                    editingUserPage
-                }*/
-                List<String> editUsers= base1.userList(editPageUsers);
-                int count = editUsers.size();
-                attributes.put("editUsers", editUsers);  //将用户标识放入参数列表后，下一步的websocket处理器可以读取这里面的数据
-                attributes.put("count", count);
-                attributes.put("pageId", pageId);
-                attributes.put("userName", userName);
-
+                String editingUserPage = (String) session.getAttribute("editPageUsers");  //这边获得登录时设置的唯一用户标识
+                if (editingUserPage == null) {
+                    editingUserPage = "未知" + session.getId();
+                }
+                attributes.put("editingUserPage", editingUserPage);  //将用户标识放入参数列表后，下一步的websocket处理器可以读取这里面的数据
             }
         }
         return true;

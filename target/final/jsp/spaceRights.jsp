@@ -3,7 +3,7 @@
 <head>
     <title>TEST</title>
     <link rel="stylesheet" href="../css/main.css" type="text/css">
-	<link rel="stylesheet" href="../css/pageHistory.css" type="text/css">
+	<link rel="stylesheet" href="../css/pageRigths.css" type="text/css">
     <link href="http://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <script type="text/javascript" src="/js/jquery-3.3.1.min.js"></script>
     <script type="text/javascript" src="/js/ajaxfileupload.js"></script>
@@ -100,43 +100,47 @@
 	<div class="main_right">
 		<div class="right_title">
 			<div class="page_name">
-                页面名称
+                空间名称
             </div>
 			<div class="page_return">
 				返回
 			</div>
 		</div>
+		<div class="page_rights_list">
+			空间权限列表
+		</div>
+		<div class="power_search">
+            <input type="text" name="peoplename" placeholder="请输入您要添加的人...">
+            <button type="submit">添加</button>
+		</div>
 		<div class="space_operate_record">
 			<div style="position:relative; height:500px; overflow:auto">
 				<table>
+					<hr />
 					<tr>
-						<th style="text-align: left" class="page_operate_record_version">版本号</th>
-						<th style="text-align: left" class="page_operate_record_content">页面操作记录</th>
-						<th style="text-align: left" class="page_operate_record_time">操作时间</th>
-						<th style="text-align: left" class="page_operate_record_username">操作人</th>
-						<th style="text-align: left" class="page_operate_record_back">版本回滚</th>
+						<th style="text-align: left" class="page_rights_username">用户账号</th>
+						<th style="text-align: left" class="page_rights_read">可以访问</th>
+						<th style="text-align: left" class="page_rights_wirte">可以编辑</th>
+						<th style="text-align: left" class="page_rights_change">修改</th>					
 					</tr>
 					<c:forEach begin="0" end="5">
 						<tr>
-							<td class="page_operate_record_version">
-								v1.0
+							<td class="page_rights_version">
+								徐钰菡
 							</td>
-							<td class="page_operate_record_content">
-								123
+							<td class="page_rights_content">
+								可以
 							</td>
-							<td class="page_operate_record_time">
-								2334
+							<td class="page_rightsd_time">
+								不可以
 							</td>
-							<td class="page_operate_record_username">
-								username
-							</td>
-							<td class="page_operate_record_back">
-								回滚
+							<td class="page_rights_change">
+								修改
 							</td>
 						</tr>
-					</c:forEach>
+					</c:forEach>	
 				</table>
-			</div>
+			</div>	
 		</div>
     </div>
 </div>

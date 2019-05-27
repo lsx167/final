@@ -1,0 +1,70 @@
+.page_page_rights_username{
+	width: 200px;
+	height: 50px;
+	font-size: 16px;
+}
+.page_page_rights_read{
+	width: 200px;
+	height: 50px;
+	margin-left: 20px;
+	font-size: 16px;
+}
+.page_page_rights_wirte{
+	width: 200px;
+	height: 50px;
+	margin-left: 40px;
+	font-size: 16px;
+}
+.page_rights_change{
+	width: 200px;
+	height: 50px;
+	margin-left: 60px;
+	font-size: 16px;
+}
+.page_name{
+	float: left;
+	text-align: center;
+	width: 200px;
+	height: 40px;
+	font-size: 30px;
+	font-weight: 500;
+	margin-top: 20px;
+}
+.page_return{
+	float: left;
+	text-align: center;
+	width: 80px;
+	height: 40px;
+	font-size: 20px;
+	margin-top: 30px;
+	margin-left: 300px;
+}
+.right_title{
+	width: 600px;
+	height: 60px;
+}
+
+.power_search{
+	height: 40px;
+	width: 300px;
+	margin-right: 120px;
+}
+.power_search input {
+	border-style: solid;
+    height: 30px;
+    margin-top: 15px;
+}
+.power_search button {
+    top: 0;
+    right: 0;
+    height: 30px;
+    margin-top: 5px;
+}
+.space_rights_lists{
+	width: 200px;
+	height: 20px;
+	font-size: 20px;
+	font-weight: 450;
+	margin-top: 20px;
+	margin-left: 10px;
+}

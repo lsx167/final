@@ -83,19 +83,7 @@ public class PageController {
         //判断当前操作者是否有编辑权限
         if(pageService.haswritePermission(spacePO,pagePO,userPO.getId())){
             mav.addObject("writePermission",1);
-
-            //添加正在编辑列表
-            editingUserPage = (Map) request.getSession().getAttribute("editingUserPage");
-            if(editingUserPage==null){
-                editingUserPage = new HashMap();
-                editingUserPage.put(pagePO.getId(),userPO.getName());
-            }else if(editingUserPage.get(pagePO.getId())==null){
-                editingUserPage.put(pagePO.getId(),userPO.getName());
-            } else {
-                String editingPageNowUsers = (String) editingUserPage.get(pagePO.getId());
-                editingUserPage.put(pagePO.getId(),userPO.getName()+"+"+editingPageNowUsers);
-            }
-            request.getSession().setAttribute("editingUserPage",editingUserPage);
+            request.getSession().setAttribute("editPageUsers",pageId + "+" + userPO.getName());
         }else {
             mav.addObject("writePermission",0);
         }

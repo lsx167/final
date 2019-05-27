@@ -24,11 +24,10 @@ public class WebSocketHandler extends TextWebSocketHandler {
      * @param session
      * @param message
      * @throws Exception
-     */
+     *//*
     @Override
     protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
         String username = (String) session.getAttributes().get("editingUserPage");
-        //String username = (String) session.getAttributes().get("editingUserPage");
 
         // 获取提交过来的消息详情
         System.out.println("收到用户 " + username + " 的消息:" + message.toString());
@@ -54,7 +53,7 @@ public class WebSocketHandler extends TextWebSocketHandler {
             //未找到匹配用户 发送失败
             sendMessageToUser(username, new TextMessage("404@对方暂时不在线"));
         }
-    }
+    }*/
 
     /**
      * 当新连接建立的时候，被调用 连接成功时候，会触发页面上onOpen方法
@@ -64,20 +63,30 @@ public class WebSocketHandler extends TextWebSocketHandler {
      */
     @Override
     public void afterConnectionEstablished(WebSocketSession session) throws Exception {
-        users.add(session);
-        List<String> editUsers = (List<String>) session.getAttributes().get("editUsers");
-        int count = (Integer) session.getAttributes().get("count");
-        String pageId = (String) session.getAttributes().get("pageId");
-        String userName = (String) session.getAttributes().get("userName");
+        //获取当前登录页面和用户信息
+        String editingUserPage = (String) session.getAttributes().get("editingUserPage");
+        String pageId = editingUserPage.substring(0,editingUserPage.indexOf("+"));
+        String userName = editingUserPage.substring(editingUserPage.indexOf("+")+1);
         System.out.println("用户 " + userName + "正在编辑页面"+pageId);
-        System.out.println("当前正有"+count+"人正在编辑");
-        StringBuffer stringBuffer = new StringBuffer();
-        stringBuffer.append(editUsers.get(0));
-        for(int i=1;i<editUsers.size();i++){
-            stringBuffer.append(editUsers.get(i));
+
+        //查找正在编辑统一页面的用户
+        int count = 1;//统计用户数
+        StringBuffer editUsers = new StringBuffer();//统计用户
+        editUsers.append(userName);
+        for (WebSocketSession user : users) {
+            String pageUsers = (String) user.getAttributes().get("editingUserPage");
+            if(pageUsers.substring(0,pageUsers.indexOf("+")).equals(pageId)){
+                count++;
+                editUsers.append("、"+pageUsers.substring(pageUsers.indexOf("+")+1));
+            }
         }
-        System.out.println("他们分别有:"+stringBuffer);
-        session.sendMessage(new TextMessage(userName + " connect"));
+        users.add(session);
+
+        System.out.println("当前正有"+count+"人正在编辑");
+        System.out.println("他们分别有:"+editUsers);
+
+        sendMessageToPageUsers(pageId,new TextMessage("当前正有"+count+"人正在编辑，他们分别有:"+editUsers));
+        //session.sendMessage(new TextMessage(userName + "连接成功"));
     }
 
     /**
@@ -89,8 +98,11 @@ public class WebSocketHandler extends TextWebSocketHandler {
      */
     @Override
     public void afterConnectionClosed(WebSocketSession session, CloseStatus status) throws Exception {
-        String username = (String) session.getAttributes().get("WEBSOCKET_USERNAME");
-        System.out.println("用户 " + username + " Connection closed. Status: " + status);
+        //获取当前登录页面和用户信息
+        String editingUserPage = (String) session.getAttributes().get("editingUserPage");
+        String pageId = editingUserPage.substring(0,editingUserPage.indexOf("+"));
+        String userName = editingUserPage.substring(editingUserPage.indexOf("+")+1);
+        System.out.println("用户" + userName + "正在退出编辑"+pageId);
         users.remove(session);
     }
 
@@ -103,27 +115,33 @@ public class WebSocketHandler extends TextWebSocketHandler {
      */
     @Override
     public void handleTransportError(WebSocketSession session, Throwable exception) throws Exception {
-        String username = (String) session.getAttributes().get("WEBSOCKET_USERNAME");
+        //获取当前登录页面和用户信息
+        String editingUserPage = (String) session.getAttributes().get("editingUserPage");
+        String userName = editingUserPage.substring(editingUserPage.indexOf("+")+1);
         if (session.isOpen()) {
             session.close();
         }
-        System.out.println("用户: " + username + " websocket connection closed......");
+        System.out.println("用户:" + userName + " websocket connection closed......");
         users.remove(session);
     }
 
     /**
-     * 给所有在线用户发送消息
+     * 给正在编辑某个页面的所有用户发送消息
      *
      * @param message
      */
-    public void sendMessageToUsers(TextMessage message) {
+    public void sendMessageToPageUsers(String pageId,TextMessage message) {
         for (WebSocketSession user : users) {
-            try {
-                if (user.isOpen()) {
-                    user.sendMessage(message);
+            String pageUsers = (String) user.getAttributes().get("editingUserPage");
+            //如果页面编号相同
+            if(pageUsers.substring(0,pageUsers.indexOf("+")).equals(pageId)) {
+                try {
+                    if (user.isOpen()) {
+                        user.sendMessage(message);
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
                 }
-            } catch (IOException e) {
-                e.printStackTrace();
             }
         }
     }
@@ -136,7 +154,8 @@ public class WebSocketHandler extends TextWebSocketHandler {
      */
     public void sendMessageToUser(String userName, TextMessage message) {
         for (WebSocketSession user : users) {
-            if (user.getAttributes().get("WEBSOCKET_USERNAME").equals(userName)) {
+            String pageUsers = (String) user.getAttributes().get("editingUserPage");
+            if(pageUsers.substring(pageUsers.indexOf("+")+1).equals(userName)) {
                 try {
                     if (user.isOpen()) {
                         user.sendMessage(message);

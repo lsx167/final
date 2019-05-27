@@ -103,7 +103,24 @@ public class WebSocketHandler extends TextWebSocketHandler {
         String pageId = editingUserPage.substring(0,editingUserPage.indexOf("+"));
         String userName = editingUserPage.substring(editingUserPage.indexOf("+")+1);
         System.out.println("用户" + userName + "正在退出编辑"+pageId);
+
         users.remove(session);
+        //查找正在编辑统一页面的用户
+        int count = 0;//统计用户数
+        StringBuffer editUsers = new StringBuffer();//统计用户
+        for (WebSocketSession user : users) {
+            String pageUsers = (String) user.getAttributes().get("editingUserPage");
+            if(pageUsers.substring(0,pageUsers.indexOf("+")).equals(pageId)){
+                count++;
+                if(editUsers.equals(null) || editUsers.length()==0){
+                    editUsers.append(pageUsers.substring(pageUsers.indexOf("+")+1));
+                } else {
+                    editUsers.append("、"+pageUsers.substring(pageUsers.indexOf("+")+1));
+                }
+            }
+        }
+        sendMessageToPageUsers(pageId,new TextMessage("当前正有"+count+"人正在编辑，他们分别有:"+editUsers));
+
     }
 
     /**
@@ -112,7 +129,7 @@ public class WebSocketHandler extends TextWebSocketHandler {
      * @param session
      * @param exception
      * @throws Exception
-     */
+     *//*
     @Override
     public void handleTransportError(WebSocketSession session, Throwable exception) throws Exception {
         //获取当前登录页面和用户信息
@@ -123,7 +140,7 @@ public class WebSocketHandler extends TextWebSocketHandler {
         }
         System.out.println("用户:" + userName + " websocket connection closed......");
         users.remove(session);
-    }
+    }*/
 
     /**
      * 给正在编辑某个页面的所有用户发送消息

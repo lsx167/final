@@ -12,6 +12,7 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -38,15 +39,12 @@ public class PageController {
     @ResponseBody
     public ModelAndView getSpaceBySpaceId(HttpServletRequest request, HttpServletResponse response,HttpSession httpSession) {
         ModelAndView mav = new ModelAndView();
-        base general = new base();
 
         //获取登录账号
         String userName = request.getParameter("userName");
         UserPO userPO = (UserPO)((Map)request.getSession().getAttribute("SESSION_USERNAME")).get(userName);
 
         long pageId = Long.parseLong(request.getParameter("pageId"));
-        /*//获取操作用户信息
-        UserPO userPO = (UserPO) httpSession.getAttribute("userPO");*/
         //获取页面信息
         PagePO pagePO = pageService.getPageByPageId(pageId);
 
@@ -69,9 +67,6 @@ public class PageController {
         }
 
         PageDetailPO pageDetailPO = pageService.getCurPageById(pageId);
-
-        //获得空间创建者信息
-        //UserPO spaceOriginUserPO = userService.getUserById(spacePO.getOriginatorID());
 
         //获得页面创建者信息
         UserPO pageOriginUserPO1 = userService.getUserById(pagePO.getOriginatorID());
@@ -203,6 +198,98 @@ public class PageController {
         mav = pageService.packagePage(userPO,userPO,spacePO,spacePOS,pagePOS,pagePO,pageDetailPO,pageOperateRecordPO);
 
         mav.addObject("writePermission",1);
+        return mav;
+    }
+
+    //根据页面id返回空间版本列表
+    @RequestMapping(value = "/getPageVersionsByPageId", produces = "text/html;charset=UTF-8")
+    @ResponseBody
+    public ModelAndView getPageVersionsByPageId(HttpServletRequest request, HttpServletResponse response,HttpSession httpSession) {
+        ModelAndView mav = new ModelAndView();
+
+        //获取登录账号
+        String userName = request.getParameter("userName");
+        UserPO userPO = (UserPO)((Map)request.getSession().getAttribute("SESSION_USERNAME")).get(userName);
+        long pageId = Long.parseLong(request.getParameter("pageId"));
+        //获取页面信息
+        PagePO pagePO = pageService.getPageByPageId(pageId);
+
+        //获取当前空间信息
+        SpacePO spacePO = spaceService.getSpaceById(pagePO.getSpaceID());
+
+        //获取空间列表信息
+        List<SpacePO> spacePOS = spaceService.getSpacesById(userPO.getId());
+
+        //获取该空间页面信息
+        List<PagePO> pagePOS = pageService.getPagesBySpaceId(spacePO.getId());
+        List<PageOperateRecordPO> pageOperateRecordPOS = pageService.getLastSevenPageOperateRecordsByPageId(pageId);
+        List<Map> pageRecords = new ArrayList<Map>();
+
+        for(int i=0;i<pageOperateRecordPOS.size();i++){
+            Map map = new HashMap();
+            map.put("afterVersionId",pageOperateRecordPOS.get(i).getAfterVersionId());
+            map.put("operatorContent",pageOperateRecordPOS.get(i).getOperatorContent());
+            map.put("operatorTime",pageOperateRecordPOS.get(i).getOperatorTime());
+            map.put("operatorName",userService.getUserById(pageOperateRecordPOS.get(i).getOperatorId()).getName());
+            pageRecords.add(i,map);
+        }
+
+        mav = pageService.packagePage(userPO,null,spacePO,spacePOS,pagePOS,pagePO,null,null);
+
+        //判断当前操作者是否有编辑权限
+        if(pageService.haswritePermission(spacePO,pagePO,userPO.getId())){
+            mav.addObject("writePermission",1);
+        }else {
+            mav.addObject("writePermission",0);
+        }
+        mav.setViewName("pageHistory");
+        mav.addObject("pageRecords",pageRecords);
+        return mav;
+    }
+
+    //根据页面id和版本号进行版本回滚
+    @RequestMapping(value = "/pageVersionReturn", produces = "text/html;charset=UTF-8")
+    @ResponseBody
+    public ModelAndView pageVersionReturn(HttpServletRequest request, HttpServletResponse response,HttpSession httpSession) {
+        ModelAndView mav = new ModelAndView();
+        //获取登录账号
+        String userName = request.getParameter("userName");
+        UserPO userPO = (UserPO) ((Map) request.getSession().getAttribute("SESSION_USERNAME")).get(userName);
+        long pageId = Long.parseLong(request.getParameter("pageId"));
+        double version = Double.parseDouble(request.getParameter("version"));
+
+        pageService.pageReturnVersion(pageId,version,userPO.getId());
+
+        //获取页面信息
+        PagePO pagePO = pageService.getPageByPageId(pageId);
+        //获取当前空间信息
+        SpacePO spacePO = spaceService.getSpaceById(pagePO.getSpaceID());
+
+        //获取空间列表信息
+        List<SpacePO> spacePOS = spaceService.getSpacesById(userPO.getId());
+
+        //获取该空间页面信息
+        List<PagePO> pagePOS = pageService.getPagesBySpaceId(spacePO.getId());
+        List<PageOperateRecordPO> pageOperateRecordPOS = pageService.getLastSevenPageOperateRecordsByPageId(pageId);
+        List<Map> pageRecords = new ArrayList<Map>();
+
+        PageDetailPO pageDetailPO = pageService.getCurPageById(pageId);
+
+        //获得页面创建者信息
+        UserPO pageOriginUserPO1 = userService.getUserById(pagePO.getOriginatorID());
+
+        PageOperateRecordPO pageOperateRecordPO = pageService.getLastPageRecordById(pageId);
+
+        mav = pageService.packagePage(userPO,pageOriginUserPO1,spacePO,spacePOS,pagePOS,pagePO,pageDetailPO,pageOperateRecordPO);
+
+        //判断当前操作者是否有编辑权限
+        if(pageService.haswritePermission(spacePO,pagePO,userPO.getId())){
+            mav.addObject("writePermission",1);
+            request.getSession().setAttribute("editPageUsers",pageId + "+" + userPO.getName());
+        }else {
+            mav.addObject("writePermission",0);
+        }
+
         return mav;
     }
 }

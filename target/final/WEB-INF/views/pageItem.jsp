@@ -189,7 +189,9 @@
                 </c:when>
             </c:choose>
             <div class="right_1_right">
-                历史
+                <a href="/page/getPageVersionsByPageId?pageId=${requestScope.pagePO.id}&userName=${requestScope.userPO.name}" style="color: black;text-decoration: none">
+                    历史
+                </a>
             </div>
             <c:choose>
                 <c:when test="${writePermission == 1}"><!-- 如果用户没有写权限-->

@@ -234,5 +234,47 @@ public class PageServiceImpl implements PageService {
         return b;
     }
 
+    @Override
+    public List<PageOperateRecordPO> getLastSevenPageOperateRecordsByPageId(Long id) {
+        return pageOperateRecordDao.getLastSevenPageOperateRecordsByPageId(id);
+    }
+
+    @Override
+    public PagePO pageReturnVersion(Long id, double version,long userId) {
+        PagePO pagePO = pageDao.getPageByPageId(id);
+        double newVersion = (double)((int)((pagePO.getVersionID()+0.1)*10))/10;
+        //更新page版本号
+        pagePO.setVersionID(newVersion);
+        pageDao.updatePageInfo(pagePO);
+
+        //更新pageDetail表
+        PageDetailPO pageDetailPO = pageDetailDao.getPageByPageIdAndVersion(id,version);
+        pageDetailPO.setId(0);
+        pageDetailPO.setVersionID(newVersion);
+        pageDetailPO.setExpired(false);
+        //删除原版本
+        pageDetailDao.deletePageRecord(id);
+        //添加新版本
+        pageDetailDao.insertPageVersion(pageDetailPO);
+
+        //更新page操作记录表
+        base base1 = new base();
+        PageOperateRecordPO pageOperateRecordPO = new PageOperateRecordPO();
+        pageOperateRecordPO.setPageId(id);
+        pageOperateRecordPO.setOperatorId(userId);
+        pageOperateRecordPO.setOperatorTime(base1.getCurrTime());
+        pageOperateRecordPO.setType(2);
+        pageOperateRecordPO.setOperatorContent("页面版本回滚");
+        pageOperateRecordPO.setBeforeVersionId(((double)((int)((newVersion-0.1)*10)))/10);
+        pageOperateRecordPO.setAfterVersionId(newVersion);
+        pageOperateRecordPO.setExpired(false);
+        pageOperateRecordDao.insertPageOperateRecord(pageOperateRecordPO);
+
+        return pagePO;
+
+
+
+    }
+
 
 }

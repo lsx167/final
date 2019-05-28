@@ -46,4 +46,10 @@
         )
     </insert>
 
+    <select id="getPageByPageIdAndVersion" resultMap="BaseResultMap">
+        select
+        <include refid="BASE_COLUMN_LIST"/>
+        from pageDetail
+        WHERE pageId =#{id} and versionID = #{version}
+    </select>
 </mapper>

@@ -42,4 +42,10 @@ public interface PageService {
 
     //检查用户是否有该页面的写权限
     boolean haswritePermission(SpacePO spacePO,PagePO pagePO,long userId);
+
+    //根据页面id获取最近的七条操作记录页面操作记录
+    List<PageOperateRecordPO> getLastSevenPageOperateRecordsByPageId(Long id);
+
+    //根据页面id和版本号进行版本回滚
+    PagePO pageReturnVersion(Long id,double version,long userId);
 }

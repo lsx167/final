@@ -1,4 +1,3 @@
-<%--
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <html>
 <head>
@@ -28,12 +27,12 @@
     <div class="dropdown">
         <button class="dropbtn">创建</button>
         <div class="dropdown-content">
-            <a href="/jsp/createSpace.jsp">创建空间</a>
-            <a href="/jsp/createRootPage.jsp?spaceName=${requestScope.spacePO.name}">创建页面</a>
+            <a href="/jsp/createSpace.jsp?userName=${requestScope.userPO.name}">创建空间</a>
+            <a href="/jsp/createChildPage.jsp?spaceName=${requestScope.spacePO.name}&pageName=${requestScope.pagePO.name}&pageId=${requestScope.pagePO.id}&userName=${requestScope.userPO.name}">创建页面</a>
         </div>
     </div>
     <button class="create_btn">
-        <a href="/user/logout" style="color: white;text-decoration: none;margin-left: 50px">
+        <a href="/user/logout?userName=${requestScope.userPO.name}" style="color: white;text-decoration: none;margin-left: 50px">
             退出
         </a>
     </button>
@@ -46,6 +45,7 @@
     <div class="bar1">
         <form action="/space/getSpaceBySearchContent" method="post">
             <input type="text" name="spaceContent" placeholder="请输入您要搜索的内容...">
+            <input type='hidden' name="userName" value ='${requestScope.userPO.name}'/>
             <button type="submit"></button>
         </form>
     </div>
@@ -69,7 +69,7 @@
 				    <c:forEach items="${requestScope.spacePOS}" var="bean">
 				        <tr>
 				            <td>
-                                <a href="/space/getSpaceBySpaceId?spaceId=${bean.id}" style="color: blue;text-decoration: none">
+                                <a href="/space/getSpaceBySpaceId?spaceId=${bean.id}&userName=${requestScope.userPO.name}" style="color: blue;text-decoration: none">
                                         ${bean.name}
                                 </a>
                             </td>
@@ -87,7 +87,7 @@
                     <c:forEach items="${requestScope.pagePOS}" var="bean">
                         <tr>
                             <td>
-                                <a href="/page/getPageByPageId?pageId=${bean.id}" style="color: blue;text-decoration: none">
+                                <a href="/page/getPageByPageId?pageId=${bean.id}&userName=${requestScope.userPO.name}" style="color: blue;text-decoration: none">
                                         ${bean.name}
                                 </a>
                             </td>
@@ -101,10 +101,12 @@
 	<div class="main_right">
 		<div class="right_title">
 			<div class="page_name">
-                页面名称
+                ${requestScope.pagePO.name}
             </div>
 			<div class="page_return">
-				返回
+                <a href="/page/getPageByPageId?pageId=${requestScope.pagePO.id}&userName=${requestScope.userPO.name}" style="color: black;text-decoration: none">
+                    返回
+                </a>
 			</div>
 		</div>
 		<div class="space_operate_record">
@@ -115,25 +117,35 @@
 						<th style="text-align: left" class="page_operate_record_content">页面操作记录</th>
 						<th style="text-align: left" class="page_operate_record_time">操作时间</th>
 						<th style="text-align: left" class="page_operate_record_username">操作人</th>
-						<th style="text-align: left" class="page_operate_record_back">版本回滚</th>
+                        <c:choose>
+                            <c:when test="${writePermission == 1}"><!-- 如果用户没有写权限-->
+                                <th style="text-align: left" class="page_operate_record_back">版本回滚</th>
+                            </c:when>
+                        </c:choose>
 					</tr>
-					<c:forEach begin="0" end="5">
+					<c:forEach items="${requestScope.pageRecords}" var="bean">
 						<tr>
 							<td class="page_operate_record_version">
-								v1.0
+								v${bean.afterVersionId}
 							</td>
 							<td class="page_operate_record_content">
-								123
+                                ${bean.operatorContent}
 							</td>
 							<td class="page_operate_record_time">
-								2334
+                                ${bean.operatorTime}
 							</td>
 							<td class="page_operate_record_username">
-								username
+                                ${bean.operatorName}
 							</td>
-							<td class="page_operate_record_back">
-								回滚
-							</td>
+                            <c:choose>
+                                <c:when test="${writePermission == 1}"><!-- 如果用户没有写权限-->
+                                    <td class="page_operate_record_back">
+                                        <a href="/page/pageVersionReturn?pageId=${requestScope.pagePO.id}&userName=${requestScope.userPO.name}&version=${bean.afterVersionId}" style="color: black;text-decoration: none">
+                                            回滚
+                                        </a>
+                                    </td>
+                                </c:when>
+                            </c:choose>
 						</tr>
 					</c:forEach>
 				</table>
@@ -149,18 +161,5 @@
         联系方式:暂无联系方式
     </p>
 </footer>
-<script type="text/javascript">
-  /*// 弹窗
-  function showWindow() {
-    $('#showdiv').show();  //显示弹窗
-    $('#cover').css('display','block'); //显示遮罩层
-    $('#cover').css('height',document.body.clientHeight+'px'); //设置遮罩层的高度为当前页面高度
-  }
-  // 关闭弹窗
-  function closeWindow() {
-    $('#showdiv').hide();  //隐藏弹窗
-    $('#cover').css('display','none');   //显示遮罩层
-  }*/
-</script>
 </body>
-</html>--%>
+</html>

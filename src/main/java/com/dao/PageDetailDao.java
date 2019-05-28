@@ -15,4 +15,6 @@ public interface PageDetailDao {
     //添加页面详细信息、页面版本更新
     Long insertPageVersion(PageDetailPO pageDetailPO);
 
+    //根据页面id和版本号查询信息
+    PageDetailPO getPageByPageIdAndVersion(@Param("id")Long id,@Param("version")double version);
 }

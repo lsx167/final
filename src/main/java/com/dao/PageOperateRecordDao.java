@@ -10,4 +10,7 @@ public interface PageOperateRecordDao {
 
     //增加页面操作记录
     Long insertPageOperateRecord(PageOperateRecordPO pageOperateRecordPO);
+
+    //根据页面id查询最近7条操作记录
+    List<PageOperateRecordPO> getLastSevenPageOperateRecordsByPageId(Long id);
 }

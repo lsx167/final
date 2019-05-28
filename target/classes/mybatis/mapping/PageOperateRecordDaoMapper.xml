@@ -46,4 +46,12 @@
         #{expired,jdbcType=TINYINT}
         )
     </insert>
+
+    <select id="getLastSevenPageOperateRecordsByPageId" resultMap="BaseResultMap">
+        select
+        <include refid="BASE_COLUMN_LIST"/>
+        from pageOperateRecord
+        WHERE expired = 0 and pageId =#{id}
+        order by id desc
+    </select>
 </mapper>

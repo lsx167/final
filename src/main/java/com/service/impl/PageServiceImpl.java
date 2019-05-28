@@ -69,7 +69,7 @@ public class PageServiceImpl implements PageService {
         PagePO pagePO = pageDao.getPageByPageId(pageId);
         PageDetailPO pageDetailPO = pageDetailDao.getCurPageById(pageId);
 
-        double version = pageDetailPO.getVersionID()+0.1;
+        double version = ((double)((int)((pageDetailPO.getVersionID()+0.1)*10)))/10;
         Date currentTime = new Date();
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String dateString = formatter.format(currentTime);
@@ -84,7 +84,7 @@ public class PageServiceImpl implements PageService {
         pageOperateRecordPO.setOperatorTime(dateString);
         pageOperateRecordPO.setType(2);
         pageOperateRecordPO.setOperatorContent("修改页面");
-        pageOperateRecordPO.setBeforeVersionId(version-0.1);
+        pageOperateRecordPO.setBeforeVersionId(((double)((int)((version-0.1)*10)))/10);
         pageOperateRecordPO.setAfterVersionId(version);
         pageOperateRecordPO.setExpired(false);
 
@@ -141,7 +141,7 @@ public class PageServiceImpl implements PageService {
 
         //更新原页面
         if(pagePO.getChildPageID().equals("-1")){
-            pagePO.setChildPageID(pagePO.getId()+"");
+            pagePO.setChildPageID(pagePO1.getId()+"");
         }else {
             pagePO.setChildPageID(pagePO.getChildPageID()+"+"+pagePO1.getId());
         }

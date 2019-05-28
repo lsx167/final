@@ -103,8 +103,6 @@ public class PageController {
         //获取页面修改内容
         String pageContent = request.getParameter("pageContent");
 
-        /*//获取用户信息
-        UserPO userPO = (UserPO) httpSession.getAttribute("userPO");*/
         //获取登录账号
         String userName = request.getParameter("userName");
         UserPO userPO = (UserPO)((Map)request.getSession().getAttribute("SESSION_USERNAME")).get(userName);
@@ -113,16 +111,6 @@ public class PageController {
         List<SpacePO> spacePOS = spaceService.getSpacesById(userPO.getId());
         //获取该空间页面信息
         List<PagePO> pagePOS = pageService.getPagesBySpaceId(spacePO.getId());
-
-        //todo 写权限需要改到前端
-        /*if(!pageService.haswritePermission(spacePO,pagePO,userPO.getId())){
-            mav.setViewName("noPermission");
-            mav.addObject("userPO",userPO);
-            mav.addObject("spacePO",spacePO);
-            mav.addObject("spacePOS",spacePOS);
-            mav.addObject("pagePOS",pagePOS);
-            return mav;
-        }*/
 
         pageService.updatePageContent(pageId,pageContent,userPO.getId());
 
@@ -182,9 +170,6 @@ public class PageController {
         String pageName = request.getParameter("pageName");
         String pageContent = request.getParameter("pageContent");
 
-/*
-        UserPO userPO = (UserPO) httpSession.getAttribute("userPO");
-*/
         //获取登录账号
         String userName = request.getParameter("userName");
         UserPO userPO = (UserPO)((Map)request.getSession().getAttribute("SESSION_USERNAME")).get(userName);
@@ -220,20 +205,4 @@ public class PageController {
         mav.addObject("writePermission",1);
         return mav;
     }
-
-    /*//编辑时给后端发送消息
-    @RequestMapping(value = "/editMessage", produces = "text/html;charset=UTF-8")
-    @ResponseBody
-    public void editMessage(String userName){
-
-        Long pageId;
-
-        if(editUsers.equals(null)){
-            editUsers.append(userName);
-        } else {
-            editUsers.append("+"+userName);
-        }
-        editingUserPage.put(pageId,editUsers);
-        request.getSession().setAttribute("editUsers",editUsers);
-    }*/
 }

@@ -24,36 +24,20 @@ public class WebSocketHandler extends TextWebSocketHandler {
      * @param session
      * @param message
      * @throws Exception
-     *//*
+     */
     @Override
     protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
-        String username = (String) session.getAttributes().get("editingUserPage");
+        String editingUserPage = (String) session.getAttributes().get("editingUserPage");
+        String pageId = editingUserPage.substring(0,editingUserPage.indexOf("+"));
+        String userName = editingUserPage.substring(editingUserPage.indexOf("+")+1);
 
         // 获取提交过来的消息详情
-        System.out.println("收到用户 " + username + " 的消息:" + message.toString());
-        // 分割成id和信息内容
-        String[] messageInfo = message.getPayload().split("@");
-        if (messageInfo.length != 2) {
-            sendMessageToUser(username, new TextMessage("500@服务器出错请稍后再发送吧"));
-        } else {
-            String target = messageInfo[0];
-            String content = messageInfo[1];
-            // 遍历所有已连接用户
-            for (WebSocketSession user : users) {
-                if (user.getAttributes().get("WEBSOCKET_USERNAME").equals(target)) {
-                    //遇到匹配用户 连接正常则发送消息
-                    if (user.isOpen()) {
-                        sendMessageToUser(target, new TextMessage("200@"+content));
-                    }else{//若异常则发送失败
-                        sendMessageToUser(username, new TextMessage("404@对方在线异常,发送失败"));
-                    }
-                    return;
-                }
-            }
-            //未找到匹配用户 发送失败
-            sendMessageToUser(username, new TextMessage("404@对方暂时不在线"));
-        }
-    }*/
+        System.out.println("1收到用户 " + userName + " 的消息:" + message.toString());
+
+        users.remove(session);
+        sendMessageToPageUsers(pageId,new TextMessage("用户"+userName+"提交了新的编辑，请刷新同步，注意在本地保存您的修改"));
+        users.add(session);
+    }
 
     /**
      * 当新连接建立的时候，被调用 连接成功时候，会触发页面上onOpen方法

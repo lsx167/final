@@ -33,27 +33,30 @@
     websocket.onclose = onClose;
 
     function onOpen(openEvt) {
-        //alert(openEvt.Data);
     }
 
     function onMessage(evt) {
-        $("#now_bianji").html("");//清空数据
-        $("#now_bianji").append(evt.data+"<br>"); // 接收后台发送的数据
+        var message = evt.data;
+        if(message.substring(0,1) == "1"){
+            alert(message);
+        }else{
+            $("#now_bianji").html("");//清空数据
+            $("#now_bianji").append(message+"<br>"); // 接收后台发送的数据
+        }
     }
     function onError() {
     }
     function onClose() {
     }
 
-    /*function doSend() {
-        if (websocket.readyState == websocket.OPEN) {
-            websocket.send($("#targetName").val()+"@"+$("#inputMsg").val());//调用后台handleTextMessage方法
-            alert("发送成功!");
+    function sendSaveMessage() {
+        if(websocket.readyState == websocket.OPEN){
+            alert("保存成功!");
+            websocket.send(${requestScope.pagePO.id}+${requestScope.userPO.name})
         } else {
-
-            alert("连接失败!"+websocket.readyState);
+            alert("保存失败！网络状态"+websocket.readyState);
         }
-    }*/
+    }
 
     // 编辑页面
     function show_bianji() {
@@ -230,7 +233,7 @@
                     ${requestScope.pageDetailPO.pageContent}
                 </script>
                 <div>
-                    <input type="submit" value="保存" />
+                    <input type="submit" onclick="sendSaveMessage()" value="保存"/>
                 </div>
             </form>
             

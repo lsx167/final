@@ -292,4 +292,106 @@ public class PageController {
 
         return mav;
     }
+
+    //根据页面id来查看页面读写权限
+    @RequestMapping(value = "/getPageRightByPageId", produces = "text/html;charset=UTF-8")
+    @ResponseBody
+    public ModelAndView getPageRightByPageId(HttpServletRequest request) {
+        ModelAndView mav = new ModelAndView();
+        //获取登录账号
+        String userName = request.getParameter("userName");
+        UserPO userPO = (UserPO)((Map)request.getSession().getAttribute("SESSION_USERNAME")).get(userName);
+
+        long pageId = Long.parseLong(request.getParameter("pageId"));
+        //获取页面信息
+        PagePO pagePO = pageService.getPageByPageId(pageId);
+
+        //获取当前空间信息
+        SpacePO spacePO = spaceService.getSpaceById(pagePO.getSpaceID());
+
+        //获取空间列表信息
+        List<SpacePO> spacePOS = spaceService.getSpacesById(userPO.getId());
+
+        //获取该空间页面信息
+        List<PagePO> pagePOS = pageService.getPagesBySpaceId(spacePO.getId());
+        mav = pageService.packagePage(userPO,null,spacePO,spacePOS,pagePOS,pagePO,null,null);
+
+        base base1 = new base();
+        List<Map> userRight = new ArrayList<Map>();
+        //所有人可读，所有人可写，类型为1
+        if(pagePO.getWriteID().equals("-1")){
+            mav.addObject("type",1);
+        }else {
+            //获取读取权限列表，读>写,读可能为-1
+            List<Long> writeIds = base1.stringToLongList(pagePO.getWriteID());
+            mav.addObject("writeIds",writeIds);
+            //所有人可读，部分人可写，类型为2
+            mav.addObject("type",2);
+            if(pagePO.getReadID().equals("-1")){
+                for(int i=0;i<writeIds.size();i++){
+                    Map map = new HashMap();
+                    map.put("userName",userService.getUserById(writeIds.get(i)).getName());
+                    map.put("readId",1);
+                    map.put("writeId",1);
+                    userRight.add(map);
+                }
+            }else {
+                //部分人可读，部分人可写，类型为3
+                mav.addObject("type",3);
+                List<Long> readIds = base1.stringToLongList(pagePO.getReadID());
+                readIds = base1.findReadOnly(readIds,writeIds);
+                for(int i=0;i<writeIds.size();i++){
+                    Map map = new HashMap();
+                    map.put("userName",userService.getUserById(writeIds.get(i)).getName());
+                    map.put("readId",1);
+                    map.put("writeId",1);
+                    userRight.add(map);
+                }
+                for(int i=0;i<readIds.size();i++){
+                    Map map = new HashMap();
+                    map.put("userName",userService.getUserById(writeIds.get(i)).getName());
+                    map.put("readId",1);
+                    map.put("writeId",0);
+                    userRight.add(map);
+                }
+            }
+        }
+        mav.addObject("userRight",userRight);
+        mav.setViewName("pageRights");
+        return mav;
+    }
+
+    /*//根据页面id来修改页面读写权限
+    @RequestMapping(value = "/updatePageRight", produces = "text/html;charset=UTF-8")
+    @ResponseBody
+    public ModelAndView updatePageRight(HttpServletRequest request) {
+        ModelAndView mav = new ModelAndView();
+
+        //获取登录账号
+        String userName = request.getParameter("userName");
+        UserPO userPO = (UserPO)((Map)request.getSession().getAttribute("SESSION_USERNAME")).get(userName);
+
+        long pageId = Long.parseLong(request.getParameter("pageId"));
+        //获取页面信息
+        PagePO pagePO = pageService.getPageByPageId(pageId);
+
+        //获取当前空间信息
+        SpacePO spacePO = spaceService.getSpaceById(pagePO.getSpaceID());
+
+        //获取空间列表信息
+        List<SpacePO> spacePOS = spaceService.getSpacesById(userPO.getId());
+
+        //获取该空间页面信息
+        List<PagePO> pagePOS = pageService.getPagesBySpaceId(spacePO.getId());
+        mav = pageService.packagePage(userPO,null,spacePO,spacePOS,pagePOS,pagePO,null,null);
+
+        //获取需要修改的用户姓名、读写权限
+        String updateUserName = request.getParameter("updateUserName");
+        String updateRead = request.getParameter("updateRead");
+        String updateWrite = request.getParameter("updateWrite");
+
+
+        return mav;
+    }*/
+
 }

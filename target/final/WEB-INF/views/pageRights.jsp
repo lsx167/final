@@ -1,10 +1,9 @@
-<%--
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <html>
 <head>
     <title>TEST</title>
-    <link rel="stylesheet" href="../css/main.css" type="text/css">
-	<link rel="stylesheet" href="../css/pageRigths.css" type="text/css">
+    <link rel="stylesheet" href="../../css/main.css" type="text/css">
+	<link rel="stylesheet" href="../../css/pageRigths.css" type="text/css">
     <link href="http://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <script type="text/javascript" src="/js/jquery-3.3.1.min.js"></script>
     <script type="text/javascript" src="/js/ajaxfileupload.js"></script>
@@ -28,12 +27,12 @@
     <div class="dropdown">
         <button class="dropbtn">创建</button>
         <div class="dropdown-content">
-            <a href="/jsp/createSpace.jsp">创建空间</a>
-            <a href="/jsp/createRootPage.jsp?spaceName=${requestScope.spacePO.name}">创建页面</a>
+            <a href="/jsp/createSpace.jsp?userName=${requestScope.userPO.name}">创建空间</a>
+            <a href="/jsp/createChildPage.jsp?spaceName=${requestScope.spacePO.name}&pageName=${requestScope.pagePO.name}&pageId=${requestScope.pagePO.id}&userName=${requestScope.userPO.name}">创建页面</a>
         </div>
     </div>
     <button class="create_btn">
-        <a href="/user/logout" style="color: white;text-decoration: none;margin-left: 50px">
+        <a href="/user/logout?userName=${requestScope.userPO.name}" style="color: white;text-decoration: none;margin-left: 50px">
             退出
         </a>
     </button>
@@ -46,6 +45,7 @@
     <div class="bar1">
         <form action="/space/getSpaceBySearchContent" method="post">
             <input type="text" name="spaceContent" placeholder="请输入您要搜索的内容...">
+            <input type='hidden' name="userName" value ='${requestScope.userPO.name}'/>
             <button type="submit"></button>
         </form>
     </div>
@@ -54,7 +54,7 @@
     <div class="main_left">
         <div class="left_name">
             <div class="left_name_img">
-                <img src="../img/wujiaoxing.png" style="max-height: 30px;margin-top: 5px;border:none;"/>
+                <img src="../../img/wujiaoxing.png" style="max-height: 30px;margin-top: 5px;border:none;"/>
             </div>
             <div class="left_name_item">
                 ${requestScope.spacePO.name}
@@ -69,7 +69,7 @@
 				    <c:forEach items="${requestScope.spacePOS}" var="bean">
 				        <tr>
 				            <td>
-                                <a href="/space/getSpaceBySpaceId?spaceId=${bean.id}" style="color: blue;text-decoration: none">
+                                <a href="/space/getSpaceBySpaceId?spaceId=${bean.id}&userName=${requestScope.userPO.name}" style="color: blue;text-decoration: none">
                                         ${bean.name}
                                 </a>
                             </td>
@@ -87,13 +87,12 @@
                     <c:forEach items="${requestScope.pagePOS}" var="bean">
                         <tr>
                             <td>
-                                <a href="/page/getPageByPageId?pageId=${bean.id}" style="color: blue;text-decoration: none">
+                                <a href="/page/getPageByPageId?pageId=${bean.id}&userName=${requestScope.userPO.name}" style="color: blue;text-decoration: none">
                                         ${bean.name}
                                 </a>
                             </td>
                         </tr>
                     </c:forEach>
-
                 </table>
             </div>
         </div>
@@ -101,10 +100,12 @@
 	<div class="main_right">
 		<div class="right_title">
 			<div class="page_name">
-                页面名称
+                ${requestScope.pagePO.name}
             </div>
 			<div class="page_return">
-				返回
+                <a href="/page/getPageByPageId?pageId=${requestScope.pagePO.id}&userName=${requestScope.userPO.name}" style="color: black;text-decoration: none">
+                    返回
+                </a>
 			</div>
 		</div>
 		<div class="page_rights_list">
@@ -116,31 +117,54 @@
 		</div>
 		<div class="space_operate_record">
 			<div style="position:relative; height:500px; overflow:auto">
-				<table>
-					<hr />
-					<tr>
-						<th style="text-align: left" class="page_rights_username">用户账号</th>
-						<th style="text-align: left" class="page_rights_read">可以访问</th>
-						<th style="text-align: left" class="page_rights_wirte">可以编辑</th>
-						<th style="text-align: left" class="page_rights_change">修改</th>					
-					</tr>
-					<c:forEach begin="0" end="5">
-						<tr>
-							<td class="page_rights_version">
-								徐钰菡
-							</td>
-							<td class="page_rights_content">
-								可以
-							</td>
-							<td class="page_rightsd_time">
-								不可以
-							</td>
-							<td class="page_rights_change">
-								修改
-							</td>
-						</tr>
-					</c:forEach>	
-				</table>
+                <c:choose>
+                    <c:when test="${requestScope.type == 1}"><!-- 所有人可读可写-->
+                        当前文档所有人可读可写
+                    </c:when>
+                </c:choose>
+                <c:choose>
+                    <c:when test="${requestScope.type == 2 || requestScope.type == 3}">
+                        <c:choose>
+                            <c:when test="${requestScope.type == 2}"><!-- 所有人可读可写-->
+                                当前文档所有人可读
+                            </c:when>
+                        </c:choose>
+                        <table>
+                            <hr/>
+                            <tr>
+                                <th style="text-align: left" class="page_rights_username">用户账号</th>
+                                <th style="text-align: left" class="page_rights_read">可以访问</th>
+                                <th style="text-align: left" class="page_rights_wirte">可以编辑</th>
+                                <th style="text-align: left" class="page_rights_change">修改</th>
+                            </tr>
+                            <c:forEach items="${requestScope.userRight}" var="bean">
+                                <tr>
+                                    <td class="page_rights_version">
+                                            ${bean.userName}
+                                    </td>
+                                    <td class="page_rights_content">
+                                        可以
+                                    </td>
+                                    <td class="page_rightsd_time">
+                                        <c:choose>
+                                            <c:when test="${bean.writeId == 1}"><!-- 如果用户有写权限-->
+                                                可以
+                                            </c:when>
+                                        </c:choose>
+                                        <c:choose>
+                                            <c:when test="${bean.writeId == 0}"><!-- 如果用户没有写权限-->
+                                                不可以
+                                            </c:when>
+                                        </c:choose>
+                                    </td>
+                                    <td class="page_rights_change">
+                                        修改
+                                    </td>
+                                </tr>
+                            </c:forEach>
+                        </table>
+                    </c:when>
+                </c:choose>
 			</div>	
 		</div>
     </div>
@@ -167,4 +191,4 @@
   }*/
 </script>
 </body>
-</html>--%>
+</html>

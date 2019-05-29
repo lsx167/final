@@ -61,4 +61,15 @@ public class base {
 
         return list;
     }
+
+    //通用方法，查找两个list<Long>中不同的
+    public List<Long> findReadOnly(List<Long> readIds,List<Long> writeIds){
+        List<Long> list = new ArrayList<Long>();
+        for(int i = 0;i<readIds.size();i++){
+            if(!isLongBelongToList(readIds.get(i),writeIds)){
+                list.add(readIds.get(i));
+            }
+        }
+        return list;
+    }
 }

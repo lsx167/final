@@ -48,4 +48,10 @@ public interface PageService {
 
     //根据页面id和版本号进行版本回滚
     PagePO pageReturnVersion(Long id,double version,long userId);
+
+    /*//根据页面id返回页面的读权限
+    String getPageReadByPageId(Long id);
+
+    //根据页面id返回页面的写权限
+    String getPageWriteByPageId(Long id);*/
 }

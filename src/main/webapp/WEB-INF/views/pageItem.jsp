@@ -52,7 +52,7 @@
     function sendSaveMessage() {
         if(websocket.readyState == websocket.OPEN){
             alert("保存成功!");
-            websocket.send(${requestScope.pagePO.id}+${requestScope.userPO.name})
+            websocket.send(${requestScope.pagePO.id}+${requestScope.userPO.name});
         } else {
             alert("保存失败！网络状态"+websocket.readyState);
         }
@@ -184,7 +184,9 @@
             <c:choose>
                 <c:when test="${writePermission == 1}"><!-- 如果用户没有写权限-->
                     <div class="right_1_right">
-                        权限
+                        <a href="/page/getPageRightByPageId?pageId=${requestScope.pagePO.id}&userName=${requestScope.userPO.name}" style="color: black;text-decoration: none">
+                            权限
+                        </a>
                     </div>
                 </c:when>
             </c:choose>

@@ -6,13 +6,17 @@ import java.util.List;
 public class UserDaoTest {
     public static void main(String[] args){
         base test = new base();
-        String string = "xyh+lsx";
-        List<String> list = new ArrayList<String>();
-        list = test.userList(string);
-        for(int i=0;i<list.size();i++){
-            System.out.println(list.get(i));
+        String string = "10001+10002+10003+10004+10005";
+        String string1 = "10001+10004+10005";
+        List<Long> read = new ArrayList<Long>();
+        List<Long> write = new ArrayList<Long>();
+        read = test.stringToLongList(string);
+        write = test.stringToLongList(string1);
+        List<Long> readOnly = test.findReadOnly(read,write);
+        for(int i=0;i<readOnly.size();i++){
+            System.out.println(readOnly.get(i));
         }
-        System.out.println(list.size());
+        System.out.println(readOnly.size());
         //System.out.println(test.isLongBelongToList((long)10001,list));
 
         /*String s1 = test.longListToString(list);

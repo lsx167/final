@@ -94,7 +94,7 @@
 		    <div style="color: gray;font-size: 20px;text-align: left;margin-left: 20px;margin-top: 20px;">
 		        我创建的空间
 		    </div>
-		    <div class="left_page">
+		    <div class="left_page" style="position:relative; height:250px; overflow:auto">
 				<table>
 				    <c:forEach items="${requestScope.spacePOS}" var="bean">
 				        <tr>
@@ -112,7 +112,7 @@
             <div style="color: gray;font-size: 20px;text-align: left;margin-left: 20px;margin-top: 20px;">
                 页面树
             </div>
-            <div class="left_page">
+            <div class="left_page" style="position:relative; height:250px; overflow:auto">
                 <table>
                     <c:forEach items="${requestScope.pagePOS}" var="bean">
                         <tr>

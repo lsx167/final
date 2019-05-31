@@ -121,6 +121,8 @@ public class UserController {
                 List<SpacePO> spacePOS = spaceService.getSpacesById(userPO.getId());
                 //获取该空间页面信息
                 List<PagePO> pagePOS = pageService.getPagesBySpaceId(spacePO.getId());
+                pagePOS = pageService.pageDfs(pagePOS);
+
                 //获取该空间最近5条操作记录
                 List<SpaceOperateRecordPO> spaceOperateRecordPOS = spaceOperateRecordService.getLastFiveSpaceOperateRecord(spacePO.getId());
 

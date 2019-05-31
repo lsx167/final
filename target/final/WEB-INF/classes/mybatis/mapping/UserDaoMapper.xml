@@ -38,4 +38,11 @@
         from user
         WHERE username =#{username}
     </select>
+
+    <select id="getUserByName" parameterType="String" resultMap="BaseResultMap">
+        select
+        <include refid="BASE_COLUMN_LIST"/>
+        from user
+        WHERE NAME =#{name}
+    </select>
 </mapper>

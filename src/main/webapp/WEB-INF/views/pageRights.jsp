@@ -10,6 +10,43 @@
     <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 </head>
 <body class="body">
+<script type="text/javascript">
+    // 编辑页面
+    function doEdit() {
+        $('#baocun').css('display','block');
+        $('#kedu2').css('display','block');
+        $('#kexie2').css('display','block');
+        $('#xiugai').css('display','none');
+        $('#kedu1').css('display','none');
+        $('#kexie1').css('display','none');
+    }
+
+    // 取消页面编辑
+    function doSave() {
+        $('#baocun').css('display','none');
+        $('#kedu2').css('display','none');
+        $('#kexie2').css('display','none');
+        $('#xiugai').css('display','block');
+        $('#kedu1').css('display','block');
+        $('#kexie1').css('display','block');
+
+        /*location.href = "/page/updatePageRight?userName=${requestScope.userPO.name}&pageId=${requestScope.pagePO.id}&updateUserName=<%--${requestScope.userRight.get(0).userName}--%>"+
+            /!*$('#updateUserName').val()+*!/"&updateRead="+$('#updateRead').val()+"&updateWrite="+$('#updateWrite').val();*/
+    }
+
+    function newRead() {
+        if($('#updateRead').val() == "不可以"){
+            $('#updateWrite').val("不可以");
+        }
+    }
+
+    function newWrite() {
+        if($('#updateWrite').val() == "可以" && $('#updateRead').val() == "不可以"){
+            alert("该用户没有读权限，不可拥有写权限，请检查后再修改！");
+            $('#updateWrite').val("不可以");
+        }
+    }
+</script>
 <header class="header">
     <img src="../img/logo.jpeg" style="max-height: 30px;float: left;margin-left: 10%;margin-top: 5px;border:none;"/>
     <div style="float: left;width: 200px;height: 30px;text-align: center;color: white;margin-top: 10px">
@@ -87,6 +124,9 @@
                     <c:forEach items="${requestScope.pagePOS}" var="bean">
                         <tr>
                             <td>
+                                <c:forEach begin="1" end="${bean.depth}">
+                                    &nbsp;&nbsp;
+                                </c:forEach>
                                 <a href="/page/getPageByPageId?pageId=${bean.id}&userName=${requestScope.userPO.name}" style="color: blue;text-decoration: none">
                                         ${bean.name}
                                 </a>
@@ -125,27 +165,38 @@
                 <c:choose>
                     <c:when test="${requestScope.type == 2 || requestScope.type == 3}">
                         <c:choose>
-                            <c:when test="${requestScope.type == 2}"><!-- 所有人可读可写-->
-                                当前文档所有人可读
+                            <c:when test="${requestScope.type == 2}"><!-- 所有人可读部分人可写-->
+                                当前文档所有人可读，部分人可写
+                            </c:when>
+                        </c:choose>
+                        <c:choose>
+                            <c:when test="${requestScope.type == 3}"><!-- 部分人可读部分人可写-->
+                                当前文档部分人可读，部分人可写
                             </c:when>
                         </c:choose>
                         <table>
                             <hr/>
                             <tr>
-                                <th style="text-align: left" class="page_rights_username">用户账号</th>
-                                <th style="text-align: left" class="page_rights_read">可以访问</th>
-                                <th style="text-align: left" class="page_rights_wirte">可以编辑</th>
+                                <th style="text-align: left" class="page_page_rights_read">用户账号</th>
+                                <th style="text-align: left" class="page_page_rights_read">可以访问</th>
+                                <th style="text-align: left" class="page_page_rights_wirte">可以编辑</th>
                                 <th style="text-align: left" class="page_rights_change">修改</th>
                             </tr>
                             <c:forEach items="${requestScope.userRight}" var="bean">
                                 <tr>
-                                    <td class="page_rights_version">
+                                    <td class="page_page_rights_username" id="updateUserName">
                                             ${bean.userName}
                                     </td>
-                                    <td class="page_rights_content">
+                                    <td class="page_page_rights_read" id="kedu1">
                                         可以
                                     </td>
-                                    <td class="page_rightsd_time">
+                                    <td class="page_page_rights_read" id="kedu2" style="display: none">
+                                        <select id="updateRead" onChange="newRead()">
+                                            <option>可以</option>
+                                            <option>不可以</option>
+                                        </select>
+                                    </td>
+                                    <td class="page_page_rights_wirte" id="kexie1">
                                         <c:choose>
                                             <c:when test="${bean.writeId == 1}"><!-- 如果用户有写权限-->
                                                 可以
@@ -157,8 +208,17 @@
                                             </c:when>
                                         </c:choose>
                                     </td>
-                                    <td class="page_rights_change">
+                                    <td class="page_page_rights_wirte" id="kexie2" style="display: none">
+                                        <select id="updateWrite" onchange="newWrite()">
+                                            <option>可以</option>
+                                            <option>不可以</option>
+                                        </select>
+                                    </td>
+                                    <td class="page_rights_change" id="xiugai" onclick="doEdit()">
                                         修改
+                                    </td>
+                                    <td class="page_rights_change" id="baocun" style="display: none" onclick="doSave()">
+                                        保存
                                     </td>
                                 </tr>
                             </c:forEach>
@@ -177,18 +237,5 @@
         联系方式:暂无联系方式
     </p>
 </footer>
-<script type="text/javascript">
-  /*// 弹窗
-  function showWindow() {
-    $('#showdiv').show();  //显示弹窗
-    $('#cover').css('display','block'); //显示遮罩层
-    $('#cover').css('height',document.body.clientHeight+'px'); //设置遮罩层的高度为当前页面高度
-  }
-  // 关闭弹窗
-  function closeWindow() {
-    $('#showdiv').hide();  //隐藏弹窗
-    $('#cover').css('display','none');   //显示遮罩层
-  }*/
-</script>
 </body>
 </html>

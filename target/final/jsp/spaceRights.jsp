@@ -86,6 +86,9 @@
                     <c:forEach items="${requestScope.pagePOS}" var="bean">
                         <tr>
                             <td>
+                                <c:forEach begin="1" end="${bean.depth}">
+                                    &nbsp;&nbsp;
+                                </c:forEach>
                                 <a href="/page/getPageByPageId?pageId=${bean.id}" style="color: blue;text-decoration: none">
                                         ${bean.name}
                                 </a>

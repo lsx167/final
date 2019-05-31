@@ -3,8 +3,11 @@ package com.service.impl;
 import com.dao.PageDao;
 import com.dao.PageDetailDao;
 import com.dao.PageOperateRecordDao;
+import com.dao.UserDao;
 import com.entities.*;
 import com.service.PageService;
+import com.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.ModelAndView;
@@ -12,8 +15,7 @@ import com.service.base;
 
 import javax.annotation.Resource;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 @Service("PageServiceImpl")
 @Scope("prototype")
@@ -22,10 +24,16 @@ public class PageServiceImpl implements PageService {
     private PageDao pageDao;
 
     @Resource
+    private UserDao userDao;
+
+    @Resource
     private PageDetailDao pageDetailDao;
 
     @Resource
     private PageOperateRecordDao pageOperateRecordDao;
+
+    @Autowired
+    private UserService userService;
 
     @Override
     public List<PagePO> getPagesBySpaceId(long id) {
@@ -62,6 +70,45 @@ public class PageServiceImpl implements PageService {
         mav.addObject("pageOperateRecordPO",pageOperateRecordPO);
         return mav;
     }
+
+    @Override
+    public ModelAndView packagePageRight(ModelAndView mav,PagePO pagePO) {
+        base base1 = new base();
+        mav.setViewName("pageRights");
+
+        //更新page的type
+        if(pagePO.getReadID().equals("-1") && pagePO.getWriteID().equals("-1")){
+            pagePO.setType(1);
+        } else if(pagePO.getReadID().equals("-1") && !pagePO.getWriteID().equals("-1")){
+            pagePO.setType(2);
+        } else {
+            pagePO.setType(3);
+        }
+        pageDao.updatePageInfo(pagePO);
+
+        mav.addObject("type",pagePO.getType());
+
+        List<Map> userRight = new ArrayList<Map>();
+        //所有人可读，部分人可写
+        if(pagePO.getType() == 2){
+            //获取可写人ids
+            List<Long> writeIds = base1.stringToLongList(pagePO.getWriteID());
+            putRightIdsIntoMap(writeIds,userRight,1);
+        }else if(pagePO.getType() == 3){    //部分人可读部分人可写
+            //获取可写人ids
+            List<Long> writeIds = base1.stringToLongList(pagePO.getWriteID());
+            //获取可读人ids
+            List<Long> readIds = base1.stringToLongList(pagePO.getReadID());
+            putRightIdsIntoMap(writeIds,userRight,1);
+            //查找可读不可写的人ids
+            readIds = base1.findReadOnly(readIds,writeIds);
+            putRightIdsIntoMap(readIds,userRight,0);
+        }
+
+        mav.addObject("userRight",userRight);
+        return mav;
+    }
+
 
     @Override
     public void updatePageContent(long pageId, String pageContent,long operatorId) {
@@ -271,10 +318,93 @@ public class PageServiceImpl implements PageService {
         pageOperateRecordDao.insertPageOperateRecord(pageOperateRecordPO);
 
         return pagePO;
+    }
 
+    @Override
+    public void updatePageRight(Long pageId, String userName, Long operatorId, String read, String write) {
+        PagePO pagePO = pageDao.getPageByPageId(pageId);
+        UserPO userPO = userDao.getUserByName(userName);
+        PageOperateRecordPO pageOperateRecordPO = pageOperateRecordDao.getLastPageOperateRecord(pageId);
+        //所有人可读可写,添加新用户权限
+        if(pagePO.getWriteID().equals("-1")){
+            pagePO.setReadID(userPO.getId()+"");
+            pagePO.setWriteID(userPO.getId()+"");
+        } else if(pagePO.getReadID().equals("-1")){
+            pagePO.setReadID(userPO.getId()+"");
+            pagePO.setWriteID(userPO.getId()+"+"+pagePO.getWriteID());
+        } else {
+            pagePO.setReadID(userPO.getId()+"+"+pagePO.getReadID());
+            pagePO.setWriteID(userPO.getId()+"+"+pagePO.getWriteID());
+        }
+        pageDao.updatePageInfo(pagePO);
 
+        //更新page操作记录表
+        base base1 = new base();
+        pageOperateRecordPO.setId(0);
+        pageOperateRecordPO.setPageId(pageId);
+        pageOperateRecordPO.setOperatorId(operatorId);
+        pageOperateRecordPO.setOperatorTime(base1.getCurrTime());
+        pageOperateRecordPO.setType(3);
+        pageOperateRecordPO.setOperatorContent("页面权限修改");
+        pageOperateRecordPO.setBeforeVersionId(pageOperateRecordPO.getAfterVersionId());
+        pageOperateRecordPO.setAfterVersionId(((double)((int)((pageOperateRecordPO.getAfterVersionId()+0.1)*10)))/10);
+        pageOperateRecordPO.setExpired(false);
+        pageOperateRecordDao.insertPageOperateRecord(pageOperateRecordPO);
+    }
+
+    @Override
+    public void putRightIdsIntoMap(List<Long> Ids,List<Map> maps,int isRead) {
+        for(int i=0;i<Ids.size();i++){
+            Map map = new HashMap();
+            map.put("userName",userService.getUserById(Ids.get(i)).getName());
+            map.put("readId",1);
+            map.put("writeId",isRead);
+            maps.add(map);
+        }
+    }
+
+    @Override
+    public List<PagePO> pageDfs(List<PagePO> pagePOS){
+        List<PagePO> pagePOS1 = new ArrayList<PagePO>();
+
+        //把所有的根页面加入队列
+        Queue<PagePO> queue = new LinkedList<PagePO>();
+        for (int i = 0;i<pagePOS.size();i++){
+            if(pagePOS.get(i).isRootPage() == true){
+                queue.add(pagePOS.get(i));
+            }
+        }
+
+        pageDfsAssistant1(queue,pagePOS1);
+
+        return pagePOS1;
+    }
+
+    @Override
+    public void pageDfsAssistant1(Queue<PagePO> queue,List<PagePO> pagePOS) {
+        base base1 = new base();
+        while (queue.peek() != null){
+            //获得队列最上方元素
+            pagePOS.add(queue.peek());
+            String childIds = queue.peek().getChildPageID();
+            if(childIds.equals("-1")){
+                queue.remove();
+            } else {
+                //对最上方元素的子集进行递归
+                pageDfsAssistant1(pageDfsAssistant2(base1.stringToLongList(childIds)),pagePOS);
+                queue.remove();
+            }
+        }
 
     }
 
-
+    @Override
+    public Queue<PagePO> pageDfsAssistant2(List<Long> pagePOS) {
+        Queue<PagePO> queue = new LinkedList<PagePO>();
+        for(int i =0;i<pagePOS.size();i++){
+            PagePO pagePO = pageDao.getPageByPageId(pagePOS.get(i));
+            queue.add(pagePO);
+        }
+        return queue;
+    }
 }

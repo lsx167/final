@@ -129,9 +129,6 @@ public class SpaceController {
 
         SpacePO spacePO = spaceService.getSpaceById(spaceId);
 
-        /*//获取用户信息
-        UserPO userPO = (UserPO) httpSession.getAttribute("userPO");*/
-
         //获取空间创始人信息
         UserPO originUserPO = userService.getUserById(spacePO.getOriginatorID());
 
@@ -149,6 +146,7 @@ public class SpaceController {
 
         //获取该空间页面信息
         List<PagePO> pagePOS = pageService.getPagesBySpaceId(spacePO.getId());
+        pagePOS = pageService.pageDfs(pagePOS);
         //获取该空间最近5条操作记录
         List<SpaceOperateRecordPO> spaceOperateRecordPOS = spaceOperateRecordService.getLastFiveSpaceOperateRecord(spacePO.getId());
 
@@ -171,9 +169,6 @@ public class SpaceController {
         //获取登录账号
         String userName = request.getParameter("userName");
         UserPO userPO = (UserPO)((Map)request.getSession().getAttribute("SESSION_USERNAME")).get(userName);
-/*
-        UserPO userPO = (UserPO) httpSession.getAttribute("userPO");
-*/
 
         //根据空间名称去查询是否存在同名空间，若存在则创建失败，校验之后移到前端
         // todo
@@ -200,7 +195,7 @@ public class SpaceController {
             List<SpacePO> spacePOS = spaceService.getSpacesById(userPO.getId());
             //获取该空间页面信息
             List<PagePO> pagePOS = pageService.getPagesBySpaceId(spacePO.getId());
-
+            pagePOS = pageService.pageDfs(pagePOS);
 
             //添加空间操作记录
             spaceOperateRecordService.createSpaceOperate(spacePO.getId(),userPO.getId(),spacePO.getName());
@@ -232,6 +227,7 @@ public class SpaceController {
         List<SpacePO> spacePOS = spaceService.getSpacesById(userPO.getId());
         //获取该空间页面信息
         List<PagePO> pagePOS = pageService.getPagesBySpaceId(spacePO.getId());
+        pagePOS = pageService.pageDfs(pagePOS);
         //获取该空间最近5条操作记录
         List<SpaceOperateRecordPO> spaceOperateRecordPOS = spaceOperateRecordService.getLastFiveSpaceOperateRecord(spacePO.getId());
 

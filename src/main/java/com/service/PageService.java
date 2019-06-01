@@ -53,7 +53,7 @@ public interface PageService {
     PagePO pageReturnVersion(Long id,double version,long userId);
 
     //修改页面权限
-    void updatePageRight(Long pageId, String userName, Long operatorId, String read, String write);
+    PagePO updatePageRight(Long pageId, String userName, Long operatorId, String read, String write);
 
     //将List<Long> 放进map中
     void putRightIdsIntoMap(List<Long> Ids,List<Map> maps,int isRead);
@@ -66,4 +66,10 @@ public interface PageService {
 
     //辅助dfs1
     Queue<PagePO> pageDfsAssistant2(List<Long> pagePOS);
+
+    //更改页面权限
+    PagePO updatePageRightType(PagePO pagePO,Integer type,UserPO userPO);
+
+    //添加用户权限
+    PagePO addPageRight(PagePO pagePO,String updateUserName,Long operatorId,ModelAndView mav);
 }

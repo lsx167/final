@@ -326,7 +326,6 @@ public class PageController {
     public ModelAndView updatePageRight(HttpServletRequest request) {
         ModelAndView mav = new ModelAndView();
 
-        // todo
         //获取登录账号
         String userName = request.getParameter("userName");
         UserPO userPO = (UserPO)((Map)request.getSession().getAttribute("SESSION_USERNAME")).get(userName);
@@ -351,10 +350,69 @@ public class PageController {
         String updateRead = request.getParameter("updateRead");
         String updateWrite = request.getParameter("updateWrite");
 
-        pageService.updatePageRight(pageId,updateUserName,userPO.getId(),updateRead,updateWrite);
+        pagePO = pageService.updatePageRight(pageId,updateUserName,userPO.getId(),updateRead,updateWrite);
 
         mav = pageService.packagePageRight(mav,pagePO);
         return mav;
     }
 
+    //修改页面权限类型
+    @RequestMapping(value = "/updatePageRightType", produces = "text/html;charset=UTF-8")
+    @ResponseBody
+    public ModelAndView updatePageRightType(HttpServletRequest request) {
+        ModelAndView mav = new ModelAndView();
+
+        //获取登录账号
+        String userName = request.getParameter("userName");
+        UserPO userPO = (UserPO)((Map)request.getSession().getAttribute("SESSION_USERNAME")).get(userName);
+        long pageId = Long.parseLong(request.getParameter("pageId"));
+        //获取页面信息
+        PagePO pagePO = pageService.getPageByPageId(pageId);
+
+        //获取当前空间信息
+        SpacePO spacePO = spaceService.getSpaceById(pagePO.getSpaceID());
+
+        //获取空间列表信息
+        List<SpacePO> spacePOS = spaceService.getSpacesById(userPO.getId());
+
+        //获取该空间页面信息
+        List<PagePO> pagePOS = pageService.getPagesBySpaceId(spacePO.getId());
+        pagePOS = pageService.pageDfs(pagePOS);
+        mav = pageService.packagePage(userPO,null,spacePO,spacePOS,pagePOS,pagePO,null,null);
+
+        int type = Integer.parseInt(request.getParameter("type"));
+        pagePO = pageService.updatePageRightType(pagePO,type,userPO);
+        mav = pageService.packagePageRight(mav,pagePO);
+        return mav;
+    }
+
+    //修改页面权限类型
+    @RequestMapping(value = "/addPageRightUser", produces = "text/html;charset=UTF-8")
+    @ResponseBody
+    public ModelAndView addPageRightUser(HttpServletRequest request) {
+        ModelAndView mav = new ModelAndView();
+        //获取登录账号
+        String userName = request.getParameter("userName");
+        UserPO userPO = (UserPO)((Map)request.getSession().getAttribute("SESSION_USERNAME")).get(userName);
+        long pageId = Long.parseLong(request.getParameter("pageId"));
+        //获取页面信息
+        PagePO pagePO = pageService.getPageByPageId(pageId);
+
+        //获取当前空间信息
+        SpacePO spacePO = spaceService.getSpaceById(pagePO.getSpaceID());
+
+        //获取空间列表信息
+        List<SpacePO> spacePOS = spaceService.getSpacesById(userPO.getId());
+
+        //获取该空间页面信息
+        List<PagePO> pagePOS = pageService.getPagesBySpaceId(spacePO.getId());
+        pagePOS = pageService.pageDfs(pagePOS);
+        mav = pageService.packagePage(userPO,null,spacePO,spacePOS,pagePOS,pagePO,null,null);
+
+        String updateUserName = request.getParameter("updateUserName");
+
+        pagePO = pageService.addPageRight(pagePO,updateUserName,userPO.getId(),mav);
+        mav = pageService.packagePageRight(mav,pagePO);
+        return mav;
+    }
 }

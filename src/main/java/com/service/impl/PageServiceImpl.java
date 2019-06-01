@@ -321,35 +321,65 @@ public class PageServiceImpl implements PageService {
     }
 
     @Override
-    public void updatePageRight(Long pageId, String userName, Long operatorId, String read, String write) {
+    public PagePO updatePageRight(Long pageId, String userName, Long operatorId, String read, String write) {
+
+        base base1 = new base();
         PagePO pagePO = pageDao.getPageByPageId(pageId);
         UserPO userPO = userDao.getUserByName(userName);
-        PageOperateRecordPO pageOperateRecordPO = pageOperateRecordDao.getLastPageOperateRecord(pageId);
-        //所有人可读可写,添加新用户权限
-        if(pagePO.getWriteID().equals("-1")){
-            pagePO.setReadID(userPO.getId()+"");
-            pagePO.setWriteID(userPO.getId()+"");
-        } else if(pagePO.getReadID().equals("-1")){
-            pagePO.setReadID(userPO.getId()+"");
-            pagePO.setWriteID(userPO.getId()+"+"+pagePO.getWriteID());
-        } else {
-            pagePO.setReadID(userPO.getId()+"+"+pagePO.getReadID());
-            pagePO.setWriteID(userPO.getId()+"+"+pagePO.getWriteID());
-        }
-        pageDao.updatePageInfo(pagePO);
 
-        //更新page操作记录表
-        base base1 = new base();
-        pageOperateRecordPO.setId(0);
-        pageOperateRecordPO.setPageId(pageId);
-        pageOperateRecordPO.setOperatorId(operatorId);
-        pageOperateRecordPO.setOperatorTime(base1.getCurrTime());
-        pageOperateRecordPO.setType(3);
+        if(pagePO.getType().equals(2)){
+            //类型为2,修改情况只有多条数据的删除
+            if(write.equals("0")){
+                List<Long> list = base1.stringToLongList(pagePO.getWriteID());
+                list.remove(userPO.getId());
+                pagePO.setWriteID(base1.longListToString(list));
+            }
+        }else {
+            //类型为3
+            //删除可写
+            if (write.equals("0")) {
+                List<Long> list = base1.stringToLongList(pagePO.getWriteID());
+                list.remove(userPO.getId());
+                pagePO.setWriteID(base1.longListToString(list));
+            }
+            //删除可读
+            if (read.equals("不可以")) {
+                List<Long> list = base1.stringToLongList(pagePO.getReadID());
+                list.remove(userPO.getId());
+                pagePO.setReadID(base1.longListToString(list));
+            }
+            //两个都可以
+            if(read.equals("可以") && write.equals("1")){
+                //如果不存在
+                if(!base1.isLongBelongToList(userPO.getId(),base1.stringToLongList(pagePO.getWriteID()))){
+                    pagePO.setWriteID(userPO.getId()+"+"+pagePO.getWriteID());
+                }
+            }
+        }
+        //修改三张表
+        PageDetailPO pageDetailPO = pageDetailDao.getCurPageById(pagePO.getId());
+        PageOperateRecordPO pageOperateRecordPO = new PageOperateRecordPO();
+        double version = ((double)((int)((pageDetailPO.getVersionID()+0.1)*10)))/10;
+
+        pageOperateRecordPO.setPageId(pagePO.getId());
+        pageOperateRecordPO.setOperatorId(userPO.getId());
+        pageOperateRecordPO.setOperatorTime(new base().getCurrTime());
         pageOperateRecordPO.setOperatorContent("页面权限修改");
-        pageOperateRecordPO.setBeforeVersionId(pageOperateRecordPO.getAfterVersionId());
-        pageOperateRecordPO.setAfterVersionId(((double)((int)((pageOperateRecordPO.getAfterVersionId()+0.1)*10)))/10);
+        pageOperateRecordPO.setType(3);
+        pageOperateRecordPO.setBeforeVersionId(pagePO.getVersionID());
+        pageOperateRecordPO.setAfterVersionId(version);
         pageOperateRecordPO.setExpired(false);
+
+        pagePO.setVersionID(version);
+
+        pageDetailPO.setId(0);
+        pageDetailPO.setVersionID(version);
+
+        pageDao.updatePageInfo(pagePO);
+        pageDetailDao.deletePageRecord(pagePO.getId());
+        pageDetailDao.insertPageVersion(pageDetailPO);
         pageOperateRecordDao.insertPageOperateRecord(pageOperateRecordPO);
+        return pagePO;
     }
 
     @Override
@@ -359,6 +389,7 @@ public class PageServiceImpl implements PageService {
             map.put("userName",userService.getUserById(Ids.get(i)).getName());
             map.put("readId",1);
             map.put("writeId",isRead);
+            map.put("number",maps.size()+1);
             maps.add(map);
         }
     }
@@ -406,5 +437,106 @@ public class PageServiceImpl implements PageService {
             queue.add(pagePO);
         }
         return queue;
+    }
+
+    @Override
+    public PagePO updatePageRightType(PagePO pagePO, Integer type,UserPO userPO) {
+        //当页面类型不发生改变
+        if(pagePO.getType().equals(type)){
+            return pagePO;
+        } else if(pagePO.getType().equals(1)){
+            //1->2
+            pagePO.setWriteID(userPO.getId()+"");
+            if(type.equals(3)){
+                //1->3
+                pagePO.setReadID(userPO.getId()+"");
+            }
+        } else if(pagePO.getType().equals(2)){
+            if(type.equals(1)){
+                //2->1
+                pagePO.setWriteID("-1");
+            } else {
+                //2->3
+                pagePO.setReadID(pagePO.getWriteID());
+            }
+        } else if(pagePO.getType().equals(3)){
+            //3->2
+            pagePO.setReadID("-1");
+            if(type.equals(1)){
+                //3->1
+                pagePO.setWriteID("-1");
+            }
+        }
+
+        //修改三张表
+        PageDetailPO pageDetailPO = pageDetailDao.getCurPageById(pagePO.getId());
+        PageOperateRecordPO pageOperateRecordPO = new PageOperateRecordPO();
+        double version = ((double)((int)((pageDetailPO.getVersionID()+0.1)*10)))/10;
+
+        pageOperateRecordPO.setPageId(pagePO.getId());
+        pageOperateRecordPO.setOperatorId(userPO.getId());
+        pageOperateRecordPO.setOperatorTime(new base().getCurrTime());
+        pageOperateRecordPO.setOperatorContent("页面权限修改");
+        pageOperateRecordPO.setType(3);
+        pageOperateRecordPO.setBeforeVersionId(pagePO.getVersionID());
+        pageOperateRecordPO.setAfterVersionId(version);
+        pageOperateRecordPO.setExpired(false);
+
+        pagePO.setVersionID(version);
+
+        pageDetailPO.setId(0);
+        pageDetailPO.setVersionID(version);
+
+        pageDao.updatePageInfo(pagePO);
+        pageDetailDao.deletePageRecord(pagePO.getId());
+        pageDetailDao.insertPageVersion(pageDetailPO);
+        pageOperateRecordDao.insertPageOperateRecord(pageOperateRecordPO);
+        return pagePO;
+    }
+
+    @Override
+    public PagePO addPageRight(PagePO pagePO, String updateUserName, Long operatorId,ModelAndView mav) {
+        base base1 = new base();
+        UserPO addUser = userDao.getUserByName(updateUserName);
+        if(addUser == null){
+            //用户名不存在
+            mav.addObject("msg","1");
+        } else if(base1.isLongBelongToList(addUser.getId(),base1.stringToLongList(pagePO.getReadID())) ||
+                base1.isLongBelongToList(addUser.getId(),base1.stringToLongList(pagePO.getWriteID()))){
+            //用户名已在list中
+            mav.addObject("msg",2);
+        } else {
+            if(pagePO.getType().equals(2)){
+                pagePO.setWriteID(addUser.getId()+"+"+pagePO.getWriteID());
+            }else {
+                pagePO.setWriteID(addUser.getId()+"+"+pagePO.getWriteID());
+                pagePO.setReadID(addUser.getId()+"+"+pagePO.getReadID());
+            }
+            //修改三张表
+            PageDetailPO pageDetailPO = pageDetailDao.getCurPageById(pagePO.getId());
+            PageOperateRecordPO pageOperateRecordPO = new PageOperateRecordPO();
+            double version = ((double)((int)((pageDetailPO.getVersionID()+0.1)*10)))/10;
+
+            pageOperateRecordPO.setPageId(pagePO.getId());
+            pageOperateRecordPO.setOperatorId(operatorId);
+            pageOperateRecordPO.setOperatorTime(new base().getCurrTime());
+            pageOperateRecordPO.setOperatorContent("页面权限修改");
+            pageOperateRecordPO.setType(3);
+            pageOperateRecordPO.setBeforeVersionId(pagePO.getVersionID());
+            pageOperateRecordPO.setAfterVersionId(version);
+            pageOperateRecordPO.setExpired(false);
+
+            pagePO.setVersionID(version);
+
+            pageDetailPO.setId(0);
+            pageDetailPO.setVersionID(version);
+
+            pageDao.updatePageInfo(pagePO);
+            pageDetailDao.deletePageRecord(pagePO.getId());
+            pageDetailDao.insertPageVersion(pageDetailPO);
+            pageOperateRecordDao.insertPageOperateRecord(pageOperateRecordPO);
+            mav.addObject("msg",3);
+        }
+        return pagePO;
     }
 }

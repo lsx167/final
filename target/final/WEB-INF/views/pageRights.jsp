@@ -8,43 +8,72 @@
     <script type="text/javascript" src="/js/jquery-3.3.1.min.js"></script>
     <script type="text/javascript" src="/js/ajaxfileupload.js"></script>
     <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+    <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 </head>
 <body class="body">
 <script type="text/javascript">
+
+    //获取页面类型
+    function getPageType() {
+        if((${requestScope.pagePO.type}) == 1){
+            $("#sel").val(1);
+        } else if((${requestScope.pagePO.type}) == 2){
+            $("#sel").val(2);
+        }else if((${requestScope.pagePO.type}) == 3){
+            $("#sel").val(3);
+        }
+    }
+    window.onload =function(){getPageType();}
     // 编辑页面
-    function doEdit() {
-        $('#baocun').css('display','block');
-        $('#kedu2').css('display','block');
-        $('#kexie2').css('display','block');
-        $('#xiugai').css('display','none');
-        $('#kedu1').css('display','none');
-        $('#kexie1').css('display','none');
+    function doEdit(number,write) {
+        if(write == 0){
+            $("#updateWrite"+number).val(0)
+        } else {
+            $("#updateWrite"+number).val(1)
+        }
+        $("#baocun"+number).css('display','block');
+        $('#kedu2'+number).css('display','block');
+        $('#kexie2'+number).css('display','block');
+        $('#xiugai'+number).css('display','none');
+        $('#kedu1'+number).css('display','none');
+        $('#kexie1'+number).css('display','none');
     }
 
     // 取消页面编辑
-    function doSave() {
-        $('#baocun').css('display','none');
-        $('#kedu2').css('display','none');
-        $('#kexie2').css('display','none');
-        $('#xiugai').css('display','block');
-        $('#kedu1').css('display','block');
-        $('#kexie1').css('display','block');
-
-        /*location.href = "/page/updatePageRight?userName=${requestScope.userPO.name}&pageId=${requestScope.pagePO.id}&updateUserName=<%--${requestScope.userRight.get(0).userName}--%>"+
-            /!*$('#updateUserName').val()+*!/"&updateRead="+$('#updateRead').val()+"&updateWrite="+$('#updateWrite').val();*/
-    }
-
-    function newRead() {
-        if($('#updateRead').val() == "不可以"){
-            $('#updateWrite').val("不可以");
+    function doSave(number) {
+        //判断是否可以修改
+        var size = ${fn:length(requestScope.userRight)}
+        if(size == 1 && $('#updateWrite'+number).val() == "0"){
+            //单条数据不允许修改
+            alert("当前仅有一个用户可编辑，不允许修改！")
+        } else{
+            //多条数据，修改第一条时
+            if(number == 1 && $('#updateWrite1').val() == "0" && $('#kexie12').text().trim() == "不可以"){
+                alert("当前仅有一个用户可编辑，不允许修改！");
+            } else {
+                location.href = "/page/updatePageRight?userName=${requestScope.userPO.name}&pageId=${requestScope.pagePO.id}&updateUserName="+
+                    $('#updateUserName'+number).val()+"&updateRead="+$('#updateRead'+number).val()+"&updateWrite="+$('#updateWrite'+number).val();
+            }
         }
     }
 
-    function newWrite() {
-        if($('#updateWrite').val() == "可以" && $('#updateRead').val() == "不可以"){
+    function changeType() {
+        location.href = "/page/updatePageRightType?pageId=${requestScope.pagePO.id}&userName=${requestScope.userPO.name}&type="+$('#sel').val();
+    }
+    function newRead(number) {
+        if($('#updateRead'+number).val() == "不可以"){
+            $('#updateWrite'+number).val("不可以");
+        }
+    }
+
+    function newWrite(number) {
+        if($('#updateWrite'+number).val() == "可以" && $('#updateRead'+number).val() == "不可以"){
             alert("该用户没有读权限，不可拥有写权限，请检查后再修改！");
-            $('#updateWrite').val("不可以");
+            $('#updateWrite'+number).val("不可以");
         }
+    }
+    function addUser() {
+        location.href = "/page/addPageRightUser?pageId=${requestScope.pagePO.id}&userName=${requestScope.userPO.name}&updateUserName="+$('#addUser').val();
     }
 </script>
 <header class="header">
@@ -151,20 +180,52 @@
 		<div class="page_rights_list">
 			权限列表
 		</div>
-		<div class="power_search">
-            <input type="text" name="peoplename" placeholder="请输入您要添加的人...">
-            <button type="submit">添加</button>
-		</div>
+        <c:choose>
+            <c:when test="${requestScope.type == 2 || requestScope.type == 3}">
+                <div class="power_search">
+                    <input type="text" name="addUser" placeholder="请输入您要添加的人..." id="addUser">
+                    <button type="submit" onclick="addUser()">添加</button>
+                </div>
+            </c:when>
+        </c:choose>
+        <c:choose>
+            <c:when test="${requestScope.msg == 1}">
+                <div class="power_search" style="margin-top: 10px">
+                    添加失败，查不到该用户！
+                </div>
+            </c:when>
+            <c:when test="${requestScope.msg == 2}">
+                <div class="power_search">
+                    添加失败，该用户已经拥有权限！
+                </div>
+            </c:when>
+            <c:when test="${requestScope.msg == 3}">
+                <div class="power_search">
+                    添加成功！
+                </div>
+            </c:when>
+        </c:choose>
 		<div class="space_operate_record">
 			<div style="position:relative; height:500px; overflow:auto">
-                <c:choose>
+                <select id="sel">
+                    <option value="1">所有人可读可写</option>
+                    <option value="2">所有人可读，部分人可写</option>
+                    <option value="3">部分人可读，部分人可写</option>
+                </select>
+                <p>
+                    <a onclick="changeType()" style="color: blue;text-decoration: none">
+                        修改页面类型
+                    </a>
+
+                </p>
+                <%--<c:choose>
                     <c:when test="${requestScope.type == 1}"><!-- 所有人可读可写-->
                         当前文档所有人可读可写
                     </c:when>
-                </c:choose>
+                </c:choose>--%>
                 <c:choose>
                     <c:when test="${requestScope.type == 2 || requestScope.type == 3}">
-                        <c:choose>
+                        <%--<c:choose>
                             <c:when test="${requestScope.type == 2}"><!-- 所有人可读部分人可写-->
                                 当前文档所有人可读，部分人可写
                             </c:when>
@@ -173,7 +234,7 @@
                             <c:when test="${requestScope.type == 3}"><!-- 部分人可读部分人可写-->
                                 当前文档部分人可读，部分人可写
                             </c:when>
-                        </c:choose>
+                        </c:choose>--%>
                         <table>
                             <hr/>
                             <tr>
@@ -184,19 +245,24 @@
                             </tr>
                             <c:forEach items="${requestScope.userRight}" var="bean">
                                 <tr>
-                                    <td class="page_page_rights_username" id="updateUserName">
-                                            ${bean.userName}
+                                    <td class="page_page_rights_username">
+                                        ${bean.userName}
+                                        <input type='hidden' name="userName" id="updateUserName${bean.number}" value ='${bean.userName}'/>
                                     </td>
-                                    <td class="page_page_rights_read" id="kedu1">
+                                    <td class="page_page_rights_read" id="kedu1${bean.number}">
                                         可以
                                     </td>
-                                    <td class="page_page_rights_read" id="kedu2" style="display: none">
-                                        <select id="updateRead" onChange="newRead()">
+                                    <td class="page_page_rights_read" id="kedu2${bean.number}" style="display: none">
+                                        <select id="updateRead${bean.number}" onChange="newRead(${bean.number})">
                                             <option>可以</option>
-                                            <option>不可以</option>
+                                            <c:choose>
+                                                <c:when test="${requestScope.type == 3}"><!-- 当类型为2时，可读只能为可以，类型为3时，可读可以为可以或不可以-->
+                                                    <option>不可以</option>
+                                                </c:when>
+                                            </c:choose>--%>
                                         </select>
                                     </td>
-                                    <td class="page_page_rights_wirte" id="kexie1">
+                                    <td class="page_page_rights_wirte" id="kexie1${bean.number}">
                                         <c:choose>
                                             <c:when test="${bean.writeId == 1}"><!-- 如果用户有写权限-->
                                                 可以
@@ -208,16 +274,16 @@
                                             </c:when>
                                         </c:choose>
                                     </td>
-                                    <td class="page_page_rights_wirte" id="kexie2" style="display: none">
-                                        <select id="updateWrite" onchange="newWrite()">
-                                            <option>可以</option>
-                                            <option>不可以</option>
+                                    <td class="page_page_rights_wirte" id="kexie2${bean.number}" style="display: none">
+                                        <select id="updateWrite${bean.number}" onchange="newWrite(${bean.number})">
+                                            <option value="1">可以</option>
+                                            <option value="0">不可以</option>
                                         </select>
                                     </td>
-                                    <td class="page_rights_change" id="xiugai" onclick="doEdit()">
+                                    <td class="page_rights_change" id="xiugai${bean.number}" onclick="doEdit(${bean.number},${bean.writeId})">
                                         修改
                                     </td>
-                                    <td class="page_rights_change" id="baocun" style="display: none" onclick="doSave()">
+                                    <td class="page_rights_change" id="baocun${bean.number}" style="display: none" onclick="doSave(${bean.number})">
                                         保存
                                     </td>
                                 </tr>

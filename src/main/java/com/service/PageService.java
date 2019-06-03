@@ -24,6 +24,7 @@ public interface PageService {
     ModelAndView packagePage(UserPO userPO, UserPO originUserPO, SpacePO spacePO, List<SpacePO> spacePOS, List<PagePO>pagePOS,
                              PagePO pagePO, PageDetailPO pageDetailPO, PageOperateRecordPO pageOperateRecordPO);
 
+    //包装页面权限
     ModelAndView packagePageRight(ModelAndView mav,PagePO pagePO);
     //更新页面信息
     void updatePageContent(long pageId,String pageContent,long operatorId);

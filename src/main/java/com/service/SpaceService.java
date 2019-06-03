@@ -34,6 +34,7 @@ public interface SpaceService {
     Long createSpace(SpacePO spacePO);
 
     //包装空间页面方法
+    //操作者
     ModelAndView packagePage(UserPO userPO, UserPO originUserPO, SpacePO spacePO, List<SpacePO> spacePOS,
                              List<PagePO>pagePOS, List<SpaceOperateRecordPO> spaceOperateRecordPOS);
 
@@ -46,4 +47,15 @@ public interface SpaceService {
     //检查用户是否有该页面的写权限
     boolean haswritePermission(SpacePO spacePO,long userId);
 
+    //包装空间权限
+    ModelAndView packagePageRight(ModelAndView mav,SpacePO spacePO);
+
+    //更改空间权限
+    SpacePO updateSpaceRightType(SpacePO spacePO,Integer type,UserPO userPO);
+
+    //添加用户权限
+    SpacePO addSpaceRight(SpacePO spacePO,String updateUserName,Long operatorId,ModelAndView mav);
+
+    //修改空间权限
+    SpacePO updateSpaceRight(Long spaceId, String userName, Long operatorId, String read, String write);
 }

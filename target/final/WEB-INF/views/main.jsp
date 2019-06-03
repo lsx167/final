@@ -50,37 +50,6 @@
     </div>
 </header>
 <div class="main">
-	<%--<!-- 遮罩层 -->
-	<div id="cover" style="background: #000; position: absolute; left: 0px; top: 0px; width: 100%; filter: alpha(opacity=30); opacity: 0.3; display: none; z-index: 2 " onclick="closeWindow()">
-	</div>
-	<div id="showdiv" style="width: 50%; margin: 0 auto; height: 300px; border: 1px solid #999; display: none; position: absolute; top: 30%; left: 25%; z-index: 3; background: #fff">
-		<div style="background: #F8F7F7; width: 100%; height: 2rem; font-size: 0.65rem; line-height: 2rem; border: 1px solid #999; text-align: center;" >
-			创建空间
-		</div>
-		<div class="create_form">
-			<form action="/space/createSpace" method="post">
-			    <div class="field-group">
-			        <label class="username-label">空间名称：</label>
-			        <input type="text" name="spaceName" id="spaceName" class="login_text" placeholder="请输入空间名称" />
-			    </div>
-			    <div class="field-group">
-			        <label class="username-label">空间描述：</label>
-			        <input type="text" name="spaceDescribe" id="spaceDescribe" class="login_text" placeholder="请输入空间描述" />
-			    </div>
-			    <div class="field-group" style="margin-top: 10px;margin-left: 20px">
-			        <input type="submit" class="input_btn" value="创建" />
-			    </div>
-			</form>
-		</div>
-		<!--
-		<div style="text-indent: 50px; height: 4rem; font-size: 0.5rem; padding: 0.5rem; line-height: 1rem; ">
-			js弹窗 js弹出DIV,并使整个页面背景变暗</div>
-		<div style="background: #418BCA; width: 80%; margin: 0 auto; height: 1.5rem; line-height: 1.5rem; text-align: center;color: #fff;margin-top: 1rem; -moz-border-radius: .128rem; -webkit-border-radius: .128rem; border-radius: .128rem;font-size: .59733rem;" onclick="closeWindow()">
-			确 定
-		</div>
-		-->
-	</div>--%>
-
     <div class="main_left">
         <div class="left_name">
             <div class="left_name_img">
@@ -130,15 +99,6 @@
                 </table>
             </div>
         </div>
-
-        <%--<div class="left_setting">
-            <div class="left_setting_img">
-                <img src="../img/shezhi.png" style="max-height: 25px;margin-top:5px;border:none;"/>
-            </div>
-            <div class="left_setting_item">
-                空间配置
-            </div>
-        </div>--%>
     </div>
     <div class="main_right">
         <div class="right_1">
@@ -152,7 +112,9 @@
                             <img src="../img/shezhi.png" style="max-height: 25px;margin-top:5px;border:none;"/>
                         </div>
                         <div class="left_setting_item">
-                            空间配置
+                            <a href="/space/getSpaceRightById?spaceId=${requestScope.spacePO.id}&userName=${requestScope.userPO.name}" style="color: blue;text-decoration: none">
+                                空间配置
+                            </a>
                         </div>
                     </div>
                 </c:when>
@@ -200,18 +162,5 @@
         联系方式:暂无联系方式
     </p>
 </footer>
-<script type="text/javascript">
-  /*// 弹窗
-  function showWindow() {
-    $('#showdiv').show();  //显示弹窗
-    $('#cover').css('display','block'); //显示遮罩层
-    $('#cover').css('height',document.body.clientHeight+'px'); //设置遮罩层的高度为当前页面高度
-  }
-  // 关闭弹窗
-  function closeWindow() {
-    $('#showdiv').hide();  //隐藏弹窗
-    $('#cover').css('display','none');   //显示遮罩层
-  }*/
-</script>
 </body>
 </html>

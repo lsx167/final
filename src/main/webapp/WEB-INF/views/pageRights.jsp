@@ -218,23 +218,8 @@
                     </a>
 
                 </p>
-                <%--<c:choose>
-                    <c:when test="${requestScope.type == 1}"><!-- 所有人可读可写-->
-                        当前文档所有人可读可写
-                    </c:when>
-                </c:choose>--%>
                 <c:choose>
                     <c:when test="${requestScope.type == 2 || requestScope.type == 3}">
-                        <%--<c:choose>
-                            <c:when test="${requestScope.type == 2}"><!-- 所有人可读部分人可写-->
-                                当前文档所有人可读，部分人可写
-                            </c:when>
-                        </c:choose>
-                        <c:choose>
-                            <c:when test="${requestScope.type == 3}"><!-- 部分人可读部分人可写-->
-                                当前文档部分人可读，部分人可写
-                            </c:when>
-                        </c:choose>--%>
                         <table>
                             <hr/>
                             <tr>

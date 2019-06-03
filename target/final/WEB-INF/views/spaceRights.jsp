@@ -14,16 +14,16 @@
 <script type="text/javascript">
 
     //获取页面类型
-    function getPageType() {
-        if((${requestScope.pagePO.type}) == 1){
+    function getSpaceType() {
+        if((${requestScope.spacePO.type}) == 1){
             $("#sel").val(1);
-        } else if((${requestScope.pagePO.type}) == 2){
+        } else if((${requestScope.spacePO.type}) == 2){
             $("#sel").val(2);
-        }else if((${requestScope.pagePO.type}) == 3){
+        }else if((${requestScope.spacePO.type}) == 3){
             $("#sel").val(3);
         }
     }
-    window.onload =function(){getPageType();}
+    window.onload =function(){getSpaceType();}
     // 编辑页面
     function doEdit(number,write) {
         if(write == 0){
@@ -51,14 +51,14 @@
             if(number == 1 && $('#updateWrite1').val() == "0" && $('#kexie12').text().trim() == "不可以"){
                 alert("当前仅有一个用户可编辑，不允许修改！");
             } else {
-                location.href = "/page/updatePageRight?userName=${requestScope.userPO.name}&pageId=${requestScope.pagePO.id}&updateUserName="+
+                location.href = "/space/updateSpaceRight?userName=${requestScope.userPO.name}&spaceId=${requestScope.spacePO.id}&updateUserName="+
                     $('#updateUserName'+number).val()+"&updateRead="+$('#updateRead'+number).val()+"&updateWrite="+$('#updateWrite'+number).val();
             }
         }
     }
 
     function changeType() {
-        location.href = "/page/updatePageRightType?pageId=${requestScope.pagePO.id}&userName=${requestScope.userPO.name}&type="+$('#sel').val();
+        location.href = "/space/updateSpaceRightType?spaceId=${requestScope.spacePO.id}&userName=${requestScope.userPO.name}&type="+$('#sel').val();
     }
     function newRead(number) {
         if($('#updateRead'+number).val() == "不可以"){
@@ -73,7 +73,7 @@
         }
     }
     function addUser() {
-        location.href = "/page/addPageRightUser?pageId=${requestScope.pagePO.id}&userName=${requestScope.userPO.name}&updateUserName="+$('#addUser').val();
+        location.href = "/space/addSpaceRightUser?spaceId=${requestScope.spacePO.id}&userName=${requestScope.userPO.name}&updateUserName="+$('#addUser').val();
     }
 </script>
 <header class="header">
@@ -169,10 +169,10 @@
 	<div class="main_right">
 		<div class="right_title">
 			<div class="page_name">
-                ${requestScope.pagePO.name}
+                ${requestScope.spacePO.name}
             </div>
 			<div class="page_return">
-                <a href="/page/getPageByPageId?pageId=${requestScope.pagePO.id}&userName=${requestScope.userPO.name}" style="color: black;text-decoration: none">
+                <a href="/space/getSpaceBySpaceId?spaceId=${requestScope.spacePO.id}&userName=${requestScope.userPO.name}" style="color: black;text-decoration: none">
                     返回
                 </a>
 			</div>
@@ -214,7 +214,7 @@
                 </select>
                 <p>
                     <a onclick="changeType()" style="color: blue;text-decoration: none">
-                        修改页面类型
+                        修改空间类型
                     </a>
 
                 </p>

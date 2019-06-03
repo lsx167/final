@@ -37,41 +37,6 @@ public class SpaceController {
     @Autowired
     private SpaceOperateRecordService spaceOperateRecordService;
 
-    /**
-     * 查询所有空间
-     * @param request
-     * @param response
-     * @return
-     *//*
-    @RequestMapping(value = "/allspace", produces = "text/html;charset=UTF-8")
-    @ResponseBody
-    public String getAllspace(HttpServletRequest request, HttpServletResponse response) {
-        List<SpacePO> spacePOS = spaceService.getAllSpace();
-        return (spacePOS.get(1).getId()+spacePOS.get(1).getName()+spacePOS.get(1).getOriginatorID()+spacePOS.get(1).getChildPageID());
-    }*/
-/*
-    *//**
-     * 根据用户id返回主空间信息
-     * @param request
-     * @param response
-     * @return
-     *//*
-    @RequestMapping(value = "/getMainSpaceById", produces = "text/html;charset=UTF-8")
-    @ResponseBody
-    public String getMainSpaceById(HttpServletRequest request, HttpServletResponse response) {
-        SpacePO spacePO = spaceService.getMainSpaceById(10001);
-        return spacePO.getName()+spacePO.getId()+spacePO.getIsMain();
-    }*/
-/*
-
-    //模糊搜索空间列表
-    @RequestMapping(value = "/getSpacesBySearch", produces = "text/html;charset=UTF-8")
-    @ResponseBody
-    public String getSpacesBySearch(HttpServletRequest request, HttpServletResponse response, HttpSession session) {
-        return null;
-    }
-*/
-
     //根据搜索内容返回空间列表
     @RequestMapping(value = "/getSpaceBySearchContent", produces = "text/html;charset=UTF-8")
     @ResponseBody
@@ -215,8 +180,6 @@ public class SpaceController {
     public ModelAndView getMainSpace(HttpServletRequest request, HttpServletResponse response,HttpSession httpSession) {
         ModelAndView mav = new ModelAndView();
 
-        /*//获取用户信息
-        UserPO userPO = (UserPO) httpSession.getAttribute("userPO");*/
         //获取登录账号
         String userName = request.getParameter("userName");
         UserPO userPO = (UserPO)((Map)request.getSession().getAttribute("SESSION_USERNAME")).get(userName);
@@ -235,4 +198,120 @@ public class SpaceController {
         mav.addObject("writePermission",1);
         return mav;
     }
+
+    //根据空间id来查看空间读写权限
+    @RequestMapping(value = "/getSpaceRightById", produces = "text/html;charset=UTF-8")
+    @ResponseBody
+    public ModelAndView getSpaceRightById(HttpServletRequest request) {
+        ModelAndView mav = new ModelAndView();
+        //获取登录账号
+        String userName = request.getParameter("userName");
+        UserPO userPO = (UserPO)((Map)request.getSession().getAttribute("SESSION_USERNAME")).get(userName);
+
+        long spaceId = Long.parseLong(request.getParameter("spaceId"));
+
+        SpacePO spacePO = spaceService.getSpaceById(spaceId);
+
+        //获取空间信息
+        List<SpacePO> spacePOS = spaceService.getSpacesById(userPO.getId());
+
+        //获取该空间页面信息
+        List<PagePO> pagePOS = pageService.getPagesBySpaceId(spacePO.getId());
+        pagePOS = pageService.pageDfs(pagePOS);
+
+        mav = spaceService.packagePage(userPO,null,spacePO,spacePOS,pagePOS,null);
+
+        mav = spaceService.packagePageRight(mav,spacePO);
+        return mav;
+    }
+
+    //根据空间id来修改读写权限
+    @RequestMapping(value = "/updateSpaceRight", produces = "text/html;charset=UTF-8")
+    @ResponseBody
+    public ModelAndView updateSpaceRight(HttpServletRequest request) {
+        ModelAndView mav = new ModelAndView();
+
+        //获取登录账号
+        String userName = request.getParameter("userName");
+        UserPO userPO = (UserPO)((Map)request.getSession().getAttribute("SESSION_USERNAME")).get(userName);
+
+        long spaceId = Long.parseLong(request.getParameter("spaceId"));
+
+        SpacePO spacePO = spaceService.getSpaceById(spaceId);
+
+        //获取空间信息
+        List<SpacePO> spacePOS = spaceService.getSpacesById(userPO.getId());
+
+        //获取该空间页面信息
+        List<PagePO> pagePOS = pageService.getPagesBySpaceId(spacePO.getId());
+        pagePOS = pageService.pageDfs(pagePOS);
+        mav = spaceService.packagePage(userPO,null,spacePO,spacePOS,pagePOS,null);
+
+        //获取需要修改的用户姓名、读写权限
+        String updateUserName = request.getParameter("updateUserName");
+        String updateRead = request.getParameter("updateRead");
+        String updateWrite = request.getParameter("updateWrite");
+
+        spacePO = spaceService.updateSpaceRight(spacePO.getId(),updateUserName,userPO.getId(),updateRead,updateWrite);
+
+        mav = spaceService.packagePageRight(mav,spacePO);
+        return mav;
+    }
+
+    //修改空间权限类型
+    @RequestMapping(value = "/updateSpaceRightType", produces = "text/html;charset=UTF-8")
+    @ResponseBody
+    public ModelAndView updateSpaceRightType(HttpServletRequest request) {
+        ModelAndView mav = new ModelAndView();
+
+        //获取登录账号
+        String userName = request.getParameter("userName");
+        UserPO userPO = (UserPO)((Map)request.getSession().getAttribute("SESSION_USERNAME")).get(userName);
+
+        long spaceId = Long.parseLong(request.getParameter("spaceId"));
+
+        SpacePO spacePO = spaceService.getSpaceById(spaceId);
+
+        //获取空间信息
+        List<SpacePO> spacePOS = spaceService.getSpacesById(userPO.getId());
+
+        //获取该空间页面信息
+        List<PagePO> pagePOS = pageService.getPagesBySpaceId(spacePO.getId());
+        pagePOS = pageService.pageDfs(pagePOS);
+        mav = spaceService.packagePage(userPO,null,spacePO,spacePOS,pagePOS,null);
+
+        int type = Integer.parseInt(request.getParameter("type"));
+        spacePO = spaceService.updateSpaceRightType(spacePO,type,userPO);
+        mav = spaceService.packagePageRight(mav,spacePO);
+        return mav;
+    }
+
+    //添加空间用户权限
+    @RequestMapping(value = "/addSpaceRightUser", produces = "text/html;charset=UTF-8")
+    @ResponseBody
+    public ModelAndView addSpaceRightUser(HttpServletRequest request) {
+        ModelAndView mav = new ModelAndView();
+        //获取登录账号
+        String userName = request.getParameter("userName");
+        UserPO userPO = (UserPO)((Map)request.getSession().getAttribute("SESSION_USERNAME")).get(userName);
+
+        long spaceId = Long.parseLong(request.getParameter("spaceId"));
+
+        SpacePO spacePO = spaceService.getSpaceById(spaceId);
+
+        //获取空间信息
+        List<SpacePO> spacePOS = spaceService.getSpacesById(userPO.getId());
+
+        //获取该空间页面信息
+        List<PagePO> pagePOS = pageService.getPagesBySpaceId(spacePO.getId());
+        pagePOS = pageService.pageDfs(pagePOS);
+        mav = spaceService.packagePage(userPO,null,spacePO,spacePOS,pagePOS,null);
+
+        String updateUserName = request.getParameter("updateUserName");
+
+        spacePO = spaceService.addSpaceRight(spacePO,updateUserName,userPO.getId(),mav);
+        mav = spaceService.packagePageRight(mav,spacePO);
+        return mav;
+    }
+
 }

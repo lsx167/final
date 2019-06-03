@@ -107,7 +107,7 @@
             </div>
         </div>
 		<div class="space_operate_record">
-            <a href="/space/getMainSpace&userName=${requestScope.userPO.name}" style="color: blue;text-decoration: none">
+            <a href="/space/getMainSpace?userName=${requestScope.userPO.name}" style="color: blue;text-decoration: none">
             返回主空间
             </a>
 		</div>

@@ -1,81 +1,16 @@
+<%--
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <html>
 <head>
     <title>TEST</title>
-    <link rel="stylesheet" href="../../css/main.css" type="text/css">
-	<link rel="stylesheet" href="../../css/pageRigths.css" type="text/css">
+    <link rel="stylesheet" href="../css/main.css" type="text/css">
+	<link rel="stylesheet" href="../css/pageRigths.css" type="text/css">
     <link href="http://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <script type="text/javascript" src="/js/jquery-3.3.1.min.js"></script>
     <script type="text/javascript" src="/js/ajaxfileupload.js"></script>
     <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-    <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 </head>
 <body class="body">
-<script type="text/javascript">
-
-    //获取页面类型
-    function getPageType() {
-        if((${requestScope.pagePO.type}) == 1){
-            $("#sel").val(1);
-        } else if((${requestScope.pagePO.type}) == 2){
-            $("#sel").val(2);
-        }else if((${requestScope.pagePO.type}) == 3){
-            $("#sel").val(3);
-        }
-    }
-    window.onload =function(){getPageType();}
-    // 编辑页面
-    function doEdit(number,write) {
-        if(write == 0){
-            $("#updateWrite"+number).val(0)
-        } else {
-            $("#updateWrite"+number).val(1)
-        }
-        $("#baocun"+number).css('display','block');
-        $('#kedu2'+number).css('display','block');
-        $('#kexie2'+number).css('display','block');
-        $('#xiugai'+number).css('display','none');
-        $('#kedu1'+number).css('display','none');
-        $('#kexie1'+number).css('display','none');
-    }
-
-    // 取消页面编辑
-    function doSave(number) {
-        //判断是否可以修改
-        var size = ${fn:length(requestScope.userRight)}
-        if(size == 1 && $('#updateWrite'+number).val() == "0"){
-            //单条数据不允许修改
-            alert("当前仅有一个用户可编辑，不允许修改！")
-        } else{
-            //多条数据，修改第一条时
-            if(number == 1 && $('#updateWrite1').val() == "0" && $('#kexie12').text().trim() == "不可以"){
-                alert("当前仅有一个用户可编辑，不允许修改！");
-            } else {
-                location.href = "/page/updatePageRight?userName=${requestScope.userPO.name}&pageId=${requestScope.pagePO.id}&updateUserName="+
-                    $('#updateUserName'+number).val()+"&updateRead="+$('#updateRead'+number).val()+"&updateWrite="+$('#updateWrite'+number).val();
-            }
-        }
-    }
-
-    function changeType() {
-        location.href = "/page/updatePageRightType?pageId=${requestScope.pagePO.id}&userName=${requestScope.userPO.name}&type="+$('#sel').val();
-    }
-    function newRead(number) {
-        if($('#updateRead'+number).val() == "不可以"){
-            $('#updateWrite'+number).val("不可以");
-        }
-    }
-
-    function newWrite(number) {
-        if($('#updateWrite'+number).val() == "可以" && $('#updateRead'+number).val() == "不可以"){
-            alert("该用户没有读权限，不可拥有写权限，请检查后再修改！");
-            $('#updateWrite'+number).val("不可以");
-        }
-    }
-    function addUser() {
-        location.href = "/page/addPageRightUser?pageId=${requestScope.pagePO.id}&userName=${requestScope.userPO.name}&updateUserName="+$('#addUser').val();
-    }
-</script>
 <header class="header">
     <img src="../img/logo.jpeg" style="max-height: 30px;float: left;margin-left: 10%;margin-top: 5px;border:none;"/>
     <div style="float: left;width: 200px;height: 30px;text-align: center;color: white;margin-top: 10px">
@@ -93,12 +28,12 @@
     <div class="dropdown">
         <button class="dropbtn">创建</button>
         <div class="dropdown-content">
-            <a href="/jsp/createSpace.jsp?userName=${requestScope.userPO.name}">创建空间</a>
-            <a href="/jsp/createChildPage.jsp?spaceName=${requestScope.spacePO.name}&pageName=${requestScope.pagePO.name}&pageId=${requestScope.pagePO.id}&userName=${requestScope.userPO.name}">创建页面</a>
+            <a href="/jsp/createSpace.jsp">创建空间</a>
+            <a href="/jsp/createRootPage.jsp?spaceName=${requestScope.spacePO.name}">创建页面</a>
         </div>
     </div>
     <button class="create_btn">
-        <a href="/user/logout?userName=${requestScope.userPO.name}" style="color: white;text-decoration: none;margin-left: 50px">
+        <a href="/user/logout" style="color: white;text-decoration: none;margin-left: 50px">
             退出
         </a>
     </button>
@@ -111,7 +46,6 @@
     <div class="bar1">
         <form action="/space/getSpaceBySearchContent" method="post">
             <input type="text" name="spaceContent" placeholder="请输入您要搜索的内容...">
-            <input type='hidden' name="userName" value ='${requestScope.userPO.name}'/>
             <button type="submit"></button>
         </form>
     </div>
@@ -120,30 +54,30 @@
     <div class="main_left">
         <div class="left_name">
             <div class="left_name_img">
-                <img src="../../img/wujiaoxing.png" style="max-height: 30px;margin-top: 5px;border:none;"/>
+                <img src="../img/wujiaoxing.png" style="max-height: 30px;margin-top: 5px;border:none;"/>
             </div>
             <div class="left_name_item">
                 ${requestScope.spacePO.name}
             </div>
         </div>
-		<div class="left_page_tree" style="position:relative; height:250px; overflow:auto">
-		    <div style="color: gray;font-size: 20px;text-align: left;margin-left: 20px;margin-top: 20px;">
-		        我创建的空间
-		    </div>
-		    <div class="left_page">
-				<table>
-				    <c:forEach items="${requestScope.spacePOS}" var="bean">
-				        <tr>
-				            <td>
+        <div class="left_page_tree" style="position:relative; height:250px; overflow:auto">
+            <div style="color: gray;font-size: 20px;text-align: left;margin-left: 20px;margin-top: 20px;">
+                我创建的空间
+            </div>
+            <div class="left_page">
+                <table>
+                    <c:forEach items="${requestScope.spacePOS}" var="bean">
+                        <tr>
+                            <td>
                                 <a href="/space/getSpaceBySpaceId?spaceId=${bean.id}&userName=${requestScope.userPO.name}" style="color: blue;text-decoration: none">
                                         ${bean.name}
                                 </a>
                             </td>
-				        </tr>
-				    </c:forEach>
-				</table>
-		    </div>
-		</div>
+                        </tr>
+                    </c:forEach>
+                </table>
+            </div>
+        </div>
         <div class="left_page_tree">
             <div style="color: gray;font-size: 20px;text-align: left;margin-left: 20px;margin-top: 20px;">
                 页面树
@@ -171,14 +105,14 @@
 			<div class="page_name">
                 ${requestScope.pagePO.name}
             </div>
-			<div class="page_return">
-                <a href="/page/getPageByPageId?pageId=${requestScope.pagePO.id}&userName=${requestScope.userPO.name}" style="color: black;text-decoration: none">
+            <div class="page_return">
+                <a href="/space/getSpaceBySpaceId?spaceId=${requestScope.spacePO.id}&userName=${requestScope.userPO.name}" style="color: black;text-decoration: none">
                     返回
                 </a>
-			</div>
+            </div>
 		</div>
 		<div class="page_rights_list">
-			权限列表
+			空间权限列表
 		</div>
         <c:choose>
             <c:when test="${requestScope.type == 2 || requestScope.type == 3}">
@@ -205,8 +139,8 @@
                 </div>
             </c:when>
         </c:choose>
-		<div class="space_operate_record">
-			<div style="position:relative; height:500px; overflow:auto">
+        <div class="space_operate_record">
+            <div style="position:relative; height:500px; overflow:auto">
                 <select id="sel">
                     <option value="1">所有人可读可写</option>
                     <option value="2">所有人可读，部分人可写</option>
@@ -214,7 +148,7 @@
                 </select>
                 <p>
                     <a onclick="changeType()" style="color: blue;text-decoration: none">
-                        修改页面类型
+                        修改空间类型
                     </a>
 
                 </p>
@@ -231,7 +165,7 @@
                             <c:forEach items="${requestScope.userRight}" var="bean">
                                 <tr>
                                     <td class="page_page_rights_username">
-                                        ${bean.userName}
+                                            ${bean.userName}
                                         <input type='hidden' name="userName" id="updateUserName${bean.number}" value ='${bean.userName}'/>
                                     </td>
                                     <td class="page_page_rights_read" id="kedu1${bean.number}">
@@ -244,7 +178,7 @@
                                                 <c:when test="${requestScope.type == 3}"><!-- 当类型为2时，可读只能为可以，类型为3时，可读可以为可以或不可以-->
                                                     <option>不可以</option>
                                                 </c:when>
-                                            </c:choose>--%>
+                                            </c:choose>&ndash;%&gt;
                                         </select>
                                     </td>
                                     <td class="page_page_rights_wirte" id="kexie1${bean.number}">
@@ -276,8 +210,8 @@
                         </table>
                     </c:when>
                 </c:choose>
-			</div>	
-		</div>
+            </div>
+        </div>
     </div>
 </div>
 <footer class="footer">
@@ -288,5 +222,18 @@
         联系方式:暂无联系方式
     </p>
 </footer>
+<script type="text/javascript">
+  /*// 弹窗
+  function showWindow() {
+    $('#showdiv').show();  //显示弹窗
+    $('#cover').css('display','block'); //显示遮罩层
+    $('#cover').css('height',document.body.clientHeight+'px'); //设置遮罩层的高度为当前页面高度
+  }
+  // 关闭弹窗
+  function closeWindow() {
+    $('#showdiv').hide();  //隐藏弹窗
+    $('#cover').css('display','none');   //显示遮罩层
+  }*/
+</script>
 </body>
-</html>
+</html>--%>

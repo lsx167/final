@@ -34,10 +34,10 @@ public class PageController {
     //当前登录用户列表
     private static Map editingUserPage = new HashMap();
 
-    //根据页面id返回空间信息
+    //根据页面id返回页面信息
     @RequestMapping(value = "/getPageByPageId", produces = "text/html;charset=UTF-8")
     @ResponseBody
-    public ModelAndView getSpaceBySpaceId(HttpServletRequest request, HttpServletResponse response,HttpSession httpSession) {
+    public ModelAndView getPageByPageId(HttpServletRequest request, HttpServletResponse response,HttpSession httpSession) {
         ModelAndView mav = new ModelAndView();
 
         //获取登录账号
@@ -58,12 +58,16 @@ public class PageController {
         List<PagePO> pagePOS = pageService.getPagesBySpaceId(spacePO.getId());
         pagePOS = pageService.pageDfs(pagePOS);
 
+        //获得最近访问的三个空间
+        List<SpacePO> lastThree = spaceService.getLastThreeSpace(userPO.getId());
+
         if(!pageService.hasReadPermission(spacePO,pagePO,userPO.getId())){
             mav.setViewName("noPermission");
             mav.addObject("userPO",userPO);
             mav.addObject("spacePO",spacePO);
             mav.addObject("spacePOS",spacePOS);
             mav.addObject("pagePOS",pagePOS);
+            mav.addObject("lastThree",lastThree);
             return mav;
         }
 
@@ -83,6 +87,7 @@ public class PageController {
         }else {
             mav.addObject("writePermission",0);
         }
+        mav.addObject("lastThree",lastThree);
         return mav;
     }
 
@@ -102,10 +107,14 @@ public class PageController {
         //获取登录账号
         String userName = request.getParameter("userName");
         UserPO userPO = (UserPO)((Map)request.getSession().getAttribute("SESSION_USERNAME")).get(userName);
+        //获得最近访问的三个空间
+        List<SpacePO> lastThree = spaceService.getLastThreeSpace(userPO.getId());
 
         pageService.updatePageContent(pageId,pageContent,userPO.getId());
 
-        return getSpaceBySpaceId(request,response,httpSession);
+        mav.addObject("lastThree",lastThree);
+
+        return getPageByPageId(request,response,httpSession);
     }
 
     //创建根页面
@@ -147,6 +156,9 @@ public class PageController {
         pagePOS = pageService.pageDfs(pagePOS);
 
         mav = pageService.packagePage(userPO,userPO,spacePO,spacePOS,pagePOS,pagePO,pageDetailPO,pageOperateRecordPO);
+        //获得最近访问的三个空间
+        List<SpacePO> lastThree = spaceService.getLastThreeSpace(userPO.getId());
+        mav.addObject("lastThree",lastThree);
 
         mav.addObject("writePermission",1);
         return mav;
@@ -193,6 +205,9 @@ public class PageController {
         pagePOS = pageService.pageDfs(pagePOS);
 
         mav = pageService.packagePage(userPO,userPO,spacePO,spacePOS,pagePOS,pagePO,pageDetailPO,pageOperateRecordPO);
+        //获得最近访问的三个空间
+        List<SpacePO> lastThree = spaceService.getLastThreeSpace(userPO.getId());
+        mav.addObject("lastThree",lastThree);
 
         mav.addObject("writePermission",1);
         return mav;
@@ -220,6 +235,8 @@ public class PageController {
         //获取该空间页面信息
         List<PagePO> pagePOS = pageService.getPagesBySpaceId(spacePO.getId());
         pagePOS = pageService.pageDfs(pagePOS);
+        //获得最近访问的三个空间
+        List<SpacePO> lastThree = spaceService.getLastThreeSpace(userPO.getId());
         List<PageOperateRecordPO> pageOperateRecordPOS = pageService.getLastSevenPageOperateRecordsByPageId(pageId);
         List<Map> pageRecords = new ArrayList<Map>();
 
@@ -241,6 +258,7 @@ public class PageController {
             mav.addObject("writePermission",0);
         }
         mav.setViewName("pageHistory");
+        mav.addObject("lastThree",lastThree);
         mav.addObject("pageRecords",pageRecords);
         return mav;
     }
@@ -269,8 +287,8 @@ public class PageController {
         //获取该空间页面信息
         List<PagePO> pagePOS = pageService.getPagesBySpaceId(spacePO.getId());
         pagePOS = pageService.pageDfs(pagePOS);
-        List<PageOperateRecordPO> pageOperateRecordPOS = pageService.getLastSevenPageOperateRecordsByPageId(pageId);
-        List<Map> pageRecords = new ArrayList<Map>();
+        //获得最近访问的三个空间
+        List<SpacePO> lastThree = spaceService.getLastThreeSpace(userPO.getId());
 
         PageDetailPO pageDetailPO = pageService.getCurPageById(pageId);
 
@@ -288,7 +306,7 @@ public class PageController {
         }else {
             mav.addObject("writePermission",0);
         }
-
+        mav.addObject("lastThree",lastThree);
         return mav;
     }
 
@@ -315,7 +333,9 @@ public class PageController {
         List<PagePO> pagePOS = pageService.getPagesBySpaceId(spacePO.getId());
         pagePOS = pageService.pageDfs(pagePOS);
         mav = pageService.packagePage(userPO,null,spacePO,spacePOS,pagePOS,pagePO,null,null);
-
+        //获得最近访问的三个空间
+        List<SpacePO> lastThree = spaceService.getLastThreeSpace(userPO.getId());
+        mav.addObject("lastThree",lastThree);
         mav = pageService.packagePageRight(mav,pagePO);
         return mav;
     }
@@ -345,6 +365,9 @@ public class PageController {
         pagePOS = pageService.pageDfs(pagePOS);
         mav = pageService.packagePage(userPO,null,spacePO,spacePOS,pagePOS,pagePO,null,null);
 
+        //获得最近访问的三个空间
+        List<SpacePO> lastThree = spaceService.getLastThreeSpace(userPO.getId());
+        mav.addObject("lastThree",lastThree);
         //获取需要修改的用户姓名、读写权限
         String updateUserName = request.getParameter("updateUserName");
         String updateRead = request.getParameter("updateRead");
@@ -380,6 +403,9 @@ public class PageController {
         pagePOS = pageService.pageDfs(pagePOS);
         mav = pageService.packagePage(userPO,null,spacePO,spacePOS,pagePOS,pagePO,null,null);
 
+        //获得最近访问的三个空间
+        List<SpacePO> lastThree = spaceService.getLastThreeSpace(userPO.getId());
+        mav.addObject("lastThree",lastThree);
         int type = Integer.parseInt(request.getParameter("type"));
         pagePO = pageService.updatePageRightType(pagePO,type,userPO);
         mav = pageService.packagePageRight(mav,pagePO);
@@ -409,6 +435,9 @@ public class PageController {
         pagePOS = pageService.pageDfs(pagePOS);
         mav = pageService.packagePage(userPO,null,spacePO,spacePOS,pagePOS,pagePO,null,null);
 
+        //获得最近访问的三个空间
+        List<SpacePO> lastThree = spaceService.getLastThreeSpace(userPO.getId());
+        mav.addObject("lastThree",lastThree);
         String updateUserName = request.getParameter("updateUserName");
 
         pagePO = pageService.addPageRight(pagePO,updateUserName,userPO.getId(),mav);

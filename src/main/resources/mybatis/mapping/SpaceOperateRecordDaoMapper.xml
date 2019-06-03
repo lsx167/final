@@ -50,4 +50,12 @@
         order by id desc
         limit 5
     </select>
+
+    <select id="getLastThreeSpaceById" resultMap="BaseResultMap">
+        select
+        <include refid="BASE_COLUMN_LIST"/>
+        from spaceOperateRecord
+        WHERE expired = 0 and operatorID =#{operatorID}
+        order by id desc
+    </select>
 </mapper>

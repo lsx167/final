@@ -128,6 +128,10 @@ public class UserController {
 
                 mav = spaceService.packagePage(userPO,userPO,spacePO,spacePOS,pagePOS,spaceOperateRecordPOS);
 
+                //获得最近访问的三个空间
+                List<SpacePO> lastThree = spaceService.getLastThreeSpace(userPO.getId());
+                mav.addObject("lastThree",lastThree);
+
                 mav.addObject("writePermission",1);
 
                 /*HttpSession session = request.getSession();

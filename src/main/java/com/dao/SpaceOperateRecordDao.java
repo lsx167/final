@@ -14,4 +14,7 @@ public interface SpaceOperateRecordDao {
 
     //根据空间id查询最近5条操作记录
     List<SpaceOperateRecordPO> getLastFiveSpaceOperateRecord(Long id);
+
+    //根据用户id查询最近访问的3个空间
+    List<SpaceOperateRecordPO> getLastThreeSpaceById(@Param("operatorID")Long operatorID);
 }

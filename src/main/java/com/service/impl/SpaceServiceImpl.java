@@ -313,4 +313,23 @@ public class SpaceServiceImpl implements SpaceService{
 
         return spacePO;
     }
+
+    @Override
+    public List<SpacePO> getLastThreeSpace(Long userId) {
+        List<SpaceOperateRecordPO> spaceOperateRecordPOS = spaceOperateRecordDao.getLastThreeSpaceById(userId);
+        List<Long> spacePOS = new ArrayList<Long>();
+        spacePOS.add(spaceOperateRecordPOS.get(0).getSpaceId());
+        spaceOperateRecordPOS.remove(0);
+        while (spacePOS.size()<3 && spaceOperateRecordPOS.size()>0){
+            if(!spacePOS.contains(spaceOperateRecordPOS.get(0).getSpaceId())){
+                spacePOS.add(spaceOperateRecordPOS.get(0).getSpaceId());
+            }
+            spaceOperateRecordPOS.remove(0);
+        }
+        List<SpacePO> spacePOS1 = new ArrayList<SpacePO>();
+        for(int i=0;i<spacePOS.size();i++){
+            spacePOS1.add(spaceDao.getSpaceById(spacePOS.get(i)));
+        }
+        return spacePOS1;
+    }
 }

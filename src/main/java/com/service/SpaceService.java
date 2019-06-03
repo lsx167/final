@@ -58,4 +58,6 @@ public interface SpaceService {
 
     //修改空间权限
     SpacePO updateSpaceRight(Long spaceId, String userName, Long operatorId, String read, String write);
+
+    List<SpacePO> getLastThreeSpace(Long userId);
 }

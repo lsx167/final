@@ -85,9 +85,15 @@
         <button class="dropbtn">空间</button>
         <div class="dropdown-content">
             <span style="font-size: small;color: #2b669a">最近访问的空间</span>
-            <a href="#">菜鸟教程 1</a>
-            <a href="#">菜鸟教程 2</a>
-            <a href="#">菜鸟教程 3</a>
+            <c:forEach items="${requestScope.lastThree}" var="bean">
+                <tr>
+                    <td>
+                        <a href="/space/getSpaceBySpaceId?spaceId=${bean.id}&userName=${requestScope.userPO.name}" style="color: blue;text-decoration: none">
+                                ${bean.name}
+                        </a>
+                    </td>
+                </tr>
+            </c:forEach>
         </div>
     </div>
     <div class="dropdown">

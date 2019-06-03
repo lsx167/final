@@ -127,7 +127,9 @@
                 <img src="../img/wujiaoxing.png" style="max-height: 30px;margin-top: 5px;border:none;"/>
             </div>
             <div class="left_name_item">
-                ${requestScope.spacePO.name}
+                <a href="/space/getSpaceBySpaceId?spaceId=${requestScope.spacePO.id}&userName=${requestScope.userPO.name}" style="color: black;text-decoration: none">
+                    ${requestScope.spacePO.name}
+                </a>
             </div>
         </div>
 		<div class="left_page_tree">

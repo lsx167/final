@@ -112,7 +112,7 @@
                             <img src="../img/shezhi.png" style="max-height: 25px;margin-top:5px;border:none;"/>
                         </div>
                         <div class="left_setting_item">
-                            <a href="/space/getSpaceRightById?spaceId=${requestScope.spacePO.id}&userName=${requestScope.userPO.name}" style="color: blue;text-decoration: none">
+                            <a href="/space/getSpaceRightById?spaceId=${requestScope.spacePO.id}&userName=${requestScope.userPO.name}" style="color: black;text-decoration: none">
                                 空间配置
                             </a>
                         </div>

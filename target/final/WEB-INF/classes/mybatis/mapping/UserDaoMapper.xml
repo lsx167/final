@@ -45,4 +45,15 @@
         from user
         WHERE NAME =#{name}
     </select>
+
+    <insert id="insertUser" parameterType="UserPO" useGeneratedKeys="true" keyProperty="id">
+        insert into user (id,userName,password,name,expired)
+        values (
+        #{id,jdbcType=BIGINT},
+        #{userName,jdbcType=VARCHAR},
+        #{password,jdbcType=VARCHAR},
+        #{name,jdbcType=VARCHAR},
+        #{expired,jdbcType=TINYINT}
+        )
+    </insert>
 </mapper>

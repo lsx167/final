@@ -47,4 +47,16 @@ public class UserServiceImpl implements UserService {
     public UserPO getUserByUsername(String username) {
         return userDao.getUserByUsername(username);
     }
+
+    @Override
+    public UserPO register(String username, String password, String name) {
+        UserPO userPO = new UserPO();
+        userPO.setName(name);
+        userPO.setUserName(username);
+        userPO.setPassword(password);
+        userPO.setExpired(false);
+
+        userDao.insertUser(userPO);
+        return userPO;
+    }
 }

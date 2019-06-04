@@ -17,4 +17,7 @@ public interface UserService {
 
     //根据用户名查用户
     UserPO getUserByUsername(String username);
+
+    //添加新用户
+    UserPO register(String username,String password,String name);
 }

@@ -65,5 +65,6 @@ public class SpaceOperateRecordServiceImpl implements SpaceOperateRecordService 
         spaceOperateRecordPO.setExpired(false);
 
         spaceOperateRecordDao.insertSpaceOperate(spaceOperateRecordPO);
-        return spaceOperateRecordPO.getId();    }
+        return spaceOperateRecordPO.getId();
+    }
 }

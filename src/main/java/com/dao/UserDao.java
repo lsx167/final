@@ -18,4 +18,7 @@ public interface UserDao {
 
     //根据用户名查用户
     UserPO getUserByName(@Param("name") String name);
+
+    //创建空间
+    Long insertUser(UserPO userPO);
 }

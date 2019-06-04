@@ -5,10 +5,7 @@ import com.entities.PagePO;
 import com.entities.SpaceOperateRecordPO;
 import com.entities.SpacePO;
 import com.entities.UserPO;
-import com.service.PageService;
-import com.service.SpaceOperateRecordService;
-import com.service.SpaceService;
-import com.service.UserService;
+import com.service.*;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -182,6 +179,46 @@ public class UserController {
         //删除对应账号
         sessionMap.remove(userPO.getName());
         request.getSession().setAttribute("SESSION_USERNAME",sessionMap);
+        return mav;
+    }
+
+    //注册
+    @RequestMapping(value = "/register", produces = "text/html;charset=UTF-8")
+    @ResponseBody
+    public ModelAndView register(HttpServletRequest request, HttpServletResponse response) {
+        ModelAndView mav = new ModelAndView();
+        String username = request.getParameter("username");
+        String password = request.getParameter("password");
+        String name = request.getParameter("name");
+        mav.setViewName("forward://jsp/admin.jsp");
+        if(username == null || password== null || name==null){
+            return mav;
+        }
+        UserPO userPO = userService.register(username,password,name);
+
+        SpacePO spacePO = new SpacePO();
+        spacePO = new SpacePO();
+        spacePO.setName(name+"的空间");
+        spacePO.setOriginatorID(userPO.getId());
+        spacePO.setIsMain(1);
+        spacePO.setType(1);
+        spacePO.setReadID("-1");
+        spacePO.setWriteID("-1");
+        spacePO.setChildPageID("-1");
+        spacePO.setDescribe("Hello,"+name+"~Welcome to your new space!");
+        spacePO.setExpired(false);
+
+        spaceService.createSpace(spacePO);
+
+        SpaceOperateRecordPO spaceOperateRecordPO = new SpaceOperateRecordPO();
+
+        spaceOperateRecordPO.setSpaceId(spacePO.getId());
+        spaceOperateRecordPO.setOperatorId(userPO.getId());
+        spaceOperateRecordPO.setOperatorTime(new base().getCurrTime());
+        spaceOperateRecordPO.setType(1);
+        spaceOperateRecordPO.setOperatorContent("创建空间-"+spacePO.getName());
+        spaceOperateRecordPO.setExpired(false);
+        spaceOperateRecordService.insertSpaceOperate(spaceOperateRecordPO);
         return mav;
     }
 }

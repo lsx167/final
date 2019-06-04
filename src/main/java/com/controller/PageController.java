@@ -444,4 +444,53 @@ public class PageController {
         mav = pageService.packagePageRight(mav,pagePO);
         return mav;
     }
+
+    //删除页面
+    @RequestMapping(value = "/deletePage", produces = "text/html;charset=UTF-8")
+    @ResponseBody
+    public ModelAndView deletePage(HttpServletRequest request) {
+        ModelAndView mav = new ModelAndView();
+
+        //获取登录账号
+        String userName = request.getParameter("userName");
+        UserPO userPO = (UserPO)((Map)request.getSession().getAttribute("SESSION_USERNAME")).get(userName);
+        long pageId = Long.parseLong(request.getParameter("pageId"));
+        //获取页面信息
+        PagePO pagePO = pageService.getPageByPageId(pageId);
+
+        //获取当前空间信息
+        SpacePO spacePO = spaceService.getSpaceById(pagePO.getSpaceID());
+
+        //获取空间创始人信息
+        UserPO originUserPO = userService.getUserById(spacePO.getOriginatorID());
+
+        boolean delete = false;
+        if(pagePO.getChildPageID().equals("-1")){
+            pageService.deletePage(pagePO,userPO);
+            spaceService.deletePage(pagePO,userPO);
+            delete = true;
+        }
+
+        //获取空间列表信息
+        List<SpacePO> spacePOS = spaceService.getSpacesById(userPO.getId());
+
+        //获取该空间最近5条操作记录
+        List<SpaceOperateRecordPO> spaceOperateRecordPOS = spaceOperateRecordService.getLastFiveSpaceOperateRecord(spacePO.getId());
+
+        //获取该空间页面信息
+        List<PagePO> pagePOS = pageService.getPagesBySpaceId(spacePO.getId());
+        pagePOS = pageService.pageDfs(pagePOS);
+        mav = spaceService.packagePage(userPO,originUserPO,spacePO,spacePOS,pagePOS,spaceOperateRecordPOS);
+
+        //获得最近访问的三个空间
+        List<SpacePO> lastThree = spaceService.getLastThreeSpace(userPO.getId());
+        mav.addObject("lastThree",lastThree);
+        if(delete == true){
+            mav.addObject("deletePage",1);
+        }else {
+            mav.addObject("deletePage",0);
+        }
+
+        return mav;
+    }
 }

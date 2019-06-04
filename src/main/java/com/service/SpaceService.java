@@ -59,5 +59,9 @@ public interface SpaceService {
     //修改空间权限
     SpacePO updateSpaceRight(Long spaceId, String userName, Long operatorId, String read, String write);
 
+    //获取最近访问的3个空间
     List<SpacePO> getLastThreeSpace(Long userId);
+
+    //删除页面的空间变动
+    void deletePage(PagePO pagePO,UserPO userPO);
 }

@@ -9,6 +9,17 @@
     <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 </head>
 <body class="body">
+<script type="text/javascript">
+    function deletePage() {
+        if((${requestScope.deletePage}) == 1){
+            alert("删除成功");
+        }
+        if((${requestScope.deletePage}) == 0){
+            alert("删除失败");
+        }
+    }
+    window.onload =function(){deletePage();}
+</script>
 <header class="header">
     <img src="../img/logo.jpeg" style="max-height: 30px;float: left;margin-left: 10%;margin-top: 5px;border:none;"/>
     <div style="float: left;width: 200px;height: 30px;text-align: center;color: white;margin-top: 10px">

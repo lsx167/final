@@ -539,4 +539,39 @@ public class PageServiceImpl implements PageService {
         }
         return pagePO;
     }
+
+    @Override
+    public void deletePage(PagePO pagePO, UserPO userPO) {
+        if(pagePO.isRootPage() == false){
+            //如果不是根页面，则去父页面中删除页面记录
+            PagePO fatherPagePO = pageDao.getPageByPageId(pagePO.getFatherPageID());
+            List<Long> list = new base().stringToLongList(fatherPagePO.getChildPageID());
+            list.remove(pagePO.getId());
+            if(list.size() == 0){
+                fatherPagePO.setChildPageID("-1");
+            }else {
+                fatherPagePO.setChildPageID(new base().longListToString(list));
+            }
+            pageDao.updatePageInfo(fatherPagePO);
+        }
+
+        pageDetailDao.deletePageRecord(pagePO.getId());
+
+        PageOperateRecordPO pageOperateRecordPO = new PageOperateRecordPO();
+        pageOperateRecordPO.setId(0);
+        pageOperateRecordPO.setPageId(pagePO.getId());
+        pageOperateRecordPO.setOperatorId(userPO.getId());
+        pageOperateRecordPO.setOperatorTime(new base().getCurrTime());
+        pageOperateRecordPO.setType(4);
+        pageOperateRecordPO.setOperatorContent("删除页面\""+pagePO.getName()+"\"");
+        pageOperateRecordPO.setBeforeVersionId(pagePO.getVersionID());
+        pageOperateRecordPO.setAfterVersionId(-1);
+        pageOperateRecordPO.setExpired(false);
+
+        pageOperateRecordDao.insertPageOperateRecord(pageOperateRecordPO);
+
+        pagePO.setExpired(true);
+
+        pageDao.updatePageInfo(pagePO);
+    }
 }

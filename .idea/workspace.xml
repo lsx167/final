@@ -10,52 +10,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="259add4a-78ab-4c03-ac8b-2f25a280c5b6" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/webapp/jsp/noPermission.jsp" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/final/jsp/noPermission.jsp" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/com/controller/PageController.class" afterPath="$PROJECT_DIR$/target/classes/com/controller/PageController.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/com/controller/SpaceController.class" afterPath="$PROJECT_DIR$/target/classes/com/controller/SpaceController.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/com/controller/UserController.class" afterPath="$PROJECT_DIR$/target/classes/com/controller/UserController.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/com/dao/SpaceOperateRecordDao.class" afterPath="$PROJECT_DIR$/target/classes/com/dao/SpaceOperateRecordDao.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/com/service/SpaceService.class" afterPath="$PROJECT_DIR$/target/classes/com/service/SpaceService.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/com/service/impl/SpaceServiceImpl.class" afterPath="$PROJECT_DIR$/target/classes/com/service/impl/SpaceServiceImpl.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/final/WEB-INF/classes/com/controller/PageController.class" afterPath="$PROJECT_DIR$/target/final/WEB-INF/classes/com/controller/PageController.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/final/WEB-INF/classes/com/controller/SpaceController.class" afterPath="$PROJECT_DIR$/target/final/WEB-INF/classes/com/controller/SpaceController.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/final/WEB-INF/classes/com/controller/UserController.class" afterPath="$PROJECT_DIR$/target/final/WEB-INF/classes/com/controller/UserController.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/final/WEB-INF/classes/com/dao/SpaceOperateRecordDao.class" afterPath="$PROJECT_DIR$/target/final/WEB-INF/classes/com/dao/SpaceOperateRecordDao.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/final/WEB-INF/classes/com/service/SpaceService.class" afterPath="$PROJECT_DIR$/target/final/WEB-INF/classes/com/service/SpaceService.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/final/WEB-INF/classes/com/service/impl/SpaceServiceImpl.class" afterPath="$PROJECT_DIR$/target/final/WEB-INF/classes/com/service/impl/SpaceServiceImpl.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/controller/PageController.java" afterPath="$PROJECT_DIR$/src/main/java/com/controller/PageController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/controller/SpaceController.java" afterPath="$PROJECT_DIR$/src/main/java/com/controller/SpaceController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/controller/UserController.java" afterPath="$PROJECT_DIR$/src/main/java/com/controller/UserController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/dao/SpaceOperateRecordDao.java" afterPath="$PROJECT_DIR$/src/main/java/com/dao/SpaceOperateRecordDao.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/service/PageService.java" afterPath="$PROJECT_DIR$/src/main/java/com/service/PageService.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/service/SpaceService.java" afterPath="$PROJECT_DIR$/src/main/java/com/service/SpaceService.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/service/impl/PageServiceImpl.java" afterPath="$PROJECT_DIR$/src/main/java/com/service/impl/PageServiceImpl.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/service/impl/SpaceServiceImpl.java" afterPath="$PROJECT_DIR$/src/main/java/com/service/impl/SpaceServiceImpl.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/mybatis/mapping/SpaceOperateRecordDaoMapper.xml" afterPath="$PROJECT_DIR$/src/main/resources/mybatis/mapping/SpaceOperateRecordDaoMapper.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/main.jsp" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/main.jsp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/noPermission.jsp" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/noPermission.jsp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/pageHistory.jsp" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/pageHistory.jsp" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/pageItem.jsp" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/pageItem.jsp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/pageRights.jsp" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/pageRights.jsp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/search.jsp" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/search.jsp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/spaceRights.jsp" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/spaceRights.jsp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/jsp/createChildPage.jsp" afterPath="$PROJECT_DIR$/src/main/webapp/jsp/createChildPage.jsp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/jsp/createRootPage.jsp" afterPath="$PROJECT_DIR$/src/main/webapp/jsp/createRootPage.jsp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/jsp/createSpace.jsp" afterPath="$PROJECT_DIR$/src/main/webapp/jsp/createSpace.jsp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/jsp/spaceRights.jsp" afterPath="$PROJECT_DIR$/src/main/webapp/jsp/spaceRights.jsp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/mybatis/mapping/SpaceOperateRecordDaoMapper.xml" afterPath="$PROJECT_DIR$/target/classes/mybatis/mapping/SpaceOperateRecordDaoMapper.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/final/WEB-INF/classes/mybatis/mapping/SpaceOperateRecordDaoMapper.xml" afterPath="$PROJECT_DIR$/target/final/WEB-INF/classes/mybatis/mapping/SpaceOperateRecordDaoMapper.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/final/WEB-INF/views/main.jsp" afterPath="$PROJECT_DIR$/target/final/WEB-INF/views/main.jsp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/final/WEB-INF/views/noPermission.jsp" afterPath="$PROJECT_DIR$/target/final/WEB-INF/views/noPermission.jsp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/final/WEB-INF/views/pageHistory.jsp" afterPath="$PROJECT_DIR$/target/final/WEB-INF/views/pageHistory.jsp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/final/WEB-INF/views/pageItem.jsp" afterPath="$PROJECT_DIR$/target/final/WEB-INF/views/pageItem.jsp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/final/WEB-INF/views/pageRights.jsp" afterPath="$PROJECT_DIR$/target/final/WEB-INF/views/pageRights.jsp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/final/WEB-INF/views/search.jsp" afterPath="$PROJECT_DIR$/target/final/WEB-INF/views/search.jsp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/final/WEB-INF/views/spaceRights.jsp" afterPath="$PROJECT_DIR$/target/final/WEB-INF/views/spaceRights.jsp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/final/jsp/createChildPage.jsp" afterPath="$PROJECT_DIR$/target/final/jsp/createChildPage.jsp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/final/jsp/createRootPage.jsp" afterPath="$PROJECT_DIR$/target/final/jsp/createRootPage.jsp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/final/jsp/createSpace.jsp" afterPath="$PROJECT_DIR$/target/final/jsp/createSpace.jsp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/final/jsp/spaceRights.jsp" afterPath="$PROJECT_DIR$/target/final/jsp/spaceRights.jsp" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -82,11 +44,9 @@
       <file leaf-file-name="SpaceController.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/controller/SpaceController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="600">
-              <caret line="341" column="45" lean-forward="false" selection-start-line="341" selection-start-column="45" selection-end-line="341" selection-end-column="45" />
-              <folding>
-                <element signature="e#2090#2099#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="492">
+              <caret line="123" column="132" lean-forward="true" selection-start-line="122" selection-start-column="8" selection-end-line="123" selection-end-column="132" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -94,19 +54,37 @@
       <file leaf-file-name="PageController.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/controller/PageController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1440">
-              <caret line="308" column="45" lean-forward="false" selection-start-line="308" selection-start-column="45" selection-end-line="308" selection-end-column="45" />
+            <state relative-caret-position="124">
+              <caret line="451" column="0" lean-forward="false" selection-start-line="451" selection-start-column="0" selection-end-line="451" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="UserController.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/controller/UserController.java">
+      <file leaf-file-name="PageServiceImpl.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/service/impl/PageServiceImpl.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="98">
-              <caret line="133" column="0" lean-forward="false" selection-start-line="133" selection-start-column="0" selection-end-line="133" selection-end-column="0" />
-              <folding />
+            <state relative-caret-position="337">
+              <caret line="560" column="0" lean-forward="false" selection-start-line="560" selection-start-column="0" selection-end-line="560" selection-end-column="0" />
+              <folding>
+                <element signature="method#packagePage#0;class#PageServiceImpl#0" expanded="false" />
+                <element signature="method#packagePageRight#0;class#PageServiceImpl#0" expanded="false" />
+                <element signature="method#updatePageContent#0;class#PageServiceImpl#0" expanded="false" />
+                <element signature="method#insertNewRootPage#0;class#PageServiceImpl#0" expanded="false" />
+                <element signature="method#insertNewChildPage#0;class#PageServiceImpl#0" expanded="false" />
+                <element signature="method#insertNewRootPageDetail#0;class#PageServiceImpl#0" expanded="false" />
+                <element signature="method#insertNewRootPageOperateRecord#0;class#PageServiceImpl#0" expanded="false" />
+                <element signature="method#hasReadPermission#0;class#PageServiceImpl#0" expanded="false" />
+                <element signature="method#haswritePermission#0;class#PageServiceImpl#0" expanded="false" />
+                <element signature="method#pageReturnVersion#0;class#PageServiceImpl#0" expanded="false" />
+                <element signature="method#updatePageRight#0;class#PageServiceImpl#0" expanded="false" />
+                <element signature="method#putRightIdsIntoMap#0;class#PageServiceImpl#0" expanded="false" />
+                <element signature="method#pageDfs#0;class#PageServiceImpl#0" expanded="false" />
+                <element signature="method#pageDfsAssistant1#0;class#PageServiceImpl#0" expanded="false" />
+                <element signature="method#pageDfsAssistant2#0;class#PageServiceImpl#0" expanded="false" />
+                <element signature="method#updatePageRightType#0;class#PageServiceImpl#0" expanded="false" />
+                <element signature="method#addPageRight#0;class#PageServiceImpl#0" expanded="false" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -114,8 +92,8 @@
       <file leaf-file-name="main.jsp" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/main.jsp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="209">
-              <caret line="24" column="44" lean-forward="true" selection-start-line="24" selection-start-column="44" selection-end-line="24" selection-end-column="44" />
+            <state relative-caret-position="300">
+              <caret line="20" column="44" lean-forward="true" selection-start-line="20" selection-start-column="44" selection-end-line="20" selection-end-column="44" />
               <folding />
             </state>
           </provider>
@@ -124,12 +102,19 @@
       <file leaf-file-name="SpaceServiceImpl.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/service/impl/SpaceServiceImpl.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="334">
-              <caret line="332" column="0" lean-forward="false" selection-start-line="332" selection-start-column="0" selection-end-line="332" selection-end-column="0" />
-              <folding>
-                <element signature="e#11270#11276#0" expanded="true" />
-                <element signature="e#11723#11732#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="465">
+              <caret line="347" column="0" lean-forward="false" selection-start-line="347" selection-start-column="0" selection-end-line="347" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="pageItem.jsp" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/pageItem.jsp">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="180">
+              <caret line="190" column="140" lean-forward="false" selection-start-line="190" selection-start-column="140" selection-end-line="190" selection-end-column="140" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -230,19 +215,13 @@
         <option value="$PROJECT_DIR$/src/main/java/com/service/base.java" />
         <option value="$PROJECT_DIR$/src/main/webapp/jsp/index.jsp" />
         <option value="$PROJECT_DIR$/src/main/webapp/jsp/login.jsp" />
-        <option value="$PROJECT_DIR$/src/main/java/com/service/impl/PageServiceImpl.java" />
         <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/websocket.jsp" />
-        <option value="$PROJECT_DIR$/src/main/java/com/service/PageService.java" />
         <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/spaceRights1.jsp" />
         <option value="$PROJECT_DIR$/src/main/java/com/dao/SpaceOperateRecordDao.java" />
         <option value="$PROJECT_DIR$/src/main/resources/mybatis/mapping/SpaceOperateRecordDaoMapper.xml" />
-        <option value="$PROJECT_DIR$/src/main/java/com/service/SpaceService.java" />
-        <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/main.jsp" />
-        <option value="$PROJECT_DIR$/src/main/java/com/service/impl/SpaceServiceImpl.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/controller/UserController.java" />
         <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/noPermission.jsp" />
         <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/pageHistory.jsp" />
-        <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/pageItem.jsp" />
         <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/pageRights.jsp" />
         <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/search.jsp" />
         <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/spaceRights.jsp" />
@@ -251,7 +230,13 @@
         <option value="$PROJECT_DIR$/src/main/webapp/jsp/createSpace.jsp" />
         <option value="$PROJECT_DIR$/src/main/webapp/jsp/spaceRights.jsp" />
         <option value="$PROJECT_DIR$/src/main/java/com/controller/SpaceController.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/service/PageService.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/service/SpaceService.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/controller/PageController.java" />
+        <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/main.jsp" />
+        <option value="$PROJECT_DIR$/src/main/java/com/service/impl/PageServiceImpl.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/service/impl/SpaceServiceImpl.java" />
+        <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/pageItem.jsp" />
       </list>
     </option>
   </component>
@@ -308,6 +293,10 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="PackagesPane" />
+      <pane id="AndroidView" />
+      <pane id="Scope" />
+      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -438,10 +427,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="PackagesPane" />
-      <pane id="AndroidView" />
-      <pane id="Scratches" />
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -747,12 +732,13 @@
       <workItem from="1559109541050" duration="19164000" />
       <workItem from="1559141452183" duration="7798000" />
       <workItem from="1559304792550" duration="42873000" />
-      <workItem from="1559568584752" duration="6561000" />
+      <workItem from="1559568584752" duration="6685000" />
+      <workItem from="1559635309188" duration="3169000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="369687000" />
+    <option name="totallyTimeSpent" value="372980000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -786,14 +772,13 @@
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Java Enterprise" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32992327" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.41943735" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.41943735" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32992327" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Spring" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32992327" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.36317137" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.20402084" sideWeight="0.5" order="6" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.20699926" sideWeight="0.5" order="6" side_tool="false" content_ui="combo" />
       <window_info id="Bean Validation" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Web" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32992327" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
@@ -801,6 +786,7 @@
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="11" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32992327" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
     </layout>
     <layout-to-restore>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
@@ -999,12 +985,6 @@
           <option name="timeStamp" value="209" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/service/impl/SpaceServiceImpl.java</url>
-          <line>318</line>
-          <properties />
-          <option name="timeStamp" value="217" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/com/controller/SpaceController.java</url>
           <line>209</line>
           <properties />
@@ -1023,19 +1003,31 @@
           <option name="timeStamp" value="221" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/service/impl/SpaceServiceImpl.java</url>
-          <line>332</line>
-          <properties />
-          <option name="timeStamp" value="222" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/com/controller/SpaceController.java</url>
           <line>132</line>
           <properties />
           <option name="timeStamp" value="223" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/controller/PageController.java</url>
+          <line>451</line>
+          <properties />
+          <option name="timeStamp" value="225" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/service/impl/PageServiceImpl.java</url>
+          <line>544</line>
+          <properties />
+          <option name="timeStamp" value="226" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/service/impl/SpaceServiceImpl.java</url>
+          <line>337</line>
+          <properties />
+          <option name="timeStamp" value="227" />
+        </line-breakpoint>
       </breakpoints>
-      <option name="time" value="224" />
+      <option name="time" value="228" />
     </breakpoint-manager>
     <watches-manager>
       <configuration name="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory">
@@ -1046,22 +1038,6 @@
     </watches-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/controller/SpaceOperateRecordController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="7">
-          <caret line="16" column="13" lean-forward="false" selection-start-line="16" selection-start-column="13" selection-end-line="16" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/controller/WebSocketController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-8">
-          <caret line="3" column="51" lean-forward="true" selection-start-line="3" selection-start-column="51" selection-end-line="3" selection-end-column="51" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/websocket/WebSocketHandler.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="200">
@@ -1076,13 +1052,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="143">
           <caret line="1149" column="30" lean-forward="false" selection-start-line="1149" selection-start-column="30" selection-end-line="1149" selection-end-column="30" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/dao/PageDetailDao.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="15" column="9" lean-forward="false" selection-start-line="15" selection-start-column="9" selection-end-line="15" selection-end-column="9" />
         </state>
       </provider>
     </entry>
@@ -1421,7 +1390,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-390">
           <caret line="9" column="24" lean-forward="true" selection-start-line="9" selection-start-column="20" selection-end-line="9" selection-end-column="24" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1429,42 +1397,10 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="420">
           <caret line="37" column="35" lean-forward="true" selection-start-line="37" selection-start-column="35" selection-end-line="37" selection-end-column="35" />
-          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/service/PageService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="352">
-          <caret line="55" column="4" lean-forward="false" selection-start-line="55" selection-start-column="4" selection-end-line="56" selection-end-column="101" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/service/impl/PageServiceImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-115">
-          <caret line="337" column="18" lean-forward="true" selection-start-line="337" selection-start-column="18" selection-end-line="337" selection-end-column="18" />
-          <folding>
-            <element signature="method#insertNewRootPageDetail#0;class#PageServiceImpl#0" expanded="false" />
-            <element signature="method#insertNewRootPageOperateRecord#0;class#PageServiceImpl#0" expanded="false" />
-            <element signature="method#haswritePermission#0;class#PageServiceImpl#0" expanded="false" />
-            <element signature="method#pageReturnVersion#0;class#PageServiceImpl#0" expanded="false" />
-            <element signature="method#pageDfs#0;class#PageServiceImpl#0" expanded="false" />
-            <element signature="method#pageDfsAssistant1#0;class#PageServiceImpl#0" expanded="false" />
-            <element signature="method#pageDfsAssistant2#0;class#PageServiceImpl#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/spaceRights1.jsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="432">
-          <caret line="140" column="19" lean-forward="true" selection-start-line="140" selection-start-column="19" selection-end-line="140" selection-end-column="19" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/spaceRights1.jsp" />
     <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/websocket.jsp">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="720">
@@ -1473,14 +1409,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/login.jsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/login.jsp" />
     <entry file="file://$PROJECT_DIR$/src/main/java/com/dao/SpaceDao.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="270">
@@ -1493,7 +1422,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="225">
           <caret line="18" column="71" lean-forward="false" selection-start-line="18" selection-start-column="71" selection-end-line="18" selection-end-column="71" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1518,44 +1446,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/service/SpaceService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="331">
-          <caret line="61" column="16" lean-forward="false" selection-start-line="61" selection-start-column="16" selection-end-line="61" selection-end-column="16" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/noPermission.jsp">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="377">
           <caret line="28" column="24" lean-forward="false" selection-start-line="28" selection-start-column="24" selection-end-line="28" selection-end-column="24" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/pageHistory.jsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="377">
-          <caret line="29" column="24" lean-forward="false" selection-start-line="29" selection-start-column="24" selection-end-line="29" selection-end-column="24" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/pageItem.jsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="195">
-          <caret line="99" column="24" lean-forward="false" selection-start-line="99" selection-start-column="24" selection-end-line="99" selection-end-column="24" />
-          <folding>
-            <element signature="n#style#0;n#a#0;n#div#1;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/pageRights.jsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="285">
-          <caret line="95" column="24" lean-forward="false" selection-start-line="95" selection-start-column="24" selection-end-line="95" selection-end-column="24" />
           <folding />
         </state>
       </provider>
@@ -1616,14 +1510,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/jsp/noPermission.jsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-29">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/jsp/noPermission.jsp" />
     <entry file="file://$PROJECT_DIR$/src/main/webapp/jsp/spaceRights.jsp">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="377">
@@ -1657,52 +1544,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="131">
           <caret line="52" column="0" lean-forward="false" selection-start-line="52" selection-start-column="0" selection-end-line="52" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/spring-web/4.0.5.RELEASE/spring-web-4.0.5.RELEASE.jar!/org/springframework/web/method/support/InvocableHandlerMethod.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="131">
-          <caret line="58" column="0" lean-forward="false" selection-start-line="58" selection-start-column="0" selection-end-line="58" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/main.jsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="209">
-          <caret line="24" column="44" lean-forward="true" selection-start-line="24" selection-start-column="44" selection-end-line="24" selection-end-column="44" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/service/impl/SpaceServiceImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="334">
-          <caret line="332" column="0" lean-forward="false" selection-start-line="332" selection-start-column="0" selection-end-line="332" selection-end-column="0" />
-          <folding>
-            <element signature="e#11270#11276#0" expanded="true" />
-            <element signature="e#11723#11732#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/controller/SpaceController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="600">
-          <caret line="341" column="45" lean-forward="false" selection-start-line="341" selection-start-column="45" selection-end-line="341" selection-end-column="45" />
-          <folding>
-            <element signature="e#2090#2099#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/controller/PageController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1440">
-          <caret line="308" column="45" lean-forward="false" selection-start-line="308" selection-start-column="45" selection-end-line="308" selection-end-column="45" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1710,6 +1551,142 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="98">
           <caret line="133" column="0" lean-forward="false" selection-start-line="133" selection-start-column="0" selection-end-line="133" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/dao/PageDetailDao.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="135">
+          <caret line="12" column="9" lean-forward="false" selection-start-line="12" selection-start-column="9" selection-end-line="12" selection-end-column="9" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/entities/PageOperateRecordPO.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="630">
+          <caret line="60" column="16" lean-forward="false" selection-start-line="60" selection-start-column="16" selection-end-line="60" selection-end-column="16" />
+          <folding>
+            <element signature="e#1175#1176#0" expanded="false" />
+            <element signature="e#1207#1208#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/entities/SpaceOperateRecordPO.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="517">
+          <caret line="58" column="16" lean-forward="false" selection-start-line="58" selection-start-column="16" selection-end-line="58" selection-end-column="16" />
+          <folding>
+            <element signature="e#1129#1130#0" expanded="true" />
+            <element signature="e#1161#1162#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/service/PageService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="252">
+          <caret line="23" column="0" lean-forward="false" selection-start-line="23" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/controller/SpaceController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="492">
+          <caret line="123" column="132" lean-forward="true" selection-start-line="122" selection-start-column="8" selection-end-line="123" selection-end-column="132" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/service/SpaceService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="232">
+          <caret line="34" column="0" lean-forward="true" selection-start-line="34" selection-start-column="0" selection-end-line="34" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/pageHistory.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="435">
+          <caret line="29" column="24" lean-forward="false" selection-start-line="29" selection-start-column="24" selection-end-line="29" selection-end-column="24" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/pageRights.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="319">
+          <caret line="25" column="45" lean-forward="true" selection-start-line="16" selection-start-column="4" selection-end-line="25" selection-end-column="45" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/main.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="300">
+          <caret line="20" column="44" lean-forward="true" selection-start-line="20" selection-start-column="44" selection-end-line="20" selection-end-column="44" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/spring-web/4.0.5.RELEASE/spring-web-4.0.5.RELEASE.jar!/org/springframework/web/method/support/InvocableHandlerMethod.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="131">
+          <caret line="137" column="0" lean-forward="false" selection-start-line="137" selection-start-column="0" selection-end-line="137" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/controller/PageController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="124">
+          <caret line="451" column="0" lean-forward="false" selection-start-line="451" selection-start-column="0" selection-end-line="451" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/service/impl/PageServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="337">
+          <caret line="560" column="0" lean-forward="false" selection-start-line="560" selection-start-column="0" selection-end-line="560" selection-end-column="0" />
+          <folding>
+            <element signature="method#packagePage#0;class#PageServiceImpl#0" expanded="false" />
+            <element signature="method#packagePageRight#0;class#PageServiceImpl#0" expanded="false" />
+            <element signature="method#updatePageContent#0;class#PageServiceImpl#0" expanded="false" />
+            <element signature="method#insertNewRootPage#0;class#PageServiceImpl#0" expanded="false" />
+            <element signature="method#insertNewChildPage#0;class#PageServiceImpl#0" expanded="false" />
+            <element signature="method#insertNewRootPageDetail#0;class#PageServiceImpl#0" expanded="false" />
+            <element signature="method#insertNewRootPageOperateRecord#0;class#PageServiceImpl#0" expanded="false" />
+            <element signature="method#hasReadPermission#0;class#PageServiceImpl#0" expanded="false" />
+            <element signature="method#haswritePermission#0;class#PageServiceImpl#0" expanded="false" />
+            <element signature="method#pageReturnVersion#0;class#PageServiceImpl#0" expanded="false" />
+            <element signature="method#updatePageRight#0;class#PageServiceImpl#0" expanded="false" />
+            <element signature="method#putRightIdsIntoMap#0;class#PageServiceImpl#0" expanded="false" />
+            <element signature="method#pageDfs#0;class#PageServiceImpl#0" expanded="false" />
+            <element signature="method#pageDfsAssistant1#0;class#PageServiceImpl#0" expanded="false" />
+            <element signature="method#pageDfsAssistant2#0;class#PageServiceImpl#0" expanded="false" />
+            <element signature="method#updatePageRightType#0;class#PageServiceImpl#0" expanded="false" />
+            <element signature="method#addPageRight#0;class#PageServiceImpl#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/service/impl/SpaceServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="465">
+          <caret line="347" column="0" lean-forward="false" selection-start-line="347" selection-start-column="0" selection-end-line="347" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/pageItem.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="190" column="140" lean-forward="false" selection-start-line="190" selection-start-column="140" selection-end-line="190" selection-end-column="140" />
           <folding />
         </state>
       </provider>

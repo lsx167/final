@@ -332,4 +332,28 @@ public class SpaceServiceImpl implements SpaceService{
         }
         return spacePOS1;
     }
+
+    @Override
+    public void deletePage(PagePO pagePO, UserPO userPO) {
+        SpacePO spacePO = spaceDao.getSpaceById(pagePO.getSpaceID());
+        List<Long> list = new base().stringToLongList(spacePO.getChildPageID());
+        list.remove(pagePO.getId());
+        if(list.size() == 0){
+            spacePO.setChildPageID("-1");
+        }else {
+            spacePO.setChildPageID(new base().longListToString(list));
+        }
+        spaceDao.updateSpaceInfo(spacePO);
+
+        SpaceOperateRecordPO spaceOperateRecordPO = new SpaceOperateRecordPO();
+
+        spaceOperateRecordPO.setSpaceId(spacePO.getId());
+        spaceOperateRecordPO.setOperatorId(userPO.getId());
+        spaceOperateRecordPO.setOperatorTime(new base().getCurrTime());
+        spaceOperateRecordPO.setType(5);
+        spaceOperateRecordPO.setOperatorContent("删除页面\""+pagePO.getName()+"\"");
+        spaceOperateRecordPO.setExpired(false);
+
+        spaceOperateRecordDao.insertSpaceOperate(spaceOperateRecordPO);
+    }
 }

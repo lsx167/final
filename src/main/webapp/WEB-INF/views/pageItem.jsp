@@ -188,7 +188,9 @@
             <c:choose>
                 <c:when test="${writePermission == 1}"><!-- 如果用户没有写权限-->
                     <div class="right_1_right">
-                        删除
+                        <a href="/page/deletePage?pageId=${requestScope.pagePO.id}&userName=${requestScope.userPO.name}" style="color: black;text-decoration: none">
+                            删除
+                        </a>
                     </div>
                 </c:when>
             </c:choose>

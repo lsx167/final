@@ -73,4 +73,6 @@ public interface PageService {
 
     //添加用户权限
     PagePO addPageRight(PagePO pagePO,String updateUserName,Long operatorId,ModelAndView mav);
+
+    void deletePage(PagePO pagePO,UserPO userPO);
 }

@@ -20,6 +20,7 @@ public class WebSocketHandler extends TextWebSocketHandler {
     // 已建立连接的用户
     private static final ArrayList<WebSocketSession> users = new ArrayList<WebSocketSession>();
 
+    //页面编辑延时消息
     private static List<Map> editedPage = new ArrayList<Map>();
     /**
      * 处理前端发送的文本信息 js调用websocket.send时候，会调用该方法
@@ -58,15 +59,19 @@ public class WebSocketHandler extends TextWebSocketHandler {
 
         //统计用户
         StringBuffer editUsers = new StringBuffer();
+        //记录正在编辑用户名
         String msg = "";
+        //添加自己进入读队列
         editUsers.append(userName);
         //统计用户数
         int count = 1;
         //用户写
         if(type.equals("1")){
             System.out.println("用户 " + userName + "正在编辑页面"+pageId);
+            //遍历session
             for (WebSocketSession user : users){
                 String pageUsers = (String) user.getAttributes().get("editingUserPage");
+                //找到同一页面
                 if(pageUsers.substring(1,pageUsers.indexOf("+")).equals(pageId)){
                     if(pageUsers.substring(0,1).equals("1")){
                         //当前有用户在写
@@ -77,9 +82,9 @@ public class WebSocketHandler extends TextWebSocketHandler {
                     }
                     count++;
                     editUsers.append("、"+pageUsers.substring(pageUsers.indexOf("+")+1));
-
                 }
             }
+            //添加session
             users.add(session);
             System.out.println("当前正有"+count+"人正在阅读");
             System.out.println("他们分别有:"+editUsers);
@@ -93,6 +98,7 @@ public class WebSocketHandler extends TextWebSocketHandler {
                 if(pageUsers.substring(1,pageUsers.indexOf("+")).equals(pageId)){
                     count++;
                     editUsers.append("、"+pageUsers.substring(pageUsers.indexOf("+")+1));
+                    //有用户在写，记录他的名字
                     if(pageUsers.substring(0,1).equals("1")){
                         msg = pageUsers.substring(pageUsers.indexOf("+")+1);
                     }
@@ -103,12 +109,15 @@ public class WebSocketHandler extends TextWebSocketHandler {
             System.out.println("他们分别有:"+editUsers);
             //有延迟消息
             for (int i=0;i<editedPage.size();i++){
+                //找同一页面
                 if(editedPage.get(i).containsKey(pageId)){
+                    //用户完成编辑后返回或保存
                     if(editedPage.get(i).get(pageId).equals(userName)){
                         session.sendMessage(new TextMessage("当前正有"+count+"人正在阅读此页面，他们分别有:"+editUsers));
                         editedPage.remove(i);
                         return;
                     } else {
+                        //用户非正常退出
                         sendMessageToPageUsers(pageId,new TextMessage("当前正有"+count+"人正在阅读此页面，他们分别有:"+editUsers));
                         editedPage.remove(i);
                         return;
@@ -141,6 +150,7 @@ public class WebSocketHandler extends TextWebSocketHandler {
         String userName = editingUserPage.substring(editingUserPage.indexOf("+")+1);
         System.out.println("用户" + userName + "正在退出编辑"+pageId);
 
+        //清除session
         users.remove(session);
         //查找正在编辑统一页面的用户
         int count = 0;//统计用户数

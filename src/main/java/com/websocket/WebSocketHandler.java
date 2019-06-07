@@ -67,16 +67,17 @@ public class WebSocketHandler extends TextWebSocketHandler {
             System.out.println("用户 " + userName + "正在编辑页面"+pageId);
             for (WebSocketSession user : users){
                 String pageUsers = (String) user.getAttributes().get("editingUserPage");
-                if(pageUsers.substring(0,1).equals("1")){
-                    //当前有用户在写
-                    System.out.println("当前有用户在写");
-                    users.add(session);
-                    session.sendMessage(new TextMessage("目前已有用户在编辑中，请稍后再试"));
-                    return;
-                }
                 if(pageUsers.substring(1,pageUsers.indexOf("+")).equals(pageId)){
+                    if(pageUsers.substring(0,1).equals("1")){
+                        //当前有用户在写
+                        System.out.println("当前有用户在写");
+                        users.add(session);
+                        session.sendMessage(new TextMessage("目前已有用户在编辑中，请稍后再试"));
+                        return;
+                    }
                     count++;
                     editUsers.append("、"+pageUsers.substring(pageUsers.indexOf("+")+1));
+
                 }
             }
             users.add(session);

@@ -47,7 +47,11 @@
         <button class="dropbtn">创建</button>
         <div class="dropdown-content">
             <a href="/jsp/createSpace.jsp?userName=${requestScope.userPO.name}">创建空间</a>
-            <a href="/jsp/createRootPage.jsp?spaceName=${requestScope.spacePO.name}&userName=${requestScope.userPO.name}">创建页面</a>
+            <c:choose>
+                <c:when test="${requestScope.writePermission == 1}"><!-- 如果用户有写权限-->
+                    <a href="/jsp/createRootPage.jsp?spaceName=${requestScope.spacePO.name}&userName=${requestScope.userPO.name}">创建页面</a>
+                </c:when>
+            </c:choose>
         </div>
     </div>
     <button class="create_btn">
@@ -126,7 +130,7 @@
                 ${requestScope.spacePO.name}
             </div>
             <c:choose>
-                <c:when test="${writePermission == 1}"><!-- 如果用户没有写权限-->
+                <c:when test="${requestScope.originPermission == 1}"><!-- 如果用户是创建者-->
                     <div class="right_1_right">
                         <div class="left_setting_img">
                             <img src="../img/shezhi.png" style="max-height: 25px;margin-top:5px;border:none;"/>

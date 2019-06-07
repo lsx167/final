@@ -83,10 +83,58 @@ public class PageController {
         //判断当前操作者是否有编辑权限
         if(pageService.haswritePermission(spacePO,pagePO,userPO.getId())){
             mav.addObject("writePermission",1);
-            request.getSession().setAttribute("editPageUsers",pageId + "+" + userPO.getName());
         }else {
             mav.addObject("writePermission",0);
         }
+        request.getSession().setAttribute("editPageUsers","0"+pageId + "+" + userPO.getName());
+        mav.addObject("lastThree",lastThree);
+        return mav;
+    }
+
+    //进入页面编辑页面
+    @RequestMapping(value = "/editPage", produces = "text/html;charset=UTF-8")
+    @ResponseBody
+    public ModelAndView editPage(HttpServletRequest request, HttpServletResponse response,HttpSession httpSession) {
+        ModelAndView mav = new ModelAndView();
+
+        //获取登录账号
+        String userName = request.getParameter("userName");
+        UserPO userPO = (UserPO)((Map)request.getSession().getAttribute("SESSION_USERNAME")).get(userName);
+
+        long pageId = Long.parseLong(request.getParameter("pageId"));
+        //获取页面信息
+        PagePO pagePO = pageService.getPageByPageId(pageId);
+
+        //获取当前空间信息
+        SpacePO spacePO = spaceService.getSpaceById(pagePO.getSpaceID());
+
+        //获取空间列表信息
+        List<SpacePO> spacePOS = spaceService.getSpacesById(userPO.getId());
+
+        //获取该空间页面信息
+        List<PagePO> pagePOS = pageService.getPagesBySpaceId(spacePO.getId());
+        pagePOS = pageService.pageDfs(pagePOS);
+
+        //获得最近访问的三个空间
+        List<SpacePO> lastThree = spaceService.getLastThreeSpace(userPO.getId());
+
+        PageDetailPO pageDetailPO = pageService.getCurPageById(pageId);
+
+        //获得页面创建者信息
+        UserPO pageOriginUserPO1 = userService.getUserById(pagePO.getOriginatorID());
+
+        PageOperateRecordPO pageOperateRecordPO = pageService.getLastPageRecordById(pageId);
+
+        mav = pageService.packagePage(userPO,pageOriginUserPO1,spacePO,spacePOS,pagePOS,pagePO,pageDetailPO,pageOperateRecordPO);
+
+        //判断当前操作者是否有编辑权限
+        if(pageService.haswritePermission(spacePO,pagePO,userPO.getId())){
+            mav.addObject("writePermission",1);
+        }else {
+            mav.addObject("writePermission",0);
+        }
+        request.getSession().setAttribute("editPageUsers","1"+pageId + "+" + userPO.getName());
+        mav.setViewName("pageEdit");
         mav.addObject("lastThree",lastThree);
         return mav;
     }

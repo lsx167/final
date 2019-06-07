@@ -2,14 +2,85 @@
 <html>
 <head>
     <title>TEST</title>
-    <link rel="stylesheet" href="../css/main.css" type="text/css">
-	<link rel="stylesheet" href="../css/pageHistory.css" type="text/css">
+    <link rel="stylesheet" href="../../css/pageItem.css" type="text/css">
     <link href="http://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <script type="text/javascript" src="/js/jquery-3.3.1.min.js"></script>
     <script type="text/javascript" src="/js/ajaxfileupload.js"></script>
+	<script type="text/javascript" charset="utf-8" src="/utf8-jsp/ueditor.all.min.js"></script>
+    <script type="text/javascript" charset="utf-8" src="/utf8-jsp/lang/zh-cn/zh-cn.js"></script>
     <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 </head>
 <body class="body">
+<script type="text/javascript" src="http://cdn.bootcss.com/jquery/3.1.0/jquery.min.js"></script>
+<script type="text/javascript" src="http://cdn.bootcss.com/sockjs-client/1.1.1/sockjs.js"></script>
+<script type="text/javascript">
+    var websocket = null;
+    if ('WebSocket' in window) {
+        //Websocket的连接
+        websocket = new WebSocket("ws://localhost:8080/websocket/socketServer");//WebSocket对应的地址  ?&userName=${requestScope.userPO.name}&pageId=${requestScope.pagePO.id}
+    }
+    else if ('MozWebSocket' in window) {
+        //Websocket的连接
+        websocket = new MozWebSocket("ws://localhost:8080/websocket/socketServer");//SockJS对应的地址
+    }
+    else {
+        //SockJS的连接
+        websocket = new SockJS("http://localhost:8080/sockjs/socketServer");    //SockJS对应的地址
+    }
+    websocket.onopen = onOpen;
+    websocket.onmessage = onMessage;
+    websocket.onerror = onError;
+    websocket.onclose = onClose;
+
+    function onOpen(openEvt) {
+    }
+
+    function onMessage(evt) {
+        var message = evt.data;
+        if(message.substring(0,1) == "目"){
+            alert(message);
+            location.href = "/page/getPageByPageId?pageId=${requestScope.pagePO.id}&userName=${requestScope.userPO.name}";
+        }else{
+            $("#now_bianji").html("");//清空数据
+            $("#now_bianji").append(message+"<br>"); // 接收后台发送的数据
+        }
+    }
+    function onError() {
+    }
+    function onClose() {
+    }
+
+    function sendSaveMessage() {
+        if(websocket.readyState == websocket.OPEN){
+            alert("保存成功!");
+            websocket.send(${requestScope.pagePO.id}+${requestScope.userPO.name});
+        } else {
+            alert("保存失败！网络状态"+websocket.readyState);
+        }
+    }
+
+    /*// 编辑页面
+    function show_bianji() {
+        $('#cancel_bianji').css('display','block');
+        $('#bianji').css('display','none');
+        $('#page_content_update').css('display','block');
+        $('#page_content_show').css('display','none');
+        $('#now_bianji').css('display','block');
+    }*/
+
+    /*// 取消页面编辑
+    function show_cancel_bianji() {
+        $('#cancel_bianji').css('display','none');
+        $('#bianji').css('display','block');
+        $('#page_content_update').css('display','none');
+        $('#page_content_show').css('display','block');
+        $('#now_bianji').css('display','none');
+    }*/
+
+    window.close = function () {
+        websocket.onclose();
+    }
+</script>
 <header class="header">
     <img src="../img/logo.jpeg" style="max-height: 30px;float: left;margin-left: 10%;margin-top: 5px;border:none;"/>
     <div style="float: left;width: 200px;height: 30px;text-align: center;color: white;margin-top: 10px">
@@ -65,7 +136,9 @@
                 <img src="../img/wujiaoxing.png" style="max-height: 30px;margin-top: 5px;border:none;"/>
             </div>
             <div class="left_name_item">
-                ${requestScope.spacePO.name}
+                <a href="/space/getSpaceBySpaceId?spaceId=${requestScope.spacePO.id}&userName=${requestScope.userPO.name}" style="color: black;text-decoration: none">
+                    ${requestScope.spacePO.name}
+                </a>
             </div>
         </div>
 		<div class="left_page_tree">
@@ -108,60 +181,55 @@
                 </table>
             </div>
         </div>
-    </div>        
-	<div class="main_right">
-		<div class="right_title">
-			<div class="page_name">
+    </div>
+	
+    <div class="main_right">
+        <div class="right_1">
+            <div class="right_1_left">
                 ${requestScope.pagePO.name}
             </div>
-			<div class="page_return">
+
+            <div class="page_return">
                 <a href="/page/getPageByPageId?pageId=${requestScope.pagePO.id}&userName=${requestScope.userPO.name}" style="color: black;text-decoration: none">
                     返回
                 </a>
-			</div>
-		</div>
-		<div class="space_operate_record">
-			<div style="position:relative; height:500px; overflow:auto">
-				<table>
-					<tr>
-						<th style="text-align: left" class="page_operate_record_version">版本号</th>
-						<th style="text-align: left" class="page_operate_record_content">页面操作记录</th>
-						<th style="text-align: left" class="page_operate_record_time">操作时间</th>
-						<th style="text-align: left" class="page_operate_record_username">操作人</th>
-                        <c:choose>
-                            <c:when test="${writePermission == 1}"><!-- 如果用户没有写权限-->
-                                <th style="text-align: left" class="page_operate_record_back">版本回滚</th>
-                            </c:when>
-                        </c:choose>
-					</tr>
-					<c:forEach items="${requestScope.pageRecords}" var="bean">
-						<tr>
-							<td class="page_operate_record_version">
-								v${bean.afterVersionId}
-							</td>
-							<td class="page_operate_record_content">
-                                ${bean.operatorContent}
-							</td>
-							<td class="page_operate_record_time">
-                                ${bean.operatorTime}
-							</td>
-							<td class="page_operate_record_username">
-                                ${bean.operatorName}
-							</td>
-                            <c:choose>
-                                <c:when test="${writePermission == 1}"><!-- 如果用户没有写权限-->
-                                    <td class="page_operate_record_back">
-                                        <a href="/page/pageVersionReturn?pageId=${requestScope.pagePO.id}&userName=${requestScope.userPO.name}&version=${bean.afterVersionId}" style="color: black;text-decoration: none">
-                                            回滚
-                                        </a>
-                                    </td>
-                                </c:when>
-                            </c:choose>
-						</tr>
-					</c:forEach>
-				</table>
-			</div>
-		</div>
+            </div>
+        </div>
+        <div class="right_2">
+            <div class="right_2_creator">
+                创建者：${requestScope.originUserPO.name}
+            </div>
+            <div class="right_2_creator">
+                版本号：${requestScope.pagePO.versionID}
+            </div>
+            <div class="right_2_time">
+                最后一次修改时间：${requestScope.pageOperateRecordPO.operatorTime}
+            </div>
+        </div>
+
+        <!--页面内容-->
+        <div class="right_3" id="page_content_update">
+            <form action="/page/updatePageContent?pageId=${requestScope.pagePO.id}&userName=${requestScope.userPO.name}" method="post">
+                <!-- 加载编辑器的容器 -->
+                <script id="container" name="pageContent" type="text/plain" class="right_3_container" >
+                    ${requestScope.pageDetailPO.pageContent}
+                </script>
+                <div>
+                    <input type="submit" onclick="sendSaveMessage()" value="保存"/>
+                </div>
+            </form>
+            
+            <!-- 配置文件 -->
+            <script type="text/javascript" src="../../utf8-jsp/ueditor.config.js"></script>
+            <!-- 编辑器源码文件 -->
+            <script type="text/javascript" src="../../utf8-jsp/ueditor.all.js"></script>
+            <!-- 实例化编辑器 -->
+            <script type="text/javascript">
+                var ue = UE.getEditor('container');
+            </script>
+        </div>
+        <div class="now_bianji" id="now_bianji">
+        </div>
     </div>
 </div>
 <footer class="footer">

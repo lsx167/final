@@ -125,9 +125,12 @@ public class SpaceController {
 
         mav = spaceService.packagePage(userPO,originUserPO,spacePO,spacePOS,pagePOS,spaceOperateRecordPOS);
         if(userPO.getId() == originUserPO.getId()){
-            mav.addObject("writePermission",1);
+            mav.addObject("originPermission",1);
         }else {
-            mav.addObject("writePermission",0);
+            mav.addObject("originPermission",0);
+        }
+        if(spaceService.haswritePermission(spacePO,userPO.getId())){
+            mav.addObject("writePermission",1);
         }
         mav.addObject("lastThree",lastThree);
         return mav;
@@ -181,6 +184,7 @@ public class SpaceController {
             List<SpaceOperateRecordPO> spaceOperateRecordPOS = spaceOperateRecordService.getLastFiveSpaceOperateRecord(spacePO.getId());
 
             mav = spaceService.packagePage(userPO,userPO,spacePO,spacePOS,pagePOS,spaceOperateRecordPOS);
+            mav.addObject("originPermission",1);
             mav.addObject("writePermission",1);
             mav.addObject("lastThree",lastThree);
             return mav;
@@ -209,6 +213,7 @@ public class SpaceController {
         //获得最近访问的三个空间
         List<SpacePO> lastThree = spaceService.getLastThreeSpace(userPO.getId());
         mav = spaceService.packagePage(userPO,userPO,spacePO,spacePOS,pagePOS,spaceOperateRecordPOS);
+        mav.addObject("originPermission",1);
         mav.addObject("writePermission",1);
         mav.addObject("lastThree",lastThree);
         return mav;

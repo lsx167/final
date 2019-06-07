@@ -273,5 +273,13 @@
 	height: 60px;
 	font-size: 16px;
 	text-align: center;
-	display: none;
+}
+.page_return{
+	float: left;
+	text-align: center;
+	width: 80px;
+	height: 40px;
+	font-size: 20px;
+	margin-top: 30px;
+	margin-left: 300px;
 }

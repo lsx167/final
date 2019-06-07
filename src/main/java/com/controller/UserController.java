@@ -130,6 +130,7 @@ public class UserController {
                 mav.addObject("lastThree",lastThree);
 
                 mav.addObject("writePermission",1);
+                mav.addObject("originPermission",1);
 
                 /*HttpSession session = request.getSession();
                 session.setAttribute("SESSION_USERNAME", username);*/

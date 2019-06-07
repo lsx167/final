@@ -60,21 +60,22 @@
 
     // 编辑页面
     function show_bianji() {
-        $('#cancel_bianji').css('display','block');
+        location.href = "/page/editPage?pageId=${requestScope.pagePO.id}&userName=${requestScope.userPO.name}";
+        /*$('#cancel_bianji').css('display','block');
         $('#bianji').css('display','none');
         $('#page_content_update').css('display','block');
         $('#page_content_show').css('display','none');
-        $('#now_bianji').css('display','block');
+        $('#now_bianji').css('display','block');*/
     }
 
     // 取消页面编辑
-    function show_cancel_bianji() {
+    /*function show_cancel_bianji() {
         $('#cancel_bianji').css('display','none');
         $('#bianji').css('display','block');
         $('#page_content_update').css('display','none');
         $('#page_content_show').css('display','block');
         $('#now_bianji').css('display','none');
-    }
+    }*/
 
     window.close = function () {
         websocket.onclose();
@@ -104,7 +105,11 @@
         <button class="dropbtn">创建</button>
         <div class="dropdown-content">
             <a href="/jsp/createSpace.jsp?userName=${requestScope.userPO.name}">创建空间</a>
-            <a href="/jsp/createChildPage.jsp?spaceName=${requestScope.spacePO.name}&pageName=${requestScope.pagePO.name}&pageId=${requestScope.pagePO.id}&userName=${requestScope.userPO.name}">创建页面</a>
+            <c:choose>
+                <c:when test="${requestScope.writePermission == 1}"><!-- 如果用户有写权限-->
+                    <a href="/jsp/createChildPage.jsp?spaceName=${requestScope.spacePO.name}&pageName=${requestScope.pagePO.name}&pageId=${requestScope.pagePO.id}&userName=${requestScope.userPO.name}">创建页面</a>
+                </c:when>
+            </c:choose>
         </div>
     </div>
     <button class="create_btn">
@@ -213,9 +218,9 @@
                     <div class="right_1_right" id="bianji" style="display: block" onclick="show_bianji()">
                         编辑
                     </div>
-                    <div class="right_1_right" id="cancel_bianji" style="display: none" onclick="show_cancel_bianji()">
+                    <%--<div class="right_1_right" id="cancel_bianji" style="display: none" onclick="show_cancel_bianji()">
                         取消编辑
-                    </div>
+                    </div>--%>
                 </c:when>
             </c:choose>
         </div>
@@ -243,7 +248,7 @@
 			${requestScope.pageDetailPO.pageContent}
 		</div>
 
-        <div class="right_3" id="page_content_update" style="display: none">
+        <%--<div class="right_3" id="page_content_update" style="display: none">
             <form action="/page/updatePageContent?pageId=${requestScope.pagePO.id}&userName=${requestScope.userPO.name}" method="post">
                 <!-- 加载编辑器的容器 -->
                 <script id="container" name="pageContent" type="text/plain" class="right_3_container" >
@@ -262,7 +267,7 @@
             <script type="text/javascript">
                 var ue = UE.getEditor('container');
             </script>
-        </div>
+        </div>--%>
         <div class="now_bianji" id="now_bianji">
         </div>
     </div>

@@ -33,7 +33,9 @@
         <button class="dropbtn">创建</button>
         <div class="dropdown-content">
             <a href="/jsp/createSpace.jsp?userName=${requestScope.userPO.name}">创建空间</a>
+<%--
             <a href="/jsp/createRootPage.jsp?spaceName=${requestScope.spacePO.name}&userName=${requestScope.userPO.name}">创建页面</a>
+--%>
         </div>
     </div>
     <button class="create_btn">

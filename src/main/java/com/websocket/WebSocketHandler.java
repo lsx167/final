@@ -90,12 +90,12 @@ public class WebSocketHandler extends TextWebSocketHandler {
             //查找正在阅读同一页面的用户
             for (WebSocketSession user : users) {
                 String pageUsers = (String) user.getAttributes().get("editingUserPage");
-                if(pageUsers.substring(0,1).equals("1")){
-                     msg = pageUsers.substring(pageUsers.indexOf("+")+1);
-                }
                 if(pageUsers.substring(1,pageUsers.indexOf("+")).equals(pageId)){
                     count++;
                     editUsers.append("、"+pageUsers.substring(pageUsers.indexOf("+")+1));
+                    if(pageUsers.substring(0,1).equals("1")){
+                        msg = pageUsers.substring(pageUsers.indexOf("+")+1);
+                    }
                 }
             }
             users.add(session);

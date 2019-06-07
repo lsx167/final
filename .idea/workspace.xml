@@ -10,7 +10,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="259add4a-78ab-4c03-ac8b-2f25a280c5b6" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/websocket/WebSocketHandler.java" afterPath="$PROJECT_DIR$/src/main/java/com/websocket/WebSocketHandler.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
@@ -38,8 +37,8 @@
       <file leaf-file-name="WebSocketHandler.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/websocket/WebSocketHandler.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="190">
-              <caret line="71" column="33" lean-forward="true" selection-start-line="71" selection-start-column="33" selection-end-line="71" selection-end-column="33" />
+            <state relative-caret-position="249">
+              <caret line="91" column="88" lean-forward="false" selection-start-line="91" selection-start-column="88" selection-end-line="91" selection-end-column="88" />
               <folding />
             </state>
           </provider>
@@ -621,12 +620,12 @@
       <workItem from="1559736697974" duration="5362000" />
       <workItem from="1559779296731" duration="10292000" />
       <workItem from="1559882914057" duration="2185000" />
-      <workItem from="1559896233820" duration="50000" />
+      <workItem from="1559896233820" duration="775000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="393244000" />
+    <option name="totallyTimeSpent" value="393969000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1308,8 +1307,8 @@
     <entry file="file://$PROJECT_DIR$/src/main/webapp/jsp/spaceRights.jsp" />
     <entry file="file://$PROJECT_DIR$/src/main/java/com/websocket/WebSocketHandler.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="190">
-          <caret line="71" column="33" lean-forward="true" selection-start-line="71" selection-start-column="33" selection-end-line="71" selection-end-column="33" />
+        <state relative-caret-position="249">
+          <caret line="91" column="88" lean-forward="false" selection-start-line="91" selection-start-column="88" selection-end-line="91" selection-end-column="88" />
           <folding />
         </state>
       </provider>

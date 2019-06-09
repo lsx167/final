@@ -9,6 +9,16 @@
     <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 </head>
 <body class="body">
+<script type="text/javascript">
+    function createPage() {
+        //获取到要跳转的页码
+        var pageName = $("#pageName").val();
+        if(pageName == ""){
+            alert("页面名不能为空");
+            return false
+        }
+    };
+</script>
 <header class="header">
     <img src="../img/logo.jpeg" style="max-height: 30px;float: left;margin-left: 10%;margin-top: 5px;border:none;"/>
     <div style="float: left;width: 200px;height: 30px;text-align: center;color: white;margin-top: 10px">
@@ -59,7 +69,7 @@
 </header>
 <div class="main">
    	<div>
-   	    <form action="/page/createNewRootPage" method="post">
+   	    <form action="/page/createNewRootPage" method="post" onsubmit="return createPage()">
             <div class="form_info">
                 <div class="info">
                     <label class="username-label">页面名称：</label>

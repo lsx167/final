@@ -14,14 +14,12 @@
         //获取到要跳转的页码
         var spaceName = $("#spaceName").val();
         var spaceDescribe = $("#spaceDescribe").val();
-        var userName = $("#userName").val();
         if(spaceName == ""){
             alert("空间名不能为空");
+            return false
         } else if(spaceDescribe == ""){
             alert("空间描述不能为空");
-        }else{
-            alert("/space/createSpace?spaceName="+spaceName+"&spaceDescribe="+spaceDescribe+"&userName="+userName);
-            location.href = "/space/createSpace?spaceName="+spaceName+"&spaceDescribe="+spaceDescribe+"&userName="+userName;
+            return false
         }
     };
 </script>
@@ -75,7 +73,7 @@
 </header>
 <div class="main">
    	<div class="left_input">
-		<form action="/space/createSpace" method="post">
+		<form action="/space/createSpace" method="post" onsubmit="return createSpace()">
 		    <div class="field-group">
 		        <label class="username-label">空间名称：</label>
 		        <input type="text" name="spaceName" id="spaceName" class="login_text" placeholder="请输入空间名称" />
@@ -85,7 +83,7 @@
 		        <input type="text" name="spaceDescribe" id="spaceDescribe" class="login_text" placeholder="请输入空间描述" />
 		    </div>
 		    <div class="field-group" style="margin-top: 10px;margin-left: 20px">
-		        <input type="submit" class="input_btn" onclick="createSpace()" value="创建" />
+		        <input type="submit" class="input_btn" value="创建" />
 		    </div>
             <input type='hidden' name="userName" id="userName" value ='${param.userName}'/>
 		</form>

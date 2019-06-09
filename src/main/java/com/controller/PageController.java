@@ -207,7 +207,7 @@ public class PageController {
         //获得最近访问的三个空间
         List<SpacePO> lastThree = spaceService.getLastThreeSpace(userPO.getId());
         mav.addObject("lastThree",lastThree);
-
+        request.getSession().setAttribute("editPageUsers","0"+pageId + "+" + userPO.getName());
         mav.addObject("writePermission",1);
         return mav;
     }
@@ -256,7 +256,7 @@ public class PageController {
         //获得最近访问的三个空间
         List<SpacePO> lastThree = spaceService.getLastThreeSpace(userPO.getId());
         mav.addObject("lastThree",lastThree);
-
+        request.getSession().setAttribute("editPageUsers","0"+pageId + "+" + userPO.getName());
         mav.addObject("writePermission",1);
         return mav;
     }
@@ -350,10 +350,10 @@ public class PageController {
         //判断当前操作者是否有编辑权限
         if(pageService.haswritePermission(spacePO,pagePO,userPO.getId())){
             mav.addObject("writePermission",1);
-            request.getSession().setAttribute("editPageUsers",pageId + "+" + userPO.getName());
         }else {
             mav.addObject("writePermission",0);
         }
+        request.getSession().setAttribute("editPageUsers","0"+pageId + "+" + userPO.getName());
         mav.addObject("lastThree",lastThree);
         return mav;
     }
@@ -460,7 +460,7 @@ public class PageController {
         return mav;
     }
 
-    //修改页面权限类型
+    //添加用户权限
     @RequestMapping(value = "/addPageRightUser", produces = "text/html;charset=UTF-8")
     @ResponseBody
     public ModelAndView addPageRightUser(HttpServletRequest request) {

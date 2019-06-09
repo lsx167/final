@@ -29,7 +29,7 @@
 .page_name{
 	float: left;
 	text-align: center;
-	width: 200px;
+	width: 400px;
 	height: 40px;
 	font-size: 30px;
 	font-weight: 500;
@@ -42,7 +42,6 @@
 	height: 40px;
 	font-size: 20px;
 	margin-top: 30px;
-	margin-left: 300px;
 }
 .right_title{
 	width: 600px;

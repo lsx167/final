@@ -29,6 +29,7 @@ public class WebSocketHandler extends TextWebSocketHandler {
      * @param message
      * @throws Exception
      */
+    //处理客户端向服务端发送的请求
     @Override
     protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
         String editingUserPage = (String) session.getAttributes().get("editingUserPage");
@@ -155,7 +156,8 @@ public class WebSocketHandler extends TextWebSocketHandler {
         //查找正在编辑统一页面的用户
         int count = 0;//统计用户数
         boolean isEditing = false;
-        StringBuffer editUsers = new StringBuffer();//统计用户
+        //统计当前页面阅读人
+        StringBuffer editUsers = new StringBuffer();
         for (WebSocketSession user : users) {
             String pageUsers = (String) user.getAttributes().get("editingUserPage");
             if(pageUsers.substring(1,pageUsers.indexOf("+")).equals(pageId)){

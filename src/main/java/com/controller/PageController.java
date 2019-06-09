@@ -61,6 +61,7 @@ public class PageController {
         //获得最近访问的三个空间
         List<SpacePO> lastThree = spaceService.getLastThreeSpace(userPO.getId());
 
+        //没有读权限
         if(!pageService.hasReadPermission(spacePO,pagePO,userPO.getId())){
             mav.setViewName("noPermission");
             mav.addObject("userPO",userPO);

@@ -244,7 +244,7 @@
         </c:choose>
 
         <!--页面内容-->
-		<div class="right_3" id="page_content_show" style="display: block">
+		<div class="right_3" id="page_content_show" style="display: block;overflow: scroll">
 			${requestScope.pageDetailPO.pageContent}
 		</div>
 

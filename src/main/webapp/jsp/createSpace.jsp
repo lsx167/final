@@ -9,6 +9,22 @@
     <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 </head>
 <body class="body">
+<script type="text/javascript">
+    function createSpace() {
+        //获取到要跳转的页码
+        var spaceName = $("#spaceName").val();
+        var spaceDescribe = $("#spaceDescribe").val();
+        var userName = $("#userName").val();
+        if(spaceName == ""){
+            alert("空间名不能为空");
+        } else if(spaceDescribe == ""){
+            alert("空间描述不能为空");
+        }else{
+            alert("/space/createSpace?spaceName="+spaceName+"&spaceDescribe="+spaceDescribe+"&userName="+userName);
+            location.href = "/space/createSpace?spaceName="+spaceName+"&spaceDescribe="+spaceDescribe+"&userName="+userName;
+        }
+    };
+</script>
 <header class="header">
     <img src="../img/logo.jpeg" style="max-height: 30px;float: left;margin-left: 10%;margin-top: 5px;border:none;"/>
     <div style="float: left;width: 200px;height: 30px;text-align: center;color: white;margin-top: 10px">
@@ -69,13 +85,13 @@
 		        <input type="text" name="spaceDescribe" id="spaceDescribe" class="login_text" placeholder="请输入空间描述" />
 		    </div>
 		    <div class="field-group" style="margin-top: 10px;margin-left: 20px">
-		        <input type="submit" class="input_btn" value="创建" />
+		        <input type="submit" class="input_btn" onclick="createSpace()" value="创建" />
 		    </div>
-            <input type='hidden' name="userName" value ='${param.userName}'/>
+            <input type='hidden' name="userName" id="userName" value ='${param.userName}'/>
 		</form>
 	</div>
 	<div class="right_img">
-		<h2>关于空间< /h2>
+		<h2>关于空间</h2>
 		<p style="text-align: left;font-size: 20px;">
 			&nbsp;&nbsp;&nbsp;&nbsp;与您的团队分享知识并与项目，流程和程序进行协作。他们将收到有关此空间和所有更新的通知。团队成员将被授予权限并添加为该空间的观察者。
 		</p>
